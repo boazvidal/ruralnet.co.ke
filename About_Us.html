@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About_Us</title>
+</head>
+
+<style>
+    body {
+            font-family: sans-serif;
+            background-image: url('images/gbd.jpg'); size: cover;
+        }
+
+        img {
+            height: 50px;
+            width: auto;
+        }
+
+        .navbar {
+            background-color: rgb(9, 124, 5);
+            overflow: visible;
+            padding: 10px 20px;
+            align-items: center;
+            text-align: center;
+            text-wrap: 1;
+            size: 30px;
+        }
+
+        .navbar a {
+                color: white;
+                padding: 14px 20px;
+                text-direction: none;
+                display: inline-block;
+            }
+
+        .navbar 1:hover {
+            background-color: blue;
+            cursor: e-resize;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: blueviolet;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgb(0 0 0 0.2);
+        }
+
+        .dropdwon-content a {
+            color: black;
+            padding:  12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            display: block;
+        }
+
+.member-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 2rem;
+  /*background: rgba(255, 255, 255, 0.55);*/
+
+}
+
+.staff {
+  text-align: center;
+  max-width: 250px;
+  transition: transform 0.3s ease;
+}
+
+.staff img {
+  width: auto;
+  height: 15rem;
+  /*background-color: #f9f9f9;*/
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  transition: transform 0.4s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.staff:hover img {
+  transform: scale(1.05);
+}
+
+.staff h3 {
+  font-size: 1rem;
+  margin: 0.5rem 0 0.2rem;
+  color: #085820;
+  background-color: #f9f9f9;
+  /*background: rgba(255, 255, 255, 0.15);*/
+  border-radius: 15px;
+  padding: 0.5rem;
+}
+
+.staff p {
+  font-size: 0.9rem;
+  color: #095a24;
+  background-color: #f9f9f9;
+  border-radius: 15px;
+  padding: 0.5rem;
+  font-family: bolonse;
+}
+
+    /* ✅ Aqua background for the form */
+    form.form {
+      background-color: aqua;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 300rem;
+      margin: auto;
+      box-shadow: 0 4px 15px rgba(7, 7, 7, 0.2);
+    }
+
+    .tabs-container {
+      width: 100%;
+      background: rgb(255, 255, 255);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .tab-button {
+      display: flex;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .tab-button button {
+      flex: 1;
+      padding: 15px;
+      color: rgb(206, 255, 205);
+      background: rgb(6, 68, 17);
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    .tab-button button.active {
+      background: #ffffff;
+      color: rgb(12, 85, 2);
+    }
+
+    .tab-content {
+      padding: 20px;
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+</style>
+<body>
+    <nav> 
+  <div class="navbar">
+        <img src="images/RURALNET.png">
+        <a href="index.html">home</a>
+        <div class="dropdown">
+            <a href="#">Services</a>
+/*            <div class="dropdown-content">
+                <a href="#">web design</a>
+                <a href="#">Develpment</a>
+                <a href="#">Graphic designing</a>
+            </div>
+        </div>
+        <a href="stafflogin.html">staff portal</a>
+        <a href="#">Student portal</a>
+        <a href="">About us</a>
+        <a href="">Reach us</a>
+		<a href="">Learning resources</a>
+		<div class="dropdown">
+			<a href="#">Learning resources</a>
+			<div class="dropdown-content">
+				<a href="website loader.html" target="_blank">Downloads</a>
+				<a href="" target="_blank">Sylabus</a>
+				<a href="" target="_blank">Course Outline</a>
+			</div>
+		</div>
+    </div>
+    </nav>
+
+    <div class="member-container">
+        <div class="staff">
+            <img src="images/micha.png" alt="">
+            <h3>Mr. Micha Schraven</h3>
+            <p>Director General</p>
+        </div>
+
+        <div class="staff">
+            <img src="images/agoko.png" alt="">
+            <h3>Mr. George Agoko</h3>
+            <p>Board of Directors Chair</p>
+        </div>
+
+        <div class="staff">
+            <img src="images/olivia.png" alt="">
+            <h3>Madam Olivia Alang'o</h3>
+            <p>Manager/CEO</p>
+        </div>
+
+        <div class="staff">
+            <img src="images/charity.png" alt="">
+            <h3>Miss. Charity Anyango</h3>
+            <p>Administrator/H.R</p>
+        </div>
+
+        <div class="staff">
+            <img src="images/boaz.png" alt="">
+            <h3>Mr. Boaz Ochieng</h3>
+            <p>ICT Instructor</p>
+        </div>
+    </div>
+
+    <form class="form">
+    <div class="tabs-container">
+      <div class="tab-button">
+        <button type="button" class="tab-btn active" data-tab="tab1"><strong>INTRODUCTION</strong></button>
+        <button type="button" class="tab-btn" data-tab="tab2"><strong>MISSION</strong></button>
+        <button type="button" class="tab-btn" data-tab="tab3"><strong>VISION</strong></button>
+        <button type="button" class="tab-btn" data-tab="tab4"><strong>OBJECTIVES</strong></button>
+        <button type="button" class="tab-btn" data-tab="tab5"><strong>BRIEF HISTORY</strong></button>
+
+      </div>
+
+      <div class="tab-content active" id="tab1">
+        <h3>Introduction; More About Us</h3>
+        <p>Ruralnet ICT Academy (RICT) is an Accredited exam center for both KASNEB/ TVETA and CSK aimed at providing ICT education to the rural population located in Siaya County in a town called Ugunja along Busia-Kisumu highway. The Academy aims to bridge the digital divide between rural and urban areas by offering high-quality training to the rural population. The Academy offers a range of courses, including computer basics, web design, programming and digital marketing. 
+
+Computer training services, as shown in our plan, have an excellent profitability level and growth rate. Our competitive edge along with new training techniques puts (RICT) at the forefront of training services. We are living in an age where computer knowledge is a must and the market for computer training services is booming.
+
+Our training center will differ from the traditional computer training services usually offered by colleges and universities because of our added personal touch and premium resources.
+</p>
+      </div>
+
+      <div class="tab-content" id="tab2">
+        <h3>Mission objectives</h3>
+        <p> RICT’s mission is to understand what our students and businesses hope to achieve and dedicate our computer training and development to the fulfillment of those goals.
+
+The computer training provided is contributing visibly and substantially to the fulfillment of our area business's strategies.
+
+RICT will maintain financial balance, charge a value for our services, and deliver an even higher value to our clients. RICT will make computer user techniques accessible to hundreds of computer users who would otherwise not have the updated knowledge to use them. RICT will make a profit and generate cash.
+
+The Academy will provide a rewarding work environment and fair compensation to our employees; ultimately provide excellent value to our customers and a fair return to our owners.
+</p>
+        <ul>
+          <li>Responsive layout</li>
+          <li>Custom Styling</li>
+          <li>Easy to navigate</li>
+        </ul>
+      </div>
+
+      <div class="tab-content" id="tab3">
+        <h3>Our Vision</h3>
+        <p>RuralNet ICT Academy’s (RICT) vision is bridging the digital gab between the rural and urban areas.</p>
+      </div>
+
+      <div class="tab-content" id="tab4">
+        <h3>Objectives</h3>
+        <p>The Ruralnet ICT Academy (RICT) knows firsthand that computer training has to meet all of its customers' needs in order to have a tangible lasting impact. When you measure across multiple customer segments—each of which has its own priorities—you see how much more training must do to consistently and simultaneously satisfy participants, managers, and executives. Training then can move to close those gaps and deliver more real value. Closing those gaps between employer skill needs, employee and learner skills development is the main objective of RICT.</p>
+      </div>
+
+      <div class="tab-content" id="tab5">
+        <h3>Brief History ABout us</h3>
+        <p>In 2010, Micha Schraven and Lawrence Odongo worked together on a large ICT project in the Sega region. They were both driven by a shared interest in ICT and rural development. In December 2016, they founded the RuralNet Internet Services Provider and IT Academy with the use of the MacBook pro’s that were donated by Service Now. Over time, RuralNet has evolved and is designed to be a social enterprise that is both an Internet Services Provider (ISP) and an associated ICT Academy to interest groups in Kenya’s country side and beyond. RICT Academy advances the communities it operates in through the facilitation of sustainable, quality ICT services and network facility. This is an area that is typically deprived of basic IT resources (Typically IT Students have no computers, internet and electricity). The Academy also has a goal of provision of suitable and stable solar energy as an option for the surrounding business premises, in case there is power outages. This system also preserves the environment since it offers clean and safe energy.</p>
+      </div>
+    </div>
+  </form>
+
+  <script>
+    const tabButtons = document.querySelectorAll(".tab-btn");
+    const tabContents = document.querySelectorAll(".tab-content");
+
+    tabButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        tabButtons.forEach(btn => btn.classList.remove("active"));
+        tabContents.forEach(tab => tab.classList.remove("active"));
+        
+        button.classList.add("active");
+        document.getElementById(button.dataset.tab).classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>

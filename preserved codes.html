@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+</head>
+<body>
+      <!--📖 Flipbook Section (self-contained, can be placed anywhere in your existing page) -->
+<section id="flipbook-section">
+  <div class="book" id="book">
+
+			 <!-- Page 101 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c101.jpg" alt="Photo 101" />
+      </div>
+      <div class="back">
+		<img src="images/c0.jpg" alt="Photo 101" /></div>
+    </div>
+
+		 <!-- Page 0 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c0.jpg" alt="Photo 0" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+		 <!-- Page 01 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c01.jpg" alt="Photo 01" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+    <!-- Page 1 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c.jpg" alt="Photo 1" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+    <!-- Page 2 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c1.jpg" alt="Photo 2" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+    <!-- Page 3 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c2.jpg" alt="Photo 3" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+    <!-- Page 4 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c3.jpg" alt="Photo 4" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+	 <!-- Page 5 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c4.jpg" alt="Photo 5" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+	 <!-- Page 6 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c5.jpg" alt="Photo 6" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+		 <!-- Page 7 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c6.jpg" alt="Photo 7" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+		 <!-- Page 8 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c7.jpg" alt="Photo 8" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+		 <!-- Page 9 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c8.jpg" alt="Photo 9" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+		 <!-- Page 10 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c9.jpg" alt="Photo 10" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+		 <!-- Page 11 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c10.jpg" alt="Photo 11" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+		 <!-- Page 12 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c11.jpg" alt="Photo 12" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+		 <!-- Page 13 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c12.jpg" alt="Photo 13" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+		 <!-- Page 14 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c13.jpg" alt="Photo 14" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+		 <!-- Page 15 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c14.jpg" alt="Photo 15" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+		 <!-- Page 16 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c15.jpg" alt="Photo 16" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+		 <!-- Page 17 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c16.jpg" alt="Photo 17" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+		 <!-- Page 18 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c17.jpg" alt="Photo 18" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+		 <!-- Page 19 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c18.jpg" alt="Photo 19" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+		 <!-- Page 20 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c19.jpg" alt="Photo 20" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+		 <!-- Page 21 -->
+    <div class="page">
+      <div class="front">
+        <img src="images/c20.jpg" alt="Photo 21" />
+      </div>
+      <div class="back"></div>
+    </div>
+
+  </div>
+</section>
+
+, initial-scale=1.0">
+
+
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const section = document.getElementById('flipbook-section');
+  const pages = Array.from(section.querySelectorAll('.page'));
+
+  let currentPage = 0;
+
+  // Set initial stacking order (top to bottom)
+  pages.forEach((p, i) => p.style.zIndex = pages.length - i);
+
+  // Function to flip one page
+  function flipNextPage() {
+    if (currentPage < pages.length) {
+      pages[currentPage].classList.add('flipped');
+      currentPage++;
+    } else {
+      // Reset all pages after reaching the end
+      pages.forEach((p, i) => {
+        p.classList.remove('flipped');
+        p.style.zIndex = pages.length - i;
+      });
+      currentPage = 0;
+    }
+  }
+
+  // Automatically flip every 3 seconds
+  setInterval(flipNextPage, 3000);
+});
+</script>
+    
+</body>
+</html>

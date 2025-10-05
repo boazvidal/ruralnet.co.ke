@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="stafflogin.css">
+</head>
+<header>
+    <navbar> 
+  <div class="topbar">
+        <img src="RURALNET.png">
+        <a href="#">home</a>
+        <div class="dropdown">
+            <a href="#">Services</a>
+            <div class="dropdown-content">
+                <a href="#">web design</a>
+                <a href="#">Develpment</a>
+                <a href="#">Graphic designing</a>
+            </div>
+        </div>
+        <a href="stafflogin.html">staff portal</a>
+        <a href="#">Student portal</a>
+        <a href="">About us</a>
+        <a href="">Reach us</a>
+    </div>
+    </navbar>
+</header>
+<body>
+    
+    <div class="container">
+        <div class="form-box active" id="login-form">
+            <form action="">
+                <h2>LOGIN TO CONTINUE ✅ </h2>
+                <input type="email" name="email" placeholder="email" required>
+                <input type="password" name="password" placeholder="password" required>
+                <button type="submit" name="login"> 🗝 Proceed</button>
+                <p>New to us? <a href="#" onclick="showForm('register-form')">Register</a></p>
+                <a href="homepage.html"><p>back to homepage</p></a>
+            </form>
+        </div>
+
+
+          <div class="form-box" id="register-form">
+            <form action="">
+                <h2>REGISTER</h2>
+                <input type="text" name="email" placeholder="email" required>
+                <input type="password" name="password" placeholder="password" required>
+                <select name="role" required>
+                    <option value="">---select role---</option>
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                    
+                </select>
+                <button type="submit" name="register">Register</button>
+                <p>ALready own an account? <a href="#" onclick="showForm('login-form')">Login</a></p>
+            </form>
+        </div>
+    </div>
+    
+
+   <script>
+   function showForm(formId) {
+    document.querySelectorAll(".form-box").forEach(form => formId.classList.remove("active"));
+    document.getElementById(formId).classList.add("active");
+}
+</script>
+
+</body>
+</html>

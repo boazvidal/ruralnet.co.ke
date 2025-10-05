@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>download learning materials</title>
+</head>
+<body>
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabbed Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 100px;
+      background: #f2f2f2;
+    }
+
+    header {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    /* ✅ Aqua background for the form */
+    form.form {
+      background-color: aqua;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 700px;
+      margin: auto;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .tabs-container {
+      width: 100%;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .tab-button {
+      display: flex;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .tab-button button {
+      flex: 1;
+      padding: 15px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    .tab-button button.active {
+      background: #007bff;
+      color: white;
+    }
+
+    .tab-content {
+      padding: 20px;
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .info {
+        align-items: center;
+        text-align: center;
+    }
+    .info h1 {
+        color: #007bff;
+    }
+
+    .info h2 {
+        background: rgb(0, 80, 36);
+        color: white;
+    }
+
+    ul {
+        color: rgb(31, 146, 8);
+    }
+
+    ul li a {
+        color: rgb(8, 5, 156);
+        font-family: 'sans-serif';
+        font-size: 18px;
+        text-decoration: none;
+    }
+
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #026613;
+        color: white;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        text-decoration: none;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        padding: 10px 15px;
+        transition: background 0.3s ease;
+    }
+
+    nav a:hover {
+        background-color: #1d5304d2;
+        border-radius: 5px;
+    }
+
+    nav img {
+        max-width: 200px;
+        display: block;
+        margin-right: 10px;
+    }
+
+  </style>
+</head>
+<body>
+    <nav>
+        <img src="RURALNET.png">
+        <a href="homepage.html">home</a>
+        <a href="#">Services</a>
+        <a href="stafflogin.html">staff portal</a>
+        <a href="#">Student portal</a>
+        <a href="">About us</a>
+        <a href="">Reach us</a>
+		<a href="https://www.netacad.com/" target="_blank">Cisco</a>
+    <a href="https://easytvet.com/" target="_blank">TVET Website</a>
+    <a href="https://www.kasneb.or.ke/" target="_blank">KASNEB Website</a>
+    </nav>
+
+  <h1><strong>GET YOUR UPDATED LEARNING RESOURCES HERE...</strong></h1>
+  <div class="info">
+  <h1>Last updated: September 2025</h1>
+  <h2>Notes</h2>
+  </div>
+
+  <form class="form">
+    <div class="tabs-container">
+      <div class="tab-button">
+        <button type="button" class="tab-btn active" data-tab="tab1">ICT Basics</button>
+        <button type="button" class="tab-btn" data-tab="tab2">Graphic Designing</button>
+        <button type="button" class="tab-btn" data-tab="tab3">Programming</button>
+        <button type="button" class="tab-btn" data-tab="tab4">Networking</button>
+      </div>
+
+      <div class="tab-content active" id="tab1">
+        <h3>Notes for beginners pursuing Computer course (ICT Essentials)</h3>
+        <ul>
+          <li><a href="COMPERENSIVE LEARNERS COMPTETENCY GUIDE FOR ICT BEGINNERS.pdf" download="">Full Notes</a></li>
+            <li><a href="" download="">Introduction</a></li>
+            <li><a href="" download="">Keyboarding skills</a></li>
+            <li><a href="" download="">mouse</a></li>
+            <li><a href="" download="">Operating systems</a></li>
+            <li><a href="" download="">Word</a></li>
+            <li><a href="" download="">Excell</a></li>
+            <li><a href="" download="">Access</a></li>
+            <li><a href="" download="">Publisher</a></li>
+            <li><a href="" download="cisco networking notes.pdf">Networking</a></li>
+            <li><a href="" download="">Internet</a></li>
+        </ul>
+
+      </div>
+
+      <div class="tab-content" id="tab2">
+        <h3>Updated notes with practical procedures for graphic designers</h3>
+        <ul>
+            <li><a href="" download="">Adobe Photoshop</a></li>
+            <li><a href="" download="">Adobe Illustrator</a></li>
+            <li><a href="" download="">Corel Draw</a></li>
+            <li><a href="" download="">Desktop Publishing</a></li>
+            <li><a href="" download="">PowerPoint</a></li>
+        </ul>
+      </div>
+
+      <div class="tab-content" id="tab3">
+        <h3>Modern Notes with the best IDES to varius programming languages and code generation tools</h3>
+        <ul>
+            <li><a href="" download="">Web Development (Complete Notes)</a></li>
+            <li><a href="" download="">HTML</a></li>
+            <li><a href="" download="">CSS</a></li>
+            <li><a href="" download="">Javascript</a></li>
+            <li><a href="" download="Python Programming.pdf">Python</a></li>
+            <li><a href="" download="">C</a></li>
+            <li><a href="" download="">C++</a></li>
+        </ul>
+      </div>
+      
+      <div class="tab-content" id="tab4">
+        <h3>Notes on Everything you need to know about networking</h3>
+        <ul>
+            <li><a href="" download="">Networking</a></li>
+            <li><a href="" download="">Networking Software</a></li>
+            <li><a href="" download="">Cisco packet tracer</a></li>
+            <li><a href="" download="">Networking tools</a></li>
+            <li><a href="" download="">OSI model</a></li>
+            <li><a href="" download="">Configuration</a></li>
+            <li><a href="" download="">Routers and wireless technology</a></li>
+        </ul>
+      </div>
+      
+    </div>
+  </form>
+
+  <div class="info">
+  <h1>======================</h1>
+  <h2>Tutorials</h2>
+  </div>
+
+  <form class="form">
+    <div class="tabs-container">
+      <div class="tab-button">
+        <button type="button" class="tab-btn active" data-tab="tab5">IT skills</button>
+        <button type="button" class="tab-btn" data-tab="tab6">Coding</button>
+        <button type="button" class="tab-btn" data-tab="tab3">Others</button>
+      </div>
+
+      <div class="tab-content active" id="tab5">
+        <h3>Tutorials</h3>
+                <ul>
+            <li><a href="" download="">Lesson one</a></li>
+            <li><a href="" download="">Word</a></li>
+            <li><a href="" download="">Excell</a></li>
+            <li><a href="" download="">Access</a></li>
+            <li><a href="" download="">Publisher</a></li>
+            <li><a href="" download="">Powerpoint</a></li>
+            <li><a href="" download="">Internet and networking</a></li>
+        </ul>
+        <p>You may Just watch them here 😇</p>
+      </div>
+
+      <div class="tab-content" id="tab6">
+        <h3>Programming tutorials</h3>
+            <li><a href="" download="">Intro to programming</a></li>
+            <li><a href="" download="">HTML</a></li>
+            <li><a href="" download="">CSS</a></li>
+            <li><a href="" download="">Javascript</a></li>
+            <li><a href="" download="">Python</a></li>
+            <li><a href="" download="">C</a></li>
+            <li><a href="" download="">C++</a></li>
+        </ul>
+      </div>
+
+      <div class="tab-content" id="tab3">
+        <h3>Contact</h3>
+        <p>Email us at <strong>ruralnet2016@gmail.com</strong></p>
+      </div>
+    </div>
+  </form>
+  
+
+  <script>
+    const tabButtons = document.querySelectorAll(".tab-btn");
+    const tabContents = document.querySelectorAll(".tab-content");
+
+    tabButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        tabButtons.forEach(btn => btn.classList.remove("active"));
+        tabContents.forEach(tab => tab.classList.remove("active"));
+        
+        button.classList.add("active");
+        document.getElementById(button.dataset.tab).classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>
+
+    
+</body>
+</html>

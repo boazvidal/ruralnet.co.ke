@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>loading...</title>
+</head>
+
+<style>
+	body {
+		height: 100vh;
+		margin: 0;
+		background: rgb(0, 0, 15);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-image: url();
+		flex-direction: column;
+
+	}
+
+	.loader {
+		width: 100px;
+		height: 100px;
+		box-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 60px #0f0f0f;
+		border: 6px solid transparent;
+		border-top: 6px solid #0ff;
+		border-radius: 50%;
+		animation: spin 1.5s linear infinite;
+
+	}
+
+	@keyframes spin {
+		0% {
+			transform: rotate(0deg);
+			box-shadow: 0 0 20px #0ff;
+		}
+		50% {
+			box-shadow: 0 0 40px #0ff, 0 0 60px #0ff;
+		}
+
+		100% {
+			transform: rotate(260deg);
+			box-shadow: 0 0 20px #0ff;
+		}
+	}
+
+	.text {
+		color: #0ff;
+		font-family: georgia;
+	}
+
+	.box {
+		width: 230px;
+		height: 120px;
+		display: grid;
+		place-content: center;
+		color: 0ff;
+		font-size: 20px;
+		--border-angle: 0turn;
+		--main-bg: conic-gradient(
+		from var(--border-angle),
+		#213,
+		#112 5%,
+		#112 60%,
+		#213 95%
+		);
+		--gradient-border: conic-gradient(
+			from var(--border-angle),
+			transparent 25%,
+			#08f,
+			#f03 99%,
+			transpa);
+
+		border: solid 5px transparent;
+		border-radius: 2rem;
+		background: 
+		var(--main-bg) padding-box,
+		var(--gradient-border) border-box,
+		var(--main-bg) border-box;
+
+		background-position: center center;
+		animation: bg-spin 3s linear infinite;
+
+	}
+
+	.box:hover {
+		animation-play-state: paused;
+	}
+
+	@keyframes bg-spin {
+		to {
+			--border-angle: 1turn;
+		}
+	}
+
+	@property --border-angle {
+		syntax: "<angle>";
+		inherits: true;
+		initial-value: 0turn;
+	}
+
+	.bd {
+		background-color: rgba(red, green, blue, alpha);
+	}
+
+	button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to right, yellow, green);
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: navy;
+    font-weight: 10500;
+    margin-bottom: 20px;
+    transition: 0.5s;
+	display: none;
+}
+
+button:hover {
+    background: linear-gradient(to right, green, yellow);
+}
+</style>
+<body>
+	<div class="loader"></div>
+	<div class="text">
+		<h3>Loading, please wait...</h3>
+		<h2>Click next to proceed</h2>
+	</div>
+
+	<div class="box">
+		
+	</div>
+
+	<button class="bd" id="button" onclick="window.location.href='Downloads.html'";>NEXT</button>
+
+	<script>
+		
+			setTimeout(() => {
+				document.getElementById("button").style.display = "block";
+		}, 5000);
+
+		
+	</script>
+
+</body>
+</html>
