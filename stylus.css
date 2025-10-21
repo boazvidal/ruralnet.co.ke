@@ -140,6 +140,19 @@
             size: 30px;
         }
 
+        .menu-icon {
+          font-size: 26px;
+          color: white;
+          cursor: pointer;
+          display: none;
+        }
+
+        @media (max-width: 768px) {
+          .menu-icon {
+            display: block;
+          }
+        }
+
         .navbar a {
                 color: white;
                 padding: 14px 20px;

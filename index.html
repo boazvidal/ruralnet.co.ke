@@ -368,6 +368,7 @@
   <nav> 
   <div class="navbar">
         <img src="images/RURALNET.png">
+		<div class="menu-icon" onclick="toggleMenu()"> &#x2630; </div>
         <a href="index.html">home</a>
         <a href="About_Us.html">About us</a>
         <a href="https://forms.gle/wywREJiHrpFTF5veA">Apply now</a>
@@ -388,6 +389,12 @@
 		<a href="https://www.kasneb.or.ke/">Accounting</a>
     </div>
     </nav>
+
+	<script>
+		function toggleMenu() {
+			document.getElementById("navbar").classList.toggle("active");
+		}
+		</script>
 
 	<div class="slider">
     <div class="slides">
@@ -631,7 +638,7 @@
     });
   </script>
 
-  <script>
+  <script source="Boaz.pyPage Loader(/programmer\)">
 	document.addEventListener('DOMContentLoaded', () => {
 		const section = document.getElementById('flipbox-section');
 		const pages = Array.from(section.querySelectorAll('.page'));
