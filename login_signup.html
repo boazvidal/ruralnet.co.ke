@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Firebase Auth — Example (single file)</title>
+  <style>
+    /* Simple, clean styles so you can copy/paste and test quickly */
+    :root{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{display:flex;align-items:flex-start;justify-content:center;padding:24px;background:#f5f7fb;color:#111}
+    .card{background:white;padding:20px;border-radius:12px;box-shadow:0 6px 20px rgba(12,20,40,.08);max-width:920px;width:100%}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    h1{margin:0 0 12px;font-size:20px}
+    label{display:block;font-size:13px;margin-bottom:6px}
+    input[type=text],input[type=email],input[type=password],input[type=file]{width:100%;padding:8px;border-radius:8px;border:1px solid #e1e6f0}
+    button{padding:8px 12px;border-radius:8px;border:0;background:#2563eb;color:white;cursor:pointer}
+    small{color:#666}
+    #messages{margin-top:12px;color:#b91c1c}
+    img.profile{width:96px;height:96px;object-fit:cover;border-radius:999px;border:2px solid #e6eefc}
+    .hidden{display:none}
+    .muted{color:#666;font-size:13px}
+    .row{display:flex;gap:8px;align-items:center}
+    .center{display:flex;align-items:center;justify-content:center}
+    @media (max-width:740px){.grid{grid-template-columns:1fr}}
+    pre{background:#0b1220;color:#dbeafe;padding:12px;border-radius:8px;overflow:auto}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Firebase Auth + Profile (single-file example)</h1>
+
+    <!-- ======= 1) Instructions for setting up Firebase (read this BEFORE running the app) ======= -->
+    <section id="instructions">
+      <h2 style="font-size:16px;margin-top:6px">Quick setup (3 minutes)</h2>
+      <ol>
+        <li>Go to <strong>console.firebase.google.com</strong> and create a new project (or open an existing one).</li>
+        <li>In the project: <strong>Authentication → Sign-in method</strong> → enable <em>Email/Password</em>.</li>
+        <li>Enable <strong>Cloud Firestore</strong> (in test mode for now) and <strong>Storage</strong> (default rules for dev), or set rules shown below before production.</li>
+        <li>Add a Web App (click the gear &gt; Project settings &gt; "Add app") and copy the Firebase config object (apiKey, authDomain, projectId, storageBucket, appId...).</li>
+        <li>Replace the <code>firebaseConfig</code> object in the code below with your config values.</li>
+      </ol>
+
+      <p class="muted">This single file includes the UI, CSS and JavaScript (using the modern Firebase modular SDK via CDN). It demonstrates: signup, login, logout, profile data stored in Firestore, profile picture stored in Storage, and password change (with reauthentication if needed).</p>
+
+      <h3 style="margin-bottom:6px">Important security rules (development → production)</h3>
+      <p class="muted">Before you publish, change Firestore & Storage rules so users can only access their own data. Example rules (copy into the console):</p>
+      <pre>// Firestore security rules
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+
+// Storage security rules
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /profile_pictures/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+</pre>
+
+    </section>
+
+    <!-- ======= 2) UI ======= -->
+    <div class="grid" style="margin-top:10px">
+
+      <!-- LEFT: Sign up & Login -->
+      <div>
+        <h2 style="font-size:15px">Sign up</h2>
+        <div id="signup-form">
+          <label>Full name <input id="signup-name" type="text" placeholder="Jane Doe"></label>
+          <label>Email <input id="signup-email" type="email" placeholder="you@mail.com"></label>
+          <label>Password <input id="signup-password" type="password" placeholder="min 6 char"></label>
+          <label>Phone <input id="signup-phone" type="text" placeholder="optional"></label>
+          <label>Profile picture <input id="signup-photo" type="file" accept="image/*"></label>
+          <div class="row" style="margin-top:8px">
+            <button id="signup-btn">Create account</button>
+            <button id="signup-to-login" style="background:#6b7280">Already have account?</button>
+          </div>
+        </div>
+
+        <hr style="margin:16px 0">
+
+        <h2 style="font-size:15px">Login</h2>
+        <div id="login-form">
+          <label>Email <input id="login-email" type="email"></label>
+          <label>Password <input id="login-password" type="password"></label>
+          <div class="row" style="margin-top:8px">
+            <button id="login-btn">Login</button>
+            <button id="reset-pass-btn" style="background:#111827">Reset password (email)</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Profile & actions (hidden until logged in) -->
+      <div id="profile-area" class="hidden">
+        <h2 style="font-size:15px">Your profile</h2>
+        <div class="center" style="margin-bottom:12px">
+          <img id="profile-pic" class="profile" src="" alt="profile" />
+        </div>
+        <label>Full name <input id="profile-name" type="text"></label>
+        <label>Phone <input id="profile-phone" type="text"></label>
+        <label>Change profile picture <input id="profile-photo" type="file" accept="image/*"></label>
+        <div class="row" style="margin-top:8px">
+          <button id="save-profile-btn">Save profile</button>
+          <button id="logout-btn" style="background:#ef4444">Logout</button>
+        </div>
+
+        <hr style="margin:12px 0">
+        <h3 style="font-size:13px">Change password</h3>
+        <small class="muted">Some updates require recent login — enter your <strong>current password</strong> to reauthenticate if requested.</small>
+        <label>Current password <input id="current-password" type="password"></label>
+        <label>New password <input id="new-password" type="password" placeholder="min 6 char"></label>
+        <div class="row" style="margin-top:8px">
+          <button id="change-password-btn">Change password</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="messages" aria-live="polite"></div>
+
+    <!-- ======= 3) The single-file JavaScript (modular Firebase SDK via CDN) ======= -->
+    <script type="module">
+    // IMPORTANT: replace the firebaseConfig object below with your project's config
+
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js';
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      signOut,
+      onAuthStateChanged,
+      updatePassword,
+      reauthenticateWithCredential,
+      EmailAuthProvider,
+      updateProfile,
+      sendPasswordResetEmail
+    } from 'https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js';
+
+    import {
+      getFirestore,
+      doc,
+      setDoc,
+      getDoc,
+      updateDoc
+    } from 'https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js';
+
+    import {
+      getStorage,
+      ref as storageRef,
+      uploadBytes,
+      getDownloadURL
+    } from 'https://www.gstatic.com/firebasejs/12.3.0/firebase-storage.js';
+
+    // ---- put your firebase config here (from Project settings -> General -> Your apps) ----
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+    // -------------------------------------------------------------------------------------
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
+    // --- helper DOM refs ---
+    const signupName = document.getElementById('signup-name');
+    const signupEmail = document.getElementById('signup-email');
+    const signupPassword = document.getElementById('signup-password');
+    const signupPhone = document.getElementById('signup-phone');
+    const signupPhoto = document.getElementById('signup-photo');
+    const signupBtn = document.getElementById('signup-btn');
+
+    const loginEmail = document.getElementById('login-email');
+    const loginPassword = document.getElementById('login-password');
+    const loginBtn = document.getElementById('login-btn');
+    const resetPassBtn = document.getElementById('reset-pass-btn');
+
+    const profileArea = document.getElementById('profile-area');
+    const profilePic = document.getElementById('profile-pic');
+    const profileName = document.getElementById('profile-name');
+    const profilePhone = document.getElementById('profile-phone');
+    const profilePhoto = document.getElementById('profile-photo');
+    const saveProfileBtn = document.getElementById('save-profile-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    const currentPassword = document.getElementById('current-password');
+    const newPassword = document.getElementById('new-password');
+    const changePasswordBtn = document.getElementById('change-password-btn');
+
+    const messages = document.getElementById('messages');
+
+    // Show message
+    function show(msg, isError = false) {
+      messages.textContent = msg;
+      messages.style.color = isError ? '#b91c1c' : '#064e3b';
+      window.setTimeout(()=>{ if(messages.textContent === msg) messages.textContent = '' }, 5000);
+    }
+
+    // Toggle screens
+    function showProfileArea(show) {
+      if(show) profileArea.classList.remove('hidden');
+      else profileArea.classList.add('hidden');
+    }
+
+    // --- SIGN UP ---
+    signupBtn.addEventListener('click', async () => {
+      const name = signupName.value.trim();
+      const email = signupEmail.value.trim();
+      const password = signupPassword.value;
+      const phone = signupPhone.value.trim();
+      const file = signupPhoto.files[0];
+
+      if(!email || !password || password.length < 6) return show('Provide valid email and password (>=6 chars)', true);
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        show('Account created. Saving profile...');
+
+        // Upload photo if present
+        let photoURL = '';
+        if(file) {
+          const fileRef = storageRef(storage, `profile_pictures/${user.uid}`);
+          await uploadBytes(fileRef, file);
+          photoURL = await getDownloadURL(fileRef);
+        }
+
+        // Save user info in Firestore (collection: users, docId = uid)
+        await setDoc(doc(db, 'users', user.uid), {
+          name: name || '',
+          email: email,
+          phone: phone || '',
+          photoURL: photoURL || ''
+        });
+
+        // Update the auth profile (optional, makes user.displayName available)
+        await updateProfile(user, { displayName: name || '', photoURL: photoURL || '' });
+
+        show('Profile saved. You are logged in.');
+      } catch (err) {
+        console.error(err);
+        show(err.message || 'Signup failed', true);
+      }
+    });
+
+    // --- LOGIN ---
+    loginBtn.addEventListener('click', async () => {
+      const email = loginEmail.value.trim();
+      const password = loginPassword.value;
+      if(!email || !password) return show('Enter email and password', true);
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        show('Logged in');
+      } catch(err) {
+        console.error(err);
+        show(err.message || 'Login failed', true);
+      }
+    });
+
+    // --- PASSWORD RESET (send reset email) ---
+    resetPassBtn.addEventListener('click', async () => {
+      const email = loginEmail.value.trim();
+      if(!email) return show('Enter your email to receive reset link', true);
+      try {
+        await sendPasswordResetEmail(auth, email);
+        show('Password reset email sent (check your inbox)');
+      } catch(err) {
+        console.error(err);
+        show(err.message || 'Could not send reset email', true);
+      }
+    });
+
+    // --- Auth state changed: show/hide profile ---
+    onAuthStateChanged(auth, async (user) => {
+      if(user) {
+        // user is signed in
+        showProfileArea(true);
+        // populate profile fields from Firestore
+        try {
+          const docRef = doc(db, 'users', user.uid);
+          const snapshot = await getDoc(docRef);
+          if(snapshot.exists()){
+            const data = snapshot.data();
+            profileName.value = data.name || user.displayName || '';
+            profilePhone.value = data.phone || '';
+            profilePic.src = data.photoURL || user.photoURL || '';
+            if(!profilePic.src) profilePic.src = 'https://via.placeholder.com/96?text=avatar';
+          } else {
+            profileName.value = user.displayName || '';
+            profilePhone.value = '';
+            profilePic.src = user.photoURL || 'https://via.placeholder.com/96?text=avatar';
+          }
+        } catch(err) {
+          console.error(err);
+          show('Could not load profile', true);
+        }
+      } else {
+        // no user
+        showProfileArea(false);
+      }
+    });
+
+    // --- SAVE profile changes (name, phone, new photo) ---
+    saveProfileBtn.addEventListener('click', async () => {
+      const user = auth.currentUser;
+      if(!user) return show('No signed-in user', true);
+      const name = profileName.value.trim();
+      const phone = profilePhone.value.trim();
+      const file = profilePhoto.files[0];
+
+      try {
+        let photoURL = '';
+        if(file) {
+          const fileRef = storageRef(storage, `profile_pictures/${user.uid}`);
+          await uploadBytes(fileRef, file);
+          photoURL = await getDownloadURL(fileRef);
+        }
+
+        const updates = { name, phone };
+        if(photoURL) updates.photoURL = photoURL;
+
+        await updateDoc(doc(db, 'users', user.uid), updates);
+
+        // Also update Firebase Auth profile (so user.displayName and user.photoURL are available)
+        const profileUpdates = {};
+        if(name) profileUpdates.displayName = name;
+        if(photoURL) profileUpdates.photoURL = photoURL;
+        if(Object.keys(profileUpdates).length) await updateProfile(user, profileUpdates);
+
+        if(photoURL) profilePic.src = photoURL;
+
+        show('Profile updated');
+      } catch(err) {
+        console.error(err);
+        show(err.message || 'Failed to update profile', true);
+      }
+    });
+
+    // --- CHANGE PASSWORD (with reauthentication if required) ---
+    changePasswordBtn.addEventListener('click', async () => {
+      const user = auth.currentUser;
+      if(!user) return show('No user signed in', true);
+      const oldPass = currentPassword.value;
+      const newPass = newPassword.value;
+      if(!newPass || newPass.length < 6) return show('New password must be at least 6 characters', true);
+
+      try {
+        // Try to update password directly (works if user recently signed in)
+        await updatePassword(user, newPass);
+        show('Password updated');
+      } catch(err) {
+        console.warn('Update password error, trying reauth if needed:', err);
+        // If we get requires-recent-login, reauthenticate with credential
+        if(err.code === 'auth/requires-recent-login' || err.code === 'auth/requires-recent-login'){
+          if(!oldPass) return show('Please enter your current password to reauthenticate', true);
+          try {
+            const credential = EmailAuthProvider.credential(user.email, oldPass);
+            await reauthenticateWithCredential(user, credential);
+            await updatePassword(user, newPass);
+            show('Password updated after reauthentication');
+          } catch(e){
+            console.error(e);
+            show(e.message || 'Reauthentication failed', true);
+          }
+        } else {
+          show(err.message || 'Could not change password', true);
+        }
+      }
+    });
+
+    // --- LOGOUT ---
+    logoutBtn.addEventListener('click', async () => {
+      try {
+        await signOut(auth);
+        show('Signed out');
+      } catch(err) {
+        console.error(err);
+        show('Could not sign out', true);
+      }
+    });
+
+    // Small convenience: switch to login view if user clicks "already have account" button
+    document.getElementById('signup-to-login').addEventListener('click', () => {
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+
+    </script>
+
+    <hr style="margin-top:18px">
+    <p class="muted">If you want: I can split this into separate files (index.html, styles.css, app.js), add email verification, or show how to deploy to Firebase Hosting with commands. Which would you like next?</p>
+  </div>
+</body>
+</html>

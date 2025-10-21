@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animated Counters</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .stats-container {
+    display: flex;
+    gap: 80px;
+    text-align: center;
+  }
+
+  .counter {
+    font-size: 60px;
+    font-weight: bold;
+    color: #FFC300; /* Yellow color */
+  }
+
+  .label {
+    font-size: 16px;
+    color: #006666; /* Teal color */
+    margin-top: 5px;
+  }
+</style>
+</head>
+<body>
+
+<div class="stats-container">
+  <div>
+    <div class="counter" data-target="7000">0</div>
+    <div class="label">No Of Students</div>
+  </div>
+  <div>
+    <div class="counter" data-target="7">0</div>
+    <div class="label">Branches</div>
+  </div>
+  <div>
+    <div class="counter" data-target="13">0</div>
+    <div class="label">Schools</div>
+  </div>
+</div>
+
+<script>
+  const counters = document.querySelectorAll('.counter');
+  const speed = 200; // Adjust speed (lower = faster)
+
+  counters.forEach(counter => {
+    const updateCount = () => {
+      const target = +counter.getAttribute('data-target');
+      const count = +counter.innerText.replace(/,/g, '');
+      const increment = target / speed;
+
+      if (count < target) {
+        const newCount = Math.ceil(count + increment);
+        counter.innerText = newCount.toLocaleString();
+        setTimeout(updateCount, 20);
+      } else {
+        counter.innerText = target.toLocaleString();
+      }
+    };
+
+    updateCount();
+  });
+</script>
+
+</body>
+</html>

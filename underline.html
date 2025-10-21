@@ -1,0 +1,34 @@
+<div class="announcement-box">
+  <h3 class="underline">General Announcements...</h3>
+  <p>Currently there are no announcements. Keep In Touch for more.</p>
+  <p>Thanks once again</p>
+</div>
+
+<style>
+.announcement-box {
+  background: linear-gradient(to right, blue, orange);
+  color: white;
+  border-radius: 30px;
+  padding: 25px;
+  font-family: Arial, sans-serif;
+}
+
+/* this part makes the underline clearly visible */
+.underline {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+}
+
+.underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px;                /* thickness of the line */
+  background-color: white;    /* color of the underline */
+  border-radius: 2px;
+}
+</style>

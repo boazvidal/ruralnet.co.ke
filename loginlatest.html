@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoginLatest</title>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        <!--background: linear-gradient(to bottom, #2fa3e6, #041449);-->;
+        background: url('c18.jpg');
+        background-size: cover;
+        
+        color: #333;
+    }
+
+    .container {
+        margin: 0 15px;
+    }
+
+    .form-box {
+        width: 100%;
+        max-width: 450px;
+        padding: 30px;
+        background: #feffc7;
+        border-radius: 21px;
+        border-color: orange;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 3.1);
+        display: none;
+    }
+
+    .form-box.active {
+        display: block;
+    }
+
+    h2 {
+        font-size: 34px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        font-size: 40px;
+        text-align: center;
+        margin-bottom: 10px;
+        color: green;
+        font-family: 'Bernard MT Condensed';
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 20px;
+        background: #eee;
+        border-radius: 6px;
+        border: none;
+        outline: none;
+        font-size: 18px;
+        color: #090e8d;
+        margin-bottom: 20px;
+
+    }
+
+    button {
+        width: 100%;
+        padding: 20px;
+        background: linear-gradient(to right, blue, navy);
+        border-radius: 15px;
+        border: none;
+        cursor: pointer;
+        font-size: 21px;
+        color: #fff;
+        font-weight: 500;
+        margin-bottom: 20px;
+        transition: 0.5s;
+    }
+
+    button:hover {
+        background: rgb(105, 173, 105);
+        color: black;
+        font-weight: 500;
+    }
+
+    p {
+        font-size: 16px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    p a {
+        color: red;
+        text-decoration: none;
+        font-size: 22px;
+    }
+
+    p a:hover {
+        color: green;
+        text-decoration: dotted;
+    }
+
+
+</style>
+<body>
+    <div class="container">
+
+        <!--Login-->
+        <div class="form-box active" id="login-form">
+            <form action="">
+                <h2>login</h2>
+                <input type="email" name="Email" placeholder="your email as username here" required>
+                <input type="password" name="password" placeholder="password" required>
+                <button type="submit" name="login">Proceed</button>
+                <p>New to us? <a href="#" onclick="showForm('register-form')">Register</a></p>    
+            </form>
+        </div>
+
+        <!--Register-->
+
+        <div class="form-box" id="register-form">
+            <form action="">
+                <h1>RURALNET ICT ACADEMY</h1>
+                <h2>You're Registering ...</h2>
+                <input type="text" name="name" placeholder="user name" required>
+                <input type="email" name="Email" placeholder="your email as username here" required>
+                <input type="password" name="password" placeholder="password" required>
+                <select name="role" required>
+                    <option value="">--select who you are--</option>
+                    <option value="user">user</option>
+                    <option value="admin">admin</option>
+
+                </select>
+
+                <button type="submit" name="register">register</button>
+                <p>Own an account? back to <a href="#" onclick="showForm('login-form')">Login</a></p>    
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        function showForm(formId) {
+            document.querySelectorAll(".form-box").forEach(form => form.classList.remove("active"));
+            document.getElementById(formId).classList.add("active");
+        }
+    </script>
+</body>
+</html>
