@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Flippable Book Viewer</title>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: sans-serif;
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .book {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    aspect-ratio: 16 / 9;
+    perspective: 2000px;
+  }
+
+  .page {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    transform-origin: left;
+    transition: transform 1s ease;
+    background: white;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  }
+
+  .page img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .page.flipped {
+    transform: rotateY(-180deg);
+    z-index: 0;
+  }
+
+  .page:not(.flipped) {
+    z-index: 1;
+  }
+
+  /* Make the right pages stack above */
+  .page:nth-child(even) {
+    left: 50%;
+    transform-origin: left;
+  }
+
+  /* Left pages flip from right edge */
+  .page:nth-child(odd) {
+    left: 0;
+    transform-origin: right;
+  }
+
+  .controls {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 800px;
+  }
+
+  button {
+    background-color: #4a90e2;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #357abd;
+  }
+
+  @media (max-width: 600px) {
+    .book {
+      aspect-ratio: 3 / 4;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+  <div class="book" id="book">
+    <div class="page">
+      <img src="images/c.jpg" alt="Page 1">
+    </div>
+    <div class="page">
+      <img src="images/c1.jpg" alt="Page 2">
+    </div>
+    <div class="page">
+      <img src="images/c2.jpg" alt="Page 3">
+    </div>
+    <div class="page">
+      <img src="images/c3.jpg" alt="Page 4">
+    </div>
+    <div class="page">
+      <img src="images/c4" alt="Page 5">
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="prevBtn">Previous</button>
+    <button id="nextBtn">Next</button>
+  </div>
+
+  <script>
+    const pages = document.querySelectorAll('.page');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    let current = 0;
+
+    // Stack pages properly
+    pages.forEach((page, index) => {
+      page.style.zIndex = pages.length - index;
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (current < pages.length) {
+        pages[current].classList.add('flipped');
+        pages[current].style.zIndex = current;
+        current++;
+      }
+    });
+
+    prevBtn.addEventListener('click', () => {
+      if (current > 0) {
+        current--;
+        pages[current].classList.remove('flipped');
+        pages[current].style.zIndex = pages.length - current;
+      }
+    });
+  </script>
+
+</body>
+</html>
