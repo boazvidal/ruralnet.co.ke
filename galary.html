@@ -1,156 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Our Photos</title>
-<style>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Flipbook</title>
 
-  body {
-    font-family: sans-serif;
-    background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-
-  .book {
-    position: relative;
-    width: 90%;
-    max-width: 800px;
-    aspect-ratio: 16 / 9;
-    perspective: 2000px;
-  }
-
-  .page {
-    width: 50%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    transform-origin: left;
-    transition: transform 1s ease;
-    background: white;
-    overflow: hidden;
-    box-shadow: 0 0 15px rgba(0,0,0,0.3);
-  }
-
-  .page img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .page.flipped {
-    transform: rotateY(-180deg);
-    z-index: 0;
-  }
-
-  .page:not(.flipped) {
-    z-index: 1;
-  }
-
-  /* Make the right pages stack above */
-  .page:nth-child(even) {
-    left: 50%;
-    transform-origin: left;
-  }
-
-  /* Left pages flip from right edge */
-  .page:nth-child(odd) {
-    left: 0;
-    transform-origin: right;
-  }
-
-  .controls {
-    margin-top: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    width: 90%;
-    max-width: 800px;
-  }
-
-  button {
-    background-color: #4a90e2;
-    border: none;
-    padding: 0.7rem 1.5rem;
-    color: white;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  button:hover {
-    background-color: #357abd;
-  }
-
-  @media (max-width: 600px) {
-    .book {
-      aspect-ratio: 3 / 4;
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-image: url(images/bkl.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      font-family: 'Courier New', Courier, monospace;
     }
-  }
-</style>
-</head>
 
+    .book {
+      width: 800px;   /* Wider */
+      height: 500px;  /* Taller */
+      perspective: 2000px;
+      position: relative;
+    }
+
+    .page {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: left;
+      transform-style: preserve-3d;
+      transition: transform 1s ease;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+
+    .front, .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      box-sizing: border-box;
+    }
+
+    .front img, .back img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 10px;
+    }
+
+    .back {
+      transform: rotateY(180deg);
+    }
+
+    .page.flipped {
+      transform: rotateY(-180deg);
+      z-index: 0 !important;
+    }
+
+    /* Stack order */
+    .page:nth-child(1) {z-index: 12;}
+    .page:nth-child(2) {z-index: 11;}
+    .page:nth-child(3) {z-index: 10;}
+    .page:nth-child(4) {z-index: 9;}
+    .page:nth-child(5) {z-index: 8;}
+    .page:nth-child(6) {z-index: 7;}
+    .page:nth-child(7) {z-index: 6;}
+    .page:nth-child(8) {z-index: 5;}
+    .page:nth-child(9) {z-index: 4;}
+    .page:nth-child(10) {z-index: 3;}
+    .page:nth-child(11) {z-index: 2;}
+    .page:nth-child(12) {z-index: 1;}
+
+    button {
+      padding: 12px 25px;
+      margin-top: 25px;
+      border: none;
+      border-radius: 8px;
+      background: #da3232;
+      color: white;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #444;
+    }
+  </style>
+</head>
 <body>
 
   <div class="book" id="book">
     <div class="page">
-      <img src="images/c.jpg" alt="Page 1">
+      <div class="front"><img src="IMG/g1.jpg" alt="Page 1"></div>
+      <div class="back"><img src="IMG/g2.jpg" alt="Back 1"></div>
     </div>
+
     <div class="page">
-      <img src="images/c1.jpg" alt="Page 2">
+      <div class="front"><img src="IMG/g3.jpg" alt="Page 2"></div>
+      <div class="back"><img src="IMG/g4" alt="Back 2"></div>
     </div>
+
     <div class="page">
-      <img src="images/c2.jpg" alt="Page 3">
+      <div class="front"><img src="IMG/g5.jpg" alt="Page 3"></div>
+      <div class="back"><img src="IMG/g6" alt="Back 3"></div>
     </div>
+
     <div class="page">
-      <img src="images/c3.jpg" alt="Page 4">
+      <div class="front"><img src="IMG/g7.jpg" alt="Page 4"></div>
+      <div class="back"><img src="IMG/g8" alt="Back 4"></div>
     </div>
-    <div class="page">
-      <img src="images/c4" alt="Page 5">
+
+        <div class="page">
+      <div class="front"><img src="IMG/g9.jpg" alt="Page 5"></div>
+      <div class="back"><img src="IMG/g10" alt="Back 5"></div>
+    </div>
+
+        <div class="page">
+      <div class="front"><img src="IMG/g11.jpg" alt="Page 6"></div>
+      <div class="back"><img src="IMG/g12" alt="Back 6"></div>
+    </div>
+
+        <div class="page">
+      <div class="front"><img src="IMG/g13.jpg" alt="Page 7"></div>
+      <div class="back"><img src="IMG/g14" alt="Back 7"></div>
+    </div>
+
+        <div class="page">
+      <div class="front"><img src="IMG/g15.jpg" alt="Page 8"></div>
+      <div class="back"><img src="IMG/g16" alt="Back 8"></div>
+    </div>
+
+        <div class="page">
+      <div class="front"><img src="IMG/g17.jpg" alt="Page 9"></div>
+      <div class="back"><img src="IMG/g18" alt="Back 9"></div>
+    </div>
+
+        <div class="page">
+      <div class="front"><img src="IMG/g19.jpg" alt="Page 10"></div>
+      <div class="back"><img src="IMG/g20" alt="Back 10"></div>
+    </div>
+
+        <div class="page">
+      <div class="front"><img src="IMG/g21.jpg" alt="Page 11"></div>
+      <div class="back"><img src="IMG/g22" alt="Back 11"></div>
+    </div>
+
+        <div class="page">
+      <div class="front"><img src="IMG/g23.jpg" alt="Page 12"></div>
+      <div class="back"><img src="IMG/g24" alt="Back 12"></div>
     </div>
   </div>
 
-  <div class="controls">
-    <button id="prevBtn">Previous</button>
-    <button id="nextBtn">Next</button>
-  </div>
+  <button onclick="flipPage()">Flip Page</button>
 
   <script>
+    let currentPage = 0;
     const pages = document.querySelectorAll('.page');
-    const nextBtn = document.getElementById('nextBtn');
-    const prevBtn = document.getElementById('prevBtn');
-    let current = 0;
 
-    // Stack pages properly
-    pages.forEach((page, index) => {
-      page.style.zIndex = pages.length - index;
-    });
-
-    nextBtn.addEventListener('click', () => {
-      if (current < pages.length) {
-        pages[current].classList.add('flipped');
-        pages[current].style.zIndex = current;
-        current++;
+    function flipPage() {
+      if (currentPage < pages.length) {
+        pages[currentPage].classList.add('flipped');
+        currentPage++;
+      } else {
+        // Reset the book
+        pages.forEach(p => p.classList.remove('flipped'));
+        currentPage = 0;
       }
-    });
-
-    prevBtn.addEventListener('click', () => {
-      if (current > 0) {
-        current--;
-        pages[current].classList.remove('flipped');
-        pages[current].style.zIndex = pages.length - current;
-      }
-    });
+    }
   </script>
-
 </body>
 </html>
