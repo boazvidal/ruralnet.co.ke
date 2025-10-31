@@ -21,7 +21,20 @@
 
     nav {
       background: black;
+      border-bottom: 10px solid white;
+      width: 100%;
+    }
+
+    nav a {
       color: white;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      size: 14px;
+      text-decoration: none;
+    }
+
+    nav img {
+      width: 100px;
+      height: auto;
     }
 
     .book {
@@ -101,6 +114,43 @@
     button:hover {
       background: #444;
     }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      background-color: black;
+      color: white;
+      padding: 40px 60px;
+      flex-wrap: wrap;
+      text-decoration: none;
+      width: 100%;
+    }
+
+    .footer a, .footer p, .footer li {
+      color: white;
+      text-decoration: none;
+      margin-bottom: 3px;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 200px;
+      margin: 0 20px;
+      border-bottom: 5px solid white;
+      border-radius: 10px;
+
+    }
+
+    .footer h3 {
+      font-size: 16px;
+      margin-top: 15px;
+      text-transform: uppercase;
+      border-bottom: 2px solid yellow;
+      padding-bottom: 5px;
+    
+    }
+    
   </style>
 </head>
 <body>
@@ -189,5 +239,32 @@
       }
     }
   </script>
+
+  <footer class="footer">
+    <div class="footer-column">
+      <h3>Useful Links</h3>
+      <li><a href="">Home</a></li>
+      <li><a href="">Who we Are</a></li>
+      <li><a href="">Student Portal</a></li>
+      <li><a href="">Accounting</a></li>
+      <li><a href="">ICT</a></li>
+    </div>
+
+    <div class="footer-column">
+      <h3>Partners</h3>
+      <li><a href="">CSK</a></li>
+      <li><a href="">KASNEB</a></li>
+      <li><a href="">TVETA</a></li>
+    </div>
+
+    <div class="footer-column">
+      <h3>Contact Us</h3>
+      <p>+254723845040</p>
+      <p>+254700886058</p>
+      <p>+254793714564</p>
+      <p>ruralnet2016@gmail.com</p>
+      <p>ruralnet.co.ke</p>
+    </div>
+  </footer>
 </body>
 </html>
