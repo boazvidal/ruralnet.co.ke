@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Saved List — Simple Webpage</title>
+  <style>
+    :root{--accent:#2563eb;--bg:#f7fafc;--card:#ffffff}
+    body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); margin:0; padding:24px; color:#0f172a}
+    .container{max-width:900px;margin:0 auto}
+    header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+    h1{font-size:20px;margin:0}
+    .card{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(12,18,31,0.06)}
+    .controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+    input[type="text"], textarea{flex:1;padding:10px;border-radius:8px;border:1px solid #e6e9ef;font-size:14px}
+    button{background:var(--accent);color:white;border:0;padding:10px 12px;border-radius:8px;cursor:pointer}
+    button.ghost{background:transparent;color:var(--accent);border:1px solid #d1e3ff}
+    .list{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+    .item{display:flex;align-items:center;gap:12px;padding:10px;border-radius:8px;border:1px solid #eef2ff}
+    .item .meta{font-size:12px;color:#475569}
+    .item.done{opacity:0.6;text-decoration:line-through}
+    .actions{margin-left:auto;display:flex;gap:6px}
+    .small{padding:6px 8px;font-size:13px}
+    .toolbar{display:flex;gap:8px;align-items:center}
+    .search{width:220px}
+    .note{font-size:13px;color:#334155;margin-top:8px}
+    footer{margin-top:12px;font-size:13px;color:#6b7280}
+    @media (max-width:560px){.controls{flex-direction:column}.search{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Saved List</h1>
+      <div class="note">Add items — they're saved in your browser (localStorage).</div>
+    </header>
+
+    <div class="card">
+      <div class="controls">
+        <input id="newItemInput" type="text" placeholder="Add new item and press Add or Enter" />
+        <button id="addBtn">Add</button>
+        <input id="searchInput" class="search" type="text" placeholder="Search / filter" />
+        <select id="filterSelect" aria-label="filter">
+          <option value="all">All</option>
+          <option value="active">Active</option>
+          <option value="done">Done</option>
+        </select>
+        <button id="clearAll" class="ghost small">Clear all</button>
+      </div>
+
+      <div class="toolbar">
+        <button id="exportBtn" class="small ghost">Export JSON</button>
+        <label for="importFile" class="small ghost" style="cursor:pointer">Import JSON</label>
+        <input id="importFile" type="file" accept="application/json" style="display:none" />
+        <button id="sortBtn" class="small ghost">Sort A→Z</button>
+      </div>
+
+      <div id="list" class="list" aria-live="polite"></div>
+
+      <div class="note">Tip: items are stored locally in this browser. Use Export to back up.</div>
+    </div>
+
+    <footer>Local only · No server · Works offline</footer>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'savedListItems_v1'
+
+    // state
+    let items = [] // {id, text, done, createdAt, updatedAt}
+    let sortAsc = true
+
+    // DOM
+    const newItemInput = document.getElementById('newItemInput')
+    const addBtn = document.getElementById('addBtn')
+    const listEl = document.getElementById('list')
+    const searchInput = document.getElementById('searchInput')
+    const filterSelect = document.getElementById('filterSelect')
+    const clearAllBtn = document.getElementById('clearAll')
+    const exportBtn = document.getElementById('exportBtn')
+    const importFile = document.getElementById('importFile')
+    const sortBtn = document.getElementById('sortBtn')
+
+    // helpers
+    const uid = ()=>Date.now().toString(36) + Math.random().toString(36).slice(2,7)
+    const save = ()=>localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
+    const load = ()=>{ try{ items = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]') }catch(e){ items = [] } }
+
+    function render(){
+      const q = searchInput.value.trim().toLowerCase()
+      const filter = filterSelect.value
+      let out = items.slice()
+      if(filter === 'active') out = out.filter(i=>!i.done)
+      if(filter === 'done') out = out.filter(i=>i.done)
+      if(q) out = out.filter(i => i.text.toLowerCase().includes(q))
+
+      listEl.innerHTML = ''
+      if(out.length === 0){ listEl.innerHTML = '<div class="note">No items</div>'; return }
+
+      out.forEach(item => {
+        const el = document.createElement('div')
+        el.className = 'item' + (item.done? ' done':'')
+
+        const checkbox = document.createElement('input')
+        checkbox.type = 'checkbox'
+        checkbox.checked = item.done
+        checkbox.addEventListener('change', ()=>{ toggleDone(item.id) })
+
+        const text = document.createElement('div')
+        text.style.minWidth = '0'
+        const title = document.createElement('div')
+        title.textContent = item.text
+        title.style.fontSize = '15px'
+        title.style.overflow = 'hidden'
+        title.style.textOverflow = 'ellipsis'
+        title.style.whiteSpace = 'nowrap'
+
+        const meta = document.createElement('div')
+        meta.className = 'meta'
+        const dt = new Date(item.updatedAt || item.createdAt)
+        meta.textContent = dt.toLocaleString()
+
+        text.appendChild(title)
+        text.appendChild(meta)
+
+        const actions = document.createElement('div')
+        actions.className = 'actions'
+
+        const editBtn = document.createElement('button')
+        editBtn.className = 'ghost small'
+        editBtn.textContent = 'Edit'
+        editBtn.addEventListener('click', ()=> startEdit(item.id))
+
+        const delBtn = document.createElement('button')
+        delBtn.className = 'ghost small'
+        delBtn.textContent = 'Delete'
+        delBtn.addEventListener('click', ()=> deleteItem(item.id))
+
+        actions.appendChild(editBtn)
+        actions.appendChild(delBtn)
+
+        el.appendChild(checkbox)
+        el.appendChild(text)
+        el.appendChild(actions)
+
+        listEl.appendChild(el)
+      })
+    }
+
+    function addItem(text){
+      const trimmed = text.trim()
+      if(!trimmed) return
+      const now = Date.now()
+      const it = { id: uid(), text: trimmed, done:false, createdAt: now, updatedAt: now }
+      items.unshift(it)
+      save(); render(); newItemInput.value = ''; newItemInput.focus()
+    }
+
+    function startEdit(id){
+      const it = items.find(x=>x.id===id)
+      if(!it) return
+      const newText = prompt('Edit item', it.text)
+      if(newText === null) return
+      const trimmed = newText.trim()
+      if(!trimmed) return alert('Item cannot be empty')
+      it.text = trimmed
+      it.updatedAt = Date.now()
+      save(); render()
+    }
+
+    function deleteItem(id){
+      if(!confirm('Delete this item?')) return
+      items = items.filter(x=>x.id!==id)
+      save(); render()
+    }
+
+    function toggleDone(id){
+      const it = items.find(x=>x.id===id)
+      if(!it) return
+      it.done = !it.done
+      it.updatedAt = Date.now()
+      save(); render()
+    }
+
+    function clearAll(){
+      if(!confirm('Clear all items? This cannot be undone.')) return
+      items = []
+      save(); render()
+    }
+
+    function exportJSON(){
+      const data = JSON.stringify(items, null, 2)
+      const blob = new Blob([data], {type:'application/json'})
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url; a.download = 'saved-list.json'
+      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url)
+    }
+
+    function importJSONFile(file){
+      const reader = new FileReader()
+      reader.onload = e=>{
+        try{
+          const parsed = JSON.parse(e.target.result)
+          if(!Array.isArray(parsed)) throw new Error('Invalid format')
+          // basic sanitize: keep known props
+          const sanitized = parsed.map(p=>({ id: p.id||uid(), text: String(p.text||'').trim(), done: !!p.done, createdAt: p.createdAt||Date.now(), updatedAt: p.updatedAt||p.createdAt||Date.now() }))
+          items = sanitized.concat(items)
+          save(); render(); alert('Imported ' + sanitized.length + ' items')
+        }catch(err){ alert('Failed to import: ' + err.message) }
+      }
+      reader.readAsText(file)
+    }
+
+    function sortItems(){
+      items.sort((a,b)=>{
+        const A = a.text.toLowerCase(), B = b.text.toLowerCase()
+        if(A < B) return sortAsc? -1: 1
+        if(A > B) return sortAsc? 1: -1
+        return 0
+      })
+      sortAsc = !sortAsc
+      sortBtn.textContent = sortAsc? 'Sort A→Z' : 'Sort Z→A'
+      save(); render()
+    }
+
+    // events
+    addBtn.addEventListener('click', ()=> addItem(newItemInput.value))
+    newItemInput.addEventListener('keydown', e=>{ if(e.key === 'Enter') addItem(newItemInput.value) })
+    searchInput.addEventListener('input', ()=> render())
+    filterSelect.addEventListener('change', ()=> render())
+    clearAllBtn.addEventListener('click', clearAll)
+    exportBtn.addEventListener('click', exportJSON)
+    importFile.addEventListener('change', e=>{ if(e.target.files.length) importJSONFile(e.target.files[0]); e.target.value = '' })
+    sortBtn.addEventListener('click', sortItems)
+
+    // init
+    load(); render()
+  </script>
+</body>
+</html>

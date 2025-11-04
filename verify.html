@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verify Saved Item</title>
+  <style>
+    :root {
+      --accent: #118302;
+      --bg: #f8fafc;
+      --text: #1e293b;
+      --card: #ffffff;
+    }
+    body {
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      color: var(--text);
+    }
+
+    /* --- Navbar --- */
+    nav {
+      background: var(--accent);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    nav .brand {
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    nav .brand img {
+      height: 100px;
+      width: auto;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      gap: 20px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+      transition: opacity 0.2s;
+    }
+    nav ul li a:hover {
+      opacity: 0.8;
+    }
+
+    /* --- Main Card --- */
+    .main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 16px;
+    }
+    .card {
+      background: var(--card);
+      width: 340px;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    h2 {
+      margin: 0 0 12px 0;
+      font-size: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-size: 15px;
+      outline: none;
+      transition: border 0.2s;
+    }
+    input:focus {
+      border-color: var(--accent);
+    }
+    button {
+      margin-top: 16px;
+      width: 100%;
+      padding: 10px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #ffffff;
+      color: green;
+    }
+    .error {
+      margin-top: 10px;
+      color: #dc2626;
+      font-size: 14px;
+      min-height: 20px;
+    }
+    .note {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 8px;
+    }
+
+    /* --- Footer --- */
+    footer {
+      background: #e2e8f0;
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+      color: #475569;
+    }
+
+    @media (max-width: 480px) {
+      nav ul {
+        gap: 12px;
+      }
+      nav .brand {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="brand">
+      <img src="images/RURALNET.png">
+    </div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="verify.html">Verify</a></li>
+      <li><a href="construction.html">Courses</a></li>
+      <li><a href="About_Us.html">About</a></li>
+    </ul>
+  </nav>
+
+  <main class="main">
+    <div class="card">
+      <h1>Are you one of us?</h1>
+      <h3>Enter your admission number to proceed</h3>
+      <h4>Name-RICT/0001/25</h4>
+      <h5>where 'Name' is your firts name and 'RICT/0001/25' is your admission number</h5>
+      <input type="text" id="valueInput" placeholder="Name-RICT/0001/25" />
+      <button onclick="checkValue()">Verify</button>
+      <div id="error" class="error"></div>
+      <div class="note">If you have trouble Loggging in, Kindly Contact ICT Desk Using the number below this page.</div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; Powered By Ruralnet ICT Academy Developer. ICT Help Desk; +254700886058 
+  </footer>
+
+  <script>
+    const STORAGE_KEY = 'savedListItems_v1';
+
+    function getSavedItems() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      } catch {
+        return [];
+      }
+    }
+
+    function checkValue() {
+      const input = document.getElementById('valueInput');
+      const errorEl = document.getElementById('error');
+      const entered = input.value.trim().toLowerCase();
+
+      if (!entered) {
+        errorEl.textContent = '⚠️ Please enter a value.';
+        return;
+      }
+
+      const items = getSavedItems();
+      const found = items.some(item => item.text.toLowerCase() === entered);
+
+      if (found) {
+        errorEl.textContent = '';
+        // ✅ Proceed to downloads.html
+        window.location.href = 'downloads.html';
+      } else {
+        errorEl.textContent = '❌ Invalid Admission Number';
+        input.value = '';
+        input.focus();
+      }
+    }
+
+    // Allow pressing Enter to check
+    document.getElementById('valueInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') checkValue();
+    });
+  </script>
+</body>
+</html>
