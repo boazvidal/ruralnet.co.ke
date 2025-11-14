@@ -38,6 +38,10 @@
     border-bottom: 10px solid white;
   }
 
+  .floating-box h2 {
+    border-bottom: 3px solid yellow;
+  }
+
   .floating-box p1 {
     color: yellow;
     font-style: italic;
@@ -54,7 +58,7 @@
   .close-btn {
     position: absolute;
     top: -32px;
-    right: -22px;
+    right: 350px;
     font-size: 40px;
     font-family: 'arial black';
     color: #da1616;
@@ -139,101 +143,124 @@
         }
 
  nav {
-      background: #004d40;
-      color: white;
-      width: 100%;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+  background: #004d40;
+  padding: 10px 20px;
+  position: relative;
+  z-index: 9999;
+}
 
-    .navbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      padding: 10px 20px;
-    }
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  position: relative;
+  z-index: 9999;
+}
 
-    .navbar img {
-      height: 45px;
-      width: auto;
-    }
+.logo {
+  width: 120px;
+}
 
-    .navbar a {
-      color: white;
-      text-decoration: none;
-      padding: 8px 12px;
-      font-size: 16px;
-      display: block;
-      transition: background 0.3s ease;
-    }
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  position: relative;
+  z-index: 9999;
+}
 
-    .navbar a:hover {
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 5px;
-    }
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 10px;
+}
 
-    /* Dropdown */
-    .dropdown {
-      position: relative;
-    }
+.nav-links a:hover {
+  background: #003f74;
+  border-radius: 5px;
+}
 
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background: #00695c;
-      min-width: 160px;
-      top: 100%;
-      left: 0;
-      border-radius: 5px;
-      overflow: hidden;
-    }
+.dropdown {
+  position: relative;
+  z-index: 9999;
+}
 
-    .dropdown-content a {
-      padding: 10px;
-      color: white;
-    }
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background: #0a2a43;
+  top: 40px;
+  left: 0;
+  min-width: 180px;
+  border-radius: 5px;
+}
 
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
+.dropdown-content a {
+  display: block;
+  padding: 10px;
+  color: white;
+}
 
-    /* Menu icon for mobile */
-    .menu-icon {
-      font-size: 26px;
-      cursor: pointer;
-      display: none;
-    }
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
-    /* Responsive Design */
-    @media (max-width: 900px) {
-      .menu-icon {
-        display: block;
-      }
+/* HAMBURGER ICON */
+.menu-icon {
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  display: none;
+}
 
-      .navbar a, 
-      .dropdown {
-        display: none;
-        width: 100%;
-      }
+/* -------------------- MOBILE FIX -------------------- */
+@media (max-width: 768px) {
 
-      .navbar.active a, 
-      .navbar.active .dropdown {
-        display: block;
-        text-align: left;
-      }
+  .menu-icon {
+    display: block;
+  }
 
-      .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+  .nav-links {
+    display: none;        /* Hides menu on mobile */
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    top: 60px;
+    left: 0;
+    background: #0a2a43;
+    padding: 20px 0;
+    text-align: center;
+  }
 
-      .dropdown-content {
-        position: static;
-        width: 100%;
-      }
-    }
+  .nav-links.show {
+    display: flex;        /* Shows when toggled */
+  }
+
+  .nav-links a {
+    padding: 15px;
+    font-size: 18px;
+    width: 100%;
+  }
+
+  /* Mobile dropdown */
+  .dropdown-content {
+    position: relative;
+    background: #003f74;
+    padding: 0;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: none; /* disable hover on mobile */
+  }
+
+  .dropdown.active .dropdown-content {
+    display: block; /* tap to open */
+  }
+}
+
+
      .slider {
       width: 90%;      /* Almost full width */
       height: 80vh;    /* Big on screen */

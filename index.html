@@ -341,8 +341,9 @@
     <span class="close-btn" onclick="closeBox()">×</span>
     <img src="images/RURALNET.png">
     <h2>Important Notice</h2>
-    <h3>The menu tabs are currently unavailable on smaller devices such as smart phones.</h3> 
-    <h3>We apologize for that and working to fix it soon</h3>
+    <h3>January intake is already ongoing</h3> 
+    <h3>for both ICT Essentials and advanced courses</h3>
+	<h3>We are still working on KASNEB Courses and we shall let you know once ready</h3>
 	<p1>powered by Ruralnet Developer</p1>
   </div>
 </div>
@@ -369,38 +370,54 @@
 	<a href=""><img src="images/linkedin.png"></a>
 </div>
 
-  <nav> 
+  <nav>
   <div class="navbar">
-        <img src="images/RURALNET.png">
-		<div class="menu-icon" onclick="toggleMenu()"> &#x2630; </div>
-        <a href="index.html">home</a>
-        <a href="About_Us.html">About us</a>
-        <a href="https://forms.gle/wywREJiHrpFTF5veA">Apply now</a>
-		<div class="dropdown">
-			<a href="#">Learning resources</a>
-			<div class="dropdown-content">
-				<a href="verify.html" target="_blank">E-Library</a>
-				<a href="construction.html" target="_blank">Sylabus</a>
-				<a href="COMPUTER COURSE OUTLINE.pdf" target="_blank">Course Outline</a>
-				<a href="FLIER.pdf" target="_blank">bronchure</a>
-				<a href="FEE_STRUCTURE.pdf" target="_blank">fee structure</a>
-			</div>
-		</div>
-		<a href="construction.html">Admision</a>
-		<a href="https://www.computerworld.com/" target="_blank">News & Updates</a>
-		<a href="announcements.html">Announcement</a>
-		<a href="construction.html">ICT</a>
-		<a href="https://www.kasneb.or.ke/">Accounting</a>
-		<a href="galary.html">gallery</a>
-		<a href="">Staff</a>
-    </div>
-    </nav>
+    <img src="images/RURALNET.png" class="logo">
 
-	<script>
-		function toggleMenu() {
-			document.getElementById("navbar").classList.toggle("active");
-		}
-		</script>
+    <div class="menu-icon" onclick="toggleMenu()">&#x2630;</div>
+
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="About_Us.html">About us</a>
+      <a href="https://forms.gle/wywREJiHrpFTF5veA">Apply now</a>
+
+      <div class="dropdown">
+        <a href="#" class="drop-btn">Learning resources ▾</a>
+        <div class="dropdown-content">
+          <a href="verify.html" target="_blank">E-Library</a>
+          <a href="construction.html" target="_blank">Sylabus</a>
+          <a href="COMPUTER COURSE OUTLINE.pdf" target="_blank">Course Outline</a>
+          <a href="FLIER.pdf" target="_blank">Brochure</a>
+          <a href="FEE_STRUCTURE.pdf" target="_blank">Fee structure</a>
+        </div>
+      </div>
+
+      <a href="construction.html">Admission</a>
+      <a href="https://www.computerworld.com/" target="_blank">News & Updates</a>
+      <a href="announcements.html">Announcement</a>
+      <a href="construction.html">ICT</a>
+      <a href="https://www.kasneb.or.ke/">Accounting</a>
+      <a href="galary.html">Gallery</a>
+      <a href="">Staff</a>
+    </div>
+  </div>
+</nav>
+
+
+<script>
+function toggleMenu() {
+  document.getElementById("navLinks").classList.toggle("show");
+}
+
+document.querySelectorAll(".drop-btn").forEach(btn => {
+  btn.addEventListener("click", function(e) {
+    e.preventDefault();
+    this.parentElement.classList.toggle("active");
+  });
+});
+</script>
+
+
 
 	<div class="slider">
     <div class="slides">
