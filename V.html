@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>t</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html>
+<head>
+    <title>Verify Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background-color: skyblue;
+        }
+        input {
+            padding: 8px;
+            width: 250px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 8px 20px;
+            cursor: pointer;
+        }
+        #error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Enter Your Code</h2>
+
+    <input type="text" id="userCode" placeholder="Enter number or character">
+
+    <br>
+
+    <button onclick="verifyCode()">Verify</button>
+
+    <p id="error"></p>
+
+    <script>
+        // The correct code to match
+        const correctCode = "ABC123";   // CHANGE THIS to your code
+
+        function verifyCode() {
+            let entered = document.getElementById("userCode").value;
+
+            if (entered === correctCode) {
+                // Redirect if match
+                window.location.href ="downloads.html"; // CHANGE destination
+            } else {
+                // Show error message
+                document.getElementById("error").textContent = "❌ Incorrent Student Identity!. Try again.";
+            }
+        }
+    </script>
+
+</body>
+</html>
+
+</body>
+</html>
