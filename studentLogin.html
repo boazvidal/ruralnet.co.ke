@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi Level Check</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: #f2f2f2;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container {
+        background: white;
+        padding: 25px;
+        width: 320px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+        text-align: center;
+    }
+
+    input {
+        width: 90%;
+        padding: 10px;
+        margin-top: 10px;
+        border: 1px solid #aaa;
+        border-radius: 6px;
+        font-size: 16px;
+    }
+
+    button {
+        margin-top: 15px;
+        width: 95%;
+        padding: 10px;
+        background: #007bff;
+        color: white;
+        border: none;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #0056b3;
+    }
+
+    .error {
+        margin-top: 12px;
+        color: red;
+        font-size: 14px;
+        height: 18px;
+    }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>Enter Level</h2>
+    <input type="text" id="levelInput" placeholder="Enter level (Level1, Level2...)">
+    <button onclick="checkLevel()">Verify</button>
+
+    <div class="error" id="error"></div>
+</div>
+
+<script>
+function checkLevel() {
+    let level = document.getElementById("levelInput").value.trim().toLowerCase();
+    let error = document.getElementById("error");
+
+    // CLEAR ERROR BEFORE CHECK
+    error.textContent = "";
+
+    // LEVEL CHECKS
+    if (level === "level1") {
+        window.location.href = "vp.html";   // Replace with your page
+    } 
+    else if (level === "level2") {
+        window.location.href = "vp2.html";  // Replace with your page
+    }
+    else if (level === "level3") {
+        window.location.href = "vp3.html";  // Example
+    }
+    else {
+        error.textContent = "❌ Invalid level. Try again.";
+    }
+}
+</script>
+
+</body>
+</html>

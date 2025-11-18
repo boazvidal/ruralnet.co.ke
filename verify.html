@@ -31,8 +31,8 @@
         padding: 10px 20px;
         box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         border-radius: 20px;
-        border-bottom: 70px solid green;
-        border-top: 70px solid white;
+        border-bottom: 20px solid white;
+        border-top: 20px solid green;
         margin-top: 10px;
     }
 
@@ -237,17 +237,25 @@
     </footer>
 
     <script>
-        const correctCode = "RICT/25/11/ICT/BCPK";  // <-- CHANGE THIS
+        //Admission Database
+        const correctCodes = [
+            "ADMNO1",
+            "ADMNO2",
+            "ADMNO3",
+            "ADMNO4",
+            "ADMNO5"
+        ];
 
         function verifyCode() {
-            let entered = document.getElementById("userCode").value.trim();
+            let entered = 
+        document.getElementById("userCode").value.trim();
 
-            if (entered === correctCode) {
-                // Redirect on success
-                window.location.href = "loaders/loaddownload.html"; // <-- CHANGE THIS
-            } else {
-                document.getElementById("error").textContent = "❌ Incorrect admission number. Try again.";
-            }
+        //Checking if the entered code is within the list...
+        if (correctCodes.includes(entered)) {
+            window.location.href = "loaders/loaddownload.html";
+        } else {
+            document.getElementById("error").textContent = "X Incorrect Admission number. Try Again"
+        }
         }
     </script>
 
