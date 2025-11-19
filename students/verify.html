@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission Verification</title>
+
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: url('../images/bbk.jpg');
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* ------------- NAVBAR ------------- */
+    nav {
+        width: 95%;
+        max-width: 1200px;
+        background: black;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        border-radius: 20px;
+        border-bottom: 20px solid white;
+        border-top: 20px solid green;
+        margin-top: 10px;
+    }
+
+    nav .brand img {
+        height: 70px;
+        width: auto;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+        padding: 0;
+        margin: 0;
+    }
+
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+    /* ------------- CARD ------------- */
+    .card {
+        width: 90%;
+        max-width: 400px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 25px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(6px);
+        margin: 20px 0;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+        background: #3498db;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .btn:hover {
+        background: #2980b9;
+    }
+
+    #error {
+        margin-top: 10px;
+        color: red;
+        font-weight: bold;
+    }
+
+    /* ------------- FOOTER ------------- */
+    footer {
+        width: 100%;
+        text-align: center;
+        font-size: 13px;
+        color: white;
+        padding: 10px;
+        margin-bottom: 5px;
+    }
+
+    /* ------------- RESPONSIVE FIXES ------------- */
+
+    /* Tablets */
+    @media (max-width: 900px) {
+        nav {
+            border-bottom: 50px solid green;
+            border-top: 50px solid white;
+        }
+        nav .brand img {
+            height: 55px;
+        }
+    }
+
+    /* Phones */
+    @media (max-width: 600px) {
+        nav {
+            flex-direction: column;
+            text-align: center;
+            gap: 10px;
+            border-bottom: 40px solid green;
+            border-top: 40px solid white;
+        }
+
+        nav ul {
+            flex-direction: row;
+            gap: 15px;
+        }
+
+        .card {
+            padding: 20px;
+        }
+    }
+
+    /* Extra small phones (320px–400px) */
+    @media (max-width: 400px) {
+        nav .brand img {
+            height: 45px;
+        }
+        nav {
+            border-bottom: 30px solid green;
+            border-top: 30px solid white;
+        }
+        .btn {
+            font-size: 14px;
+        }
+    }
+</style>
+
+</head>
+
+<body>
+
+    	<!--FULL PAGE PROTECTION SCRIPT -->
+
+<script>
+	//Right-Click
+	document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+
+<!--F12-->
+<script>
+	document.onkeydown = function(e) {
+
+	//F12
+	if (e.keyCode == 123) {
+		return false;
+	}
+
+
+//Ctrl+Shift+I or Ctrl+Shift+J or Ctrl+Shift+C
+
+	if (e.ctrlKey && e.shiftKey && (
+		e.keyCode === 73 ||
+		e.keyCode === 74 ||
+		e.keyCode === 67
+	)) {
+		return false;
+	}
+
+//Ctrl+U View Source-->
+
+	if (e.ctrlKey && e.keyCode === 85) {
+		return false;
+	}
+
+	//Ctrl+C Copy
+	if (e.ctrlKey && e.keyCode === 67) {
+		return false;
+	}
+};
+</script>
+
+    <nav>
+    <div class="brand">
+      <img src="../images/RURALNET.png">
+    </div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+
+    </ul>
+  </nav>
+
+    <div class="card">
+        <h2>Are you one of us?</h2>
+
+        <p>Scan the QR code at the back of your student ID</p>
+
+        <p><b>Enter the code</b></p>
+
+        <p style="font-size: 14px; color:#444;">
+            You can use your camera or any qr detector software/App. 
+        </p>
+
+        <input type="text" id="userCode" placeholder="Enter the QR code here...">
+
+        <div class="btn" onclick="verifyCode()">Verify</div>
+
+        <p id="error"></p>
+
+        <p style="font-size: 13px; margin-top: 10px; color:#555;">
+            If you have trouble logging in, Kindly contact ICT Desk using the number below this page.
+        </p>
+    </div>
+
+    <footer>
+        © Powered By Ruralnet ICT Academy Developer. ICT Help Desk: +254700886058
+    </footer>
+
+    <script>
+        //Admission Database
+        const correctCodes = [
+            "ADMNO1",
+            "ADMNO2",
+            "ADMNO3",
+            "ADMNO4",
+            "ADMNO5"
+        ];
+
+    
+        function checkLevel() {
+    let level = document.getElementById("levelInput").value.trim().toLowerCase();
+    let error = document.getElementById("error");
+
+    // CLEAR ERROR BEFORE CHECK
+    error.textContent = "";
+
+    // LEVEL CHECKS
+    if (level === "level1") {
+        window.location.href = "vp.html";   // Replace with your page
+    } 
+    else if (level === "level2") {
+        window.location.href = "vp2.html";  // Replace with your page
+    }
+    else if (level === "level3") {
+        window.location.href = "vp3.html";  // Example
+    }
+    else {
+        error.textContent = "❌ Invalid level. Try again.";
+    }
+}
+
+        function verifyCode() {
+            let entered = 
+        document.getElementById("userCode").value.trim();
+
+        //Checking if the entered code is within the list...
+        if (correctCodes.includes(entered)) {
+            window.location.href = "../loaders/loaddownload.html";
+        } else {
+            document.getElementById("error").textContent = "X Incorrect Admission number. Try Again"
+        }
+        }
+    </script>
+
+</body>
+</html>

@@ -10,7 +10,7 @@
         margin: 0;
         padding: 0;
         font-family: Arial, sans-serif;
-        background: #f2f2f2;
+        background: url('../images/bbk.jpg');
         height: 100vh;
         display: flex;
         justify-content: center;
@@ -18,12 +18,26 @@
     }
 
     .container {
-        background: white;
+        background: rgb(255, 255, 255, 0.1);
+        backdrop-filter: blur(3px);
+        box-shadow: 0 8px 20px rgb(0, 0, 0, 0.2);
         padding: 25px;
         width: 320px;
         border-radius: 10px;
         box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
         text-align: center;
+    }
+
+    .container img {
+        width: 300px;
+        height: auto;
+    }
+
+    .container h1 {
+        color: green;
+        font-family: 'Bernard MT Condensed';
+        text-shadow: 
+        -px -px rgba(0, 0, 0);
     }
 
     input {
@@ -53,7 +67,7 @@
 
     .error {
         margin-top: 12px;
-        color: red;
+        color: maroon;
         font-size: 14px;
         height: 18px;
     }
@@ -63,36 +77,42 @@
 <body>
 
 <div class="container">
-    <h2>Enter Level</h2>
-    <input type="text" id="levelInput" placeholder="Enter level (Level1, Level2...)">
-    <button onclick="checkLevel()">Verify</button>
+    <img src="../images/RURALNET.png">
+    <h1>RURALNET ICT ACADEMY</h1>
+    <h2>STUDENT LOGIN PAGE</h2>
+    <p>Enter Your name followed by your Admission Number</p>
+    <p>eg; BRIAN-RICT/001/001</p>
+    <input type="text" id="levelInput" placeholder="BRIAN-RICT/00001/0003">
+    <button onclick="checkLevel()">Proceed</button>
 
     <div class="error" id="error"></div>
 </div>
 
 <script>
 function checkLevel() {
-    let level = document.getElementById("levelInput").value.trim().toLowerCase();
+    // Convert user input to UPPERCASE
+    let level = document.getElementById("levelInput").value.trim().toUpperCase();
     let error = document.getElementById("error");
 
-    // CLEAR ERROR BEFORE CHECK
+    // CLEAR ERROR
     error.textContent = "";
 
-    // LEVEL CHECKS
-    if (level === "level1") {
-        window.location.href = "vp.html";   // Replace with your page
-    } 
-    else if (level === "level2") {
-        window.location.href = "vp2.html";  // Replace with your page
+    // LEVEL CHECKS (UPPERCASE ONLY)
+    if (level === "SUSAN-RICT/001") {
+        window.location.href = "Susan.html";
     }
-    else if (level === "level3") {
-        window.location.href = "vp3.html";  // Example
+    else if (level === "USER") {
+        window.location.href = "downloads.html";
+    }
+    else if (level === "LEVEL3") {
+        window.location.href = "vp3.html";
     }
     else {
-        error.textContent = "❌ Invalid level. Try again.";
+        error.textContent = "❌ Invalid Admission Number! Try again.";
     }
 }
 </script>
+
 
 </body>
 </html>

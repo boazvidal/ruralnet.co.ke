@@ -158,6 +158,29 @@
       padding-top: 60px;
     }
   }
+
+  button {
+            padding: 12px 25px;
+            margin: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .download-btn {
+            background: #28a745;
+        }
+
+        .download-btn:hover {
+            background: #1e7e34;
+        }
 </style>
 </head>
 <body>
@@ -168,8 +191,8 @@
         <strong>
       <li class="active" onclick="showSection('update', event)">PERSONAL DETAILS</li>
       <li onclick="showSection('funds', event)">ACADEMIC INFO</li>
-      <li onclick="showSection('postgrad', event)">LAERNING PROGRESS</li>
-      <li onclick="showSection('loans', event)">LEARNING MATERIALS</li>
+      <li onclick="showSection('postgrad', event)">COURSE DETAILS</li>
+      <li onclick="showSection('loans', event)">LEARNING PROGRESS</li>
       <li onclick="showSection('self', event)">CERTIFICATIONS</li>
       </strong>
     </ul>
@@ -195,92 +218,97 @@
       <p><pre>SUB-COUNTY:      UGUNJA</p></pre>
       <p><pre>CONSTITUENCY:    UGUNJA</p></pre>
       <p><pre>WARD:       UGUNJA</pre></p>
-      <p><pre>LOCATION:          FEMALE</p></pre>
+      <p><pre>LOCATION/village:          FEMALE</p></pre>
       <P><pre>BOX ADRESS:      P. O. BOX 40606, UGUNJA </pre></P>
       <P><pre>STUDENT'S CONTACT:      +254745722201 </pre></P>
       <P><pre>GUARDIAN'S CONTACT:      +254716564449 </pre></P>
+      <p><pre>STUDENT'S EMAIL:          N/A</p></pre>
       </strong>
     </div>
 
     <div id="funds" class="section">
-      <h1>ACADEMIC QUALIFICATION</h1>
-      <strong>
-        <P><pre>ADMNO:            RICT/25/11/BACPK007</pre></P>
-      <P><pre>COURSE:       ICT Essentials/Computer basics II;</pre></P>
-      <P><pre>DESCRIPTION:                          Covers Intro to Computers, Microsoft Applications, Database System project and Internet Essentials</pre></P>
-      <P><pre>DURATION:       Two Months</pre></P>
-      <P><pre>Enrollment Date:                          11/11/2025</pre></P>
-      <P><pre>COMPLETION DATE:            11/01/2026</pre></P>
-      <P><pre>                          Kenya Certificate of Secondary Education (KCSE)</pre></P>
-      <P><pre>PREVIOUS ACHIEVEMNT:       KCSE</pre></P>
-      <P><pre>                          Kenya Certificate of Primary Education</pre></P>
-      </strong>
 
-      <h1>PROFFESSIONAL DEVELOPMENT</h1>
+      <h1>ACADEMIC INFO</h1>
       <strong>
-        <p><pre>2022 - 2023: National Youth Service (NYS)</pre></p>
+        <p><pre>KCPE SCHOOL: XXXXXXXXX</pre></p>
     </strong>
-        <p>Paramilitary Training</p>
-        <p>Fire fighting Skills</p>
-        <p>Disaster Management</p>
-        <p>First Aid and Driils</p>
+        <p>KCPE YEAR: XXXXXXXXXXX</p>
+
     <strong>
-        <p>September - November 2024: Pandya Memorial Hospital</p>
+        <p>KCSE SCHOOL</p>
     </strong>
-        <p>Networking</p>
-        <p>ICT Technician</p>
-      
+        <p>KCSE YEAR</p>
+
+            <strong>
+        <p>OTHER INSTITUTION: SCHOOL: xxxxxxxxx</p>
+        <p>OTHER INSTITUTION: YEAR: xxxxxxxxx</p>
+    </strong>
     </div>
 
     <div id="postgrad" class="section">
-      <h1>SKILLS</h1>
-      <h2><pre>Computer Networking</pre></h2>
-      <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>Computer Networking</strong><pre></p>
-      <P><pre>                          Network Settup</pre></P>
-      <P><pre>                          Network Management</pre></P>
-      <P><pre>                          Troubleshooting</pre></P>
-    
-    <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>Software Installation</strong><pre></p>
-      <P><pre>                          Software Installation, Maintenance and Upgrades</pre></P>
-      <P><pre>                          Software Configuration</pre></P>
-      <P><pre>                          Application Operations</pre></P>
-      <P><pre>                          Troubleshooting</pre></P>
-      <P><pre>                          Software Configurations</pre></P>
-      <P><pre>                          Operating System Installation</pre></P>
-      <P><pre>                          Designing and Managing Databases</pre></P>
-
-      <h2><pre>Hardware</pre></h2>
-      <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>Responsibilities</strong><pre></p>
-      <P><pre>                          Drivers installation</pre></P>
-      <P><pre>                          Drivers Update</pre></P>
-      <P><pre>                          General Technical support</pre></P>
-      <P><pre>                          General Repair</pre></P>
-      <P><pre>                          Drive and Disk Pertitioning</pre></P>
+      <h1>COURSE DETAILS</h1>
+      <strong>
+        <P><pre>ADMNO:            RICT/25/11/BACPK007</pre></P>
+      <P><pre>COURSE:       ICT Essentials/Computer basics II;</pre></P>
+      <P><pre>DESCRIPTION:   Covers Intro to Computers, Microsoft Applications, Database System project and Internet Essentials</pre></P>
+      <P><pre>DURATION:       Two Months</pre></P>
+      <P><pre>Enrollment Date:   11/11/2025</pre></P>
+      <P><pre>COMPLETION DATE:            11/01/2026</pre></P>
+      <P><pre>LEARNING MODE:              FULL TIME</pre></P>
+      <P><pre>TYPE OF STUDY:       PHYSICAL</pre></P>
+      <P><pre>STUDY HOURS          2PM TO 4PM; Monday to Friday</pre></P>
+      </strong>
     </div>
 
     <div id="loans" class="section">
-      <h1>HOBBIES</h1>
-      <p><strong>Travelling</strong></p>
-      <p><strong>Team Building</strong></p>
-      <p><strong>Exploring new security Technolies and Inventions</strong></p>
-      <p><strong>Research</strong></p>
+      <h2><pre>GENERAL STUDENT'S INFORMATION</pre></h2>
+      <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>Course Description</strong><pre></p>
+      <P><pre>Course Code:                  102</pre></P>
+      <P><pre>General Performance Rate:     Credit</pre></P>
+      <P><pre>Conduct Remarks               Average</pre></P>
+    
+    <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>FEE PAYMENT</strong><pre></p>
+      <P><pre>Total Fee Payable:        Kshs. 6,600</pre></P>
+      <P><pre>Total Paid                   Kshs. 6,600</pre></P>
+      <P><pre>Balance                      Nil</pre></P>
+
+      <h2><pre>Academic Score Sheet</pre></h2>
+      <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>Assessment Results</strong><pre></p>
+      <P><pre>Introduction:             90%</pre></P>
+      <P><pre>Word:                          90%</pre></P>
+      <P><pre>Excel:                          90%</pre></P>
+      <P><pre>Access:                         90%</pre></P>
+      <P><pre>Publisher:                          90%</pre></P>
+      <P><pre>PowerPoint:                          90%</pre></P>
+      <P><pre>Internet:                          90%</pre></P>
+      <P><pre>Overral Grade:                          Distinction</pre></P>
     </div>
 
     <div id="self" class="section">
-      <h1>REFEREES</h1>
+      <h1>RESULTS</h1>
       <strong>
-        <p>Mr. Kaitany</p>
+        <p>You have completed your course. Congratulations</p>
       </strong>
-      <p>H.O.D</p>
-      <p>NYS TGTI College</p>
-      <p>+254722140959</p>
+      <p>Make Good use of the knowledge you have attained at Ruralnet ICT Academy. </p>
+      <p>Incase you faced any challege while learning, Please feel free to share you idea through the numbers below this page.</p>
+      <p>Regards.</p>
 
       <strong>
-        <p>Mr. Paul Juma</p>
+       <!--<p>Your Certificate will be ready soon</p>
+        <p>Please Note that the certificate will only be ready upon clearance of the fee.</p> -->
+        <p>Your Certificate is available down here</p>
       </strong>
-      <p>Lecturer</p>
-      <p>NYS - TGTI College</p>
-      <p>+254725970825</p>
+
+      <!-- VIEW PDF BUTTON -->
+    <button onclick="window.open('files/myfile.pdf', '_blank')">
+        View Certificate
+    </button>
+
+    <!-- DOWNLOAD PDF BUTTON -->
+    <a href="files/myfile.pdf" download>
+        <button class="download-btn">Download Certificate</button>-->
+    </a>
+
       <p></p>
     </div>
 
@@ -291,8 +319,8 @@
     </div>
 
     <footer>
-      <p><strong>I am a proficient and professional ICT technician with a vast knowledge in the field of ICT.</strong></p>
-      <p><strong>Flexibility and less supervision are the main characters that I possess in a workplace to meet organizational objectives as well and personal skill development.</strong>.</p>
+      <p><strong>OGUTU SUSAN ACHIENG</strong></p>
+      <p><strong>ICT ESSENTIALS 102</strong>.</p>
     </footer>
   </div>
 
