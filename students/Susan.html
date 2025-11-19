@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Susan</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+
+  body {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 240px;
+    background: url(images/oceanBlue.png); /* HELB green */
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: left 0.3s ease;
+  }
+
+  .nav {
+    list-style: none;
+    padding: 20px 0;
+  }
+
+  .nav li {
+    padding: 15px 25px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .nav li:hover {
+    background: rgba(255,255,255,0.1);
+  }
+
+  .nav li.active {
+    background: #f9b233; /* highlight color */
+    color: #000;
+    font-weight: bold;
+  }
+
+  .bottom {
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
+
+  /* Main Content */
+  .content {
+    flex: 1;
+    background: url(images/white1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20px;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  /* Toggle Button for Small Screens */
+  .toggle-btn {
+    display: none;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #3100b8;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    font-size: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 999;
+  }
+
+  /* Section Styling */
+  .section {
+    display: none;
+    background: url(images/whiteB.png); /*rgb(209, 70, 70);*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-bottom: 10px solid blue;
+  }
+
+  .section.active {
+    display: block;
+  }
+
+  .section h1 {
+    color: blue;
+    padding: 1rem;
+    border-bottom: 5px solid black;
+
+  }
+
+  .section strong p pre {
+    font-family: 'arial black';
+    padding: 0.3rem;
+  }
+
+  .section p {
+    padding: 0.5rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    size: 23px;
+  }
+
+  footer {
+    text-align: center;
+    color: #cbda07;
+    font-size: 18px;
+    margin-top: 40px;
+    font-family: 'Times New Roman', Times, serif;
+    background: url(images/Dblue.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 3rem;
+    padding: 0.5rem;
+    border-bottom: 7px solid orangered;
+  }
+
+  footer p {
+    padding: 0.5rem;
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 900px) {
+    body {
+      flex-direction: column;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: -250px;
+      top: 0;
+      height: 100%;
+      z-index: 1000;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .toggle-btn {
+      display: block;
+    }
+
+    .content {
+      padding-top: 60px;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <ul class="nav">
+        <strong>
+      <li class="active" onclick="showSection('update', event)">PERSONAL DETAILS</li>
+      <li onclick="showSection('funds', event)">ACADEMIC INFO</li>
+      <li onclick="showSection('postgrad', event)">LAERNING PROGRESS</li>
+      <li onclick="showSection('loans', event)">LEARNING MATERIALS</li>
+      <li onclick="showSection('self', event)">CERTIFICATIONS</li>
+      </strong>
+    </ul>
+    <div class="bottom">
+      <h4>CONTACT</h4>
+      <p onclick="showSection('contact', event)" style="cursor:pointer;">📞 For more info, Contact us</p>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <button class="toggle-btn" id="toggleBtn">☰ Menu</button>
+
+    <div id="update" class="section active">
+      <h1>BACKGROUND INFORMATION</h1>
+      <strong>
+      <p><pre>NAME:            OGUTU SISAN ACHIENG</pre></p>
+      <p><pre>GENDER:          FEMALE</p></pre>
+      <p><pre>DATE OF BIRTH:   03/10/2004</pre></p>
+      <p><pre>MARITAL STATUS:  SINGLE</p></pre>
+      <p><pre>NATIONALITY:     KENYAN</pre></p>
+      <p><pre>COUNTY:          SIAYA</p></pre>
+      <p><pre>SUB-COUNTY:      UGUNJA</p></pre>
+      <p><pre>CONSTITUENCY:    UGUNJA</p></pre>
+      <p><pre>WARD:       UGUNJA</pre></p>
+      <p><pre>LOCATION:          FEMALE</p></pre>
+      <P><pre>BOX ADRESS:      P. O. BOX 40606, UGUNJA </pre></P>
+      <P><pre>STUDENT'S CONTACT:      +254745722201 </pre></P>
+      <P><pre>GUARDIAN'S CONTACT:      +254716564449 </pre></P>
+      </strong>
+    </div>
+
+    <div id="funds" class="section">
+      <h1>ACADEMIC QUALIFICATION</h1>
+      <strong>
+        <P><pre>ADMNO:            RICT/25/11/BACPK007</pre></P>
+      <P><pre>COURSE:       ICT Essentials/Computer basics II;</pre></P>
+      <P><pre>DESCRIPTION:                          Covers Intro to Computers, Microsoft Applications, Database System project and Internet Essentials</pre></P>
+      <P><pre>DURATION:       Two Months</pre></P>
+      <P><pre>Enrollment Date:                          11/11/2025</pre></P>
+      <P><pre>COMPLETION DATE:            11/01/2026</pre></P>
+      <P><pre>                          Kenya Certificate of Secondary Education (KCSE)</pre></P>
+      <P><pre>PREVIOUS ACHIEVEMNT:       KCSE</pre></P>
+      <P><pre>                          Kenya Certificate of Primary Education</pre></P>
+      </strong>
+
+      <h1>PROFFESSIONAL DEVELOPMENT</h1>
+      <strong>
+        <p><pre>2022 - 2023: National Youth Service (NYS)</pre></p>
+    </strong>
+        <p>Paramilitary Training</p>
+        <p>Fire fighting Skills</p>
+        <p>Disaster Management</p>
+        <p>First Aid and Driils</p>
+    <strong>
+        <p>September - November 2024: Pandya Memorial Hospital</p>
+    </strong>
+        <p>Networking</p>
+        <p>ICT Technician</p>
+      
+    </div>
+
+    <div id="postgrad" class="section">
+      <h1>SKILLS</h1>
+      <h2><pre>Computer Networking</pre></h2>
+      <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>Computer Networking</strong><pre></p>
+      <P><pre>                          Network Settup</pre></P>
+      <P><pre>                          Network Management</pre></P>
+      <P><pre>                          Troubleshooting</pre></P>
+    
+    <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>Software Installation</strong><pre></p>
+      <P><pre>                          Software Installation, Maintenance and Upgrades</pre></P>
+      <P><pre>                          Software Configuration</pre></P>
+      <P><pre>                          Application Operations</pre></P>
+      <P><pre>                          Troubleshooting</pre></P>
+      <P><pre>                          Software Configurations</pre></P>
+      <P><pre>                          Operating System Installation</pre></P>
+      <P><pre>                          Designing and Managing Databases</pre></P>
+
+      <h2><pre>Hardware</pre></h2>
+      <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>Responsibilities</strong><pre></p>
+      <P><pre>                          Drivers installation</pre></P>
+      <P><pre>                          Drivers Update</pre></P>
+      <P><pre>                          General Technical support</pre></P>
+      <P><pre>                          General Repair</pre></P>
+      <P><pre>                          Drive and Disk Pertitioning</pre></P>
+    </div>
+
+    <div id="loans" class="section">
+      <h1>HOBBIES</h1>
+      <p><strong>Travelling</strong></p>
+      <p><strong>Team Building</strong></p>
+      <p><strong>Exploring new security Technolies and Inventions</strong></p>
+      <p><strong>Research</strong></p>
+    </div>
+
+    <div id="self" class="section">
+      <h1>REFEREES</h1>
+      <strong>
+        <p>Mr. Kaitany</p>
+      </strong>
+      <p>H.O.D</p>
+      <p>NYS TGTI College</p>
+      <p>+254722140959</p>
+
+      <strong>
+        <p>Mr. Paul Juma</p>
+      </strong>
+      <p>Lecturer</p>
+      <p>NYS - TGTI College</p>
+      <p>+254725970825</p>
+      <p></p>
+    </div>
+
+    <div id="contact" class="section">
+      <h1>Contact info</h1>
+      <p>Email: machilachrispus@gmail.com</p>
+      <p>Phone: (+254)705514108, 0706068985 </p>
+    </div>
+
+    <footer>
+      <p><strong>I am a proficient and professional ICT technician with a vast knowledge in the field of ICT.</strong></p>
+      <p><strong>Flexibility and less supervision are the main characters that I possess in a workplace to meet organizational objectives as well and personal skill development.</strong>.</p>
+    </footer>
+  </div>
+
+<script>
+  // Switch sections
+  function showSection(id, event) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+
+    document.querySelectorAll('.nav li').forEach(li => li.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // close sidebar on small screens
+    document.getElementById('sidebar').classList.remove('open');
+  }
+
+  // Toggle sidebar for small screens
+  const toggleBtn = document.getElementById('toggleBtn');
+  const sidebar = document.getElementById('sidebar');
+
+  toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+  });
+</script>
+
+</body>
+</html>
