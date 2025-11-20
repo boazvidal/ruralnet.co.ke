@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multi Level Check</title>
-
+<title>StudentPortal</title>
+<link rel="icon" type="image/png" href="../images/favicon.png">
 <style>
     body {
         margin: 0;
@@ -76,10 +76,51 @@
 </head>
 <body>
 
+    <!--FULL PAGE PROTECTION SCRIPT -->
+
+<script>
+	//Right-Click
+	document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+
+<!--F12-->
+<script>
+	document.onkeydown = function(e) {
+
+	//F12
+	if (e.keyCode == 123) {
+		return false;
+	}
+
+
+//Ctrl+Shift+I or Ctrl+Shift+J or Ctrl+Shift+C
+
+	if (e.ctrlKey && e.shiftKey && (
+		e.keyCode === 73 ||
+		e.keyCode === 74 ||
+		e.keyCode === 67
+	)) {
+		return false;
+	}
+
+//Ctrl+U View Source-->
+
+	if (e.ctrlKey && e.keyCode === 85) {
+		return false;
+	}
+
+	//Ctrl+C Copy
+	if (e.ctrlKey && e.keyCode === 67) {
+		return false;
+	}
+};
+</script>
+
+
 <div class="container">
     <img src="../images/RURALNET.png">
-    <h1>RURALNET ICT ACADEMY</h1>
-    <h2>STUDENT LOGIN PAGE</h2>
+    <h1>STUDENT LOGIN PAGE</h1>
+    <h2>SIGN IN TO PROCEED</h2>
     <p>Enter Your name followed by your Admission Number</p>
     <p>eg; BRIAN-RICT/001/001</p>
     <input type="text" id="levelInput" placeholder="BRIAN-RICT/00001/0003">
