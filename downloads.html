@@ -14,176 +14,238 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tabbed Form</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 100px;
-      background-image: url(images/lw.jpg);
-      background-size: cover;
-      background-repeat: no-repeat;
-    }
+    /* ==== GLOBAL STYLING ==== */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 120px 20px 20px; /* space for fixed navbar */
+  background-image: url(images/lw.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
-    header {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
+/* Center all <h1> headings */
+.info h1 {
+  color: #007bff;
+  text-shadow:
+    -1px -1px 0 black,
+    1px 1px 0 white;
+}
 
-    /* ✅ Aqua background for the form */
-    form.form {
-      background-color: aqua;
-      padding: 20px;
-      border-radius: 8px;
-      max-width: 700px;
-      margin: auto;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
+.info h2 {
+  background: rgb(0, 80, 36);
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
 
-    .tabs-container {
-      width: 100%;
-      background: white;
-      border-radius: 8px;
-      overflow: hidden;
-    }
+/* ==== FORM CONTAINER ==== */
+form.form {
+  background-color: aqua;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 700px;
+  margin: auto;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
 
-    .tab-button {
-      display: flex;
-      border-bottom: 2px solid #ddd;
-    }
+/* ==== TABS CONTAINER ==== */
+.tabs-container {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
 
-    .tab-button button {
-      flex: 1;
-      padding: 15px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background 0.3s;
-    }
+/* ==== TAB BUTTONS ==== */
+.tab-button {
+  display: flex;
+  flex-wrap: wrap; /* allows break on small screens */
+  border-bottom: 2px solid #ddd;
+}
 
-    .tab-button button.active {
-      background: #007bff;
-      color: white;
-    }
+.tab-button button {
+  flex: 1 1 150px; /* flexible width */
+  padding: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.3s;
+}
 
-    .tab-content {
-      padding: 20px;
-      display: none;
-    }
+.tab-button button.active {
+  background: #007bff;
+  color: white;
+}
 
-    .tab-content.active {
-      display: block;
-    }
+/* ==== TAB CONTENT ==== */
+.tab-content {
+  padding: 20px;
+  display: none;
+}
 
-    .info {
-        align-items: center;
-        text-align: center;
-    }
-    .info h1 {
-        color: #007bff;
-        text-shadow: 
-        -1px -1px 0 rgb(0, 0, 0),
-        1px 1px 0 rgb(255, 255, 255);
+.tab-content.active {
+  display: block;
+}
 
-    }
+ul {
+  color: rgb(31, 146, 8);
+}
 
-    .info h2 {
-        background: rgb(0, 80, 36);
-        color: white;
-    }
+ul li a {
+  color: rgb(8, 5, 156);
+  font-size: 18px;
+  text-decoration: none;
+}
 
-    ul {
-        color: rgb(31, 146, 8);
-    }
+/* ==== NAVIGATION BAR ==== */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #026613;
+    color: white;
+    z-index: 1000;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 5px solid white;
+}
 
-    ul li a {
-        color: rgb(8, 5, 156);
-        font-family: 'sans-serif';
-        font-size: 18px;
-        text-decoration: none;
-    }
+nav img {
+    max-width: 170px;
+}
 
+/* Navigation links */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+}
+
+nav ul li a {
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #1d5304d2;
+    border-radius: 5px;
+    border-bottom: 4px solid white;
+    border-right: 4px solid white;
+}
+
+/* ===== HAMBURGER BUTTON ===== */
+.menu-btn {
+    font-size: 30px;
+    cursor: pointer;
+    display: none;
+}
+
+/* ===== MOBILE VIEW ===== */
+@media (max-width: 768px) {
     nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background: #026613;
-        color: white;
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        padding: 10px 15px;
-        text-decoration: none;
-        border-bottom: 5px solid rgb(255, 255, 255);
+        flex-wrap: wrap;
     }
 
+    /* Show hamburger */
+    .menu-btn {
+        display: block;
+    }
+
+    /* Hide nav links */
     nav ul {
-        list-style: none;
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        background: #026613;
+        margin-top: 10px;
+        padding: 10px 0;
+        border-top: 3px solid white;
+    }
+
+    /* Show them when active */
+    nav ul.active {
         display: flex;
-        justify-content: center;
-        align-items: center;
     }
 
-    nav a {
-        color: white;
-        text-decoration: none;
-        padding: 10px 15px;
-        transition: background 0.3s ease;
-    }
-
-    nav a:hover {
-        background-color: #1d5304d2;
-        border-radius: 5px;
-        border-bottom: 4px solid white;
-        border-right: 4px solid white;
+    nav ul li a {
+        padding: 12px;
+        text-align: center;
+        width: 100%;
+        display: block;
     }
 
     nav img {
-        max-width: 200px;
-        display: block;
-        margin-right: 10px;
+        max-width: 140px;
     }
+}
 
+/* ==== FOOTER ==== */
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: black;
+  color: white;
+  padding: 40px 20px;
+}
 
-    .footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      background-color: black;
-      color: white;
-      padding: 40px 60px;
-      flex-wrap: wrap;
-      text-decoration: none;
-      width: 100%;
-    }
+.footer-column {
+  flex: 1 1 200px;
+  min-width: 200px;
+  margin: 10px;
+  background: #1d1c1c;
+  padding: 10px;
+  border-radius: 10px;
+  border-bottom: 5px solid white;
+}
 
-    .footer a, .footer p, .footer li {
-      color: white;
-      text-decoration: none;
-      margin-bottom: 3px;
-      padding-left: 7px;
-    }
+.footer h3 {
+  font-size: 16px;
+  text-transform: uppercase;
+  border-bottom: 2px solid yellow;
+  padding-bottom: 5px;
+}
 
-    .footer-column {
-      flex: 1;
-      min-width: 200px;
-      margin: 0 20px;
-      border-bottom: 5px solid white;
-      border-radius: 10px;
-      background-color: #1d1c1c;
+.footer-column li a {
+  color: white;
+  text-decoration: none;
 
+}
 
-    }
+/* ==== RESPONSIVE MEDIA QUERIES ==== */
+@media (max-width: 768px) {
+  body {
+    padding: 140px 10px 10px; /* more spacing for navbar */
+  }
 
-    .footer h3 {
-      font-size: 16px;
-      margin-top: 15px;
-      text-transform: uppercase;
-      border-bottom: 2px solid yellow;
-      padding-bottom: 5px;
-    
-    }
+  .tab-button button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  
+
+@media (max-width: 480px) {
+  .tab-button button {
+    flex: 1 1 100%;
+    font-size: 13px;
+  }
+
+  form.form {
+    padding: 15px;
+  }
+
+  .footer {
+    text-align: center;
+  }
+}
 
   </style>
 </head>
@@ -229,16 +291,27 @@
 };
 </script>
 
+<script>
+function toggleMenu() {
+    document.querySelector(".nav-links").classList.toggle("active");
+}
+</script>
 
-    <nav>
-        <img src="images/RURALNET.png">
-        <a href="index.html">home</a>
-        <a href="">About us</a>
-        <a href="">Student Portal</a>
-		<a href="https://www.netacad.com/" target="_blank">Cisco</a>
-    <a href="https://easytvet.com/" target="_blank">TVET Website</a>
-    <a href="https://www.kasneb.or.ke/" target="_blank">KASNEB Website</a>
-    </nav>
+<nav>
+    <img src="images/RURALNET.png">
+
+    <!-- Hamburger menu -->
+    <div class="menu-btn" onclick="toggleMenu()">&#9776;</div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">home</a></li>
+        <li><a href="">About us</a></li>
+        <li><a href="">Student Portal</a></li>
+        <li><a href="https://www.netacad.com/" target="_blank">Cisco</a></li>
+        <li><a href="https://easytvet.com/" target="_blank">TVET Website</a></li>
+        <li><a href="https://www.kasneb.or.ke/" target="_blank">KASNEB Website</a></li>
+    </ul>
+</nav>
 
   <h1><strong>GET YOUR UPDATED LEARNING RESOURCES HERE...</strong></h1>
   <div class="info">
