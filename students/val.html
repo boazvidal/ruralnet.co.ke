@@ -10,7 +10,15 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background: #f5f5f5;
+            background: linear-gradient(270deg, #ff512f, #24c6dc, #524a9d, white, red, blue, green, black, yellow,magenta, cyan);
+            background-size: 800% 800%;
+            animation: bgAnimation 15s ease infinite;
+        }
+
+        @keyframes bgAnimation {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
         }
 
         .container {

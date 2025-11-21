@@ -12,6 +12,7 @@
     display: flex;
     height: 100vh;
     overflow: hidden;
+    background-image: url('../images/c15.jpg');
   }
 
   /* Sidebar */
@@ -51,6 +52,29 @@
   .bottom {
     padding: 20px;
     border-top: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .bottom a {
+          color: white;
+          background-color: red;
+          font-family: Verdana, Geneva, Tahoma, sans-serif;
+          padding: 5px 40px;
+          justify-content: center;
+          align-items: right;
+          z-index: 0;
+          width: 100%;
+          border-radius: 4rem;
+          font-weight: bold;
+          text-decoration: none;
+          border-bottom: 5px solid white;
+          
+
+        }
+
+  .bottom a:hover {
+    color: red;
+    background-color: white;
+    border-bottom: 5px solid red;
   }
 
   /* Main Content */
@@ -247,6 +271,7 @@
     <div class="bottom">
       <h4>CONTACT</h4>
       <p onclick="showSection('contact', event)" style="cursor:pointer;">📞 For more info, Contact us</p>
+      <a href="studentLogin.html">SIGN OUT</a>
     </div>
   </div>
 
