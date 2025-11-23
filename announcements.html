@@ -5,158 +5,206 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Announcements</title>
     <link rel="icon" type="image/png" href="images/favicon.png">
-</head>
 
 <style>
-    body {
-        background-image: url('/images/BK.jpg');
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
 
+/* ============================================
+   BACKGROUND
+   ============================================ */
+body {
+    background-image: url('/images/BK.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================================
+   RESPONSIVE NAVIGATION BAR
+   ============================================ */
+
+nav {
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Bernard MT Condensed';
+}
+
+/* Logo */
+nav img {
+    height: 70px;
+    width: auto;
+}
+
+/* Links container */
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+/* Links */
+nav a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+/* Hamburger icon (hidden on desktop) */
+.menu-icon {
+    display: none;
+    font-size: 36px;
+    cursor: pointer;
+}
+
+/* ----------------------------
+   MOBILE NAVIGATION (max 768px)
+   ---------------------------- */
+@media (max-width: 768px) {
+
+    .nav-links {
+        display: none;               /* Hidden until toggled */
+        flex-direction: column;
+        background: green;
+        width: 100%;
+        text-align: center;
+        padding-bottom: 10px;
     }
 
-    .announcement-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 20px 0;
+    .nav-links.active {
+        display: flex;               /* Show when toggled */
     }
 
-
-    nav {
-        background-color: green;
-        align-items: centre;
+    .menu-icon {
+        display: block;              /* Show hamburger icon */
         color: white;
-        padding: 10px;
-        display: flex;
-        justify-content: center;
-        padding: 14px 20px;
-        font-size: 20px;
-        text-decoration: none;
-        font-family: 'Bernard MT Condensed';
-    
     }
 
     nav img {
-        height: 80px;
-        width: auto;
+        height: 55px;                /* Smaller logo */
     }
+}
 
-    nav a {
-        color: white;
-        align-items: center;
-        margin-right: 20px;
-    }
+/* ============================================
+   ANNOUNCEMENT STYLING
+   ============================================ */
+.announcement-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
 
-    .ann {
-        background: linear-gradient(to right, blue, orange);
-        border-color: white;
-        box-sizing: border-box;
-        border-radius: 3rem;
-        display: inline-block;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    }
+.ann {
+    background: linear-gradient(to right, blue, orange);
+    border-color: white;
+    box-sizing: border-box;
+    border-radius: 3rem;
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
 
-    .ann h1{
-        align-items: center;
-        padding: 2rem;
-        font-size: 50px;
-        color: white;
-        border-bottom: 7px  solid white;
-        padding-bottom: 3rem;
-    }
+.ann h1 {
+    padding: 2rem;
+    font-size: 50px;
+    color: white;
+    border-bottom: 7px solid white;
+    padding-bottom: 3rem;
+}
 
-    .ann h3{
-        align-items: center;
-        padding: 2rem;
-        font-size: 25px;
-        color: white;
-    }
+.ann h3 {
+    padding: 2rem;
+    font-size: 25px;
+    color: white;
+    text-align: left;
+    margin: 5px;
+}
 
-    .ann h2{
-        align-items: center;
-        padding: 2rem;
-        font-size: 40px;
-        color: white;
-        background-color: rgb(2, 87, 2);
-        border-radius: 1rem;
-        font-family: 'Clarendon Blk BT';
-        font-style: italic;
-    }
+.ann h3 li a {
+    color: white;
+    text-decoration: none;
+}
+
+.ann h3 li a:hover {
+    background-color: red;
+}
+
+.ann h2 {
+    padding: 2rem;
+    font-size: 40px;
+    color: white;
+    background-color: rgb(2, 87, 2);
+    border-radius: 1rem;
+    font-family: 'Clarendon Blk BT';
+    font-style: italic;
+}
 </style>
+</head>
+
 <body>
 
-    	<!--FULL PAGE PROTECTION SCRIPT -->
-
+<!-- FULL PAGE PROTECTION SCRIPT -->
 <script>
-	//Right-Click
-	document.addEventListener('contextmenu', event => event.preventDefault());
-</script>
+document.addEventListener('contextmenu', event => event.preventDefault());  // Right-click disable
 
-<!--F12-->
-<script>
-	document.onkeydown = function(e) {
-
-	//F12
-	if (e.keyCode == 123) {
-		return false;
-	}
-
-
-//Ctrl+Shift+I or Ctrl+Shift+J or Ctrl+Shift+C
-
-	if (e.ctrlKey && e.shiftKey && (
-		e.keyCode === 73 ||
-		e.keyCode === 74 ||
-		e.keyCode === 67
-	)) {
-		return false;
-	}
-
-//Ctrl+U View Source-->
-
-	if (e.ctrlKey && e.keyCode === 85) {
-		return false;
-	}
-
-	//Ctrl+C Copy
-	if (e.ctrlKey && e.keyCode === 67) {
-		return false;
-	}
+document.onkeydown = function(e) {
+    if (e.keyCode == 123) return false;                 // F12
+    if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) return false; // Ctrl+Shift+I/J/C
+    if (e.ctrlKey && e.keyCode === 85) return false;    // Ctrl+U
+    if (e.ctrlKey && e.keyCode === 67) return false;    // Ctrl+C
 };
 </script>
 
+<!-- ============================================
+     NAVIGATION BAR
+     ============================================ -->
+<nav>
+    <img src="images/RURALNET.png">
 
-    <nav>
-        <img src="images/RURALNET.png">
+    <!-- Hamburger menu icon -->
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+
+    <!-- Navigation links -->
+    <div class="nav-links" id="navLinks">
         <a href="index.html">home</a>
         <a href="About_Us.html">About us</a>
-		<a href="https://www.computerworld.com/">News & Updates</a>
-		<a href="announcements.html">Announcement</a>
-    </nav>
+        <a href="https://www.computerworld.com/">News & Updates</a>
+        <a href="announcements.html">Announcement</a>
+    </div>
+</nav>
 
-    <div class="announcement-wrapper">
+<!-- Mobile Menu Toggle Script -->
+<script>
+function toggleMenu() {
+    document.getElementById("navLinks").classList.toggle("active");
+}
+</script>
+
+<!-- ============================================
+     ANNOUNCEMENT BOX
+     ============================================ -->
+<div class="announcement-wrapper">
     <div class="ann">
         <h1>General Announcements...</h1>
         <h3>
             <li>Coding classes for kids are now available</li>
-            <li>Scratch (Game Development) program is now on. </li>
+            <li>Scratch (Game Development) program is now on.</li>
             <li>There are some few adjustments on the ICT Basic course.</li>
-            <li>E-Library page under learning resources tab is now fully functiional.</li>
+            <li>E-Library page under learning resources tab is now fully functional.</li>
             <li>Ready certificates are also available through student portal page</li>
             <li>To confirm your certificate, log into e-library page</li>
-            <li>Please feel free to contact us on any inquries</li>
+            <li>Please feel free to contact us on any inquiries</li>
             <li><a href="About_Us.html">Click here to contact us</a></li>
-            <li>To make any application, go to <a href="forms.gle/wywREJiHrpFTF5veA">Apply now </a>page</li>
+            <li>To make any application, go to <a href="forms.gle/wywREJiHrpFTF5veA">Apply now</a> page</li>
         </h3>
-        <h2>Thanks once again</h3>
+        <h2>Thanks once again</h2>
     </div>
-    </div>
+</div>
 
 </body>
 </html>
