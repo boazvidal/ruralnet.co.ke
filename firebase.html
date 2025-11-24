@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registrar Panel</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f2f2f2;
+      padding: 20px;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 600px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background: #0d6efd;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0a58ca;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+      background: #fff;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    th {
+      background: #e9ecef;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Registrar – Student Registration</h2>
+
+  <input id="fullName" type="text" placeholder="Full Name">
+  <input id="admNo" type="text" placeholder="Admission Number">
+  <input id="idNumber" type="text" placeholder="ID Number">
+  <input id="phone" type="text" placeholder="Phone Number">
+
+  <select id="course">
+    <option value="">-- Select Course --</option>
+    <option>ICT</option>
+    <option>Business Management</option>
+    <option>Journalism</option>
+    <option>Hospitality</option>
+    <option>Engineering</option>
+  </select>
+
+  <button id="saveBtn">SAVE STUDENT</button>
+
+  <h3>Registered Students</h3>
+
+  <table id="studentsTable">
+    <tr>
+      <th>Full Name</th>
+      <th>Admission No</th>
+      <th>Phone</th>
+      <th>Course</th>
+    </tr>
+  </table>
+</div>
+
+
+<!-- Firebase Script -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+  import { 
+    getFirestore, collection, addDoc, getDocs, serverTimestamp 
+  } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+
+  // 🔹 Your Firebase Config
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_BUCKET",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // 🔹 Save Student
+  document.getElementById("saveBtn").onclick = async () => {
+
+    let fullName = document.getElementById("fullName").value;
+    let admNo = document.getElementById("admNo").value;
+    let idNumber = document.getElementById("idNumber").value;
+    let phone = document.getElementById("phone").value;
+    let course = document.getElementById("course").value;
+
+    if (!fullName || !admNo || !phone || !course) {
+      alert("Please fill all required fields");
+      return;
+    }
+
+    await addDoc(collection(db, "students"), {
+      fullName,
+      admNo,
+      idNumber,
+      phone,
+      course,
+      createdAt: serverTimestamp()
+    });
+
+    alert("Student Saved!");
+    loadStudents(); // refresh table
+  };
+
+  // 🔹 Load Students into Table
+  async function loadStudents() {
+    const table = document.getElementById("studentsTable");
+
+    // Clear table except header
+    table.innerHTML = `
+      <tr>
+        <th>Full Name</th>
+        <th>Admission No</th>
+        <th>Phone</th>
+        <th>Course</th>
+      </tr>
+    `;
+
+    const querySnap = await getDocs(collection(db, "students"));
+
+    querySnap.forEach(doc => {
+      let data = doc.data();
+
+      let row = `
+        <tr>
+          <td>${data.fullName}</td>
+          <td>${data.admNo}</td>
+          <td>${data.phone}</td>
+          <td>${data.course}</td>
+        </tr>
+      `;
+
+      table.innerHTML += row;
+    });
+  }
+
+  // Load students on page open
+  loadStudents();
+
+</script>
+
+</body>
+</html>
+
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyC-JoPMk5Ox3mR5hQPc_z0vBekXjMFiBMs",
+    authDomain: "student-records-c37a3.firebaseapp.com",
+    projectId: "student-records-c37a3",
+    storageBucket: "student-records-c37a3.firebasestorage.app",
+    messagingSenderId: "684734182862",
+    appId: "1:684734182862:web:e7547a4a2f2243efa3279f"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Records</title>
+</head>
+
+<style>
+    body {
+    font-family: Arial;
+    padding: 20px;
+    background: #f2f2f2;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.form input, #searchBar, #amount {
+    padding: 10px;
+    width: 250px;
+    margin: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background: black;
+    color: white;
+    border: none;
+    margin: 5px;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    background: white;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+</style>
+
+<body>
+
+    <script type="module">
+        // ------------------------------
+// FIREBASE IMPORTS
+// ------------------------------
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+import { 
+    getFirestore, collection, addDoc, getDocs, 
+    deleteDoc, updateDoc, doc, onSnapshot, query 
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+// ------------------------------
+// YOUR FIREBASE CONFIG
+// ------------------------------
+const firebaseConfig = {
+  apiKey: "AIzaSyC-JoPMk5Ox3mR5hQPc_z0vBekXjMFiBMs",
+  authDomain: "student-records-c37a3.firebaseapp.com",
+  projectId: "student-records-c37a3",
+  storageBucket: "student-records-c37a3.firebasestorage.app",
+  messagingSenderId: "684734182862",
+  appId: "1:684734182862:web:e7547a4a2f2243efa3279f"
+};
+
+// Initialize Firebase & Firestore
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// ------------------------------
+// ADD STUDENT
+// ------------------------------
+document.getElementById("addBtn").addEventListener("click", async () => {
+    let name = document.getElementById("name").value;
+    let adm = document.getElementById("adm").value;
+    let course = document.getElementById("course").value;
+
+    await addDoc(collection(db, "students"), {
+        name,
+        adm,
+        course
+    });
+
+    alert("Student added successfully!");
+
+    document.getElementById("name").value = "";
+    document.getElementById("adm").value = "";
+    document.getElementById("course").value = "";
+});
+
+// ------------------------------
+// DISPLAY STUDENTS IN TABLE
+// ------------------------------
+const table = document.getElementById("studentsTable");
+
+onSnapshot(collection(db, "students"), (snapshot) => {
+    table.innerHTML = "";
+    snapshot.forEach((docu) => {
+        let data = docu.data();
+
+        table.innerHTML += `
+            <tr>
+                <td>${data.name}</td>
+                <td>${data.adm}</td>
+                <td>${data.course}</td>
+
+                <td>
+                    <button onclick="editStudent('${docu.id}', '${data.name}', '${data.adm}', '${data.course}')">Edit</button>
+                    <button onclick="deleteStudent('${docu.id}')">Delete</button>
+                    <button onclick="openProfile('${docu.id}')">Profile</button>
+                </td>
+            </tr>
+        `;
+    });
+});
+
+// ------------------------------
+// DELETE STUDENT
+// ------------------------------
+window.deleteStudent = async function(id){
+    if(confirm("Delete this student?")){
+        await deleteDoc(doc(db, "students", id));
+    }
+};
+
+// ------------------------------
+// EDIT STUDENT
+// ------------------------------
+window.editStudent = async function(id, name, adm, course){
+    let newName = prompt("Enter new name:", name);
+    let newAdm = prompt("Enter new admission:", adm);
+    let newCourse = prompt("Enter new course:", course);
+
+    await updateDoc(doc(db, "students", id), {
+        name: newName,
+        adm: newAdm,
+        course: newCourse
+    });
+
+    alert("Updated!");
+};
+
+// ------------------------------
+// SEARCH BAR
+// ------------------------------
+document.getElementById("searchBar").addEventListener("input", async function(){
+    let text = this.value.toLowerCase();
+    let q = query(collection(db, "students"));
+
+    const snapshot = await getDocs(q);
+    table.innerHTML = "";
+
+    snapshot.forEach((docu) => {
+        let data = docu.data();
+
+        if(
+            data.name.toLowerCase().includes(text) || 
+            data.adm.toLowerCase().includes(text)
+        ){
+            table.innerHTML += `
+                <tr>
+                    <td>${data.name}</td>
+                    <td>${data.adm}</td>
+                    <td>${data.course}</td>
+
+                    <td>
+                        <button onclick="editStudent('${docu.id}', '${data.name}', '${data.adm}', '${data.course}')">Edit</button>
+                        <button onclick="deleteStudent('${docu.id}')">Delete</button>
+                        <button onclick="openProfile('${docu.id}')">Profile</button>
+                    </td>
+                </tr>
+            `;
+        }
+    });
+});
+
+// ------------------------------
+// OPEN PROFILE PAGE
+// ------------------------------
+window.openProfile = function(id){
+    window.location.href = `student.html?id=${id}`;
+};
+
+    </script>
+<h1>Student Records System</h1>
+
+<!-- Search Bar -->
+<input type="text" id="searchBar" placeholder="Search by name or admission number">
+
+<!-- Add Student Form -->
+<div class="form">
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="text" id="adm" placeholder="Admission Number">
+    <input type="text" id="course" placeholder="Course">
+    <button id="addBtn">Add Student</button>
+</div>
+
+<h2>All Students</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Admission</th>
+            <th>Course</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="studentsTable"></tbody>
+</table>
+
+<h1>Student Profile</h1>
+
+<div id="info"></div>
+
+<h2>Add Fee Payment</h2>
+<input type="number" id="amount" placeholder="Enter amount">
+<button id="payBtn">Add Payment</button>
+
+<h2>Payment History</h2>
+<ul id="paymentsList"></ul>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+import { 
+    getFirestore, collection, doc, getDoc, addDoc, onSnapshot 
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC-JoPMk5Ox3mR5hQPc_z0vBekXjMFiBMs",
+  authDomain: "student-records-c37a3.firebaseapp.com",
+  projectId: "student-records-c37a3",
+  storageBucket: "student-records-c37a3.firebasestorage.app",
+  messagingSenderId: "684734182862",
+  appId: "1:684734182862:web:e7547a4a2f2243efa3279f"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Get student ID from URL
+const url = new URLSearchParams(window.location.search);
+const id = url.get("id");
+
+// Load student info
+(async function(){
+    const snap = await getDoc(doc(db, "students", id));
+    const data = snap.data();
+
+    document.getElementById("info").innerHTML = `
+        <p><b>Name:</b> ${data.name}</p>
+        <p><b>Admission:</b> ${data.adm}</p>
+        <p><b>Course:</b> ${data.course}</p>
+    `;
+})();
+
+// Add fee payment
+document.getElementById("payBtn").addEventListener("click", async () => {
+    let amount = document.getElementById("amount").value;
+
+    await addDoc(collection(db, "students", id, "payments"), {
+        amount,
+        date: new Date().toLocaleString()
+    });
+
+    alert("Payment Added!");
+});
+
+// Show payment history
+onSnapshot(collection(db, "students", id, "payments"), (snapshot) => {
+    let list = document.getElementById("paymentsList");
+    list.innerHTML = "";
+
+    snapshot.forEach((p) => {
+        let d = p.data();
+        list.innerHTML += `<li>KES ${d.amount} — ${d.date}</li>`;
+    });
+});
+</script>
+</body>
+</html>
