@@ -1,286 +1,632 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Student Records</title>
-</head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Student Records – Admin</title>
 
+<!-- EXPORT LIBRARIES -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- MODERN SMART CSS -->
 <style>
-    body {
-    font-family: Arial;
-    padding: 20px;
-    background: #f2f2f2;
-}
+  /* ---------- Layout ---------- */
+  :root{
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --primary:#4c8bf5;
+    --muted:#6b7280;
+    --radius:12px;
+    --glass: rgba(255,255,255,0.6);
+  }
 
-h1, h2 {
-    color: #333;
-}
+  * {box-sizing: border-box;}
+  body{
+    margin:0;
+    font-family: "Inter", "Poppins", Arial, sans-serif;
+    background: linear-gradient(180deg,var(--bg),#eef3ff 80%);
+    color:#111827;
+    padding:24px;
+  }
 
-.form input, #searchBar, #amount {
-    padding: 10px;
-    width: 250px;
-    margin: 5px;
-}
+  .app {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 20px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
 
-button {
-    padding: 10px 20px;
-    background: black;
-    color: white;
+  /* ---------- Sidebar ---------- */
+  .sidebar {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding:18px;
+    box-shadow: 0 6px 18px rgba(12,20,60,0.08);
+    height: calc(100vh - 48px);
+    position: sticky;
+    top: 24px;
+  }
+  .logo { font-weight:700; color:var(--primary); font-size:18px; margin-bottom:14px; }
+  .nav { display:flex; flex-direction:column; gap:8px; margin-top:6px; }
+  .nav button {
+    background: transparent;
     border: none;
-    margin: 5px;
-    cursor: pointer;
+    text-align: left;
+    padding:10px 8px;
+    border-radius:8px;
+    cursor:pointer;
+    color:#111827;
+    font-weight:600;
+  }
+  .nav button:hover { background:#f1f7ff; color:var(--primary); }
+
+  /* ---------- Main ---------- */
+  .main {
+    min-height: 80vh;
+  }
+
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding:18px;
+    box-shadow: 0 6px 18px rgba(12,20,60,0.06);
+    margin-bottom: 18px;
+  }
+
+  .card h2 { margin:0 0 8px 0; font-size:18px; color:#0f172a; }
+  .muted { color:var(--muted); font-size:13px; margin-bottom:12px; }
+
+  /* ---------- Form ---------- */
+  .form-grid {
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:12px;
+  }
+
+  .form-grid .full { grid-column: 1 / -1; }
+  label { display:block; font-size:13px; font-weight:600; color:#233; margin-bottom:6px; }
+  input, select {
+    width:100%; padding:10px 12px; border-radius:10px; border:1px solid #e6eefc;
+    background: linear-gradient(180deg, #fff, #fbfdff);
+    outline:none; transition: box-shadow .12s, border-color .12s;
+    font-size:14px;
+  }
+  input:focus, select:focus {
+    border-color: var(--primary); box-shadow: 0 6px 18px rgba(76,139,245,0.12);
+  }
+
+  .row-actions { display:flex; gap:10px; align-items:center; }
+
+  .btn {
+    padding:10px 14px; border-radius:10px; border:none; cursor:pointer; font-weight:700;
+    background:var(--primary); color:white;
+  }
+  .btn.ghost { background:transparent; color:var(--primary); border:1px solid rgba(76,139,245,0.12); }
+  .btn.warn { background:#ff6b6b; }
+
+  /* ---------- Table ---------- */
+  .table-wrap { overflow:auto; }
+  table {
+    width:100%; border-collapse:collapse; min-width:1100px;
+    margin-top:12px; background: white; border-radius:10px; overflow:hidden;
+  }
+  thead { background: linear-gradient(90deg,var(--primary),#2f6fe0); color:#fff; }
+  th, td { padding:10px 12px; text-align:left; border-bottom:1px solid rgba(15, 23, 42, 0.05); font-size:13px; }
+  tbody tr:nth-child(even) { background:#fbfdff; }
+  tbody tr:hover { background:#f1f7ff; }
+
+  .actions button { margin-right:6px; padding:6px 10px; border-radius:8px; font-size:13px; }
+  .actions .edit { background:#06b6d4; color:white; border:none; }
+  .actions .delete { background:#ef4444; color:white; border:none; }
+
+  /* ---------- Modal ---------- */
+  .modal-backdrop {
+    position: fixed; inset:0; background: rgba(8,10,20,0.45);
+    display: none; align-items:center; justify-content:center; z-index:50;
+  }
+  .modal {
+    background:var(--card); width:920px; max-width:95%; border-radius:12px; padding:18px;
+    box-shadow:0 12px 40px rgba(12,20,60,0.25);
+  }
+  .modal h3 { margin:0 0 10px 0; }
+  .modal .modal-actions { display:flex; gap:10px; justify-content:flex-end; margin-top:10px; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:980px){
+    .app { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .sidebar { position:relative; height:auto; }
+  }
+
+  .search-sort-bar {
+    margin-bottom: 15px;
 }
 
-table {
+#searchInput {
     width: 100%;
-    background: white;
-    border-collapse: collapse;
-}
-
-table th, table td {
-    border: 1px solid #ddd;
     padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
 }
 
 </style>
-
+</head>
 <body>
 
-    <script type="module">
-        // ------------------------------
-// FIREBASE IMPORTS
-// ------------------------------
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-import { 
-    getFirestore, collection, addDoc, getDocs, 
-    deleteDoc, updateDoc, doc, onSnapshot, query 
-} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+    <script>
+        // -------------------------------
+// SEARCH FILTER BY NAMES ONLY
+// -------------------------------
+document.getElementById("searchInput").addEventListener("keyup", function () {
+    const searchValue = this.value.toLowerCase();
+    const rows = document.querySelectorAll("#recordsTable tbody tr");
 
-// ------------------------------
-// YOUR FIREBASE CONFIG
-// ------------------------------
-const firebaseConfig = {
-  apiKey: "AIzaSyC-JoPMk5Ox3mR5hQPc_z0vBekXjMFiBMs",
-  authDomain: "student-records-c37a3.firebaseapp.com",
-  projectId: "student-records-c37a3",
-  storageBucket: "student-records-c37a3.firebasestorage.app",
-  messagingSenderId: "684734182862",
-  appId: "1:684734182862:web:e7547a4a2f2243efa3279f"
-};
-
-// Initialize Firebase & Firestore
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-// ------------------------------
-// ADD STUDENT
-// ------------------------------
-document.getElementById("addBtn").addEventListener("click", async () => {
-    let name = document.getElementById("name").value;
-    let adm = document.getElementById("adm").value;
-    let course = document.getElementById("course").value;
-
-    await addDoc(collection(db, "students"), {
-        name,
-        adm,
-        course
-    });
-
-    alert("Student added successfully!");
-
-    document.getElementById("name").value = "";
-    document.getElementById("adm").value = "";
-    document.getElementById("course").value = "";
-});
-
-// ------------------------------
-// DISPLAY STUDENTS IN TABLE
-// ------------------------------
-const table = document.getElementById("studentsTable");
-
-onSnapshot(collection(db, "students"), (snapshot) => {
-    table.innerHTML = "";
-    snapshot.forEach((docu) => {
-        let data = docu.data();
-
-        table.innerHTML += `
-            <tr>
-                <td>${data.name}</td>
-                <td>${data.adm}</td>
-                <td>${data.course}</td>
-
-                <td>
-                    <button onclick="editStudent('${docu.id}', '${data.name}', '${data.adm}', '${data.course}')">Edit</button>
-                    <button onclick="deleteStudent('${docu.id}')">Delete</button>
-                    <button onclick="openProfile('${docu.id}')">Profile</button>
-                </td>
-            </tr>
-        `;
+    rows.forEach(row => {
+        const nameCell = row.children[0]; // first column = Names
+        const nameText = nameCell.textContent.toLowerCase();
+        row.style.display = nameText.includes(searchValue) ? "" : "none";
     });
 });
-
-// ------------------------------
-// DELETE STUDENT
-// ------------------------------
-window.deleteStudent = async function(id){
-    if(confirm("Delete this student?")){
-        await deleteDoc(doc(db, "students", id));
-    }
-};
-
-// ------------------------------
-// EDIT STUDENT
-// ------------------------------
-window.editStudent = async function(id, name, adm, course){
-    let newName = prompt("Enter new name:", name);
-    let newAdm = prompt("Enter new admission:", adm);
-    let newCourse = prompt("Enter new course:", course);
-
-    await updateDoc(doc(db, "students", id), {
-        name: newName,
-        adm: newAdm,
-        course: newCourse
-    });
-
-    alert("Updated!");
-};
-
-// ------------------------------
-// SEARCH BAR
-// ------------------------------
-document.getElementById("searchBar").addEventListener("input", async function(){
-    let text = this.value.toLowerCase();
-    let q = query(collection(db, "students"));
-
-    const snapshot = await getDocs(q);
-    table.innerHTML = "";
-
-    snapshot.forEach((docu) => {
-        let data = docu.data();
-
-        if(
-            data.name.toLowerCase().includes(text) || 
-            data.adm.toLowerCase().includes(text)
-        ){
-            table.innerHTML += `
-                <tr>
-                    <td>${data.name}</td>
-                    <td>${data.adm}</td>
-                    <td>${data.course}</td>
-
-                    <td>
-                        <button onclick="editStudent('${docu.id}', '${data.name}', '${data.adm}', '${data.course}')">Edit</button>
-                        <button onclick="deleteStudent('${docu.id}')">Delete</button>
-                        <button onclick="openProfile('${docu.id}')">Profile</button>
-                    </td>
-                </tr>
-            `;
-        }
-    });
-});
-
-// ------------------------------
-// OPEN PROFILE PAGE
-// ------------------------------
-window.openProfile = function(id){
-    window.location.href = `student.html?id=${id}`;
-};
 
     </script>
-<h1>Student Records System</h1>
 
-<!-- Search Bar -->
-<input type="text" id="searchBar" placeholder="Search by name or admission number">
+<div class="app">
 
-<!-- Add Student Form -->
-<div class="form">
-    <input type="text" id="name" placeholder="Full Name">
-    <input type="text" id="adm" placeholder="Admission Number">
-    <input type="text" id="course" placeholder="Course">
-    <button id="addBtn">Add Student</button>
+  <!-- Sidebar -->
+  <aside class="sidebar card">
+    <div class="logo">Smart Student Admin</div>
+    <div class="muted">Manage student records, payments and exports</div>
+    <nav class="nav">
+      <button onclick="document.getElementById('addCard').scrollIntoView({behavior:'smooth'})">Add Student</button>
+      <button onclick="document.getElementById('listCard').scrollIntoView({behavior:'smooth'})">All Students</button>
+      <button onclick="printTable()">Print</button>
+      <button onclick="downloadPDF()">Export PDF</button>
+      <button onclick="downloadExcel()">Export Excel</button>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- Add Card -->
+    <section id="addCard" class="card">
+      <h2>Add New Student</h2>
+      <div class="muted">Fill the form — Balance is computed automatically (TotalExpected − AmountPaid)</div>
+
+      <div class="form-grid">
+        <div>
+          <label for="Names">Names</label>
+          <input id="Names" placeholder="Full name">
+        </div>
+
+        <div>
+          <label for="RegNo">RegNo</label>
+          <input id="RegNo" placeholder="Registration number">
+        </div>
+
+        <div>
+          <label for="RegDate">Reg Date</label>
+          <input id="RegDate" type="date">
+        </div>
+
+        <div>
+          <label for="Course">Course</label>
+          <input id="Course" placeholder="Course name">
+        </div>
+
+        <div>
+          <label for="TotalExpected">Total Expected</label>
+          <input id="TotalExpected" type="number" placeholder="Total fee expected">
+        </div>
+
+        <div>
+          <label for="AmountPaid">Amount Paid</label>
+          <input id="AmountPaid" type="number" placeholder="Amount already paid">
+        </div>
+
+        <div>
+          <label for="Balance">Balance</label>
+          <input id="Balance" type="number" placeholder="Balance" disabled>
+        </div>
+
+        <div>
+          <label for="DateOfBirth">Date of Birth</label>
+          <input id="DateOfBirth" type="date">
+        </div>
+
+        <div>
+          <label for="ParentContact">Parent Contact</label>
+          <input id="ParentContact" placeholder="Parent / guardian contact">
+        </div>
+
+        <div>
+          <label for="StudentContact">Student Contact</label>
+          <input id="StudentContact" placeholder="Student contact">
+        </div>
+
+        <div>
+          <label for="Location">Location</label>
+          <input id="Location" placeholder="Town / estate">
+        </div>
+
+        <div>
+          <label for="Constituency">Constituency</label>
+          <input id="Constituency" placeholder="Constituency">
+        </div>
+
+        <div>
+          <label for="County">County</label>
+          <input id="County" placeholder="County">
+        </div>
+
+        <div>
+          <label for="ModeOfStudy">Mode of Study</label>
+          <select id="ModeOfStudy">
+            <option value="">Select mode</option>
+            <option>Full Time</option>
+            <option>Part Time</option>
+            <option>Distance Learning</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="TypeOfStudy">Type of Study</label>
+          <select id="TypeOfStudy">
+            <option value="">Select type</option>
+            <option>Certificate</option>
+            <option>Diploma</option>
+            <option>Degree</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="CourseDuration">Course Duration</label>
+          <input id="CourseDuration" placeholder="e.g. 24 months">
+        </div>
+
+        <div>
+          <label for="CompletionDate">Completion Date</label>
+          <input id="CompletionDate" type="date">
+        </div>
+
+        <div class="full">
+          <div class="row-actions">
+            <button id="addBtn" class="btn">Add Record</button>
+            <button onclick="clearForm()" class="btn ghost">Clear</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- List Card -->
+    <section id="listCard" class="card">
+      <h2>All Students</h2>
+      <div class="muted">Realtime list from Firestore</div>
+
+      <div class="table-wrap">
+        <div class="search-sort-bar">
+    <input type="text" id="searchInput" placeholder="Search records..." />
+</div>
+        <table id="recordsTable" aria-live="polite">
+          <thead>
+            <tr>
+              <th>Names</th><th>RegNo</th><th>RegDate</th><th>Course</th>
+              <th>AmountPaid</th><th>TotalExpected</th><th>Balance</th>
+              <th>Phone</th><th>Location</th><th>Mode</th><th>Type</th><th>Duration</th>
+              <th>Completion</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="recordsBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
 </div>
 
-<h2>All Students</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Admission</th>
-            <th>Course</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody id="studentsTable"></tbody>
-</table>
+<!-- Edit Modal -->
+<div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-hidden="true">
+  <div class="modal" role="document" aria-labelledby="editTitle">
+    <h3 id="editTitle">Edit Student</h3>
+    <div style="display:grid; gap:8px; grid-template-columns: 1fr 1fr;">
+      <!-- Fields will be injected/populated -->
+      <div><label>Names</label><input id="e_Names"></div>
+      <div><label>RegNo</label><input id="e_RegNo"></div>
+      <div><label>RegDate</label><input id="e_RegDate" type="date"></div>
+      <div><label>Course</label><input id="e_Course"></div>
+      <div><label>TotalExpected</label><input id="e_TotalExpected" type="number"></div>
+      <div><label>AmountPaid</label><input id="e_AmountPaid" type="number"></div>
+      <div><label>Balance</label><input id="e_Balance" type="number" disabled></div>
+      <div><label>DateOfBirth</label><input id="e_DateOfBirth" type="date"></div>
+      <div><label>ParentContact</label><input id="e_ParentContact"></div>
+      <div><label>StudentContact</label><input id="e_StudentContact"></div>
+      <div><label>Location</label><input id="e_Location"></div>
+      <div><label>Constituency</label><input id="e_Constituency"></div>
+      <div><label>County</label><input id="e_County"></div>
+      <div><label>ModeOfStudy</label><select id="e_ModeOfStudy"><option>Full Time</option><option>Part Time</option><option>Distance Learning</option></select></div>
+      <div><label>TypeOfStudy</label><select id="e_TypeOfStudy"><option>Certificate</option><option>Diploma</option><option>Degree</option></select></div>
+      <div><label>CourseDuration</label><input id="e_CourseDuration"></div>
+      <div><label>CompletionDate</label><input id="e_CompletionDate" type="date"></div>
+    </div>
 
-<h1>Student Profile</h1>
+    <div class="modal-actions" style="margin-top:12px;">
+      <button id="saveEdit" class="btn">Save Changes</button>
+      <button onclick="closeModal()" class="btn ghost">Cancel</button>
+    </div>
+  </div>
+</div>
 
-<div id="info"></div>
-
-<h2>Add Fee Payment</h2>
-<input type="number" id="amount" placeholder="Enter amount">
-<button id="payBtn">Add Payment</button>
-
-<h2>Payment History</h2>
-<ul id="paymentsList"></ul>
-
+<!-- FIREBASE + APP LOGIC -->
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-import { 
-    getFirestore, collection, doc, getDoc, addDoc, onSnapshot 
-} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+  import {
+    getFirestore, collection, addDoc, deleteDoc, updateDoc,
+    doc, onSnapshot, getDoc
+  } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyC-JoPMk5Ox3mR5hQPc_z0vBekXjMFiBMs",
-  authDomain: "student-records-c37a3.firebaseapp.com",
-  projectId: "student-records-c37a3",
-  storageBucket: "student-records-c37a3.firebasestorage.app",
-  messagingSenderId: "684734182862",
-  appId: "1:684734182862:web:e7547a4a2f2243efa3279f"
-};
+  // --- Firebase config (kept exactly as provided)
+  const firebaseConfig = {
+    apiKey: "AIzaSyC-JoPMk5Ox3mR5hQPc_z0vBekXjMFiBMs",
+    authDomain: "student-records-c37a3.firebaseapp.com",
+    projectId: "student-records-c37a3",
+    storageBucket: "student-records-c37a3.firebasestorage.app",
+    messagingSenderId: "684734182862",
+    appId: "1:684734182862:web:e7547a4a2f2243efa3279f"
+  };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const studentsCol = collection(db, "students");
 
-// Get student ID from URL
-const url = new URLSearchParams(window.location.search);
-const id = url.get("id");
+  /* ---------- Helpers: element refs ---------- */
+  const $ = id => document.getElementById(id);
 
-// Load student info
-(async function(){
-    const snap = await getDoc(doc(db, "students", id));
-    const data = snap.data();
+  // Add form elements
+  const Names = $("Names"), RegNo = $("RegNo"), RegDate = $("RegDate"), Course = $("Course"),
+        TotalExpected = $("TotalExpected"), AmountPaid = $("AmountPaid"), Balance = $("Balance"),
+        DateOfBirth = $("DateOfBirth"), ParentContact = $("ParentContact"), StudentContact = $("StudentContact"),
+        Location = $("Location"), Constituency = $("Constituency"), County = $("County"),
+        ModeOfStudy = $("ModeOfStudy"), TypeOfStudy = $("TypeOfStudy"), CourseDuration = $("CourseDuration"),
+        CompletionDate = $("CompletionDate"), addBtn = $("addBtn");
 
-    document.getElementById("info").innerHTML = `
-        <p><b>Name:</b> ${data.name}</p>
-        <p><b>Admission:</b> ${data.adm}</p>
-        <p><b>Course:</b> ${data.course}</p>
-    `;
-})();
+  // Modal fields
+  const modal = $("modalBackdrop");
+  const e_Names = $("e_Names"), e_RegNo = $("e_RegNo"), e_RegDate = $("e_RegDate"), e_Course = $("e_Course"),
+        e_TotalExpected = $("e_TotalExpected"), e_AmountPaid = $("e_AmountPaid"), e_Balance = $("e_Balance"),
+        e_DateOfBirth = $("e_DateOfBirth"), e_ParentContact = $("e_ParentContact"), e_StudentContact = $("e_StudentContact"),
+        e_Location = $("e_Location"), e_Constituency = $("e_Constituency"), e_County = $("e_County"),
+        e_ModeOfStudy = $("e_ModeOfStudy"), e_TypeOfStudy = $("e_TypeOfStudy"), e_CourseDuration = $("e_CourseDuration"),
+        e_CompletionDate = $("e_CompletionDate"), saveEdit = $("saveEdit");
 
-// Add fee payment
-document.getElementById("payBtn").addEventListener("click", async () => {
-    let amount = document.getElementById("amount").value;
+  let editingId = null;
 
-    await addDoc(collection(db, "students", id, "payments"), {
-        amount,
-        date: new Date().toLocaleString()
+  /* ---------- Auto-balance handlers ---------- */
+  function calcBalanceFromAdd(){
+    const e = Number(TotalExpected.value || 0);
+    const p = Number(AmountPaid.value || 0);
+    Balance.value = e - p;
+  }
+  function calcBalanceFromEdit(){
+    const e = Number(e_TotalExpected.value || 0);
+    const p = Number(e_AmountPaid.value || 0);
+    e_Balance.value = e - p;
+  }
+  TotalExpected.addEventListener("input", calcBalanceFromAdd);
+  AmountPaid.addEventListener("input", calcBalanceFromAdd);
+  e_TotalExpected.addEventListener("input", calcBalanceFromEdit);
+  e_AmountPaid.addEventListener("input", calcBalanceFromEdit);
+
+  /* ---------- Add Record ---------- */
+  addBtn.addEventListener("click", async () => {
+    // basic validation
+    if (!Names.value.trim() || !RegNo.value.trim()) {
+      alert("Please provide Names and RegNo.");
+      return;
+    }
+
+    const payload = {
+      Names: Names.value.trim(),
+      RegNo: RegNo.value.trim(),
+      RegDate: RegDate.value || null,
+      Course: Course.value || "",
+      TotalExpected: Number(TotalExpected.value || 0),
+      AmountPaid: Number(AmountPaid.value || 0),
+      Balance: Number(Balance.value || 0),
+      DateOfBirth: DateOfBirth.value || null,
+      ParentContact: ParentContact.value || "",
+      StudentContact: StudentContact.value || "",
+      Location: Location.value || "",
+      Constituency: Constituency.value || "",
+      County: County.value || "",
+      ModeOfStudy: ModeOfStudy.value || "",
+      TypeOfStudy: TypeOfStudy.value || "",
+      CourseDuration: CourseDuration.value || "",
+      CompletionDate: CompletionDate.value || null,
+      createdAt: new Date().toISOString()
+    };
+
+    try {
+      await addDoc(studentsCol, payload);
+      alert("Student added successfully!");
+      clearForm();
+    } catch (err) {
+      console.error(err);
+      alert("Failed to add student. Check console for details.");
+    }
+  });
+
+  /* ---------- Clear add form ---------- */
+  function clearForm(){
+    const inputs = [Names, RegNo, RegDate, Course, TotalExpected, AmountPaid, Balance, DateOfBirth,
+      ParentContact, StudentContact, Location, Constituency, County, ModeOfStudy, TypeOfStudy, CourseDuration, CompletionDate];
+    inputs.forEach(i => i.value = "");
+  }
+
+  /* ---------- Real-time display ---------- */
+  const recordsBody = $("recordsBody");
+
+  onSnapshot(studentsCol, (snap) => {
+    recordsBody.innerHTML = "";
+    snap.forEach(docSnap => {
+      const d = docSnap.data();
+      const id = docSnap.id;
+      const tr = document.createElement("tr");
+
+      tr.innerHTML = `
+        <td>${escapeHtml(d.Names || "")}</td>
+        <td>${escapeHtml(d.RegNo || "")}</td>
+        <td>${formatDate(d.RegDate)}</td>
+        <td>${escapeHtml(d.Course || "")}</td>
+        <td>${numberFormat(d.AmountPaid)}</td>
+        <td>${numberFormat(d.TotalExpected)}</td>
+        <td>${numberFormat(d.Balance)}</td>
+        <td>${escapeHtml(d.StudentContact || "")}</td>
+        <td>${escapeHtml(d.Location || "")}</td>
+        <td>${escapeHtml(d.ModeOfStudy || "")}</td>
+        <td>${escapeHtml(d.TypeOfStudy || "")}</td>
+        <td>${escapeHtml(d.CourseDuration || "")}</td>
+        <td>${formatDate(d.CompletionDate)}</td>
+        <td class="actions">
+          <button class="edit" onclick="openEdit('${id}')">Edit</button>
+          <button class="delete" onclick="deleteRecord('${id}')">Delete</button>
+        </td>
+      `;
+
+      recordsBody.appendChild(tr);
     });
+  });
 
-    alert("Payment Added!");
-});
+  /* ---------- Delete ---------- */
+  window.deleteRecord = async function(id){
+    if (!confirm("Delete this record?")) return;
+    try {
+      await deleteDoc(doc(studentsCol.firestore, "students", id)); // fallback
+    } catch (err) {
+      // alternate approach
+      try {
+        await deleteDoc(doc(db, "students", id));
+      } catch(e){ console.error(e); alert("Delete failed"); }
+    }
+  };
 
-// Show payment history
-onSnapshot(collection(db, "students", id, "payments"), (snapshot) => {
-    let list = document.getElementById("paymentsList");
-    list.innerHTML = "";
+  /* ---------- Open Edit Modal ---------- */
+  window.openEdit = async function(id){
+    editingId = id;
+    modal.style.display = "flex";
+    modal.setAttribute("aria-hidden","false");
 
-    snapshot.forEach((p) => {
-        let d = p.data();
-        list.innerHTML += `<li>KES ${d.amount} — ${d.date}</li>`;
+    try {
+      const docRef = doc(db, "students", id);
+      const snap = await getDoc(docRef);
+      if (!snap.exists()) { alert("Document not found"); return; }
+      const d = snap.data();
+
+      e_Names.value = d.Names || "";
+      e_RegNo.value = d.RegNo || "";
+      e_RegDate.value = d.RegDate || "";
+      e_Course.value = d.Course || "";
+      e_TotalExpected.value = d.TotalExpected || 0;
+      e_AmountPaid.value = d.AmountPaid || 0;
+      e_Balance.value = d.Balance || 0;
+      e_DateOfBirth.value = d.DateOfBirth || "";
+      e_ParentContact.value = d.ParentContact || "";
+      e_StudentContact.value = d.StudentContact || "";
+      e_Location.value = d.Location || "";
+      e_Constituency.value = d.Constituency || "";
+      e_County.value = d.County || "";
+      e_ModeOfStudy.value = d.ModeOfStudy || "";
+      e_TypeOfStudy.value = d.TypeOfStudy || "";
+      e_CourseDuration.value = d.CourseDuration || "";
+      e_CompletionDate.value = d.CompletionDate || "";
+    } catch (err) {
+      console.error(err);
+      alert("Failed to load record for edit.");
+    }
+  };
+
+  /* ---------- Close modal ---------- */
+  function closeModal(){
+    editingId = null;
+    modal.style.display = "none";
+    modal.setAttribute("aria-hidden","true");
+  }
+  window.closeModal = closeModal;
+
+  /* ---------- Save edits ---------- */
+  saveEdit.addEventListener("click", async () => {
+    if (!editingId) return alert("No record selected.");
+    const payload = {
+      Names: e_Names.value.trim(),
+      RegNo: e_RegNo.value.trim(),
+      RegDate: e_RegDate.value || null,
+      Course: e_Course.value || "",
+      TotalExpected: Number(e_TotalExpected.value || 0),
+      AmountPaid: Number(e_AmountPaid.value || 0),
+      Balance: Number(e_Balance.value || 0),
+      DateOfBirth: e_DateOfBirth.value || null,
+      ParentContact: e_ParentContact.value || "",
+      StudentContact: e_StudentContact.value || "",
+      Location: e_Location.value || "",
+      Constituency: e_Constituency.value || "",
+      County: e_County.value || "",
+      ModeOfStudy: e_ModeOfStudy.value || "",
+      TypeOfStudy: e_TypeOfStudy.value || "",
+      CourseDuration: e_CourseDuration.value || "",
+      CompletionDate: e_CompletionDate.value || ""
+    };
+
+    // recalc balance server-side too
+    payload.Balance = Number(payload.TotalExpected) - Number(payload.AmountPaid);
+
+    try {
+      await updateDoc(doc(db, "students", editingId), payload);
+      alert("Saved successfully!");
+      closeModal();
+    } catch (err) {
+      console.error(err);
+      alert("Save failed. Check console.");
+    }
+  });
+
+  /* ---------- Exports & Print ---------- */
+  window.downloadExcel = function(){
+    const tbl = document.getElementById("recordsTable");
+    const wb = XLSX.utils.table_to_book(tbl, {sheet:"Students"});
+    XLSX.writeFile(wb, "Students.xlsx");
+  };
+
+  window.downloadPDF = function(){
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF('l','pt','a4'); // landscape
+    pdf.html(document.getElementById("recordsTable"), {
+      callback: function(doc){ doc.save("Students.pdf"); },
+      margin: [20,20,20,20],
+      x: 10,
+      y: 10,
+      width: 800
     });
-});
+  };
+
+  window.printTable = function(){
+    window.print();
+  };
+
+  /* ---------- Utilities ---------- */
+  function numberFormat(n){ return (n === undefined || n === null) ? "" : Number(n).toLocaleString(); }
+  function formatDate(v){ if(!v) return ""; try { return new Date(v).toLocaleDateString(); } catch(e){ return v; } }
+  function escapeHtml(s){ if(!s) return ""; return String(s).replace(/[&<>"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"})[m]; }); }
+
+  // Make modal close on backdrop click
+  modal.addEventListener("click", (ev) => { if(ev.target === modal) closeModal(); });
+
+  // Expose openEdit & deleteRecord to window (we used inline onclicks)
+  window.openEdit = window.openEdit;
+  window.deleteRecord = window.deleteRecord;
+
 </script>
 </body>
 </html>

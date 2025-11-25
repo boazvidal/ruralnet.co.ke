@@ -6,48 +6,121 @@
     <title>Document</title>
 </head>
 <body>
+	<h1>Studnt Records system</h1>
 
-    	<!--FULL PAGE PROTECTION SCRIPT -->
+	<!-- Search Bar-->
+	<input type="text" id="searchbar" placeholder="search by name of admission number">
 
-<script>
-	//Right-Click
-	document.addEventListener('contextmenu', event => event.preventDefault());
-</script>
+	<!--Add student Form-->
 
-<!--F12-->
-<script>
-	document.onkeydown = function(e) {
+	<div class="form">
+		<input type="text" id="name" placeholder="Full Name">
+		<input type="text" id="adm" placeholder="Admission number">
+		<input type="text" id="course" placeholder="Course">
+		<input type="text" id="level" placeholder="Corse Level">
+		<input type="text" id="RegDate" placeholder="Enrollment Date">
+		<input type="text" id="DateOfBirth" placeholder="DAte of birth">
+		<input type="text" id="ParentContact" placeholder="Parent's Contact">
+		<input type="text" id="StudentContact" placeholder="Student's Contact">
+		<input type="text" id="TotalPaid" placeholder="Total Fee Paid">
+		<input type="text" id="Balance" placeholder="Balance">
+		<input type="text" id="DOC" placeholder="Date of completion">
 
-	//F12
-	if (e.keyCode == 123) {
-		return false;
-	}
+		<button id="addBtn">Add Student</button>
+	</div>
+
+	<!--STUDENT RECORDS SECTION-->
+	<h2>All Students</h2>
+	<table>
+		<thead>
+			<th>Name</th>
+			<th>Admission</th>
+			<th>course</th>
+			<th>Level</th>
+			<th>Enrollment Date</th>
+			<th>Date of Birth</th>
+			<th>Guardian</th>
+			<th>Contact</th>
+			<th>Fee paid</th>
+			<th>Balance</th>
+			<th>Completion Date</th>
+		</thead>
+		<tbody id="studentsTable"></tbody>
+	</table>
 
 
-//Ctrl+Shift+I or Ctrl+Shift+J or Ctrl+Shift+C
+	<!--FIREBASE PART-->
+	<script type="module">
+		        // ------------------------------
+		// FIREBASE IMPORTS
+		// ------------------------------
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+		import { 
+    		getFirestore, collection, addDoc, getDocs, 
+    		deleteDoc, updateDoc, doc, onSnapshot, query 
+		} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-	if (e.ctrlKey && e.shiftKey && (
-		e.keyCode === 73 ||
-		e.keyCode === 74 ||
-		e.keyCode === 67
-	)) {
-		return false;
-	}
+		// ------------------------------
+		// RURALNET FIREBASE CONFIG
+		// ------------------------------
+		const firebaseConfig = {
+  		apiKey: "AIzaSyC-JoPMk5Ox3mR5hQPc_z0vBekXjMFiBMs",
+  		authDomain: "student-records-c37a3.firebaseapp.com",
+  		projectId: "student-records-c37a3",
+  		storageBucket: "student-records-c37a3.firebasestorage.app",
+  		messagingSenderId: "684734182862",
+  		appId: "1:684734182862:web:e7547a4a2f2243efa3279f"
+		};
 
-//Ctrl+U View Source-->
+		// Initialize Firebase & Firestore
+		const app = initializeApp(firebaseConfig);
+		const db = getFirestore(app);
 
-	if (e.ctrlKey && e.keyCode === 85) {
-		return false;
-	}
+		// ADDING STUDENTS...
 
-	//Ctrl+C Copy
-	if (e.ctrlKey && e.keyCode === 67) {
-		return false;
-	}
-};
-</script>
+		document.getElementById("addBtn").addEventListener("click", async () => {
+			let name = document.getElementById("name").value;
+			let adm = document.getElementById("adm").value;
+			let course = document.getElementById("course").value;
+			let level = document.getElementById("level").value;
+			let RegDate = document.getElementById("RegDate").value;
+			let DateOfBirth = document.getElementById("DateOfBirth").value;
+			let ParentContact = document.getElementById("ParentContact").value;
+			let StudentContact = document.getElementById("StudentContact").value;
+			let TotalPaid = document.getElementById("TotalPaid").value;
+			let Balance = document.getElementById("Balance").value;
+			let DOC = document.getElementById("DOC").value;
 
-    <div class=""><h1>Welcome staff</h1></div>
-    <p>select an option to proceed</p>
+			await addDoc(collection(db, "students"), {
+				name,
+				adm,
+				course,
+				RegDate,
+				DateOfBirth,
+				ParentContact,
+				StudentContact,
+				TotalPaid,
+				Balance,
+				DOC
+			});
+
+			alert("Student Details Saved Successfully");
+
+			document.getElementById("name").value = "";
+			document.getElementById("adm").value = "";
+			document.getElementById("course").value = "";
+			document.getElementById("level").value = "";
+			document.getElementById("RegDate").value = "";
+			document.getElementById("DateOfBirth").value = "";
+			document.getElementById("ParentContact").value = "";
+			document.getElementById("StudentContact").value = "";
+			document.getElementById("TotalPaid").value;
+			document.getElementById("Balance").value = "";
+			document.getElementById("DOC").value = "";
+		});
+
+		// DISPLAYING STUDENTS IN TABLE
+
+	</script>
 </body>
 </html>
