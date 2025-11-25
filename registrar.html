@@ -13,8 +13,8 @@
 <style>
   /* ---------- Layout ---------- */
   :root{
-    --bg:#f5f7fb;
-    --card:#ffffff;
+    --bg:#13b10e;
+    --card:#faf7f7;
     --primary:#4c8bf5;
     --muted:#6b7280;
     --radius:12px;
@@ -47,6 +47,11 @@
     height: calc(100vh - 48px);
     position: sticky;
     top: 24px;
+  }
+
+  .sidebar img {
+    width: 200px;
+    height: auto;
   }
   .logo { font-weight:700; color:var(--primary); font-size:18px; margin-bottom:14px; }
   .nav { display:flex; flex-direction:column; gap:8px; margin-top:6px; }
@@ -152,6 +157,15 @@
     border-radius: 6px;
 }
 
+.footer-text {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;   /* ← this aligns it to the right */
+    color: blue;
+    text-align: right;
+}
+
+
 </style>
 </head>
 <body>
@@ -177,7 +191,8 @@ document.getElementById("searchInput").addEventListener("keyup", function () {
 
   <!-- Sidebar -->
   <aside class="sidebar card">
-    <div class="logo">Smart Student Admin</div>
+    <img src="images/RURALNET.png">
+    <div class="logo">STUDENT MANAGEMENT SYSTEM</div>
     <div class="muted">Manage student records, payments and exports</div>
     <nav class="nav">
       <button onclick="document.getElementById('addCard').scrollIntoView({behavior:'smooth'})">Add Student</button>
@@ -185,6 +200,8 @@ document.getElementById("searchInput").addEventListener("keyup", function () {
       <button onclick="printTable()">Print</button>
       <button onclick="downloadPDF()">Export PDF</button>
       <button onclick="downloadExcel()">Export Excel</button>
+
+      <div class="footer-text">Developed By Boaz</div>
     </nav>
   </aside>
 
@@ -307,9 +324,6 @@ document.getElementById("searchInput").addEventListener("keyup", function () {
       <div class="muted">Realtime list from Firestore</div>
 
       <div class="table-wrap">
-        <div class="search-sort-bar">
-    <input type="text" id="searchInput" placeholder="Search records..." />
-</div>
         <table id="recordsTable" aria-live="polite">
           <thead>
             <tr>
