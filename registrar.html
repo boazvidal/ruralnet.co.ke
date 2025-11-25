@@ -165,6 +165,23 @@
     text-align: right;
 }
 
+.footer-text a {
+  color: white;
+  font-family: sans-serif;
+  background: linear-gradient(to right, blue, red);
+  padding: 10px 60px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: bold;
+  size: 34px;
+  border-bottom: 5px solid blue;
+}
+
+.footer-text a:hover {
+  background: linear-gradient(to left, blue, red);
+  border-top: 5px solid red;
+}
+
 
 </style>
 </head>
@@ -224,7 +241,10 @@
       <button onclick="downloadPDF()">Export PDF</button>
       <button onclick="downloadExcel()">Export Excel</button>
 
-      <div class="footer-text">Developed By Boaz</div>
+      <div class="footer-text">
+        <a href="Employees.html">Sign out</a>
+        <P>Developed By Boaz</P>
+      </div>
     </nav>
   </aside>
 
