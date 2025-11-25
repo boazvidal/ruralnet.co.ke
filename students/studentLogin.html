@@ -116,6 +116,12 @@
 };
 </script>
 
+    <script>
+        // Prevent going back
+        window.onpopstate = function () {
+        window.location.href = "StudentLogin.html"; // your redirect page
+    };
+    </script>
 
 <div class="container">
     <img src="../images/RURALNET.png">
