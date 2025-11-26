@@ -17,7 +17,79 @@
     }*/
 
 	/* ================= Styling dropdown on hover) ================= */
-	
+  .ict-wrapper {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    background: #e7d4d4;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  }
+
+.ict-title {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    color: #333;
+  }
+
+  .accordion {
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Hide radios */
+  .accordion input {
+    display: none;
+  }
+
+  .item {
+    border-radius: 30px;
+    background: white;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    text-align: left;
+  }
+
+  /* TAB HEADER */
+  .title {
+    padding: 18px;
+    font-size: 18px;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    user-select: none;
+  }
+
+  /* Colors */
+  #tab1 + label.title { background: #ff7e71; }
+  #tab2 + label.title { background: #00a8ff; }
+  #tab3 + label.title { background: #8a6cff; }
+
+  /* CONTENT AREA (initially closed) */
+  .content {
+    max-height: 0;
+    overflow: hidden;
+    background: white;
+    padding: 0 25px;
+    transition: max-height 0.5s ease, padding 0.3s ease;
+  }
+
+  /* OPEN STATE — smooth animation */
+  input:checked ~ .content {
+    max-height: 300px; /* enough space for text */
+    padding: 20px 25px;
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+
+
   </style> 
 
 </head>
@@ -61,7 +133,7 @@
 	if (e.ctrlKey && e.keyCode === 67) {
 		return false;
 	}
-};
+}
 </script>
 
 	<!-- Floating Box Section -->
@@ -344,7 +416,64 @@ document.querySelectorAll(".drop-btn").forEach(btn => {
 
   </div>
 
-    
+<div class="ict-wrapper">
+  
+  <div class="ict-title">COURSE SYNOPSIS CATEGORIES
+    <p style="color: green; size: 12px; font-family: 'Lucida Calligraphy';">click to expand</p>
+  </div>
+
+  <div class="accordion">
+
+    <div class="item">
+      <input type="radio" name="acc" id="tab1" checked>
+      <label for="tab1" class="title">Computer Basics</label>
+      <div class="content">
+        <h3>ICT Essentails I</h3>
+        <p>Package subscription: <strong style="color: red;">Kshs. 4,500</strong></p>
+        <p>Introduction to computers</p>
+        <p>Light-weight knowledge on computer packages</p>
+        <p>Internet basics</p>
+        <p>❌ No networking</p>
+        <p>❌ No project</p>
+        <p>❌ No project</p>
+        <p>❌ No Deep diving into applications</p>
+        <p>❌ No Modern Tech tools</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <input type="radio" name="acc" id="tab2">
+      <label for="tab2" class="title">ICT Essentials </label>
+      <div class="content">
+        <h3>ICT Skills</h3>
+        <p>Package Subscription: <strong style="color: red;">Kshs. 6,600</strong></p>
+        <p>Introduction to Computers</p>
+        <p>ICT Resourses operation mastery</p>
+        <p>ICT Ethics and security</p>
+        <p>Full knowledge on computer packages</p>
+        <p>Internet essentials</p>
+        <p>✅ networking</p>
+        <p>✅ project</p>
+        <p>✅ project</p>
+        <p>✅ Deep diving into applications</p>
+        <p>✅ Modern Tech tools</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <input type="radio" name="acc" id="tab3">
+      <label for="tab3" class="title">Advanced Courses</label>
+      <div class="content">
+        <h3>Special Courses</h3>
+        <p>Subscription fee varies depending on the course selected. see more in the <a href="FLIER.pdf" target="_blank">Bronchure Tab</a></p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
 </body>
 <footer>
     <!--<h2 style="text-align: center; background-color: white; color: black; font-family: wide latin;">'</h2>-->
