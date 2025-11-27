@@ -17,6 +17,11 @@
       padding-left: 7px;
     }
 
+    .footer a:hover {
+        background: white;
+        color: green;
+    }
+
     .footer-column {
       flex: 1;
       min-width: 200px;
