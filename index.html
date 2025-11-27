@@ -6,6 +6,7 @@
     <title>Home|| Ruralnet ICT Academy</title>
 
 	<link rel="stylesheet" href="stylus.css">
+  <link rel="stylesheet" href="stylus-footer.css">
 	<link rel="icon" type="image/png" href="images/favicon.png">
   <style>
 
@@ -473,24 +474,60 @@ document.querySelectorAll(".drop-btn").forEach(btn => {
 
 </div>
 
+<footer class="footer">
+    <div class="footer-column">
+      <h3>Useful Links</h3>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="About_Us.html">Who we Are</a></li>
+      <li><a href="">Student Portal</a></li>
+      <li><a href="">Accounting</a></li>
+      <li><a href="">ICT</a></li>
+    </div>
 
+    <div class="footer-column">
+      <h3>Partners</h3>
+      <li><a href="">CSK</a></li>
+      <li><a href="">KASNEB</a></li>
+      <li><a href="">TVETA</a></li>
+    </div>
+
+    <div class="footer-column">
+      <h3>Contact Us</h3>
+      <p>+254723845040</p>
+      <p>+254700886058</p>
+      <p>+254793714564</p>
+      <p>ruralnet2016@gmail.com</p>
+      <p>ruralnet.co.ke</p>
+    </div>
+
+    <div style="width: 100%; height: 400px;">
+      <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.798716585544!2d34.29549147494557!3d0.17961016421947956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177fee707dda6723%3A0x7661927a7a412ea0!2sRuralNet%20IT%20Services%20%26%20Academy!5e0!3m2!1sen!2ske!4v1764222258833!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      width="100%"
+      height="100%"
+      style="border:0"
+      allowfullscree=""
+      loading="lazy">
+      </iframe>
+    </div>
+  </footer>
 </body>
 <footer>
-    <!--<h2 style="text-align: center; background-color: white; color: black; font-family: wide latin;">'</h2>-->
+    <!--<h2 style="text-align: center; background-color: white; color: black; font-family: wide latin;">'</h2>--
 	<h2 style="text-align: right;">'</h2>    
 	<h2 style="text-align: center; background-color: white; color: black; font-family: wide latin;"><strong>CONTACT US</strong></h2>
         
   <form class="form">
   <div class="tabs-container">
 
-    <!-- TAB BUTTONS -->
+    <!-- TAB BUTTONS --
     <div class="tab-button">
       <button type="button" class="tab-btn active" data-tab="tab1">CALL/TEXT US VIA WHATSAPP/SMS APP</button>
       <button type="button" class="tab-btn" data-tab="tab2">LINKS</button>
       <button type="button" class="tab-btn" data-tab="tab3">LOCATION</button>
     </div>
 
-    <!-- TAB CONTENT 1 -->
+    <!-- TAB CONTENT 1 --
     <div class="tab-content active" id="tab1">
       <h3>Phone Numbers</h3>
       <ul class="blue-text">
@@ -500,7 +537,7 @@ document.querySelectorAll(".drop-btn").forEach(btn => {
       </ul>
     </div>
 
-    <!-- TAB CONTENT 2 -->
+    <!-- TAB CONTENT 2 --
     <div class="tab-content" id="tab2">
       <h3>Accessibility Links</h3>
       <ul class="blue-text">
@@ -510,13 +547,13 @@ document.querySelectorAll(".drop-btn").forEach(btn => {
       </ul>
     </div>
 
-    <!-- TAB CONTENT 3 -->
+    <!-- TAB CONTENT 3 --
     <div class="tab-content" id="tab3">
       <h3>Where to find us</h3>
       <p class="blue-text">
         KWFT at the ground floor, Matibabu Hospital occupying the first floor,
-        <strong>Ruralnet ICT Academy</strong> occupying the second floor of oguya plaza;
-        (The tall building besides Wells Petrol Station; Opposite Easy Coach and Guardian Booking Offices.)
+        <strong>Ruralnet ICT Academy</strong> occupying the second floor of Oguya Plaza;
+        (The tall building beside Wells Petrol Station; Opposite Easy Coach and Guardian Booking Offices.)
       </p>
     </div>
 
@@ -525,21 +562,24 @@ document.querySelectorAll(".drop-btn").forEach(btn => {
   <h3 style="align-items: center; justify-content: center;">Copyright © 2025 Ruralnet ICT Academy. All rights reserved. </h3>
 
   <script>
-    const tabButtons = document.querySelectorAll(".tab-btn");
-    const tabContents = document.querySelectorAll(".tab-content");
+  //const buttons = document.querySelectorAll(".tab-btn");
+  //const contents = document.querySelectorAll(".tab-content");
 
-    tabButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        tabButtons.forEach(btn => btn.classList.remove("active"));
-        tabContents.forEach(tab => tab.classList.remove("active"));
-        
-        button.classList.add("active");
-        document.getElementById(button.dataset.tab).classList.add("active");
-      });
-    });
-  </script>
+  //buttons.forEach(btn => {
+    //btn.addEventListener("click", () => {
 
-  <script source="Boaz.pyPage Loader(/programmer\)">
+      // Remove "active" class from all buttons and content
+      //buttons.forEach(b => b.classList.remove("active"));
+      //contents.forEach(c => c.classList.remove("active"));
+
+      // Add active class to clicked button and matching content
+     // btn.classList.add("active");
+     // document.getElementById(btn.dataset.tab).classList.add("active");
+   // });
+//  });
+</script>
+
+  <script>
 	document.addEventListener('DOMContentLoaded', () => {
 		const section = document.getElementById('flipbox-section');
 		const pages = Array.from(section.querySelectorAll('.page'));
@@ -566,7 +606,9 @@ document.querySelectorAll(".drop-btn").forEach(btn => {
 			}
 
 		})
-	</script>
+	</script> -->
+
+
 </body>
 
     </footer>
