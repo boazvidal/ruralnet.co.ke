@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam portal</title>
+    <link rel="icon" type="image/png" href="images/favexam.jpg">
+</head>
+<body>
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabbed Form</title>
+  <style>
+    /* ==== GLOBAL STYLING ==== */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 120px 20px 20px; /* space for fixed navbar */
+  background-image: url(images/examBG.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Center all <h1> headings */
+.info h1 {
+  color: #007bff;
+  text-shadow:
+    -1px -1px 0 black,
+    1px 1px 0 white;
+}
+
+.info h2 {
+  background: rgb(0, 80, 36);
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/* ==== FORM CONTAINER ==== */
+form.form {
+  background-color: aqua;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 700px;
+  margin: auto;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* ==== TABS CONTAINER ==== */
+.tabs-container {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* ==== TAB BUTTONS ==== */
+.tab-button {
+  display: flex;
+  flex-wrap: wrap; /* allows break on small screens */
+  border-bottom: 2px solid #ddd;
+}
+
+.tab-button button {
+  flex: 1 1 150px; /* flexible width */
+  padding: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.tab-button button.active {
+  background: #007bff;
+  color: white;
+}
+
+/* ==== TAB CONTENT ==== */
+.tab-content {
+  padding: 20px;
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+ul {
+  color: rgb(31, 146, 8);
+}
+
+ul li a {
+  color: rgb(8, 5, 156);
+  font-size: 18px;
+  text-decoration: none;
+}
+
+/* ==== NAVIGATION BAR ==== */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #026613;
+    color: white;
+    z-index: 1000;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 5px solid white;
+}
+
+nav img {
+    max-width: 170px;
+}
+
+/* Navigation links */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+}
+
+nav ul li a {
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #1d5304d2;
+    border-radius: 5px;
+    border-bottom: 4px solid white;
+    border-right: 4px solid white;
+}
+
+/* ===== HAMBURGER BUTTON ===== */
+.menu-btn {
+    font-size: 30px;
+    cursor: pointer;
+    display: none;
+}
+
+/* ===== MOBILE VIEW ===== */
+@media (max-width: 768px) {
+    nav {
+        flex-wrap: wrap;
+    }
+
+    /* Show hamburger */
+    .menu-btn {
+        display: block;
+    }
+
+    /* Hide nav links */
+    nav ul {
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        background: #026613;
+        margin-top: 10px;
+        padding: 10px 0;
+        border-top: 3px solid white;
+    }
+
+    /* Show them when active */
+    nav ul.active {
+        display: flex;
+    }
+
+    nav ul li a {
+        padding: 12px;
+        text-align: center;
+        width: 100%;
+        display: block;
+    }
+
+    nav img {
+        max-width: 140px;
+    }
+}
+
+/* ==== FOOTER ==== */
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: black;
+  color: white;
+  padding: 40px 20px;
+}
+
+.footer-column {
+  flex: 1 1 200px;
+  min-width: 200px;
+  margin: 10px;
+  background: #1d1c1c;
+  padding: 10px;
+  border-radius: 10px;
+  border-bottom: 5px solid white;
+}
+
+.footer h3 {
+  font-size: 16px;
+  text-transform: uppercase;
+  border-bottom: 2px solid yellow;
+  padding-bottom: 5px;
+}
+
+.footer-column li a {
+  color: white;
+  text-decoration: none;
+
+}
+
+/* ==== RESPONSIVE MEDIA QUERIES ==== */
+@media (max-width: 768px) {
+  body {
+    padding: 140px 10px 10px; /* more spacing for navbar */
+  }
+
+  .tab-button button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+  
+
+@media (max-width: 480px) {
+  .tab-button button {
+    flex: 1 1 100%;
+    font-size: 13px;
+  }
+
+  form.form {
+    padding: 15px;
+  }
+
+  .footer {
+    text-align: center;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  	<!--FULL PAGE PROTECTION SCRIPT -->
+
+<script>
+	//Right-Click
+	document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+
+<!--F12-->
+<script>
+	document.onkeydown = function(e) {
+
+	//F12
+	if (e.keyCode == 123) {
+		return false;
+	}
+
+
+//Ctrl+Shift+I or Ctrl+Shift+J or Ctrl+Shift+C
+
+	if (e.ctrlKey && e.shiftKey && (
+		e.keyCode === 73 ||
+		e.keyCode === 74 ||
+		e.keyCode === 67
+	)) {
+		return false;
+	}
+
+//Ctrl+U View Source-->
+
+	if (e.ctrlKey && e.keyCode === 85) {
+		return false;
+	}
+
+	//Ctrl+C Copy
+	if (e.ctrlKey && e.keyCode === 67) {
+		return false;
+	}
+};
+</script>
+
+<script>
+function toggleMenu() {
+    document.querySelector(".nav-links").classList.toggle("active");
+}
+</script>
+
+<nav>
+    <img src="images/RURALNET.png">
+
+    <!-- Hamburger menu -->
+    <div class="menu-btn" onclick="toggleMenu()">&#9776;</div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">home</a></li>
+        <li><a href="">About us</a></li>
+        <li><a href="">Student Portal</a></li>
+        <li><a href="https://www.netacad.com/" target="_blank">Cisco</a></li>
+        <li><a href="https://easytvet.com/" target="_blank">TVET Website</a></li>
+        <li><a href="https://www.kasneb.or.ke/" target="_blank">KASNEB Website</a></li>
+    </ul>
+</nav>
+
+  <h1><strong>EXAMS PORTAL</strong></h1>
+  <div class="info">
+  <h1>Kinldy Print the exams from here.</h1>
+  <h1>Exams Help in monitoring students' progress in class.</h1>
+  <h2>Basic/Computer Essentials</h2>
+  </div>
+
+  <form class="form">
+    <div class="tabs-container">
+      <div class="tab-button">
+        <button type="button" class="tab-btn active" data-tab="tab1">ICT Basics</button>
+        <button type="button" class="tab-btn" data-tab="tab2">Graphic Designing</button>
+        <button type="button" class="tab-btn" data-tab="tab3">Programming</button>
+        <button type="button" class="tab-btn" data-tab="tab4">Networking</button>
+      </div>
+
+      <div class="tab-content active" id="tab1">
+        <h3>Basic ICT Course Assessments</h3>
+        <ul>
+          <li><a href="COMPERENSIVE LEARNERS COMPTETENCY GUIDE FOR ICT BEGINNERS.pdf" download="">Full Notes</a></li>
+            <li><a href="" onclick="window.open('Intro.pdf')">Introduction Exams</a></li>
+            <li><a href="" onclick="window.open('Word.pdf')">Word Exam</a></li>
+            <li><a href="" onclick="window.open('Excel.pdf')">Excell Assessment</a></li>
+            <li><a href="" onclick="window.open('ACCESS.pdf')">Access Assessment</a></li>
+            <li><a href="" onclick="window.open('publisher.pdf')">Publisher Assessment</a></li>
+            <li><a href="" onclick="window.open('POWERPOINT AND INTERNET.pdf')">PowerPoint Assessment</a></li>
+            <li><a href="" onclick="window.open('POWERPOINT AND INTERNET.pdf')">Internet Assessments</a></li>
+            <li><a href="" download="">Practical Works</a></li>
+            <li><a href="">....</a></li>
+            <li><a href="">....</a></li>
+        </ul>
+
+      </div>
+
+      <div class="tab-content" id="tab2">
+        <h3>Updated notes with practical procedures for graphic designers</h3>
+        <ul>
+            <li><a href="" onclick="window.open('PHOTOSHOP.pdf')">Adobe Photoshop</a></li>
+            <!--<li><a href="" download="">Adobe Illustrator</a></li>
+            <li><a href="" download="">Corel Draw</a></li>
+            <li><a href="" download="">Desktop Publishing</a></li>
+            <li><a href="" download="">PowerPoint</a></li>-->
+        </ul>
+      </div>
+
+      <!--<div class="tab-content" id="tab3">
+        <h3>Modern Notes with the best IDES to varius programming languages and code generation tools</h3>
+        <ul>
+            <li><a href="" download="">Web Development (Complete Notes)</a></li>
+            <li><a href="" download="">HTML</a></li>
+            <li><a href="" download="">CSS</a></li>
+            <li><a href="" download="">Javascript</a></li>
+            <li><a href="" download="Python Programming.pdf">Python</a></li>
+            <li><a href="" download="">C</a></li>
+            <li><a href="" download="">C++</a></li>
+        </ul>
+      </div>
+      
+      <div class="tab-content" id="tab4">
+        <h3>Notes on Everything you need to know about networking</h3>
+        <ul>
+            <li><a href="" download="">Networking</a></li>
+            <li><a href="" download="">Networking Software</a></li>
+            <li><a href="" download="">Cisco packet tracer</a></li>
+            <li><a href="" download="">Networking tools</a></li>
+            <li><a href="" download="">OSI model</a></li>
+            <li><a href="" download="">Configuration</a></li>
+            <li><a href="" download="">Routers and wireless technology</a></li>
+        </ul>
+      </div>
+      
+    </div>
+  </form>
+
+  <div class="info">
+  <h1>======================</h1>
+  <h2>Tutorials</h2>
+  </div>
+
+  <form class="form">
+    <div class="tabs-container">
+      <div class="tab-button">
+        <button type="button" class="tab-btn active" data-tab="tab5">IT skills</button>
+        <button type="button" class="tab-btn" data-tab="tab6">Coding</button>
+        <button type="button" class="tab-btn" data-tab="tab3">Others</button>
+      </div>
+
+      <div class="tab-content active" id="tab5">
+        <h3>Tutorials</h3>
+                <ul>
+            <li><a href="" download="">Lesson one</a></li>
+            <li><a href="" download="">Word</a></li>
+            <li><a href="" download="">Excell</a></li>
+            <li><a href="" download="">Access</a></li>
+            <li><a href="" download="">Publisher</a></li>
+            <li><a href="" download="">Powerpoint</a></li>
+            <li><a href="" download="">Internet and networking</a></li>
+        </ul>
+        <p>You may Just watch them here 😇</p>
+      </div>-->
+
+      <div class="tab-content" id="tab6">
+        <h3>Programming tutorials</h3>
+            <li><a href="" download="">Intro to programming</a></li>
+            <li><a href="" download="">HTML</a></li>
+            <li><a href="" download="">CSS</a></li>
+            <li><a href="" download="">Javascript</a></li>
+            <li><a href="" download="">Python</a></li>
+            <li><a href="" download="">C</a></li>
+            <li><a href="" download="">C++</a></li>
+        </ul>
+      </div>
+
+      <!--<div class="tab-content" id="tab3">
+        <h3>Contact</h3>
+        <p>Email us at <strong>ruralnet2016@gmail.com</strong></p>
+      </div>-->
+    </div>
+  </form>
+  
+
+  <script>
+    const tabButtons = document.querySelectorAll(".tab-btn");
+    const tabContents = document.querySelectorAll(".tab-content");
+
+    tabButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        tabButtons.forEach(btn => btn.classList.remove("active"));
+        tabContents.forEach(tab => tab.classList.remove("active"));
+        
+        button.classList.add("active");
+        document.getElementById(button.dataset.tab).classList.add("active");
+      });
+    });
+  </script>
+
+  <footer class="footer">
+    <div class="footer-column">
+      <h3>Useful Links</h3>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="About_Us.html">Who we Are</a></li>
+      <li><a href="">Student Portal</a></li>
+      <li><a href="">Accounting</a></li>
+      <li><a href="">ICT</a></li>
+    </div>
+
+    <div class="footer-column">
+      <h3>Partners</h3>
+      <li><a href="">CSK</a></li>
+      <li><a href="">KASNEB</a></li>
+      <li><a href="">TVETA</a></li>
+    </div>
+
+    <div class="footer-column">
+      <h3>Contact Us</h3>
+      <p>+254723845040</p>
+      <p>+254700886058</p>
+      <p>+254793714564</p>
+      <p>ruralnet2016@gmail.com</p>
+      <p>ruralnet.co.ke</p>
+    </div>
+  </footer>
+</body>
+</html>
+
+    
+</body>
+</html>
