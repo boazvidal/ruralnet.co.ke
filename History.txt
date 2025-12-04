@@ -1,0 +1,15 @@
+History and Evolution
+In 2010, Micha Schraven and Lawrence Odongo worked together on a large ICT project in the Sega region. They were both driven by a shared interest in ICT and rural development. In December 2016, they founded the RuralNet Internet Services Provider and IT Academy with the use of the MacBook pro’s that were donated by Service Now. Over time, RuralNet has evolved and is designed to be a social enterprise that is both an Internet Services Provider (ISP) and an associated ICT Academy to interest groups in Kenya’s country side and beyond. RICT Academy advances the communities it operates in through the facilitation of sustainable, quality ICT services and network facility. This is an area that is typically deprived of basic IT resources (Typically IT Students have no computers, internet and electricity). The Academy also has a goal of provision of suitable and stable solar energy as an option for the surrounding business premises, in case there is power outages. This system also preserves the environment since it offers clean and safe energy.
+
+At inception, the Program was developed for the purpose of providing basic computer training to the rural area residents and primary schools. The training was provided per 2-hour session. Upon completion of the program, the students received a Certificate. The sessions were made up of 10 core areas of Microsoft Office® training. The core areas were: 
+1.	Word Processing
+2.	Access Database
+3.	Publisher
+4.	Internet
+5.	Excel spreadsheets
+6.	Presentations
+7.	Graphics design
+8.	Networking
+9.	Accounting
+10.	Data analysis 
+11.	Programming
