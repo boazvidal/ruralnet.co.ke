@@ -369,6 +369,11 @@
       <h2>All Students</h2>
       <div class="muted">Students records DataBase</div>
 
+      <div class="search-sort-bar">
+        <p>search using name, phone number, reg no or course</p>
+        <input type="text" id="searchInput" placeholder="search for a record...">
+      </div>
+
       <div class="table-wrap">
         <table id="recordsTable" aria-live="polite">
           <thead>
@@ -407,7 +412,7 @@
       <div><label>Constituency</label><input id="e_Constituency"></div>
       <div><label>County</label><input id="e_County"></div>
       <div><label>ModeOfStudy</label><select id="e_ModeOfStudy"><option>Full Time</option><option>Part Time</option><option>Distance Learning</option></select></div>
-      <div><label>TypeOfStudy</label><select id="e_TypeOfStudy"><option>Certificate</option><option>Diploma</option><option>Degree</option></select></div>
+      <div><label>TypeOfStudy</label><select id="e_TypeOfStudy"><option>Physical full time</option><option>distant</option><option>part time</option></select></div>
       <div><label>CourseDuration</label><input id="e_CourseDuration"></div>
       <div><label>CompletionDate</label><input id="e_CompletionDate" type="date"></div>
     </div>
@@ -418,6 +423,21 @@
     </div>
   </div>
 </div>
+
+<script>
+  // ---------------- SEARCH FUNCTION //
+  const searchInput = documrnt.getElementById("searchInput");
+
+  searchInput.addEventListener("keyup", () => {
+    const filter = searchInput.value.toLowerCase();
+    const rows = recordsBody.getElementsByTagName("tr");
+
+    for (let i = 0; i< rows.length; i++) {
+      const rowText = rows[i].innerText.toOwerCase();
+      rows[i].style.display = rowText.includes(filter) ? "" : "none";
+    }
+  })
+</script>
 
 <!-- FIREBASE + APP LOGIC -->
 <script type="module">
