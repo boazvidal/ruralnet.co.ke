@@ -41,7 +41,7 @@
 
   /* ---------- Sidebar ---------- */
   .sidebar {
-    background: var(--card);
+    background: ;
     border-radius: var(--radius);
     padding:18px;
     box-shadow: 0 6px 18px rgba(12,20,60,0.08);
@@ -241,7 +241,8 @@
       <button onclick="document.getElementById('listCard').scrollIntoView({behavior:'smooth'})">All Students</button>
       <button onclick="printTable()">Print</button>
       <button onclick="downloadPDF()">Export PDF</button>
-      <button onclick="downloadExcel()">Export Excel</button>
+      <!--<button onclick="downloadExcel()">Export Excel</button>-->
+      <button onclick="window.open('resources.html')">Back to Resources</button>
 
       <div class="footer-text">
         <a href="Employees.html">Sign out</a>
@@ -366,7 +367,7 @@
     <!-- List Card -->
     <section id="listCard" class="card">
       <h2>All Students</h2>
-      <div class="muted">Realtime list from Firestore</div>
+      <div class="muted">Students records DataBase</div>
 
       <div class="table-wrap">
         <table id="recordsTable" aria-live="polite">
