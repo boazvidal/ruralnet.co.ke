@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>popup</title>
+
+    <style>
+        /* Dimmed background */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Popup Window */
+.popup-box {
+    background: white;
+    padding: 20px;
+    width: 80%;
+    max-width: 320px;
+    border-radius: 10px;
+    text-align: center;
+    animation: popIn 0.3s ease;
+}
+
+.popup-box button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    background: orange;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Animation */
+@keyframes popIn {
+    from {transform: scale(0.8); opacity: 0;}
+    to {transform: scale(1); opacity: 1;}
+}
+
+    </style>
+</head>
+<body>    
+    <button class="openPopupBtn">Open Menu</button>
+
+<!-- USSD POPUP WINDOW -->
+<div id="ussdPopup" class="popup-overlay">
+  <div class="popup-box">
+    <h3>USSD Menu</h3>
+    <button>1. Balance</button>
+    <button>2. Buy Bundles</button>
+    <button>3. Send Money</button>
+    <button id="closePopup">Cancel</button>
+  </div>
+</div>
+
+<script>
+document.querySelector(".openPopupBtn").onclick = function() {
+    document.getElementById("ussdPopup").style.display = "flex";
+}
+
+document.getElementById("closePopup").onclick = function() {
+    document.getElementById("ussdPopup").style.display = "none";
+}
+
+// Also close if background is clicked
+document.getElementById("ussdPopup").onclick = function(e) {
+    if (e.target === this) this.style.display = "none";
+}
+</script>
+
+
+</body>
+</html>
