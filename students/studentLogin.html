@@ -42,6 +42,27 @@
             1px 1px 0 white;
     }
 
+    .container a {
+        color: white;
+        background-color: none;
+        border-radius: 15px;
+        border-bottom: 3px solid white;
+        border-top: 1px solid blue;
+        margin-top: 0.5rem;
+        padding: 1rem;
+        margin: 1rem;
+        margin-right: 1rem;
+        text-decoration: none;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .container a:hover {
+        color: red;
+        background-color: white;
+        cursor: url("../images/hover.svg") 16 16, pointer;
+    }
+
     input {
         width: 90%;
         padding: 10px;
@@ -55,12 +76,14 @@
         margin-top: 15px;
         width: 95%;
         padding: 10px;
-        background: #007bff;
+        background: darkblue;
         color: white;
         border: none;
         font-size: 16px;
-        border-radius: 6px;
+        border-radius: 15px;
         cursor: pointer;
+        margin-bottom: 2rem;
+        border: 2px solid white;
     }
 
     button:hover {
@@ -133,6 +156,7 @@
     <p>eg; BRIAN-RICT/001/001</p>
     <input type="text" id="levelInput" autocomplete="off" placeholder="BRIAN-RICT/00001/0003">
     <button onclick="checkLevel()">Proceed</button>
+    <a href="../index.html">Back to Home</a><a href="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdmtwKqowkNksJLVEs49aRU8dN7MXlfzWrkmG1WAsg-6sJAIg/alreadyresponded?usp=send_form">Register </a>
 
     <div class="error" id="error"></div>
 </div>
@@ -194,6 +218,8 @@ function checkLevel() {
     }
     else {
         error.textContent = "❌ Invalid Admission Number! Try again.";
+        error.style.color = "white";
+        error.style.backgroundColor = "red"
     }
 }
 </script>
