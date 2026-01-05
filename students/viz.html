@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMMACULATE</title>
+<link rel="icon" href="../images/favicon.png">
+
+<style>
+/* ------------------ RESET ------------------ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* ------------------ LAYOUT ------------------ */
+body {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 240px;
+  background: url(images/oceanBlue.png) no-repeat center/cover;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.content {
+  flex: 1;
+  background: url(../images/white1.jpg) no-repeat center/cover;
+  padding: 20px;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* ------------------ SIDEBAR ------------------ */
+.nav {
+  list-style: none;
+  padding: 20px 0;
+}
+
+.nav li {
+  padding: 15px 25px;
+  cursor: pointer;
+}
+
+.nav li:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.nav li.active {
+  background: #f9b233;
+  color: #000;
+  font-weight: bold;
+}
+
+.bottom {
+  padding: 20px;
+  border-top: 5px solid #fff;
+}
+
+.bottom a {
+  display: inline-block;
+  background: red;
+  color: #fff;
+  padding: 10px 50px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.bottom a:hover {
+  background: #fff;
+  color: red;
+}
+
+/* ------------------ SECTIONS ------------------ */
+.section {
+  display: none;
+  padding: 15px;
+  border-radius: 8px;
+  background: linear-gradient(270deg, red, lightblue, orange, yellow, white);
+  background-size: 800% 800%;
+  animation: bgMove 15s ease infinite;
+  border-bottom: 10px solid blue;
+}
+
+.section.active {
+  display: block;
+}
+
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.section h1, .section h2 {
+  color: blue;
+  margin-bottom: 15px;
+  border-bottom: 4px solid #000;
+  padding-bottom: 8px;
+}
+
+/* ------------------ INFO GRID ------------------ */
+.info-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  row-gap: 10px;
+}
+
+.info-grid div {
+  padding: 4px 0;
+}
+
+.label {
+  font-weight: bold;
+}
+
+/* ------------------ FOOTER ------------------ */
+footer {
+  margin-top: 40px;
+  background: url(images/Dblue.jpg) no-repeat center/cover;
+  color: #cbda07;
+  text-align: center;
+  padding: 10px;
+  border-radius: 3rem;
+  border-bottom: 7px solid orangered;
+}
+
+/* ------------------ MOBILE ------------------ */
+.toggle-btn {
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 22px;
+  padding: 10px;
+  background: #3100b8;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    position: fixed;
+    left: -250px;
+    height: 100%;
+    z-index: 1000;
+    transition: left 0.3s;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .toggle-btn {
+    display: block;
+  }
+
+  .content {
+    padding-top: 60px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ------------------ SIDEBAR ------------------ -->
+<div class="sidebar" id="sidebar">
+  <img src="images/immah.png" alt="Student Photo">
+
+  <ul class="nav">
+    <li class="active" onclick="showSection('personal', this)">PERSONAL DETAILS</li>
+    <li onclick="showSection('academic', this)">ACADEMIC INFO</li>
+    <li onclick="showSection('course', this)">COURSE DETAILS</li>
+    <li onclick="showSection('progress', this)">LEARNING PROGRESS</li>
+    <li onclick="showSection('results', this)">CERTIFICATIONS</li>
+  </ul>
+
+  <div class="bottom">
+    <p onclick="showSection('contact', null)" style="cursor:pointer;">📞 Contact Us</p>
+    <a href="studentLogin.html">SIGN OUT</a>
+  </div>
+</div>
+
+<!-- ------------------ CONTENT ------------------ -->
+<div class="content">
+<button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+
+<!-- PERSONAL -->
+<div id="personal" class="section active">
+  <h1>Background Information</h1>
+  <div class="info-grid">
+    <div class="label">Name</div><div>Immaculate Faith Atieno</div>
+    <div class="label">Gender</div><div>Female</div>
+    <div class="label">Date of Birth</div><div>09 / 07 / 2006</div>
+    <div class="label">Nationality</div><div>Kenyan</div>
+    <div class="label">County</div><div>Siaya</div>
+    <div class="label">Ward</div><div>Ugunja</div>
+    <div class="label">Village</div><div>Uyemba</div>
+    <div class="label">Student Contact</div><div>0768 420 407</div>
+    <div class="label">Email</div><div>faithimmaculate304@gmail.com</div>
+  </div>
+</div>
+
+<!-- ACADEMIC -->
+<div id="academic" class="section">
+  <h1>Academic Information</h1>
+  <div class="info-grid">
+    <div class="label">KCPE School</div><div>Nyabondo Girls</div>
+    <div class="label">KCPE Year</div><div>2021</div>
+    <div class="label">KCSE School</div><div>Butere Girls</div>
+    <div class="label">KCSE Year</div><div>2024</div>
+  </div>
+</div>
+
+<!-- COURSE -->
+<div id="course" class="section">
+  <h1>Course Details</h1>
+  <div class="info-grid">
+    <div class="label">Admission No</div><div>RICT/25/12/BAPK018</div>
+    <div class="label">Course</div><div>ICT Essentials / Computer Basics II</div>
+    <div class="label">Duration</div><div>Two Months</div>
+    <div class="label">Study Mode</div><div>Full Time (Physical)</div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div id="progress" class="section">
+  <h1>Learning Progress</h1>
+  <div class="info-grid">
+    <div class="label">Overall Grade</div><div>Distinction</div>
+    <div class="label">Conduct</div><div>Splendid</div>
+    <div class="label">Fee Status</div><div>Cleared</div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="results" class="section">
+  <h1>Completion Status</h1>
+  <p><strong>Congratulations!</strong> You have completed your course successfully.</p>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="section">
+  <h1>Contact Information</h1>
+  <p>Email: ruralnet2016@gmail.com</p>
+  <p>Phone: 0723 845 040</p>
+</div>
+
+<footer>
+  <p><strong>IMMACULATE FAITH</strong></p>
+  <p>ICT ESSENTIALS 102</p>
+</footer>
+</div>
+
+<!-- ------------------ JS ------------------ -->
+<script>
+function showSection(id, el) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+
+  document.querySelectorAll('.nav li').forEach(li => li.classList.remove('active'));
+  if (el) el.classList.add('active');
+
+  sidebar.classList.remove('open');
+}
+
+function toggleSidebar() {
+  sidebar.classList.toggle('open');
+}
+
+const sidebar = document.getElementById('sidebar');
+</script>
+
+</body>
+</html>
