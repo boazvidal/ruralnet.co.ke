@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+
+    <link rel="icon" type="image/png" href="../images/favicAboutUs.png">
+</head>
+
+<style>
+    body {
+            font-family: sans-serif;
+            background-image: url('../images/gbd.jpg'); 
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        img {
+            height: 50px;
+            width: auto;
+        }
+
+        .navbar {
+            background-color: green;
+            overflow: visible;
+            padding: 10px 20px;
+            align-items: center;
+            text-align: center;
+            text-wrap: 1;
+            size: 30px;
+        }
+
+        .navbar a {
+                color: white;
+                padding: 14px 20px;
+                text-direction: none;
+                display: inline-block;
+                font-family: 'Bernard MT Condensed';
+                font-size: 20px;
+                text-decoration: none;
+            }
+
+        .navbar a:hover {
+            background-color: none;
+            cursor: e-resize;
+            border-bottom: 5px solid lightblue;
+            border-radius: 8px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: blueviolet;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgb(0 0 0 0.2);
+        }
+
+        .dropdwon-content a {
+            color: black;
+            padding:  12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            display: block;
+        }
+
+.member-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 2rem;
+  /*background: rgba(255, 255, 255, 0.55);*/
+
+}
+
+.staff {
+  text-align: center;
+  max-width: 250px;
+  transition: transform 0.3s ease;
+}
+
+.staff img {
+  width: auto;
+  height: 15rem;
+  /*background-color: #f9f9f9;*/
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  transition: transform 0.4s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.staff:hover img {
+  transform: scale(1.05);
+}
+
+.staff h3 {
+  font-size: 1rem;
+  margin: 0.5rem 0 0.2rem;
+  color: #085820;
+  background-color: #f9f9f9;
+  /*background: rgba(255, 255, 255, 0.15);*/
+  border-radius: 15px;
+  padding: 0.5rem;
+}
+
+.staff p {
+  font-size: 0.9rem;
+  color: #095a24;
+  background-color: #f9f9f9;
+  border-radius: 15px;
+  padding: 0.5rem;
+  font-family: bolonse;
+}
+
+    /* ✅ Aqua background for the form */
+    form.form {
+      background-color: aqua;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 300rem;
+      margin: auto;
+      box-shadow: 0 4px 15px rgba(7, 7, 7, 0.2);
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .tabs-container {
+      width: 100%;
+      background: rgb(255, 255, 255);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .tab-button {
+      display: flex;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .tab-button button {
+      flex: 1;
+      padding: 15px;
+      color: rgb(206, 255, 205);
+      background: rgb(6, 68, 17);
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    .tab-button button.active {
+      background: #ffffff;
+      color: rgb(12, 85, 2);
+    }
+
+    .tab-content {
+      padding: 20px;
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      background-color: black;
+      color: white;
+      padding: 40px 60px;
+      flex-wrap: wrap;
+      text-decoration: none;
+      width: 100%;
+    }
+
+    .footer a, .footer p, .footer li {
+      color: white;
+      text-decoration: none;
+      margin-bottom: 3px;
+      padding-left: 7px;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 200px;
+      margin: 0 20px;
+      border-bottom: 5px solid white;
+      border-radius: 10px;
+      background-color: #1d1c1c;
+
+
+    }
+
+    .footer h3 {
+      font-size: 16px;
+      margin-top: 15px;
+      text-transform: uppercase;
+      border-bottom: 2px solid yellow;
+      padding-bottom: 5px;
+    
+    }
+</style>
+<body>
+
+  	<!--FULL PAGE PROTECTION SCRIPT -->
+
+<script>
+	//Right-Click
+	document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+
+<!--F12-->
+<script>
+	document.onkeydown = function(e) {
+
+	//F12
+	if (e.keyCode == 123) {
+		return false;
+	}
+
+
+//Ctrl+Shift+I or Ctrl+Shift+J or Ctrl+Shift+C
+
+	if (e.ctrlKey && e.shiftKey && (
+		e.keyCode === 73 ||
+		e.keyCode === 74 ||
+		e.keyCode === 67
+	)) {
+		return false;
+	}
+
+//Ctrl+U View Source-->
+
+	if (e.ctrlKey && e.keyCode === 85) {
+		return false;
+	}
+
+	//Ctrl+C Copy
+	if (e.ctrlKey && e.keyCode === 67) {
+		return false;
+	}
+};
+</script>
+
+
+    <nav> 
+  <div class="navbar">
+        <img src="../images/RURALNET.png">
+        <a href="index.html">home</a>
+        <a href="https://forms.gle/wywREJiHrpFTF5veA">Apply Now</a>
+        <a href="About_Us.html">About us</a>
+        <a href="announcements.html">Announcements</a>
+        <a href="https://easytvet.com/">TVET</a>
+        <a href="https://www.kasneb.or.ke/">KASNEB</a>
+        <a href="https://www.netacad.com/">CISCO</a>
+    </div>
+    </nav>
+
+    <div class="member-container">
+        <div class="staff">
+            <img src="../images/micha.png" alt="">
+            <h3>Mr. Micha Schraven</h3>
+            <p>Director General</p>
+        </div>
+
+        <div class="staff">
+            <img src="../images/agoko.png" alt="">
+            <h3>Mr. George Agoko</h3>
+            <p>Board of Directors Chair</p>
+        </div>
+
+        <div class="staff">
+            <img src="../images/olivia.png" alt="">
+            <h3>Madam Olivia Alang'o</h3>
+            <p>Manager/CEO</p>
+        </div>
+
+        <div class="staff">
+            <img src="../images/charity.png" alt="">
+            <h3>Miss. Charity Anyango</h3>
+            <p>Administrator/H.R</p>
+        </div>
+
+        <div class="staff">
+            <img src="../images/boaz.png" alt="">
+            <h3>Mr. Boaz Ochieng</h3>
+            <p>ICT Officer</p>
+        </div>
+    </div>
+
+    <form class="form">
+    <div class="tabs-container">
+      <div class="tab-button">
+        <button type="button" class="tab-btn active" data-tab="tab1"><strong>INTRODUCTION</strong></button>
+        <button type="button" class="tab-btn" data-tab="tab2"><strong>MISSION</strong></button>
+        <button type="button" class="tab-btn" data-tab="tab3"><strong>VISION</strong></button>
+        <button type="button" class="tab-btn" data-tab="tab4"><strong>OBJECTIVES</strong></button>
+        <button type="button" class="tab-btn" data-tab="tab5"><strong>BRIEF HISTORY</strong></button>
+      </div>
+
+      <!-- FIXED CONTENT AREAS -->
+      <div class="tab-content active" id="tab1"></div>
+      <div class="tab-content" id="tab2"></div>
+      <div class="tab-content" id="tab3"></div>
+      <div class="tab-content" id="tab4"></div>
+      <div class="tab-content" id="tab5"></div>
+    </div>
+</form>
+
+<script>
+// Mapping tabs to the files
+const tabFiles = {
+    tab1: "../intro.txt",
+    tab2: "../mission.txt",
+    tab3: "../vision.txt",
+    tab4: "../Objectives.txt",
+    tab5: "../History.txt"
+};
+
+// Load default tab (tab1)
+loadTabContent("tab1");
+
+function loadTabContent(tabId) {
+    fetch(tabFiles[tabId])
+        .then(res => res.text())
+        .then(text => {
+            document.getElementById(tabId).innerHTML = 
+                text.replace(/\n/g, "<br>");
+        })
+        .catch(err => {
+            document.getElementById(tabId).innerHTML = 
+                "<p style='color:red;'>Failed to load content.</p>";
+        });
+}
+
+document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        const tabId = btn.dataset.tab;
+        loadTabContent(tabId);
+    });
+});
+</script>
+
+<script>
+    const tabButtons = document.querySelectorAll(".tab-btn");
+    const tabContents = document.querySelectorAll(".tab-content");
+
+    tabButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        tabButtons.forEach(btn => btn.classList.remove("active"));
+        tabContents.forEach(tab => tab.classList.remove("active"));
+        
+        button.classList.add("active");
+        document.getElementById(button.dataset.tab).classList.add("active");
+      });
+    });
+</script>
+
+  <footer class="footer">
+    <div class="footer-column">
+      <h3>Useful Links</h3>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="About_Us.html">Who we Are</a></li>
+      <li><a href="students/studentLogin.html">Student Portal</a></li>
+      <li><a href="https://online.kasneb.or.ke/">Accounting</a></li>
+      <li><a href="https://www.cisco.com/">ICT</a></li>
+    </div>
+
+    <div class="footer-column">
+      <h3>Partners</h3>
+      <li><a href="https://www.cskonline.org/">CSK</a></li>
+      <li><a href="https://www.kasneb.or.ke/">KASNEB</a></li>
+      <li><a href="https://www.tveta.go.ke/">TVETA</a></li>
+    </div>
+
+    <div class="footer-column">
+      <h3>Contact Us</h3>
+      <p>+254723845040</p>
+      <p>+254700886058</p>
+      <p>+254793714564</p>
+      <p>ruralnet2016@gmail.com</p>
+      <p>ruralnet.co.ke</p>
+    </div>
+  </footer>
+</body>
+</html>
