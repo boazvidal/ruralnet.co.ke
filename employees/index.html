@@ -253,8 +253,7 @@
         const correctCodes = [
             "OLIVIA-2016",
             "CHARITY-2016",
-            "BOAZ-2016",
-            "KELLY-2016"
+            "BOAZ-2016"
         ];
 
         function verifyCode() {
@@ -263,7 +262,7 @@
 
         //Checking if the entered code is within the list...
         if (correctCodes.includes(entered)) {
-            window.location.href = "resources.html";
+            window.location.href = "../resources.html";
         } else {
             document.getElementById("error").textContent = "X Are sure you are our staff?. Maybe No, Try Again";
             error.style.color="red";

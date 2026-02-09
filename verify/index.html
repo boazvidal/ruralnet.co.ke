@@ -251,8 +251,7 @@
             "RICTACADEMY/2025-2026/LV1&2/007569",
             "OLIVIA-2016",
             "CHARITY-2016",
-            "BOAZ-2016",
-            "KELLY-2016"
+            "BOAZ-2016"
         ];
 
         function verifyCode() {
@@ -261,7 +260,7 @@
 
         //Checking if the entered code is within the list...
         if (correctCodes.includes(entered)) {
-            window.location.href = "loaders/loaddownload.html";
+            window.location.href = "../loaders/loaddownload.html";
         } else {
             document.getElementById("error").textContent = "X Incorrect Admission number. Try Again"
         }
