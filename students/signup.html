@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Signup</title>
+
+<style>
+body{font-family:Arial;background:#eef;}
+.box{background:white;width:400px;margin:40px auto;padding:20px;border-radius:10px;}
+input,button{width:100%;padding:10px;margin:10px 0;}
+button{background:#28a745;color:white;border:none;cursor:pointer;}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h3>Student Signup</h3>
+
+<p id="admDisplay"></p>
+
+<input id="phone" placeholder="Phone +254...">
+<input id="password" type="password" placeholder="Password">
+
+<!-- reCAPTCHA -->
+<div id="recaptcha-container"></div>
+
+<button onclick="sendOTP()">Send OTP</button>
+
+<input id="otp" placeholder="Enter OTP">
+<button onclick="verifyOTP()">Verify & Create</button>
+
+<p id="msg"></p>
+</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCb269VbClV7GFGMeQPcExLf51F2vkeRdU",
+  authDomain: "student-dashboard-a4d8a.firebaseapp.com",
+  projectId: "student-dashboard-a4d8a",
+  storageBucket: "student-dashboard-a4d8a.firebasestorage.app",
+  messagingSenderId: "445918817492",
+  appId: "1:445918817492:web:b5bad1559f5e18880d5f41"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+let confirmation;
+
+// SHOW admission
+let adm = localStorage.getItem("admission");
+document.getElementById("admDisplay").innerText = "Admission: " + adm;
+
+
+// ✅ Setup reCAPTCHA ONCE
+window.onload = function(){
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+        'recaptcha-container',
+        { size: 'normal' }
+    );
+};
+
+
+// SEND OTP
+function sendOTP(){
+
+let phone = document.getElementById("phone").value;
+
+if(phone == ""){
+    alert("Enter phone number");
+    return;
+}
+
+auth.signInWithPhoneNumber(phone, window.recaptchaVerifier)
+.then(result=>{
+    confirmation = result;
+    document.getElementById("msg").innerText = "OTP sent successfully";
+})
+.catch(error=>{
+    document.getElementById("msg").innerText = error.message;
+});
+
+}
+
+
+// VERIFY OTP
+function verifyOTP(){
+
+let code = document.getElementById("otp").value;
+
+if(!confirmation){
+    alert("Click Send OTP first");
+    return;
+}
+
+confirmation.confirm(code)
+.then(()=>{
+    createAccount();
+})
+.catch(()=>{
+    document.getElementById("msg").innerText = "Wrong OTP";
+});
+
+}
+
+
+// CREATE ACCOUNT
+function createAccount(){
+
+let password = document.getElementById("password").value;
+
+if(password.length < 6){
+    alert("Password must be at least 6 characters");
+    return;
+}
+
+let email = adm + "@ruralnet.com";
+
+auth.createUserWithEmailAndPassword(email, password)
+.then(user=>{
+
+    db.collection("students").doc(adm).set({
+        admission: adm,
+        phone: document.getElementById("phone").value
+    });
+
+    alert("Account created successfully");
+
+    window.location = "login.html";
+
+})
+.catch(error=>{
+    document.getElementById("msg").innerText = error.message;
+});
+
+}
+</script>
+
+</body>
+</html>

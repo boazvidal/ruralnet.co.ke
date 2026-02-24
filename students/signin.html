@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+
+<style>
+body{font-family:Arial;background:#f0f0f0;}
+.box{width:350px;margin:100px auto;background:white;padding:20px;}
+input,button{width:100%;padding:10px;margin:10px 0;}
+button{background:#007bff;color:white;border:none;}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h3>Student Login</h3>
+
+<input id="adm" placeholder="Admission">
+<input id="pass" type="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+<a href="reset.html">Reset Password</a>
+<p id="msg"></p>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script>
+const firebaseConfig = {
+apiKey: "AIzaSyCb269VbClV7GFGMeQPcExLf51F2vkeRdU",
+authDomain: "student-dashboard-a4d8a.firebaseapp.com",
+projectId: "student-dashboard-a4d8a",
+storageBucket: "student-dashboard-a4d8a.firebasestorage.app",
+messagingSenderId: "445918817492",
+appId: "1:445918817492:web:b5bad1559f5e18880d5f41"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+function login(){
+let adm=document.getElementById("adm").value;
+let pass=document.getElementById("pass").value;
+
+let email=adm+"@ruralnet.com";
+
+auth.signInWithEmailAndPassword(email,pass)
+.then(()=>{
+ window.location="student-dashboard.html";
+})
+.catch(err=>{
+ document.getElementById("msg").innerText=err.message;
+});
+}
+</script>
+
+</body>
+</html>
