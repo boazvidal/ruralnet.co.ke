@@ -1,36 +1,181 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Signup</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student signup</title>
 <style>
-body{font-family:Arial;background:#eef;}
-.box{background:white;width:400px;margin:40px auto;padding:20px;border-radius:10px;}
-input,button{width:100%;padding:10px;margin:10px 0;}
-button{background:#28a745;color:white;border:none;cursor:pointer;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: linear-gradient(135deg,#141e30,#243b55);
+}
+
+.box{
+  width:400px;
+  padding:35px;
+  border-radius:20px;
+  backdrop-filter: blur(20px);
+  background: rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.2);
+  box-shadow:0 15px 35px rgba(0,0,0,0.3);
+  color:white;
+  animation:fadeIn 0.6s ease;
+}
+
+h3{
+  text-align:center;
+  margin-bottom:25px;
+  font-weight:600;
+  letter-spacing:1px;
+}
+
+label{
+  font-size:13px;
+  opacity:0.8;
+}
+
+.input-group{
+  position:relative;
+  margin-bottom:18px;
+}
+
+.input-group i{
+  position:absolute;
+  top:50%;
+  left:12px;
+  transform:translateY(-50%);
+  font-size:14px;
+  opacity:0.6;
+}
+
+input{
+  width:100%;
+  padding:12px 12px 12px 38px;
+  border-radius:10px;
+  border:none;
+  background:rgba(255,255,255,0.15);
+  color:white;
+  font-size:14px;
+  outline:none;
+  transition:0.3s;
+}
+
+input::placeholder{
+  color:rgba(255,255,255,0.6);
+}
+
+input:focus{
+  background:rgba(255,255,255,0.25);
+}
+
+input[readonly]{
+  opacity:0.7;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:#00c6ff;
+  background:linear-gradient(to right,#00c6ff,#0072ff);
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+.show{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:13px;
+  margin-bottom:15px;
+}
+
+#msg{
+  text-align:center;
+  margin-top:10px;
+  font-size:13px;
+}
+
+/* Success animation */
+.success{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:white;
+  padding:40px;
+  border-radius:20px;
+  text-align:center;
+  animation:pop 0.4s ease;
+}
+
+.success i{
+  font-size:50px;
+  color:green;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes pop{
+  from{opacity:0; transform:translate(-50%,-50%) scale(0.8);}
+  to{opacity:1; transform:translate(-50%,-50%) scale(1);}
+}
 </style>
 </head>
 
 <body>
 
 <div class="box">
+
 <h3>Student Signup</h3>
 
-<p id="admDisplay"></p>
+<!-- Admission (readonly) -->
+<label>Admission Number</label>
+<input id="adm" readonly>
 
-<input id="phone" placeholder="Phone +254...">
-<input id="password" type="password" placeholder="Password">
+<!-- Phone -->
+<label>Phone Number</label>
+<input id="phone" placeholder="+2547XXXXXXXX">
 
-<!-- reCAPTCHA -->
-<div id="recaptcha-container"></div>
+<!-- Password -->
+<label>Password</label>
+<input id="password" type="password">
 
-<button onclick="sendOTP()">Send OTP</button>
+<!-- Confirm -->
+<label>Confirm Password</label>
+<input id="confirm" type="password">
 
-<input id="otp" placeholder="Enter OTP">
-<button onclick="verifyOTP()">Verify & Create</button>
-
-<p id="msg"></p>
+<div class="show">
+<input type="checkbox" onclick="showPassword()"> Show Password
 </div>
+
+<button onclick="createAccount()">Proceed</button>
+
+<p id="msg" style="color:red;"></p>
+
+</div>
+
 
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -52,93 +197,86 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-let confirmation;
 
-// SHOW admission
-let adm = localStorage.getItem("admission");
-document.getElementById("admDisplay").innerText = "Admission: " + adm;
+// 🔹 Get admission from previous page
+let admission = localStorage.getItem("admission");
 
-
-// ✅ Setup reCAPTCHA ONCE
-window.onload = function(){
-    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-        'recaptcha-container',
-        { size: 'normal' }
-    );
-};
-
-
-// SEND OTP
-function sendOTP(){
-
-let phone = document.getElementById("phone").value;
-
-if(phone == ""){
-    alert("Enter phone number");
-    return;
+if(!admission){
+  window.location = "check.html";
 }
 
-auth.signInWithPhoneNumber(phone, window.recaptchaVerifier)
-.then(result=>{
-    confirmation = result;
-    document.getElementById("msg").innerText = "OTP sent successfully";
-})
-.catch(error=>{
-    document.getElementById("msg").innerText = error.message;
-});
+console.log("Admission from storage:", admission);
 
+document.getElementById("adm").value = admission;
+
+// 🔹 Show password
+function showPassword(){
+  let p = document.getElementById("password");
+  let c = document.getElementById("confirm");
+
+  if(p.type === "password"){
+    p.type = "text";
+    c.type = "text";
+  }else{
+    p.type = "password";
+    c.type = "password";
+  }
 }
 
 
-// VERIFY OTP
-function verifyOTP(){
-
-let code = document.getElementById("otp").value;
-
-if(!confirmation){
-    alert("Click Send OTP first");
-    return;
-}
-
-confirmation.confirm(code)
-.then(()=>{
-    createAccount();
-})
-.catch(()=>{
-    document.getElementById("msg").innerText = "Wrong OTP";
-});
-
-}
-
-
-// CREATE ACCOUNT
+// 🔹 Create account
 function createAccount(){
 
-let password = document.getElementById("password").value;
+  let phone = document.getElementById("phone").value;
+  let password = document.getElementById("password").value;
+  let confirm = document.getElementById("confirm").value;
 
-if(password.length < 6){
-    alert("Password must be at least 6 characters");
+  // validation
+  if(!phone || !password || !confirm){
+    document.getElementById("msg").innerText = "Fill all fields";
     return;
-}
+  }
 
-let email = adm + "@ruralnet.com";
+  if(password !== confirm){
+    document.getElementById("msg").innerText = "Passwords do not match";
+    return;
+  }
 
-auth.createUserWithEmailAndPassword(email, password)
-.then(user=>{
+  let email = admission + "@ruralnet.com";
 
-    db.collection("students").doc(adm).set({
-        admission: adm,
-        phone: document.getElementById("phone").value
+
+  // prevent duplicate signup
+  db.collection("students").doc(admission).get()
+  .then(doc => {
+
+    if(doc.exists){
+      document.getElementById("msg").innerText =
+      "Account already exists. Please login.";
+      return;
+    }
+
+    // create auth
+    auth.createUserWithEmailAndPassword(email, password)
+    .then(()=>{
+
+      // save student
+      db.collection("students").doc(admission).set({
+        admission: admission,
+        phone: phone,
+        created: new Date()
+      });
+
+      // login state
+      localStorage.setItem("student", admission);
+
+      // go dashboard
+      window.location = "dashboard.html";
+    })
+    .catch(error=>{
+      document.getElementById("msg").innerText = error.message;
     });
 
-    alert("Account created successfully");
-
-    window.location = "login.html";
-
-})
-.catch(error=>{
-    document.getElementById("msg").innerText = error.message;
-});
+  });
 
 }
 </script>
