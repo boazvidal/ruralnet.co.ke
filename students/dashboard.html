@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Dashboard</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+  background: linear-gradient(120deg,#0f2027,#203a43,#2c5364);
+  height:100vh;
+  color:white;
+}
+
+/* Glassmorphism */
+.dashboard{
+  width:90%;
+  max-width:1100px;
+  margin:40px auto;
+  padding:30px;
+  border-radius:20px;
+  backdrop-filter: blur(15px);
+  background: rgba(255,255,255,0.08);
+  box-shadow:0 8px 32px rgba(0,0,0,0.3);
+}
+
+/* Header */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.header h2{
+  font-weight:600;
+}
+
+.logout{
+  padding:10px 20px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  background:#ff4d4d;
+  color:white;
+  transition:.3s;
+}
+
+.logout:hover{
+  background:#ff0000;
+}
+
+/* Cards */
+.cards{
+  margin-top:30px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+.card{
+  padding:25px;
+  border-radius:15px;
+  background: rgba(255,255,255,0.1);
+  transition:.3s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+}
+
+.card h3{
+  margin-bottom:10px;
+}
+
+/* Welcome */
+.welcome{
+  margin-top:20px;
+  font-size:18px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+  <div class="header">
+    <h2>Student Dashboard</h2>
+    <button class="logout" onclick="logout()">Logout</button>
+  </div>
+
+  <div class="welcome">
+    Welcome, Admission No: <strong id="studentAdm"></strong>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Profile</h3>
+      <p>View and update your personal details.</p>
+    </div>
+
+    <div class="card">
+      <h3>Results</h3>
+      <p>Check your academic results.</p>
+    </div>
+
+    <div class="card">
+      <h3>Fees</h3>
+      <p>View fee balance and payments.</p>
+    </div>
+
+    <div class="card">
+      <h3>Downloads</h3>
+      <p>Download forms and reports.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Firebase -->
+<script type="module">
+
+// 🔥 Import Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } 
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+// 🔥 USE YOUR CONFIG (the one you shared earlier)
+const firebaseConfig = {
+  apiKey: "YOUR_KEY",
+  authDomain: "YOUR_DOMAIN",
+  projectId: "YOUR_PROJECT",
+  storageBucket: "YOUR_BUCKET",
+  messagingSenderId: "YOUR_SENDER",
+  appId: "YOUR_APP"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+
+// ✅ Step 3: Protect page
+onAuthStateChanged(auth, (user) => {
+
+  if (!user) {
+    // Not logged in
+    window.location.href = "login.html";
+  } else {
+    // Logged in
+    const admission = localStorage.getItem("admission");
+    document.getElementById("studentAdm").innerText = admission;
+  }
+
+});
+
+
+// ✅ Step 4: Logout
+window.logout = function () {
+  signOut(auth).then(() => {
+    localStorage.clear();
+    window.location.href = "login.html";
+  });
+};
+
+</script>
+
+</body>
+</html>
