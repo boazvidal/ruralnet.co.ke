@@ -1,173 +1,291 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Student Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
 
+/* ===== Animated Background (YOU REQUESTED THIS TO STAY) ===== */
 body{
-  background: linear-gradient(120deg,#0f2027,#203a43,#2c5364);
-  height:100vh;
-  color:white;
-}
-
-/* Glassmorphism */
-.dashboard{
-  width:90%;
-  max-width:1100px;
-  margin:40px auto;
-  padding:30px;
-  border-radius:20px;
-  backdrop-filter: blur(15px);
-  background: rgba(255,255,255,0.08);
-  box-shadow:0 8px 32px rgba(0,0,0,0.3);
-}
-
-/* Header */
-.header{
+  margin:0;
+  font-family:Arial, sans-serif;
   display:flex;
-  justify-content:space-between;
-  align-items:center;
+  height:100vh;
+
+  background: linear-gradient(270deg, red, lightblue, orange, yellow, white, cyan, magenta, lightgreen);
+  background-size: 800% 800%;
+  animation: bgAnimation 15s ease infinite;
 }
 
-.header h2{
-  font-weight:600;
+@keyframes bgAnimation{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
 }
 
-.logout{
-  padding:10px 20px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  background:#ff4d4d;
+/* ===== SIDEBAR ===== */
+.sidebar{
+  width:270px;
+  background: linear-gradient(180deg,#0f75bc,#1e3c72);
   color:white;
-  transition:.3s;
+  display:flex;
+  flex-direction:column;
+  backdrop-filter: blur(10px);
 }
 
-.logout:hover{
-  background:#ff0000;
+.profile-box{
+  padding:20px;
+  text-align:center;
 }
 
-/* Cards */
-.cards{
-  margin-top:30px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-}
-
-.card{
-  padding:25px;
-  border-radius:15px;
-  background: rgba(255,255,255,0.1);
-  transition:.3s;
-}
-
-.card:hover{
-  transform:translateY(-5px);
-}
-
-.card h3{
+.profile-box h3{
   margin-bottom:10px;
 }
 
-/* Welcome */
-.welcome{
-  margin-top:20px;
-  font-size:18px;
+.profile-box img{
+  width:120px;
+  height:120px;
+  border-radius:8px;
+  object-fit:cover;
 }
+
+/* ===== MENU ===== */
+.menu{
+  flex:1;
+}
+
+.menu div{
+  padding:15px 20px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:0.3s;
+}
+
+.menu div:hover{
+  background:rgba(255,255,255,0.2);
+}
+
+.active{
+  background:#f0b429;
+  color:black;
+}
+
+/* ===== FOOTER ===== */
+.bottom{
+  padding:20px;
+  border-top:1px solid rgba(255,255,255,0.3);
+}
+
+.signout{
+  background:red;
+  border:none;
+  color:white;
+  padding:12px;
+  width:100%;
+  border-radius:25px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+/* ===== CONTENT ===== */
+.content{
+  flex:1;
+  padding:40px;
+  overflow-y:auto;
+  background: rgba(255,255,255,0.85);
+}
+
+/* Sections */
+.section{
+  display:none;
+}
+
+.section.active-section{
+  display:block;
+}
+
+.section h2{
+  border-bottom:3px solid blue;
+  padding-bottom:10px;
+}
+
+/* Info rows */
+.row{
+  display:flex;
+  justify-content:space-between;
+  margin:20px 0;
+  max-width:500px;
+}
+
+.footer-name{
+  margin-top:20px;
+  font-weight:bold;
+  text-align:center;
+}
+
 </style>
 </head>
-
 <body>
 
-<div class="dashboard">
+<!-- SIDEBAR -->
+<div class="sidebar">
 
-  <div class="header">
-    <h2>Student Dashboard</h2>
-    <button class="logout" onclick="logout()">Logout</button>
+  <div class="profile-box">
+    <h3 id="welcomeText">Welcome</h3>
+    <img id="studentPhoto" src="https://via.placeholder.com/120">
   </div>
 
-  <div class="welcome">
-    Welcome, Admission No: <strong id="studentAdm"></strong>
+  <div class="menu">
+    <div onclick="switchSection('fees')" class="active">LEARNING PROGRESS</div>
+    <div onclick="switchSection('scores')">ACADEMIC SCORE</div>
   </div>
 
-  <div class="cards">
-    <div class="card">
-      <h3>Profile</h3>
-      <p>View and update your personal details.</p>
+  <div class="bottom">
+    <button class="signout" onclick="logout()">SIGN OUT</button>
+    <div class="footer-name" id="footerName"></div>
+  </div>
+
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- FEE SECTION -->
+  <div id="fees" class="section active-section">
+    <h2>FEE PAYMENT</h2>
+
+    <div class="row">
+      <span>Total Fee Payable:</span>
+      <span id="feeTotal"></span>
     </div>
 
-    <div class="card">
-      <h3>Results</h3>
-      <p>Check your academic results.</p>
+    <div class="row">
+      <span>Total Paid:</span>
+      <span id="feePaid"></span>
     </div>
 
-    <div class="card">
-      <h3>Fees</h3>
-      <p>View fee balance and payments.</p>
+    <div class="row">
+      <span>Balance:</span>
+      <span id="feeBalance"></span>
+    </div>
+  </div>
+
+  <!-- SCORES SECTION -->
+  <div id="scores" class="section">
+    <h2>Academic Score Sheet</h2>
+
+    <div class="row">
+      <span>Introduction:</span>
+      <span id="introScore"></span>
     </div>
 
-    <div class="card">
-      <h3>Downloads</h3>
-      <p>Download forms and reports.</p>
+    <div class="row">
+      <span>Word:</span>
+      <span id="wordScore"></span>
     </div>
   </div>
 
 </div>
 
 <!-- Firebase -->
-<script type="module">
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-// 🔥 Import Firebase
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut } 
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+<script>
 
-// 🔥 USE YOUR CONFIG (the one you shared earlier)
 const firebaseConfig = {
-  apiKey: "YOUR_KEY",
-  authDomain: "YOUR_DOMAIN",
-  projectId: "YOUR_PROJECT",
-  storageBucket: "YOUR_BUCKET",
-  messagingSenderId: "YOUR_SENDER",
-  appId: "YOUR_APP"
+  apiKey: "AIzaSyCb269VbClV7GFGMeQPcExLf51F2vkeRdU",
+  authDomain: "student-dashboard-a4d8a.firebaseapp.com",
+  projectId: "student-dashboard-a4d8a",
+  storageBucket: "student-dashboard-a4d8a.firebasestorage.app",
+  messagingSenderId: "445918817492",
+  appId: "1:445918817492:web:b5bad1559f5e18880d5f41"
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+firebase.initializeApp(firebaseConfig);
 
+const auth = firebase.auth();
+const db = firebase.firestore();
 
-// ✅ Step 3: Protect page
-onAuthStateChanged(auth, (user) => {
+let admission = localStorage.getItem("student");
 
-  if (!user) {
-    // Not logged in
-    window.location.href = "login.html";
+/* 🔐 Secure session */
+auth.onAuthStateChanged(user=>{
+  if(!user){
+    window.location="login.html";
   } else {
-    // Logged in
-    const admission = localStorage.getItem("admission");
-    document.getElementById("studentAdm").innerText = admission;
+    loadStudentData();
   }
-
 });
 
+/* 🔄 Switch sections */
+function switchSection(id){
 
-// ✅ Step 4: Logout
-window.logout = function () {
-  signOut(auth).then(() => {
-    localStorage.clear();
-    window.location.href = "login.html";
+  document.querySelectorAll(".section")
+  .forEach(sec=>sec.classList.remove("active-section"));
+
+  document.getElementById(id)
+  .classList.add("active-section");
+
+  document.querySelectorAll(".menu div")
+  .forEach(btn=>btn.classList.remove("active"));
+
+  event.target.classList.add("active");
+}
+
+/* 🔥 Load Data From Firestore */
+function loadStudentData(){
+
+  db.collection("students").doc(admission).get()
+  .then(doc=>{
+    if(doc.exists){
+
+      let d = doc.data();
+
+      // Name
+      let firstName = d.fullname.split(" ")[0];
+      document.getElementById("welcomeText").innerText =
+        "Welcome " + firstName;
+
+      document.getElementById("footerName").innerText =
+        d.fullname;
+
+      // Photo
+      if(d.profilePic){
+        document.getElementById("studentPhoto").src = d.profilePic;
+      }
+
+      // Fees
+      let total = d.feeTotal || 0;
+      let paid = d.feePaid || 0;
+      let balance = total - paid;
+
+      document.getElementById("feeTotal").innerText = "Kshs. " + total;
+      document.getElementById("feePaid").innerText = "Kshs. " + paid;
+      document.getElementById("feeBalance").innerText = "Kshs. " + balance;
+
+      // Results
+      if(d.results){
+        document.getElementById("introScore").innerText =
+          d.results.introduction || "-";
+
+        document.getElementById("wordScore").innerText =
+          d.results.word || "-";
+      }
+
+    }
   });
-};
+
+}
+
+/* 🔓 Logout */
+function logout(){
+  localStorage.removeItem("student");
+  auth.signOut();
+  window.location="login.html";
+}
 
 </script>
 
