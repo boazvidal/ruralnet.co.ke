@@ -196,6 +196,7 @@
   z-index: 9999;
   position: fixed;
   width: 100%;
+  top: 40px;
 }
 
 .navbar {
@@ -356,6 +357,7 @@
     border: 5px solid #fff;
     border-radius: 10px;
     position: relative;
+    top: 7rem;
   }
 
   .slides {
@@ -468,6 +470,14 @@
   background: rgba(255,255,255,0.3); /* optional */
   backdrop-filter: blur(3px);        /* optional */
   size: 400px;
+  border-radius: 1rem;
+  border: 3px solid blue;
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  from {box-shadow: 0 0 5px #00ffff;}
+  to {box-shadow: 0 0 20px #00ffff;}
 }
 
 .label {
