@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Becky</title>
+<title>Nelly</title>
 <link rel="icon" type="image/png" href="../images/favicon.png">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
@@ -33,7 +33,7 @@
   }
 
   .nav li {
-    padding: 15px 25px;
+    padding: 10px 15px;
     cursor: pointer;
     transition: background 0.3s;
   }
@@ -119,6 +119,11 @@
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     border-bottom: 10px solid blue;
+  }
+
+  .section a {
+    text-decoration: none;
+    color: #000;
   }
 
   @keyframes bgAnimation {
@@ -269,13 +274,14 @@
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
 
-    <img src="images/becky.png">
+    <img src="images/nelly.png">
     <ul class="nav">
         <strong>
       <li class="active" onclick="showSection('update', event)">PERSONAL DETAILS</li>
       <li onclick="showSection('funds', event)">ACADEMIC INFO</li>
       <li onclick="showSection('postgrad', event)">COURSE DETAILS</li>
       <li onclick="showSection('loans', event)">LEARNING PROGRESS</li>
+      <li onclick="showSection('assignments', event)">ASSIGNMENTS</li>
       <li onclick="showSection('exams', event)">EXAMINATIONS</li>
       <li onclick="showSection('self', event)">CERTIFICATIONS</li>
       </strong>
@@ -283,7 +289,7 @@
     <div class="bottom">
       <h4>CONTACT</h4>
       <p onclick="showSection('contact', event)" style="cursor:pointer;">📞 Contact us</p>
-      <a href="studentLogin.html">SIGN OUT</a>
+      <a href="/students">SIGN OUT</a>
     </div>
   </div>
 
@@ -292,25 +298,26 @@
     <button class="toggle-btn" id="toggleBtn">☰ Menu</button>
 
     <div id="update" class="section active">
+
       <h2 style="background-color: white;">Join our whatsapp group below;</h2>
       <a href="https://chat.whatsapp.com/FqtZpwSb5dQ1kqsXcfnpTF?mode=gi_t" style="background-color: white;">Click here to join</a>
       
       <h1>BACKGROUND INFORMATION</h1>
       <strong>
-      <p><pre>NAME:            ACHIENG BECKY</pre></p>
+      <p><pre>NAME:            NELLY MOVINE ONYANGI</pre></p>
       <p><pre>GENDER:          FEMALE</p></pre>
-      <p><pre>DATE OF BIRTH:   01/09/2006</pre></p>
+      <p><pre>DATE OF BIRTH:   26/08/2006</pre></p>
       <p><pre>MARITAL STATUS:  SINGLE</p></pre>
       <p><pre>NATIONALITY:     KENYAN</pre></p>
       <p><pre>COUNTY:          SIAYA</p></pre>
-      <p><pre>SUB-COUNTY:      ---</p></pre>
+      <p><pre>SUB-COUNTY:      UGUNJA</p></pre>
       <p><pre>CONSTITUENCY:     UGUNJA</p></pre>
-      <p><pre>WARD:       WARD</pre></p>
-      <p><pre>LOCATION/village:          SIDINDI</p></pre>
+      <p><pre>WARD:       UGUNJA </pre></p>
+      <p><pre>LOCATION/village:         USIGINY</p></pre>
       <P><pre>BOX ADRESS:      N/A</pre></P>
-      <P><pre>STUDENT'S CONTACT:      N/A </pre></P>
-      <P><pre>GUARDIAN'S CONTACT:      +254735805907 </pre></P>
-      <p><pre>STUDENT'S EMAIL:          N/A</p></pre>
+      <P><pre>STUDENT'S CONTACT:     0722226149</pre></P>
+      <P><pre>GUARDIAN'S CONTACT:    +254711983443</pre></P>
+      <p><pre>STUDENT'S EMAIL:       N/A</p></pre>
       </strong>
     </div>
 
@@ -318,12 +325,12 @@
 
       <h1>ACADEMIC INFO</h1>
       <strong>
-        <p><pre>KCPE SCHOOL: RACECOURSE PRIMARY SCHOOL</pre></p>
+        <p><pre>KCPE SCHOOL: SIRANDUMB</pre></p>
     </strong>
-        <p>KCPE YEAR: 2021</p>
+        <p>KCPE YEAR: 2022</p>
 
     <strong>
-        <p>KCSE SCHOOL: CENTRAL SECONDARY SCHOOL </p>
+        <p>KCSE SCHOOL: RANGALA GIRLS</p>
     </strong>
         <p>KCSE YEAR: 2025</p>
 
@@ -336,15 +343,15 @@
     <div id="postgrad" class="section">
       <h1>COURSE DETAILS</h1>
       <strong>
-        <P><pre>ADMNO:            RICT/26/01/BAPK022</pre></P>
+        <P><pre>ADMNO:            RICT/26/03/BAPK064</pre></P>
       <P><pre>COURSE:       ICT Essentials/Computer basics II;</pre></P>
       <P><pre>DESCRIPTION:   Covers Intro to Computers, Microsoft Applications, Database System project and Internet Essentials</pre></P>
       <P><pre>DURATION:       Two Months</pre></P>
-      <P><pre>Enrollment Date:   12/01/2026</pre></P>
-      <P><pre>COMPLETION DATE:            05/03/2026</pre></P>
+      <P><pre>Enrollment Date:   09/03/2026</pre></P>
+      <P><pre>COMPLETION DATE:          09/05/2026</pre></P>
       <P><pre>LEARNING MODE:              FULL TIME</pre></P>
       <P><pre>TYPE OF STUDY:       PHYSICAL</pre></P>
-      <P><pre>STUDY HOURS          10AM TO 12PM; Monday to Friday</pre></P>
+      <P><pre>STUDY HOURS          10M TO 12PM; Monday to Friday</pre></P>
       </strong>
     </div>
 
@@ -356,48 +363,52 @@
       <P><pre>Conduct Remarks               ---</pre></P>
     
     <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>FEE PAYMENT</strong><pre></p>
-      <P><pre>Total Fee Payable:        Kshs. 4,500</pre></P>
+      <P><pre>Total Fee Payable:        Kshs. 6,600</pre></P>
       <P><pre>Total Paid                   Kshs. 2,000</pre></P>
-      <P><pre>Balance                      2,500</pre></P>
+      <P><pre>Balance                      4,600</pre></P>
 
       <h2><pre>Academic Score Sheet</pre></h2>
       <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>Assessment Results</strong><pre></p>
-      <P><pre>Introduction:             55</pre></P>
-      <P><pre>Word:                          80% </pre></P>
-      <P><pre>Excel:                          50&</pre></P>
-      <P><pre>Access:                         50%</pre></P>
-      <P><pre>Publisher:                         90</pre></P>
-      <P><pre>PowerPoint:                          90</pre></P>
-      <P><pre>Internet:                          90</pre></P>
-      <P><pre>Overral Grade:                         Credit (Proficient)</pre></P>
-    </div>
+      <P><pre>Introduction:             --- </pre></P>
+      <P><pre>Word:                          ---</pre></P>
+      <P><pre>Excel:                          </pre></P>
+      <P><pre>Access:                         ---</pre></P>
+      <P><pre>Publisher:                          ---</pre></P>
+      <P><pre>PowerPoint:                          ---</pre></P>
+      <P><pre>Internet:                          ---</pre></P>
+      <P><pre>Overral Grade:                          ---</pre></P>
+    </div> 
 
-    <!--<li onclick="showSection('exams', event)">EXAMINATIONS</li>-->
+    <DIV id="assignments" class="section">
+        <h3>There are no current assignmnents</h3>
+    </DIV>
+
+    <li onclick="showSection('exams', event)">EXAMINATIONS</li>
 
     <div id="exams" class="section">
       <h1>examinations</h1>
-      <h3>click the tab below to open <strong>Publisher, PowerPoint and Internet Exam</strong></h3>
+      <h3>click the tab below to open <strong>Introduction Exams</strong></h3>
         <!-- VIEW PDF BUTTON -->
-    <button onclick="window.open('../PUBLISHER_POWERPOINT_AND_INTERNET.pdf', '_blank')">
-        Open  .dtp, .pptx & Internet assessment
+    <button onclick="window.open('../KS.pdf', '_blank')">
+        Open M.s Introduction assessment
     </button>
     </div>
 
     <div id="self" class="section">
       <h1>RESULTS</h1>
-      <strong>
-      <p>You have completed your course. Congratulations</p>
-      </strong> 
-      <!--<p>Incase you are planning to be absent, or you have absented yourself from atending your class,</p>
+      
+      <p>Incase you are planning to be absent, or you have absented yourself from atending your class,</p>
       <p>Communicate through call or SMS to the nearest Instructor or Staff</p>
       <p>Absenting yourself for one week without communication calls for automatic discontinuation!</p>
-      <p>when defferment period is past due, you will have to be re-admitted</p>-->
+      <p>when defferment period is past due, you will have to be re-admitted</p>
+
+      <!--<p>You have completed your course. Congratulations</p>
       <p>Make Good use of the knowledge you have attained at Ruralnet ICT Academy. </p>
-      <p>Incase you faced any challege while learning, Please feel free to share your idea through the numbers below this page.</p>-->
+      <p>Incase you faced any challege while learning, Please feel free to share your idea through the numbers below this page.</p>
       <p>Please Note that the certificate will only be ready upon clearance of the fee.</p>
       <p> Certificate will be ready 6 to 7 days from the date of completion</p>
       <p>keep checking if you have completed a course</p>
-      <p>Regards.</p>
+      <p>Regards.</p>-->
       <strong>
         <!--<p>Your Certificate is available here</p>-->
       </strong>
@@ -407,7 +418,7 @@
         View Certificate
     </button>
 
-    <!--DOWNLOAD PDF BUTTON --
+    <!-- DOWNLOAD PDF BUTTON --
     <a href="files/myfile.pdf" download>
         <button class="download-btn">Download Certificate</button>-->
     </a>
@@ -418,11 +429,12 @@
     <div id="contact" class="section">
       <h1>Contact info</h1>
       <p>Email: ruralnet2016@gmail.com</p>
-      <p>Phone: (+254)723845040, 0700886058 </p>
+      <p>Phone: +254700886058 </p>
+      <a href="https//www.ruralnet.co.ke">Web: ruralnet.co.ke</p>
     </div>
 
     <footer>
-      <p><strong>ACHIENG BECKY</strong></p>
+      <p><strong>NELLY MOVINE ONYANGO </strong></p>
       <p><strong>ICT ESSENTIALS 102</strong>.</p>
     </footer>
   </div>
