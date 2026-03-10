@@ -360,6 +360,12 @@
     top: 7rem;
   }
 
+  .slider h1 {
+    color: blue;
+    padding-top: 5rem;
+    align-items: center;
+  }
+
   .slides {
     display: flex;
     width: 100%;
