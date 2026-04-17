@@ -378,6 +378,7 @@
         <table id="recordsTable" aria-live="polite">
           <thead>
             <tr>
+              <th>#</th>
               <th>Names</th><th>RegNo</th><th>RegDate</th><th>Course</th>
               <th>AmountPaid</th><th>TotalExpected</th><th>Balance</th>
               <th>Phone</th><th>Location</th><th>Mode</th><th>Type</th><th>Duration</th>
@@ -553,12 +554,14 @@ searchInput.addEventListener("keyup", () => {
 
   onSnapshot(studentsCol, (snap) => {
     recordsBody.innerHTML = "";
+    let count = 1; // 👈 LISTING/NUMBERING
     snap.forEach(docSnap => {
       const d = docSnap.data();
       const id = docSnap.id;
       const tr = document.createElement("tr");
 
       tr.innerHTML = `
+        <td>${count++}</td>
         <td>${escapeHtml(d.Names || "")}</td>
         <td>${escapeHtml(d.RegNo || "")}</td>
         <td>${formatDate(d.RegDate)}</td>
