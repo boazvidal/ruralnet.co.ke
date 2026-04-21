@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>360 Rotating Devices</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f5f7;
+}
+
+.container {
+  display: flex;
+  gap: 80px;
+  perspective: 1200px;
+}
+
+/* Wrapper handles rotation */
+.device-wrapper {
+  width: 320px;
+  transform-style: preserve-3d;
+  animation: spin 6s linear infinite;
+}
+
+/* Reverse direction for second device */
+.device-wrapper.reverse {
+  animation: spinReverse 12s linear infinite;
+}
+
+.device {
+  width: 100%;
+  display: block;
+  backface-visibility: hidden; /* prevents mirrored backside glitch */
+}
+
+/* Full 360° rotation */
+@keyframes spin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes spinReverse {
+  from {
+    transform: rotateY(360deg);
+  }
+  to {
+    transform: rotateY(0deg);
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="device-wrapper">
+      <img src="images/laptop1.png" class="device" alt="Laptop 1">
+    </div>
+
+    <div class="device-wrapper reverse">
+      <img src="images/laptop2.png" class="device" alt="Laptop 2">
+    </div>
+  </div>
+</body>
+</html>
