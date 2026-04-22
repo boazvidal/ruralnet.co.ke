@@ -94,7 +94,6 @@ footer {
     <p>Sign in using your staff number</p>
 
     <input type="password" id="userCode" placeholder="Enter staff number">
-
     <div class="btn" id="loginBtn">Verify</div>
 
     <p id="error"></p>
@@ -104,7 +103,7 @@ footer {
 © Powered By Ruralnet ICT Academy Developer
 </footer>
 
-<!-- FIREBASE + LOGIN LOGIC -->
+<!-- 🔥 FIREBASE + LOGIN -->
 <script type="module">
 
 // ✅ Import Firebase
@@ -112,10 +111,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/fireba
 import { getFirestore, collection, query, where, getDocs } 
 from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
-// (Optional)
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-analytics.js";
-
-// ✅ Your config
+// ✅ Your Config
 const firebaseConfig = {
   apiKey: "AIzaSyAOp0bK9NtPrw2kAbe0i5UchdWXy7aQaD8",
   authDomain: "staff-portal-c1caf.firebaseapp.com",
@@ -129,17 +125,20 @@ const firebaseConfig = {
 // ✅ Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const analytics = getAnalytics(app);
 
-// ✅ LOGIN FUNCTION
+// 🔐 LOGIN FUNCTION
 async function verifyCode() {
     const entered = document.getElementById("userCode").value.trim();
     const errorBox = document.getElementById("error");
+
+    errorBox.textContent = "";
 
     if (!entered) {
         errorBox.textContent = "Enter your staff number";
         return;
     }
+
+    errorBox.textContent = "Checking...";
 
     try {
         const q = query(
@@ -150,6 +149,10 @@ async function verifyCode() {
         const snapshot = await getDocs(q);
 
         if (!snapshot.empty) {
+            // ✅ Save session
+            localStorage.setItem("staffLoggedIn", "true");
+
+            // ✅ Redirect
             window.location.href = "../resources.html";
         } else {
             errorBox.textContent = "Invalid staff number";
@@ -157,22 +160,13 @@ async function verifyCode() {
 
     } catch (err) {
         console.error(err);
-        errorBox.textContent = "System error. Try again later.";
+        errorBox.textContent = "System error. Check console.";
     }
 }
 
-// ✅ BUTTON CLICK
+// 🎯 EVENTS
 document.getElementById("loginBtn").addEventListener("click", verifyCode);
 
-// ✅ ENTER KEY
-document.getElementById("userCode").addEventListener("keypress", function(e) {
-    if (e.key === "Enter") verifyCode();
-});
-
-// BUTTON CLICK
-document.getElementById("loginBtn").addEventListener("click", verifyCode);
-
-// ENTER KEY SUPPORT
 document.getElementById("userCode").addEventListener("keypress", function(e) {
     if (e.key === "Enter") verifyCode();
 });
