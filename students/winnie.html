@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Winnie</title>
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+
+  body {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 240px;
+    background: url(images/oceanBlue.png); /* HELB green */
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: left 0.3s ease;
+  }
+
+  .nav {
+    list-style: none;
+    padding: 20px 0;
+  }
+
+  .nav li {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .nav li:hover {
+    background: rgba(255,255,255,0.1);
+  }
+
+  .nav li.active {
+    background: #f9b233; /* highlight color */
+    color: #000;
+    font-weight: bold;
+  }
+
+  .bottom {
+    padding: 20px;
+    border-top: 5px solid white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+
+
+  .bottom a {
+    color: white;
+    background-color: red;
+    padding: 10px 60px;
+    border-radius: 20px;
+    border-bottom: 5px solid white;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin-top: 20px;
+  }
+
+  .bottom a:hover {
+    color: red;
+    background: white;
+    border-bottom: 5px solid red;
+  }
+
+  .bottom p {
+    margin-bottom: 20px;
+  }
+
+  /* Main Content */
+  .content {
+    flex: 1;
+    background: url(../images/white1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20px;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  /* Toggle Button for Small Screens */
+  .toggle-btn {
+    display: none;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #3100b8;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    font-size: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 999;
+  }
+
+  /* Section Styling */
+  .section {
+    display: none;
+    /*background: url(images/whiteB.png); /*rgb(209, 70, 70);
+    background-repeat: no-repeat;
+    background-size: cover;*/
+    background: linear-gradient(270deg, red, lightblue, orange, yellow, white, cyan, magenta, lightgreen, green);
+    background-size: 800% 800%;
+    animation: bgAnimation 15s ease infinite;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-bottom: 10px solid blue;
+  }
+
+  .section a {
+    text-decoration: none;
+    color: #000;
+  }
+
+  @keyframes bgAnimation {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+
+  .section.active {
+    display: block;
+  }
+
+  .section h1 {
+    color: blue;
+    padding: 1rem;
+    border-bottom: 5px solid black;
+
+  }
+
+  .section strong p pre {
+    font-family: 'arial black';
+    padding: 0.3rem;
+  }
+
+  .section p {
+    padding: 0.5rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    size: 23px;
+  }
+
+  footer {
+    text-align: center;
+    color: #cbda07;
+    font-size: 18px;
+    margin-top: 40px;
+    font-family: 'Times New Roman', Times, serif;
+    background: url(images/Dblue.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 3rem;
+    padding: 0.5rem;
+    border-bottom: 7px solid orangered;
+  }
+
+  footer p {
+    padding: 0.5rem;
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 900px) {
+    body {
+      flex-direction: column;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: -250px;
+      top: 0;
+      height: 100%;
+      z-index: 1000;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+    }
+
+    .sidebar img {
+      border-radius: 16px;
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .toggle-btn {
+      display: block;
+    }
+
+    .content {
+      padding-top: 60px;
+    }
+  }
+
+  button {
+            padding: 12px 25px;
+            margin: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .download-btn {
+            background: #28a745;
+        }
+
+        .download-btn:hover {
+            background: #1e7e34;
+        }
+  .what {
+  text-align: center; /* centers content */
+  padding: 20px;
+  /*background-color: #f9f9f9; /* light background */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.what h2 {
+  margin-bottom: 15px;
+  color: #333;
+  font-family: Arial, sans-serif;
+}
+
+.what a {
+  display: inline-block;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #25D366, #128C7E); /* WhatsApp green tones */
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.what a:hover {
+  background: linear-gradient(135deg, #128C7E, #075E54);
+  transform: translateY(-2px);
+}
+
+.ethics {
+  text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.ethics a {
+  margin-bottom: 15px;
+  color: blue;
+  font-family: Georgia;
+}
+
+.ethics a {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: linear-gradient(135deg, green, skyblue);
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: all 0.4s ease;
+  box-shadow: 0 3px 6px rgba(0,0,0, 0.4);
+}
+
+.ethics a:hover {
+  background-color: white;
+  transform: translateY(-7px);
+  color: blue;
+}
+
+</style>
+</head>
+<body>
+
+    <!--FULL PAGE PROTECTION SCRIPT -->
+
+<script>
+	//Right-Click
+	document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+
+<!--F12-->
+<script>
+	document.onkeydown = function(e) {
+
+	//F12
+	if (e.keyCode == 123) {
+		return false;
+	}
+
+
+//Ctrl+Shift+I or Ctrl+Shift+J or Ctrl+Shift+C
+
+	if (e.ctrlKey && e.shiftKey && (
+		e.keyCode === 73 ||
+		e.keyCode === 74 ||
+		e.keyCode === 67
+	)) {
+		return false;
+	}
+
+//Ctrl+U View Source-->
+
+	if (e.ctrlKey && e.keyCode === 85) {
+		return false;
+	}
+
+	//Ctrl+C Copy
+	if (e.ctrlKey && e.keyCode === 67) {
+		return false;
+	}
+};
+</script>
+
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+
+    <img src="images/winnie.png">
+    <ul class="nav">
+        <strong>
+      <li class="active" onclick="showSection('update', event)">PERSONAL DETAILS</li>
+      <li onclick="showSection('funds', event)">ACADEMIC INFO</li>
+      <li onclick="showSection('postgrad', event)">COURSE DETAILS</li>
+      <li onclick="showSection('loans', event)">LEARNING PROGRESS</li>
+      <li onclick="showSection('assignments', event)">ASSIGNMENTS</li>
+      <li onclick="showSection('exams', event)">EXAMINATIONS</li>
+      <li onclick="showSection('self', event)">CERTIFICATIONS</li>
+      </strong>
+    </ul>
+    <div class="bottom">
+      <h4>CONTACT</h4>
+      <p onclick="showSection('contact', event)" style="cursor:pointer;">📞 Contact us</p>
+      <a href="/students">SIGN OUT</a>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <button class="toggle-btn" id="toggleBtn">☰ Menu</button>
+
+    <div id="update" class="section active">
+
+      <div class="what">
+      <a href="https://chat.whatsapp.com/FqtZpwSb5dQ1kqsXcfnpTF?mode=gi_t">Click here to join our whatsapp group</a>
+      </div>
+
+      <h1>BACKGROUND INFORMATION</h1>
+      <strong>
+      <p><pre>NAME:            WINNIE LUCY ALUOCHA</pre></p>
+      <p><pre>GENDER:          FEMALE</p></pre>
+      <p><pre>DATE OF BIRTH:   22/01/1998</pre></p>
+      <p><pre>MARITAL STATUS:  SINGLE</p></pre>
+      <p><pre>NATIONALITY:     KENYAN</pre></p>
+      <p><pre>COUNTY:          SIAYA</p></pre>
+      <p><pre>SUB-COUNTY:      UGUNJA</p></pre>
+      <p><pre>CONSTITUENCY:     UGUNJA</p></pre>
+      <p><pre>WARD:       UMALA </pre></p>
+      <p><pre>LOCATION/village:        Umala</p></pre>
+      <P><pre>BOX ADRESS:      N/A</pre></P>
+      <P><pre>STUDENT'S CONTACT:     0743413028</pre></P>
+      <P><pre>GUARDIAN'S CONTACT:    +254724429102</pre></P>
+      <p><pre>STUDENT'S EMAIL:       N/A</p></pre>
+      </strong>
+    </div>
+
+    <div id="funds" class="section">
+
+      <h1>ACADEMIC INFO</h1>
+      <strong>
+        <p><pre>KCPE SCHOOL: Sega Township</pre></p>
+    </strong>
+        <p>KCPE YEAR: 2012</p>
+
+    <strong>
+        <p>KCSE SCHOOL: NYAMIRA GIRLS</p>
+    </strong>
+        <p>KCSE YEAR: 2016</p>
+
+            <strong>
+        <p>OTHER INSTITUTION: N/A</p>
+        <p>OTHER INSTITUTION: YEAR: N/A</p>
+    </strong>
+    </div>
+
+    <div id="postgrad" class="section">
+      <h1>COURSE DETAILS</h1>
+      <strong>
+        <P><pre>ADMNO:            RICT102/26/04/BAPK091</pre></P>
+      <P><pre>COURSE:       ICT Essentials/Computer basics II;</pre></P>
+      <P><pre>DESCRIPTION:   Covers Intro to Computers, Microsoft Applications, Database SystemS, Internet Essentials & Photoshop </pre></P>
+      <P><pre>DURATION:       Two Months</pre></P>
+      <P><pre>Enrollment Date:   21/04/2026</pre></P>
+      <P><pre>COMPLETION DATE:          21/06/2026</pre></P>
+      <P><pre>LEARNING MODE:              FULL TIME</pre></P>
+      <P><pre>TYPE OF STUDY:       PHYSICAL</pre></P>
+      <P><pre>STUDY HOURS          12PM TO 2PM; Monday to Friday</pre></P>
+      <div class="ethics">
+        <a href="../ethics.pdf" target="_blank">Rules, Regulations, Code of conduct & Ethics</a>
+      </div>
+      </strong>
+    </div>
+
+    <div id="loans" class="section">
+      <h2><pre>GENERAL STUDENT'S INFORMATION</pre></h2>
+      <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>Course Description</strong><pre></p>
+      <P><pre>Course Code:                  102</pre></P>
+      <P><pre>General Performance Rate:     ---</pre></P>
+      <P><pre>Conduct Remarks               ---</pre></P>
+    
+    <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>FEE PAYMENT</strong><pre></p>
+        <h3>Cponfirm with administrator</h3>
+      <!--<P><pre>Total Fee Payable:        Kshs. 6,600</pre></P>
+      <P><pre>Total Paid                   Kshs. 2,000</pre></P>
+      <P><pre>Balance                      4,600</pre></P>-->
+
+      <h2><pre>Academic Score Sheet</pre></h2>
+      <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>Assessment Results</strong><pre></p>
+      <P><pre>Introduction:             </pre></P>
+      <P><pre>Word:                          </pre></P>
+      <P><pre>Excel:                          </pre></P>
+      <P><pre>Access:                         </pre></P>
+      <P><pre>Publisher:                          ---</pre></P>
+      <P><pre>PowerPoint:                          ---</pre></P>
+      <P><pre>Internet:                          ---</pre></P>
+      <P><pre>Overral Grade:                          ---</pre></P>
+    </div>
+
+    <DIV id="assignments" class="section">
+        <h3>There are no current assignmnents</h3>
+    </DIV>
+
+    <li onclick="showSection('exams', event)">EXAMINATIONS</li>
+
+    <div id="exams" class="section">
+      <h1>examinations</h1>
+      <h3>click the tab below to open <strong>Introduction to Computers Exam</strong></h3>
+        <!-- VIEW PDF BUTTON -->
+    <button onclick="window.open('../INTROL.pdf', '_blank')">
+        Open First Assessment
+    </button>
+    </div>
+
+    <div id="self" class="section">
+      <h1>RESULTS</h1>
+      <strong>
+      <!--<p>You have completed your course. Congratulations</p>-->
+      </strong>
+      <p>Incase you are planning to be absent, or you have absented yourself from atending your class,</p>
+      <p>Communicate through call or SMS to the nearest Instructor or Staff</p>
+      <p>Absenting yourself for one week without communication calls for automatic discontinuation!</p>
+      <p>when defferment period is past due, you will have to be re-admitted</p>-->
+      <!--<p>Make Good use of the knowledge you have attained at Ruralnet ICT Academy. </p>
+      <p>Incase you faced any challege while learning, Please feel free to share your idea through the numbers below this page.</p>-->
+      <p>Please Note that the certificate will only be ready upon clearance of the fee.</p>
+      <p> Certificate will be ready 6 to 7 days from the date of completion</p>
+      <p>keep checking if you have completed a course</p>
+      <p>Regards.</p>
+      <strong>
+        <!--<p>Your Certificate is available here</p>-->
+      </strong>
+
+      <!-- VIEW PDF BUTTON --
+    <button onclick="window.open('files/myfile.pdf', '_blank')">
+        View Certificate
+    </button>
+
+    <!-- DOWNLOAD PDF BUTTON --
+    <a href="files/myfile.pdf" download>
+        <button class="download-btn">Download Certificate</button>-->
+    </a>
+
+      <p></p>
+    </div>
+
+    <div id="contact" class="section">
+      <h1>Contact info</h1>
+      <p>Email: ruralnet2016@gmail.com</p>
+      <p>Phone: +254700886058 </p>
+      <a href="https//www.ruralnet.co.ke">Web: ruralnet.co.ke</p>
+    </div>
+
+    <footer>
+      <p><strong>WINNIE LUCY ALUOCH</strong></p>
+      <p><strong>ICT ESSENTIALS 102</strong>.</p>
+    </footer>
+  </div>
+
+<script>
+  // Switch sections
+  function showSection(id, event) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+
+    document.querySelectorAll('.nav li').forEach(li => li.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // close sidebar on small screens
+    document.getElementById('sidebar').classList.remove('open');
+  }
+
+  // Toggle sidebar for small screens
+  const toggleBtn = document.getElementById('toggleBtn');
+  const sidebar = document.getElementById('sidebar');
+
+  toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+  });
+</script>
+
+</body>
+</html>
