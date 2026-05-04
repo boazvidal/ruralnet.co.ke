@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RICT Poster</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #001f5b;
+}
+
+/* MAIN POSTER */
+.poster {
+    width: 850px;
+    height: 1200px;
+    margin: auto;
+    position: relative;
+    background: linear-gradient(135deg, #003c9e, #00bfff);
+    overflow: hidden;
+    color: yellow;
+}
+
+/* BACKGROUND LIGHT SHAPES */
+.poster::before,
+.poster::after {
+    content: "";
+    position: absolute;
+    width: 150%;
+    height: 300px;
+    background: rgba(255,255,255,0.1);
+    transform: rotate(-20deg);
+    top: 150px;
+    left: -200px;
+}
+
+.poster::after {
+    top: 500px;
+    transform: rotate(-15deg);
+}
+
+/* HEADER TEXT */
+.header {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    font-weight: bold;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 48px;
+}
+
+.header h2 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.header h3 {
+    margin-top: 10px;
+    font-size: 30px;
+}
+
+/* LOGO */
+.logo {
+    position: absolute;
+    right: 40px;
+    top: 30px;
+    background: black;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.logo span {
+    display: block;
+    color: #00ff88;
+}
+
+/* COURSE TITLE */
+.course-title {
+    position: absolute;
+    top: 250px;
+    left: 40px;
+    background: linear-gradient(to right, yellow, lime);
+    color: blue;
+    padding: 15px 40px;
+    border-radius: 40px;
+    font-weight: bold;
+    box-shadow: 0 0 20px rgba(255,255,0,0.6);
+}
+
+/* COURSE LIST */
+.course-list {
+    position: absolute;
+    top: 320px;
+    left: 40px;
+    width: 420px;
+}
+
+.course {
+    position: relative;
+    margin: 18px 0;
+    padding: 15px 20px;
+    background: linear-gradient(to right, #ccff00, #99cc00);
+    color: blue;
+    border-radius: 30px;
+    font-weight: bold;
+    transform: skewX(-15deg);
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+}
+
+/* TEXT FIX inside skew */
+.course span {
+    display: block;
+    transform: skewX(15deg);
+}
+
+/* RIGHT IMAGE */
+.image-box {
+    position: absolute;
+    right: 40px;
+    top: 300px;
+    width: 320px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.image-box img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* GLASS CONTACT PANEL */
+.contact {
+    position: absolute;
+    right: 20px;
+    bottom: 200px;
+    width: 320px;
+    padding: 40px 20px;
+    border-radius: 5px solid yellow;
+    background: rgba(2, 78, 150, 0.15);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    color: yellow;
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
+}
+
+.contact p {
+    margin: 8px 0;
+    font-weight: bold;
+}
+
+/* FOOTER SHAPE */
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(45deg, orange, gold);
+    padding: 20px;
+    text-align: center;
+    font-size: 26px;
+    font-style: italic;
+    color: blue;
+}
+
+/* BLACK CORNER SHAPE */
+.corner {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 200px;
+    height: 150px;
+    background: black;
+    clip-path: polygon(100% 0, 0 100%, 100% 100%);
+}
+</style>
+</head>
+
+<body>
+
+<div class="poster">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>Career is waiting</h1>
+        <h2>for someone</h2>
+        <h3>Make sure its you !!!</h3>
+    </div>
+
+    <!-- LOGO -->
+    <div class="logo">
+        RURALNET
+        <span>RICT Academy</span>
+    </div>
+
+    <!-- COURSE TITLE -->
+    <div class="course-title">COURSE PROSPECT</div>
+
+    <!-- COURSES -->
+    <div class="course-list">
+        <div class="course"><span>Basic IT essentials (Packages & O.S)</span></div>
+        <div class="course"><span>Programming</span></div>
+        <div class="course"><span>CCTV Installation</span></div>
+        <div class="course"><span>Software Installation</span></div>
+        <div class="course"><span>Computer Repair</span></div>
+        <div class="course"><span>Cyber Security</span></div>
+        <div class="course"><span>Web Development</span></div>
+        <div class="course"><span>Graphic Designing</span></div>
+        <div class="course"><span>DBMS (Access II)</span></div>
+        <div class="course"><span>Excel II</span></div>
+    </div>
+
+    <!-- IMAGE -->
+    <div class="image-box">
+        <img src="images/student-printer.png" alt="student">
+    </div>
+
+    <!-- CONTACT -->
+    <div class="contact">
+        <p>Interested?</p>
+        <p>Reach us through</p>
+        <p>0723845040</p>
+        <p>0700886058</p>
+        <p></p>
+        <p>ruralnet2016@gmail.com</p>
+        <p>ruralnet.co.ke</p>
+        <p>Location: Second floor of Oguya Plaza(Matibabu Building)</p>
+    </div>
+
+    <!-- CORNER -->
+    <div class="corner"></div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        A Centre for computational excellence
+    </div>
+
+</div>
+
+</body>
+</html>
