@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Portal</title>
+  <link rel="icon" type="image/png" href="images/favdownload.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      background: #f4f6f9;
+      color: #333;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #026613;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      z-index: 1000;
+    }
+
+    nav img {
+      max-height: 50px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ffdd57;
+    }
+
+    .menu-btn {
+      display: none;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background: #026613;
+        width: 100%;
+        padding: 10px;
+      }
+      nav ul.active {
+        display: flex;
+      }
+      .menu-btn {
+        display: block;
+      }
+    }
+
+    /* MAIN CONTENT */
+    .container {
+      padding: 100px 20px 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: #026613;
+      margin-bottom: 30px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .card button:hover {
+      background: #0056b3;
+    }
+
+    .logout {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+      font-weight: bold;
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .logout:hover {
+      text-decoration: underline;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #111;
+      color: #eee;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 30px 20px;
+    }
+
+    .footer-column {
+      flex: 1 1 200px;
+      margin: 10px;
+    }
+
+    .footer-column h3 {
+      border-bottom: 2px solid #ffdd57;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+    }
+
+    .footer-column a {
+      color: #eee;
+      text-decoration: none;
+      display: block;
+      margin: 5px 0;
+    }
+
+    .footer-column a:hover {
+      color: #ffdd57;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <img src="images/RURALNET.png" alt="Logo">
+  <div class="menu-btn" onclick="document.querySelector('nav ul').classList.toggle('active')">&#9776;</div>
+  <ul>
+    <li><a href="resources.html">Back</a></li>
+    <li><a href="https://ruralnet.co.ke/">Home</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+  <h2>Administrative Forms & Confidentials</h2>
+  <div class="card-grid">
+    <div class="card"><button onclick="location.href='FILE_INDEXING.pdf'">File Indexing</button></div>
+    <div class="card"><button onclick="location.href='construction.html'">Staff Est.</button></div>
+    <div class="card"><button onclick="location.href='inventory.html'">Inventory</button></div>
+    <div class="card"><button onclick="location.href='construction.html'">Handing Over</button></div>
+    <div class="card"><button onclick="location.href='construction.html'">Taking Over</button></div>
+    <div class="card"><button onclick="location.href='MAINTENANCE_LOGSHEET.pdf'">Repair Log Sheet</button></div>
+    <div class="card"><button onclick="location.href='construction.html'">L.P.O</button></div>
+    <div class="card"><button onclick="location.href='INVOICE.pub'">Invoice</button></div>
+    <div class="card"><button onclick="location.href='construction.html'">Petty Cash</button></div>
+    <div class="card"><button onclick="location.href='ruralnet_receipt.pub'">Receipts</button></div>
+    <div class="card"><button onclick="location.href='policy.pdf'">Policy</button></div>
+    <div class="card"><button onclick="location.href='REQUISITION_FORM.docx'">Requisition</button></div>
+  </div>
+
+  <a href="Employees.html" class="logout">Log out</a>
+</div>
+
+<footer>
+  <div class="footer-column">
+    <h3>Useful Links</h3>
+    <a href="index.html">Home</a>
+    <a href="About_Us.html">Who We Are</a>
+    <a href="#">Student Portal</a>
+    <a href="#">Accounting</a>
+    <a href="#">ICT</a>
+  </div>
+  <div class="footer-column">
+    <h3>Partners</h3>
+    <a href="#">CSK</a>
+    <a href="#">KASNEB</a>
+    <a href="#">TVETA</a>
+  </div>
+  <div class="footer-column">
+    <h3>Contact Us</h3>
+    <p>+254723845040</p>
+    <p>+254700886058</p>
+    <p>+254793714564</p>
+    <p>ruralnet2016@gmail.com</p>
+    <p>ruralnet.co.ke</p>
+  </div>
+</footer>
+
+</body>
+</html>
