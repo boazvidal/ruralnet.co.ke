@@ -4,461 +4,958 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mitchelle</title>
+
 <link rel="icon" type="image/png" href="../images/favicon.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
 
-  body {
-    display: flex;
-    height: 100vh;
-    overflow: hidden;
+:root{
+  --primary:#2563eb;
+  --secondary:#0f172a;
+  --accent:#06b6d4;
+  --success:#22c55e;
+  --danger:#ef4444;
+  --light:#f8fafc;
+  --white:#ffffff;
+  --text:#1e293b;
+  --gray:#64748b;
+  --border:rgba(255,255,255,0.1);
+  --shadow:0 10px 30px rgba(0,0,0,0.15);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  display:flex;
+  min-height:100vh;
+  background:
+  linear-gradient(rgba(15,23,42,.92), rgba(15,23,42,.92)),
+  url("../images/white1.jpg");
+  background-size:cover;
+  background-position:center;
+  overflow:hidden;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+  width:280px;
+  background:rgba(15,23,42,.96);
+  backdrop-filter:blur(12px);
+  border-right:1px solid var(--border);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:.4s ease;
+  z-index:1000;
+}
+
+.logo-section{
+  text-align:center;
+  padding:30px 20px 15px;
+}
+
+.logo-section img{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid rgba(255,255,255,.15);
+  box-shadow:0 10px 20px rgba(0,0,0,.4);
+}
+
+.logo-section h2{
+  color:white;
+  margin-top:15px;
+  font-size:21px;
+}
+
+.logo-section p{
+  color:#cbd5e1;
+  font-size:14px;
+}
+
+.nav{
+  list-style:none;
+  padding:20px 14px;
+}
+
+.nav li{
+  padding:15px 18px;
+  margin-bottom:10px;
+  border-radius:14px;
+  color:#e2e8f0;
+  cursor:pointer;
+  transition:.3s ease;
+  font-size:15px;
+  font-weight:500;
+}
+
+.nav li:hover{
+  background:rgba(255,255,255,.08);
+  transform:translateX(5px);
+}
+
+.nav li.active{
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:white;
+  box-shadow:0 10px 20px rgba(37,99,235,.3);
+}
+
+.bottom{
+  padding:25px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+.bottom h4{
+  color:white;
+  margin-bottom:15px;
+}
+
+.bottom p{
+  color:#cbd5e1;
+  margin-bottom:18px;
+  cursor:pointer;
+}
+
+.bottom a{
+  display:inline-block;
+  text-decoration:none;
+  background:linear-gradient(135deg,#ef4444,#dc2626);
+  color:white;
+  padding:12px 22px;
+  border-radius:12px;
+  font-weight:600;
+  transition:.3s ease;
+}
+
+.bottom a:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 20px rgba(239,68,68,.3);
+}
+
+/* CONTENT */
+
+.content{
+  flex:1;
+  overflow-y:auto;
+  padding:30px;
+  position:relative;
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+}
+
+.topbar h1{
+  color:white;
+  font-size:32px;
+}
+
+.topbar span{
+  color:#cbd5e1;
+}
+
+/* TOGGLE */
+
+.toggle-btn{
+  display:none;
+  position:fixed;
+  top:20px;
+  left:20px;
+  width:52px;
+  height:52px;
+  border:none;
+  border-radius:14px;
+  font-size:22px;
+  cursor:pointer;
+  z-index:2000;
+  color:white;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:var(--shadow);
+}
+
+/* SECTION */
+
+.section{
+  display:none;
+  animation:fade .4s ease;
+}
+
+.section.active{
+  display:block;
+}
+
+.card{
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(12px);
+  border-radius:24px;
+  padding:30px;
+  margin-bottom:25px;
+  box-shadow:var(--shadow);
+}
+
+.card h2{
+  color:var(--secondary);
+  margin-bottom:25px;
+  position:relative;
+}
+
+.card h2::after{
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:-10px;
+  width:80px;
+  height:4px;
+  border-radius:10px;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+}
+
+/* GRID */
+
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px;
+}
+
+.info-box{
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:18px;
+  padding:18px;
+  transition:.3s ease;
+}
+
+.info-box:hover{
+  transform:translateY(-5px);
+  box-shadow:0 10px 20px rgba(0,0,0,.08);
+}
+
+.label{
+  font-size:13px;
+  color:var(--gray);
+  margin-bottom:7px;
+}
+
+.value{
+  font-size:15px;
+  font-weight:600;
+  color:var(--secondary);
+}
+
+/* WHATSAPP */
+
+.whatsapp-box{
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  padding:28px;
+  border-radius:24px;
+  margin-bottom:25px;
+  text-align:center;
+  color:white;
+  box-shadow:var(--shadow);
+}
+
+.whatsapp-box h3{
+  margin-bottom:12px;
+}
+
+.whatsapp-box a{
+  display:inline-block;
+  margin-top:10px;
+  padding:12px 22px;
+  border-radius:12px;
+  text-decoration:none;
+  background:white;
+  color:#128C7E;
+  font-weight:700;
+  transition:.3s ease;
+}
+
+.whatsapp-box a:hover{
+  transform:scale(1.05);
+}
+
+/* BUTTONS */
+
+.btn{
+  display:inline-block;
+  padding:13px 24px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:600;
+  text-decoration:none;
+  transition:.3s ease;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:white;
+}
+
+.btn-success{
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+  color:white;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+}
+
+/* TABLE */
+
+.table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px;
+}
+
+.table th{
+  background:var(--secondary);
+  color:white;
+  padding:14px;
+  text-align:left;
+}
+
+.table td{
+  padding:14px;
+  border-bottom:1px solid #e2e8f0;
+  background:#fff;
+}
+
+/* NOTICE */
+
+.notice{
+  background:#ecfeff;
+  border-left:6px solid var(--accent);
+  padding:20px;
+  border-radius:16px;
+  margin-top:20px;
+}
+
+.notice p{
+  margin-bottom:10px;
+  color:#164e63;
+}
+
+/* FOOTER */
+
+footer{
+  text-align:center;
+  padding:22px;
+  color:white;
+  background:rgba(255,255,255,.08);
+  border-radius:20px;
+  margin-top:35px;
+  backdrop-filter:blur(10px);
+}
+
+/* ANIMATION */
+
+@keyframes fade{
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+  .sidebar{
+    position:fixed;
+    left:-100%;
+    top:0;
+    height:100%;
   }
 
-  /* Sidebar */
-  .sidebar {
-    width: 240px;
-    background: url(images/oceanBlue.png); /* HELB green */
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: left 0.3s ease;
+  .sidebar.open{
+    left:0;
   }
 
-  .nav {
-    list-style: none;
-    padding: 20px 0;
+  .toggle-btn{
+    display:block;
   }
 
-  .nav li {
-    padding: 10px 15px;
-    cursor: pointer;
-    transition: background 0.3s;
+  .content{
+    padding:90px 20px 20px;
   }
 
-  .nav li:hover {
-    background: rgba(255,255,255,0.1);
+  .topbar{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:8px;
   }
 
-  .nav li.active {
-    background: #f9b233; /* highlight color */
-    color: #000;
-    font-weight: bold;
+  .topbar h1{
+    font-size:24px;
   }
+}
 
-  .bottom {
-    padding: 20px;
-    border-top: 5px solid white;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-  
-
-
-  .bottom a {
-    color: white;
-    background-color: red;
-    padding: 10px 60px;
-    border-radius: 20px;
-    border-bottom: 5px solid white;
-    font-weight: bold;
-    text-decoration: none;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    margin-top: 20px;
-  }
-
-  .bottom a:hover {
-    color: red;
-    background: white;
-    border-bottom: 5px solid red;
-  }
-
-  .bottom p {
-    margin-bottom: 20px;
-  }
-
-  /* Main Content */
-  .content {
-    flex: 1;
-    background: url(../images/white1.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding: 20px;
-    overflow-y: auto;
-    position: relative;
-  }
-
-  /* Toggle Button for Small Screens */
-  .toggle-btn {
-    display: none;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: #3100b8;
-    color: white;
-    border: none;
-    padding: 10px 14px;
-    font-size: 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    z-index: 999;
-  }
-
-  /* Section Styling */
-  .section {
-    display: none;
-    /*background: url(images/whiteB.png); /*rgb(209, 70, 70);
-    background-repeat: no-repeat;
-    background-size: cover;*/
-    background: linear-gradient(270deg, red, lightblue, orange, yellow, white, cyan, magenta, lightgreen, green);
-    background-size: 800% 800%;
-    animation: bgAnimation 15s ease infinite;
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    border-bottom: 10px solid blue;
-  }
-
-  .section a {
-    text-decoration: none;
-    color: #000;
-  }
-
-  @keyframes bgAnimation {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-  }
-
-  .section.active {
-    display: block;
-  }
-
-  .section h1 {
-    color: blue;
-    padding: 1rem;
-    border-bottom: 5px solid black;
-
-  }
-
-  .section strong p pre {
-    font-family: 'arial black';
-    padding: 0.3rem;
-  }
-
-  .section p {
-    padding: 0.5rem;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    size: 23px;
-  }
-
-  footer {
-    text-align: center;
-    color: #cbda07;
-    font-size: 18px;
-    margin-top: 40px;
-    font-family: 'Times New Roman', Times, serif;
-    background: url(images/Dblue.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 3rem;
-    padding: 0.5rem;
-    border-bottom: 7px solid orangered;
-  }
-
-  footer p {
-    padding: 0.5rem;
-  }
-
-  /* --- RESPONSIVE --- */
-  @media (max-width: 900px) {
-    body {
-      flex-direction: column;
-    }
-
-    .sidebar {
-      position: fixed;
-      left: -250px;
-      top: 0;
-      height: 100%;
-      z-index: 1000;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.3);
-    }
-
-    .sidebar img {
-      border-radius: 16px;
-    }
-
-    .sidebar.open {
-      left: 0;
-    }
-
-    .toggle-btn {
-      display: block;
-    }
-
-    .content {
-      padding-top: 60px;
-    }
-  }
-
-  button {
-            padding: 12px 25px;
-            margin: 10px;
-            font-size: 18px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            background: #007bff;
-            color: white;
-        }
-
-        button:hover {
-            background: #0056b3;
-        }
-
-        .download-btn {
-            background: #28a745;
-        }
-
-        .download-btn:hover {
-            background: #1e7e34;
-        }
 </style>
 </head>
+
 <body>
 
-    <!--FULL PAGE PROTECTION SCRIPT -->
-
 <script>
-	//Right-Click
-	document.addEventListener('contextmenu', event => event.preventDefault());
+document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
 
-<!--F12-->
 <script>
-	document.onkeydown = function(e) {
+document.onkeydown = function(e){
 
-	//F12
-	if (e.keyCode == 123) {
-		return false;
-	}
+if(e.keyCode == 123){
+return false;
+}
 
+if(e.ctrlKey && e.shiftKey && (
+e.keyCode === 73 ||
+e.keyCode === 74 ||
+e.keyCode === 67
+)){
+return false;
+}
 
-//Ctrl+Shift+I or Ctrl+Shift+J or Ctrl+Shift+C
+if(e.ctrlKey && e.keyCode === 85){
+return false;
+}
 
-	if (e.ctrlKey && e.shiftKey && (
-		e.keyCode === 73 ||
-		e.keyCode === 74 ||
-		e.keyCode === 67
-	)) {
-		return false;
-	}
+if(e.ctrlKey && e.keyCode === 67){
+return false;
+}
 
-//Ctrl+U View Source-->
-
-	if (e.ctrlKey && e.keyCode === 85) {
-		return false;
-	}
-
-	//Ctrl+C Copy
-	if (e.ctrlKey && e.keyCode === 67) {
-		return false;
-	}
 };
 </script>
 
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
 
-  <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
+<div>
 
-    <img src="images/mitchel.png">
-    <ul class="nav">
-        <strong>
-      <li class="active" onclick="showSection('update', event)">PERSONAL DETAILS</li>
-      <li onclick="showSection('funds', event)">ACADEMIC INFO</li>
-      <li onclick="showSection('postgrad', event)">COURSE DETAILS</li>
-      <li onclick="showSection('loans', event)">LEARNING PROGRESS</li>
-      <li onclick="showSection('assignments', event)">ASSIGNMENTS</li>
-      <li onclick="showSection('exams', event)">EXAMINATIONS</li>
-      <li onclick="showSection('self', event)">CERTIFICATIONS</li>
-      </strong>
-    </ul>
-    <div class="bottom">
-      <h4>CONTACT</h4>
-      <p onclick="showSection('contact', event)" style="cursor:pointer;">📞 Contact us</p>
-      <a href="/students">SIGN OUT</a>
-    </div>
-  </div>
+<div class="logo-section">
+<img src="images/mitchel.png">
+<h2>Mitchelle Anyango</h2>
+<p>Student Dashboard</p>
+</div>
 
-  <!-- Content -->
-  <div class="content">
-    <button class="toggle-btn" id="toggleBtn">☰ Menu</button>
+<ul class="nav">
 
-    <div id="update" class="section active">
+<li class="active" onclick="showSection('update', event)">👤 Personal Details</li>
 
-      <h2 style="background-color: white;">Join our whatsapp group below;</h2>
-      <a href="https://chat.whatsapp.com/FqtZpwSb5dQ1kqsXcfnpTF?mode=gi_t" style="background-color: white;">Click here to join</a>
-      
-      <h1>BACKGROUND INFORMATION</h1>
-      <strong>
-      <p><pre>NAME:            MITCHELLE ANYANGO ONYANGO</pre></p>
-      <p><pre>GENDER:          FEMALE</p></pre>
-      <p><pre>DATE OF BIRTH:   24/08/2008</pre></p>
-      <p><pre>MARITAL STATUS:  SINGLE</p></pre>
-      <p><pre>NATIONALITY:     KENYAN</pre></p>
-      <p><pre>COUNTY:          SIAYA</p></pre>
-      <p><pre>SUB-COUNTY:      UGUNJA</p></pre>
-      <p><pre>CONSTITUENCY:    UGUNJA</p></pre>
-      <p><pre>WARD:       UGUNJA </pre></p>
-      <p><pre>LOCATION/village:         UGUNJA</p></pre>
-      <P><pre>BOX ADRESS:      N/A</pre></P>
-      <P><pre>STUDENT'S CONTACT:     0700421033</pre></P>
-      <P><pre>GUARDIAN'S CONTACT:    +254721399339</pre></P>
-      <p><pre>STUDENT'S EMAIL:       N/A</p></pre>
-      </strong>
-    </div>
+<li onclick="showSection('funds', event)">🎓 Academic Info</li>
 
-    <div id="funds" class="section">
+<li onclick="showSection('postgrad', event)">📘 Course Details</li>
 
-      <h1>ACADEMIC INFO</h1>
-      <strong>
-        <p><pre>KCPE SCHOOL: NYASANDA </pre></p>
-    </strong>
-        <p>KCPE YEAR: 2022</p>
+<li onclick="showSection('loans', event)">📈 Learning Progress</li>
 
-    <strong>
-        <p>KCSE SCHOOL: RANGALA GIRLS</p>
-    </strong>
-        <p>KCSE YEAR: 2025</p>
+<li onclick="showSection('assignments', event)">📝 Assignments</li>
 
-            <strong>
-        <p>OTHER INSTITUTION: N/A</p>
-        <p>OTHER INSTITUTION: YEAR: N/A</p>
-    </strong>
-    </div>
+<li onclick="showSection('exams', event)">📄 Examinations</li>
 
-    <div id="postgrad" class="section">
-      <h1>COURSE DETAILS</h1>
-      <strong>
-        <P><pre>ADMNO:            RICT/26/03/BAPK065</pre></P>
-      <P><pre>COURSE:       ICT Essentials/Computer basics II;</pre></P>
-      <P><pre>DESCRIPTION:   Covers Intro to Computers, Microsoft Applications, Database System project and Internet Essentials</pre></P>
-      <P><pre>DURATION:       Two Months</pre></P>
-      <P><pre>Enrollment Date:   09/03/2026</pre></P>
-      <P><pre>COMPLETION DATE:          09/05/2026</pre></P>
-      <P><pre>LEARNING MODE:              FULL TIME</pre></P>
-      <P><pre>TYPE OF STUDY:       PHYSICAL</pre></P>
-      <P><pre>STUDY HOURS          10M TO 12PM; Monday to Friday</pre></P>
-      </strong>
-    </div>
+<li onclick="showSection('self', event)">🏆 Certifications</li>
 
-    <div id="loans" class="section">
-      <h2><pre>GENERAL STUDENT'S INFORMATION</pre></h2>
-      <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>Course Description</strong><pre></p>
-      <P><pre>Course Code:                  102</pre></P>
-      <P><pre>General Performance Rate:     ---</pre></P>
-      <P><pre>Conduct Remarks               ---</pre></P>
-    
-    <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>FEE PAYMENT</strong><pre></p>
-      <P><pre>Total Fee Payable:        Kshs. 6,600</pre></P>
-      <P><pre>Total Paid                   Kshs. 2,000</pre></P>
-      <P><pre>Balance                      4,600</pre></P>
+</ul>
 
-      <h2><pre>Academic Score Sheet</pre></h2>
-      <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>Assessment Results</strong><pre></p>
-      <P><pre>Introduction:             83 </pre></P>
-      <P><pre>Word:                          85</pre></P>
-      <P><pre>Excel:                          </pre></P>
-      <P><pre>Access:                         ---</pre></P>
-      <P><pre>Publisher:                          ---</pre></P>
-      <P><pre>PowerPoint:                          ---</pre></P>
-      <P><pre>Internet:                          ---</pre></P>
-      <P><pre>Overral Grade:                          ---</pre></P>
-    </div> 
+</div>
 
-    <DIV id="assignments" class="section">
-        <h3>There are no current assignmnents</h3>
-    </DIV>
+<div class="bottom">
 
-    <li onclick="showSection('exams', event)">EXAMINATIONS</li>
+<h4>CONTACT</h4>
 
-    <div id="exams" class="section">
-      <h1>examinations</h1>
-      <h3>click the tab below to open <strong>PRESENTATION Assessment</strong></h3>
-        <!-- VIEW PDF BUTTON -->
-    <button onclick="window.open('../POWERPOINT_EXAMS.pdf', '_blank')">
-        Open Powerpoint assessment
-    </button>
-    </div>
+<p onclick="showSection('contact', event)">📞 Contact Us</p>
 
-    <div id="self" class="section">
-      <h1>RESULTS</h1>
-      
-      <p>Incase you are planning to be absent, or you have absented yourself from atending your class,</p>
-      <p>Communicate through call or SMS to the nearest Instructor or Staff</p>
-      <p>Absenting yourself for one week without communication calls for automatic discontinuation!</p>
-      <p>when defferment period is past due, you will have to be re-admitted</p>
+<a href="/students">SIGN OUT</a>
 
-      <!--<p>You have completed your course. Congratulations</p>
-      <p>Make Good use of the knowledge you have attained at Ruralnet ICT Academy. </p>
-      <p>Incase you faced any challege while learning, Please feel free to share your idea through the numbers below this page.</p>
-      <p>Please Note that the certificate will only be ready upon clearance of the fee.</p>
-      <p> Certificate will be ready 6 to 7 days from the date of completion</p>
-      <p>keep checking if you have completed a course</p>
-      <p>Regards.</p>-->
-      <strong>
-        <!--<p>Your Certificate is available here</p>-->
-      </strong>
+</div>
 
-      <!-- VIEW PDF BUTTON --
-    <button onclick="window.open('files/myfile.pdf', '_blank')">
-        View Certificate
-    </button>
+</div>
 
-    <!-- DOWNLOAD PDF BUTTON --
-    <a href="files/myfile.pdf" download>
-        <button class="download-btn">Download Certificate</button>-->
-    </a>
+<!-- CONTENT -->
+<div class="content">
 
-      <p></p>
-    </div>
+<button class="toggle-btn" id="toggleBtn">☰</button>
 
-    <div id="contact" class="section">
-      <h1>Contact info</h1>
-      <p>Email: ruralnet2016@gmail.com</p>
-      <p>Phone: +254700886058 </p>
-      <a href="https//www.ruralnet.co.ke">Web: ruralnet.co.ke</p>
-    </div>
+<div class="topbar">
 
-    <footer>
-      <p><strong>MITCHELLE ANYANGO ONYANGO </strong></p>
-      <p><strong>ICT ESSENTIALS 102</strong>.</p>
-    </footer>
-  </div>
+<div>
+<h1>Student Portal</h1>
+<span>Welcome back, Mitchelle 👋</span>
+</div>
+
+</div>
+
+<!-- PERSONAL -->
+<div class="section active" id="update">
+
+<div class="whatsapp-box">
+
+<h3>Join Our WhatsApp Group</h3>
+
+<a href="https://chat.whatsapp.com/FqtZpwSb5dQ1kqsXcfnpTF?mode=gi_t">
+Join Group
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>Background Information</h2>
+
+<div class="info-grid">
+
+<div class="info-box">
+<div class="label">Full Name</div>
+<div class="value">MITCHELLE ANYANGO ONYANGO</div>
+</div>
+
+<div class="info-box">
+<div class="label">Gender</div>
+<div class="value">Female</div>
+</div>
+
+<div class="info-box">
+<div class="label">Date of Birth</div>
+<div class="value">24/08/2008</div>
+</div>
+
+<div class="info-box">
+<div class="label">Marital Status</div>
+<div class="value">Single</div>
+</div>
+
+<div class="info-box">
+<div class="label">Nationality</div>
+<div class="value">Kenyan</div>
+</div>
+
+<div class="info-box">
+<div class="label">County</div>
+<div class="value">Siaya</div>
+</div>
+
+<div class="info-box">
+<div class="label">Sub County</div>
+<div class="value">Ugunja</div>
+</div>
+
+<div class="info-box">
+<div class="label">Constituency</div>
+<div class="value">Ugunja</div>
+</div>
+
+<div class="info-box">
+<div class="label">Ward</div>
+<div class="value">Ugunja</div>
+</div>
+
+<div class="info-box">
+<div class="label">Village</div>
+<div class="value">Ugunja</div>
+</div>
+
+<div class="info-box">
+<div class="label">Student Contact</div>
+<div class="value">0700421033</div>
+</div>
+
+<div class="info-box">
+<div class="label">Guardian Contact</div>
+<div class="value">+254721399339</div>
+</div>
+
+<div class="info-box">
+<div class="label">Student Email</div>
+<div class="value">N/A</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ACADEMIC -->
+<div class="section" id="funds">
+
+<div class="card">
+
+<h2>Academic Information</h2>
+
+<div class="info-grid">
+
+<div class="info-box">
+<div class="label">KCPE School</div>
+<div class="value">NYASANDA</div>
+</div>
+
+<div class="info-box">
+<div class="label">KCPE Year</div>
+<div class="value">2022</div>
+</div>
+
+<div class="info-box">
+<div class="label">KCSE School</div>
+<div class="value">RANGALA GIRLS</div>
+</div>
+
+<div class="info-box">
+<div class="label">KCSE Year</div>
+<div class="value">2025</div>
+</div>
+
+<div class="info-box">
+<div class="label">Other Institution</div>
+<div class="value">N/A</div>
+</div>
+
+<div class="info-box">
+<div class="label">Institution Year</div>
+<div class="value">N/A</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- COURSE -->
+<div class="section" id="postgrad">
+
+<div class="card">
+
+<h2>Course Details</h2>
+
+<div class="info-grid">
+
+<div class="info-box">
+<div class="label">Admission Number</div>
+<div class="value">RICT/26/03/BAPK065</div>
+</div>
+
+<div class="info-box">
+<div class="label">Course</div>
+<div class="value">ICT Essentials / Computer Basics II</div>
+</div>
+
+<div class="info-box">
+<div class="label">Description</div>
+<div class="value">Covers Intro to Computers, Microsoft Applications, Database System project and Internet Essentials</div>
+</div>
+
+<div class="info-box">
+<div class="label">Duration</div>
+<div class="value">Two Months</div>
+</div>
+
+<div class="info-box">
+<div class="label">Enrollment Date</div>
+<div class="value">09/03/2026</div>
+</div>
+
+<div class="info-box">
+<div class="label">Completion Date</div>
+<div class="value">09/05/2026</div>
+</div>
+
+<div class="info-box">
+<div class="label">Learning Mode</div>
+<div class="value">Full Time</div>
+</div>
+
+<div class="info-box">
+<div class="label">Type of Study</div>
+<div class="value">Physical</div>
+</div>
+
+<div class="info-box">
+<div class="label">Study Hours</div>
+<div class="value">10AM TO 12PM | Monday - Friday</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- LEARNING -->
+<div class="section" id="loans">
+
+<div class="card">
+
+<h2>General Student Information</h2>
+
+<div class="info-grid">
+
+<div class="info-box">
+<div class="label">Course Code</div>
+<div class="value">102</div>
+</div>
+
+<div class="info-box">
+<div class="label">General Performance Rate</div>
+<div class="value">---</div>
+</div>
+
+<div class="info-box">
+<div class="label">Conduct Remarks</div>
+<div class="value">---</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Fee Payment</h2>
+
+<table class="table">
+
+<tr>
+<th>Description</th>
+<th>Amount</th>
+</tr>
+
+<tr>
+<td>Total Fee Payable</td>
+<td>Kshs. 6,600</td>
+</tr>
+
+<tr>
+<td>Total Paid</td>
+<td>Kshs. 2,000</td>
+</tr>
+
+<tr>
+<td>Balance</td>
+<td>Kshs. 4,600</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="card">
+
+<h2>Academic Score Sheet</h2>
+
+<table class="table">
+
+<tr>
+<th>Unit</th>
+<th>Score</th>
+</tr>
+
+<tr>
+<td>Introduction</td>
+<td>83%</td>
+</tr>
+
+<tr>
+<td>Word</td>
+<td>85%</td>
+</tr>
+
+<tr>
+<td>Excel</td>
+<td>60%</td>
+</tr>
+
+<tr>
+<td>Access</td>
+<td>50%</td>
+</tr>
+
+<tr>
+<td>Publisher</td>
+<td>78%</td>
+</tr>
+
+<tr>
+<td>PowerPoint</td>
+<td>80%</td>
+</tr>
+
+<tr>
+<td>Internet</td>
+<td>75%</td>
+</tr>
+
+<tr>
+<td>Overall Grade</td>
+<td>DISTINCTION</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ASSIGNMENTS -->
+<div class="section" id="assignments">
+
+<div class="card">
+
+<h2>Assignments</h2>
+
+<div class="notice">
+
+<p>There are currently no active assignments available.</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- EXAMS -->
+<div class="section" id="exams">
+
+<div class="card">
+
+<h2>Examinations</h2>
+
+<div class="notice">
+
+<p>You currently have no pending examinations.</p>
+
+<button class="btn btn-primary">
+---
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- CERTIFICATIONS -->
+<div class="section" id="self">
+
+<div class="card">
+
+<h2>Certification Information</h2>
+
+<div class="notice">
+
+<p>You have completed your course. Congratulations.</p>
+
+<p>Make good use of the knowledge attained at Ruralnet ICT Academy.</p>
+
+<p>If you faced any challenge while learning, feel free to communicate through the contact information below.</p>
+
+<p>Your certificate is available below.</p>
+
+</div>
+
+<br>
+
+<button class="btn btn-primary"
+onclick="window.open('certificates/MITCHELLE.pdf', '_blank')">
+
+View Certificate
+
+</button>
+
+<a href="certificates/MITCHELLE.pdf" download class="btn btn-success">
+Download Certificate
+</a>
+
+</div>
+
+</div>
+
+<!-- CONTACT -->
+<div class="section" id="contact">
+
+<div class="card">
+
+<h2>Contact Information</h2>
+
+<div class="info-grid">
+
+<div class="info-box">
+<div class="label">Email</div>
+<div class="value">ruralnet2016@gmail.com</div>
+</div>
+
+<div class="info-box">
+<div class="label">Phone</div>
+<div class="value">+254700886058</div>
+</div>
+
+<div class="info-box">
+<div class="label">Website</div>
+<div class="value">www.ruralnet.co.ke</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+
+<p><strong>MITCHELLE ANYANGO ONYANGO</strong></p>
+
+<p><strong>ICT ESSENTIALS 102</strong></p>
+
+</footer>
+
+</div>
 
 <script>
-  // Switch sections
-  function showSection(id, event) {
-    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
 
-    document.querySelectorAll('.nav li').forEach(li => li.classList.remove('active'));
-    event.target.classList.add('active');
+function showSection(id, event){
 
-    // close sidebar on small screens
-    document.getElementById('sidebar').classList.remove('open');
-  }
+document.querySelectorAll('.section').forEach(section=>{
+section.classList.remove('active');
+});
 
-  // Toggle sidebar for small screens
-  const toggleBtn = document.getElementById('toggleBtn');
-  const sidebar = document.getElementById('sidebar');
+document.getElementById(id).classList.add('active');
 
-  toggleBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('open');
-  });
+document.querySelectorAll('.nav li').forEach(item=>{
+item.classList.remove('active');
+});
+
+if(event){
+event.target.classList.add('active');
+}
+
+sidebar.classList.remove('open');
+}
+
+const toggleBtn = document.getElementById('toggleBtn');
+const sidebar = document.getElementById('sidebar');
+
+toggleBtn.addEventListener('click', ()=>{
+
+sidebar.classList.toggle('open');
+
+});
+
 </script>
 
 </body>
