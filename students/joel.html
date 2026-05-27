@@ -32,6 +32,10 @@
   font-family:'Poppins',sans-serif;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   display:flex;
   min-height:100vh;
@@ -40,10 +44,14 @@ body{
   url("../images/white1.jpg");
   background-size:cover;
   background-position:center;
-  overflow:hidden;
+  background-attachment:fixed;
+
+  /* FIXED SCROLL */
+  overflow-x:hidden;
+  overflow-y:auto;
 }
 
-/* ================= SIDEBAR ================= */
+/* SIDEBAR */
 
 .sidebar{
   width:280px;
@@ -55,6 +63,12 @@ body{
   justify-content:space-between;
   transition:.4s ease;
   z-index:1000;
+
+  /* FIX */
+  height:100vh;
+  overflow-y:auto;
+  position:sticky;
+  top:0;
 }
 
 .logo-section{
@@ -141,13 +155,17 @@ body{
   box-shadow:0 10px 20px rgba(239,68,68,.3);
 }
 
-/* ================= CONTENT ================= */
+/* CONTENT */
 
 .content{
   flex:1;
-  overflow-y:auto;
   padding:30px;
   position:relative;
+
+  /* FIX */
+  min-height:100vh;
+  overflow-x:hidden;
+  overflow-y:auto;
 }
 
 .topbar{
@@ -155,6 +173,7 @@ body{
   justify-content:space-between;
   align-items:center;
   margin-bottom:25px;
+  gap:10px;
 }
 
 .topbar h1{
@@ -166,7 +185,7 @@ body{
   color:#cbd5e1;
 }
 
-/* ================= TOGGLE ================= */
+/* TOGGLE */
 
 .toggle-btn{
   display:none;
@@ -185,7 +204,7 @@ body{
   box-shadow:var(--shadow);
 }
 
-/* ================= SECTION ================= */
+/* SECTION */
 
 .section{
   display:none;
@@ -209,6 +228,7 @@ body{
   color:var(--secondary);
   margin-bottom:25px;
   position:relative;
+  line-height:1.4;
 }
 
 .card h2::after{
@@ -222,7 +242,7 @@ body{
   background:linear-gradient(135deg,var(--primary),var(--accent));
 }
 
-/* ================= GRID ================= */
+/* GRID */
 
 .info-grid{
   display:grid;
@@ -236,6 +256,7 @@ body{
   border-radius:18px;
   padding:18px;
   transition:.3s ease;
+  overflow-wrap:break-word;
 }
 
 .info-box:hover{
@@ -253,9 +274,10 @@ body{
   font-size:15px;
   font-weight:600;
   color:var(--secondary);
+  word-break:break-word;
 }
 
-/* ================= WHATSAPP ================= */
+/* WHATSAPP */
 
 .whatsapp-box{
   background:linear-gradient(135deg,#25D366,#128C7E);
@@ -287,7 +309,7 @@ body{
   transform:scale(1.05);
 }
 
-/* ================= BUTTONS ================= */
+/* BUTTONS */
 
 .btn{
   display:inline-block;
@@ -298,6 +320,7 @@ body{
   font-weight:600;
   text-decoration:none;
   transition:.3s ease;
+  margin-top:10px;
 }
 
 .btn-primary{
@@ -314,7 +337,7 @@ body{
   transform:translateY(-3px);
 }
 
-/* ================= TABLE ================= */
+/* TABLE */
 
 .table{
   width:100%;
@@ -335,7 +358,7 @@ body{
   background:#fff;
 }
 
-/* ================= NOTICE ================= */
+/* NOTICE */
 
 .notice{
   background:#ecfeff;
@@ -348,31 +371,10 @@ body{
 .notice p{
   margin-bottom:10px;
   color:#164e63;
+  line-height:1.7;
 }
 
-/* ================= ETHICS ================= */
-
-.ethics{
-  margin-top:25px;
-  text-align:center;
-}
-
-.ethics a{
-  display:inline-block;
-  text-decoration:none;
-  padding:14px 22px;
-  border-radius:14px;
-  background:linear-gradient(135deg,#22c55e,#06b6d4);
-  color:white;
-  font-weight:600;
-  transition:.3s ease;
-}
-
-.ethics a:hover{
-  transform:translateY(-4px);
-}
-
-/* ================= FOOTER ================= */
+/* FOOTER */
 
 footer{
   text-align:center;
@@ -384,7 +386,11 @@ footer{
   backdrop-filter:blur(10px);
 }
 
-/* ================= ANIMATION ================= */
+footer p{
+  line-height:1.8;
+}
+
+/* ANIMATION */
 
 @keyframes fade{
   from{
@@ -397,15 +403,21 @@ footer{
   }
 }
 
-/* ================= RESPONSIVE ================= */
+/* RESPONSIVE */
 
 @media(max-width:900px){
+
+  body{
+    display:block;
+  }
 
   .sidebar{
     position:fixed;
     left:-100%;
     top:0;
-    height:100%;
+    width:280px;
+    height:100vh;
+    overflow-y:auto;
   }
 
   .sidebar.open{
@@ -417,7 +429,10 @@ footer{
   }
 
   .content{
-    padding:90px 20px 20px;
+    width:100%;
+    min-height:100vh;
+    padding:90px 15px 20px;
+    overflow-x:hidden;
   }
 
   .topbar{
@@ -428,7 +443,69 @@ footer{
 
   .topbar h1{
     font-size:24px;
+    word-break:break-word;
   }
+
+  .card{
+    padding:20px;
+    border-radius:18px;
+  }
+
+  .info-grid{
+    grid-template-columns:1fr;
+  }
+
+  .table{
+    display:block;
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+
+  .btn{
+    width:100%;
+    text-align:center;
+  }
+
+  .whatsapp-box{
+    padding:22px 18px;
+  }
+
+  footer{
+    padding:18px;
+  }
+}
+
+/* EXTRA SMALL DEVICES */
+
+@media(max-width:500px){
+
+  .logo-section img{
+    width:90px;
+    height:90px;
+  }
+
+  .logo-section h2{
+    font-size:18px;
+  }
+
+  .topbar h1{
+    font-size:22px;
+  }
+
+  .card h2{
+    font-size:20px;
+  }
+
+  .value{
+    font-size:14px;
+  }
+
+  .toggle-btn{
+    width:48px;
+    height:48px;
+    font-size:20px;
+  }
+
 }
 
 </style>
