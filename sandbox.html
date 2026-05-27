@@ -1,67 +1,777 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>glow</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Stephen Student Portal</title>
+
+<link rel="icon" type="image/png" href="../images/favicon.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-    .stat-box{
-    position: relative;
-    width: 180px;
-    height: 70px;
-    border-radius: 20px;
-    overflow: hidden;
+
+:root{
+    --primary:#2563eb;
+    --secondary:#0f172a;
+    --accent:#06b6d4;
+    --light:#f8fafc;
+    --white:#ffffff;
+    --text:#1e293b;
+    --gray:#64748b;
+    --border:rgba(255,255,255,0.15);
+    --shadow:0 10px 30px rgba(0,0,0,0.15);
 }
 
-/* rotating glow */
-.stat-box::before{
-    content: "";
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(
-        transparent,
-        transparent,
-        transparent,
-        #0044ff
-    );
-    animation: rotateBorder 4s linear infinite;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
 }
 
-/* inner box */
-.stat-box::after{
-    content: "";
-    position: absolute;
-    inset: 3px;
-    background: rgba(0,0,0,0.5);
-    border-radius: 18px;
+body{
+    display:flex;
+    min-height:100vh;
+    background:
+    linear-gradient(rgba(15,23,42,.92), rgba(15,23,42,.92)),
+    url("../images/white1.jpg");
+    background-size:cover;
+    background-position:center;
+    overflow:hidden;
+    color:var(--text);
 }
 
-/* content above */
-.stat-box .content{
-    position: relative;
-    z-index: 2;
-    color: white;
-    text-align: center;
-    padding-top: 10px;
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    width:280px;
+    background:rgba(15,23,42,0.95);
+    backdrop-filter:blur(12px);
+    border-right:1px solid var(--border);
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    transition:.4s ease;
+    z-index:1000;
 }
 
-/* animation */
-@keyframes rotateBorder{
-    100%{
-        transform: rotate(360deg);
+.logo-section{
+    text-align:center;
+    padding:30px 20px 10px;
+}
+
+.logo-section img{
+    width:110px;
+    height:110px;
+    object-fit:cover;
+    border-radius:50%;
+    border:4px solid rgba(255,255,255,.2);
+    box-shadow:0 10px 20px rgba(0,0,0,.4);
+}
+
+.logo-section h2{
+    color:white;
+    margin-top:15px;
+    font-size:20px;
+}
+
+.logo-section p{
+    color:#cbd5e1;
+    font-size:13px;
+}
+
+.nav{
+    list-style:none;
+    padding:20px 12px;
+}
+
+.nav li{
+    padding:15px 18px;
+    margin-bottom:10px;
+    border-radius:14px;
+    color:#e2e8f0;
+    cursor:pointer;
+    transition:.3s ease;
+    font-size:15px;
+    font-weight:500;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.nav li:hover{
+    background:rgba(255,255,255,.08);
+    transform:translateX(4px);
+}
+
+.nav li.active{
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    color:white;
+    box-shadow:0 8px 20px rgba(37,99,235,.3);
+}
+
+.bottom{
+    padding:25px;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.bottom h4{
+    color:white;
+    margin-bottom:12px;
+}
+
+.bottom p{
+    color:#cbd5e1;
+    margin-bottom:18px;
+    cursor:pointer;
+}
+
+.bottom a{
+    display:inline-block;
+    text-decoration:none;
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+    color:white;
+    padding:12px 24px;
+    border-radius:12px;
+    font-weight:600;
+    transition:.3s ease;
+}
+
+.bottom a:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(239,68,68,.3);
+}
+
+/* ================= CONTENT ================= */
+
+.content{
+    flex:1;
+    overflow-y:auto;
+    padding:30px;
+    position:relative;
+}
+
+/* Top Bar */
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.topbar h1{
+    color:white;
+    font-size:30px;
+}
+
+.topbar span{
+    color:#cbd5e1;
+    font-size:14px;
+}
+
+/* Toggle Button */
+
+.toggle-btn{
+    display:none;
+    position:fixed;
+    top:20px;
+    left:20px;
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    color:white;
+    border:none;
+    width:50px;
+    height:50px;
+    border-radius:14px;
+    font-size:22px;
+    cursor:pointer;
+    z-index:2000;
+    box-shadow:var(--shadow);
+}
+
+/* ================= CARDS ================= */
+
+.section{
+    display:none;
+    animation:fade .4s ease;
+}
+
+.section.active{
+    display:block;
+}
+
+.card{
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(12px);
+    border-radius:24px;
+    padding:30px;
+    margin-bottom:25px;
+    box-shadow:var(--shadow);
+    border:1px solid rgba(255,255,255,.2);
+}
+
+.card h2{
+    margin-bottom:20px;
+    color:var(--secondary);
+    font-size:24px;
+    position:relative;
+}
+
+.card h2::after{
+    content:'';
+    position:absolute;
+    left:0;
+    bottom:-8px;
+    width:70px;
+    height:4px;
+    border-radius:10px;
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+}
+
+/* ================= INFO GRID ================= */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:18px;
+    margin-top:25px;
+}
+
+.info-box{
+    background:#f8fafc;
+    border-radius:16px;
+    padding:18px;
+    border:1px solid #e2e8f0;
+    transition:.3s ease;
+}
+
+.info-box:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+}
+
+.label{
+    font-size:13px;
+    color:var(--gray);
+    margin-bottom:6px;
+}
+
+.value{
+    font-size:15px;
+    font-weight:600;
+    color:var(--secondary);
+}
+
+/* ================= BUTTONS ================= */
+
+.btn{
+    display:inline-block;
+    padding:14px 24px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s ease;
+    margin-top:10px;
+}
+
+.btn-primary{
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    color:white;
+}
+
+.btn-primary:hover{
+    transform:translateY(-3px);
+}
+
+.btn-success{
+    background:linear-gradient(135deg,#16a34a,#22c55e);
+    color:white;
+}
+
+.btn-danger{
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+    color:white;
+}
+
+/* ================= NOTICE ================= */
+
+.notice{
+    background:linear-gradient(135deg,#ecfeff,#cffafe);
+    border-left:6px solid var(--accent);
+    padding:20px;
+    border-radius:16px;
+    margin-top:20px;
+}
+
+.notice p{
+    margin-bottom:10px;
+    color:#164e63;
+}
+
+/* ================= WHATSAPP ================= */
+
+.whatsapp-box{
+    background:linear-gradient(135deg,#25D366,#128C7E);
+    padding:25px;
+    border-radius:22px;
+    text-align:center;
+    margin-bottom:25px;
+    color:white;
+    box-shadow:var(--shadow);
+}
+
+.whatsapp-box h3{
+    margin-bottom:12px;
+}
+
+.whatsapp-box a{
+    display:inline-block;
+    margin-top:10px;
+    background:white;
+    color:#128C7E;
+    text-decoration:none;
+    padding:12px 20px;
+    border-radius:12px;
+    font-weight:600;
+    transition:.3s ease;
+}
+
+.whatsapp-box a:hover{
+    transform:scale(1.05);
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    text-align:center;
+    margin-top:40px;
+    padding:20px;
+    color:white;
+    background:rgba(255,255,255,.08);
+    border-radius:18px;
+    backdrop-filter:blur(10px);
+}
+
+/* ================= ANIMATION ================= */
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .sidebar{
+        position:fixed;
+        left:-100%;
+        top:0;
+        height:100%;
+    }
+
+    .sidebar.open{
+        left:0;
+    }
+
+    .toggle-btn{
+        display:block;
+    }
+
+    .content{
+        padding:90px 20px 20px;
+    }
+
+    .topbar{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:8px;
+    }
+
+    .topbar h1{
+        font-size:24px;
     }
 }
 
 </style>
 </head>
+
 <body>
-    <div class="stat-box">
-    <div class="content">
-        <h3>7,000</h3>
-        <p>No Of Students</p>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+
+    <div>
+
+        <div class="logo-section">
+            <img src="students/images/stivo.png">
+            <h2>Stephen Owino</h2>
+            <p>Student Dashboard</p>
+        </div>
+
+        <ul class="nav">
+            <li class="active" onclick="showSection('personal', event)">👤 Personal Details</li>
+            <li onclick="showSection('academic', event)">🎓 Academic Info</li>
+            <li onclick="showSection('course', event)">📘 Course Details</li>
+            <li onclick="showSection('progress', event)">📈 Learning Progress</li>
+            <li onclick="showSection('assignments', event)">📝 Assignments</li>
+            <li onclick="showSection('exams', event)">📄 Examinations</li>
+            <li onclick="showSection('results', event)">🏆 Certifications</li>
+        </ul>
+
     </div>
+
+    <div class="bottom">
+        <h4>Support</h4>
+        <p onclick="showSection('contact', event)">📞 Contact Us</p>
+
+        <a href="/students">Sign Out</a>
+    </div>
+
 </div>
+
+<!-- Content -->
+<div class="content">
+
+    <button class="toggle-btn" id="toggleBtn">☰</button>
+
+    <div class="topbar">
+        <div>
+            <h1>Student Portal</h1>
+            <span>Welcome back, Stephen 👋</span>
+        </div>
+    </div>
+
+    <!-- PERSONAL -->
+    <div class="section active" id="personal">
+
+        <div class="whatsapp-box">
+            <h3>Join Our WhatsApp Group</h3>
+
+            <a href="https://chat.whatsapp.com/FqtZpwSb5dQ1kqsXcfnpTF?mode=gi_t">
+                Join Group
+            </a>
+        </div>
+
+        <div class="card">
+
+            <h2>Background Information</h2>
+
+            <div class="info-grid">
+
+                <div class="info-box">
+                    <div class="label">Full Name</div>
+                    <div class="value">Stephen Owino Ochieng</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Gender</div>
+                    <div class="value">Male</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Date of Birth</div>
+                    <div class="value">28/01/2009</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Nationality</div>
+                    <div class="value">Kenyan</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">County</div>
+                    <div class="value">Siaya</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Sub County</div>
+                    <div class="value">Ugunja</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Ward</div>
+                    <div class="value">Ugunja</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Village</div>
+                    <div class="value">Sigomere</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Guardian Contact</div>
+                    <div class="value">+254723751400</div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ACADEMIC -->
+    <div class="section" id="academic">
+
+        <div class="card">
+
+            <h2>Academic Information</h2>
+
+            <div class="info-grid">
+
+                <div class="info-box">
+                    <div class="label">KCPE School</div>
+                    <div class="value">Happy Cot Academy</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">KCPE Year</div>
+                    <div class="value">2022</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">KCSE School</div>
+                    <div class="value">Rangala Girls High School</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">KCSE Year</div>
+                    <div class="value">2025</div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- COURSE -->
+    <div class="section" id="course">
+
+        <div class="card">
+
+            <h2>Course Details</h2>
+
+            <div class="info-grid">
+
+                <div class="info-box">
+                    <div class="label">Admission Number</div>
+                    <div class="value">RICT102/26/05/BAPK101</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Course</div>
+                    <div class="value">ICT Essentials / Computer Basics II</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Duration</div>
+                    <div class="value">Two Months</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Learning Mode</div>
+                    <div class="value">Full Time</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Study Type</div>
+                    <div class="value">Physical</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Study Hours</div>
+                    <div class="value">10AM - 12PM</div>
+                </div>
+
+            </div>
+
+            <br>
+
+            <a href="../ethics.pdf" target="_blank" class="btn btn-primary">
+                View Rules & Ethics
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="section" id="progress">
+
+        <div class="card">
+
+            <h2>Learning Progress</h2>
+
+            <div class="info-grid">
+
+                <div class="info-box">
+                    <div class="label">General Performance</div>
+                    <div class="value">---</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Conduct Remarks</div>
+                    <div class="value">---</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Introduction</div>
+                    <div class="value">---</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Word</div>
+                    <div class="value">---</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Excel</div>
+                    <div class="value">---</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">PowerPoint</div>
+                    <div class="value">---</div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ASSIGNMENTS -->
+    <div class="section" id="assignments">
+
+        <div class="card">
+
+            <h2>Assignments</h2>
+
+            <div class="notice">
+                <p>There are currently no assignments available.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- EXAMS -->
+    <div class="section" id="exams">
+
+        <div class="card">
+
+            <h2>Examinations</h2>
+
+            <p>ICT Essentials Assessment</p>
+
+            <br>
+
+            <button class="btn btn-primary"
+            onclick="window.open('../INTRO.pdf','_blank')">
+                Open Assessment
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- RESULTS -->
+    <div class="section" id="results">
+
+        <div class="card">
+
+            <h2>Certification & Notices</h2>
+
+            <div class="notice">
+
+                <p>Please communicate with your instructor in case of absence.</p>
+
+                <p>Absence for one week without communication may lead to discontinuation.</p>
+
+                <p>Certificates are issued after fee clearance.</p>
+
+                <p>Certificate processing takes 6–7 days after course completion.</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CONTACT -->
+    <div class="section" id="contact">
+
+        <div class="card">
+
+            <h2>Contact Information</h2>
+
+            <div class="info-grid">
+
+                <div class="info-box">
+                    <div class="label">Email</div>
+                    <div class="value">ruralnet2016@gmail.com</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Phone</div>
+                    <div class="value">+254700886058</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Website</div>
+                    <div class="value">www.ruralnet.co.ke</div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p><strong>STEPHEN OWINO OCHIENG</strong></p>
+        <p>ICT ESSENTIALS 102</p>
+    </footer>
+
+</div>
+
+<script>
+
+function showSection(id, event){
+
+    document.querySelectorAll('.section').forEach(section=>{
+        section.classList.remove('active');
+    });
+
+    document.getElementById(id).classList.add('active');
+
+    document.querySelectorAll('.nav li').forEach(item=>{
+        item.classList.remove('active');
+    });
+
+    if(event){
+        event.target.classList.add('active');
+    }
+
+    sidebar.classList.remove('open');
+}
+
+const toggleBtn = document.getElementById('toggleBtn');
+const sidebar = document.getElementById('sidebar');
+
+toggleBtn.addEventListener('click', ()=>{
+    sidebar.classList.toggle('open');
+});
+
+</script>
+
 </body>
 </html>
