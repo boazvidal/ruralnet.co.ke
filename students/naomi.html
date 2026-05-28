@@ -3,527 +3,1093 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Naomi</title>
+<title>Zilpa Atieno Onyango</title>
+
 <link rel="icon" type="image/png" href="../images/favicon.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
 
-  body {
-    display: flex;
-    height: 100vh;
-    overflow: hidden;
-  }
-
-  /* Sidebar */
-  .sidebar {
-    width: 240px;
-    background: url(images/oceanBlue.png); /* HELB green */
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: left 0.3s ease;
-  }
-
-  .nav {
-    list-style: none;
-    padding: 20px 0;
-  }
-
-  .nav li {
-    padding: 10px 15px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-
-  .nav li:hover {
-    background: rgba(255,255,255,0.1);
-  }
-
-  .nav li.active {
-    background: #f9b233; /* highlight color */
-    color: #000;
-    font-weight: bold;
-  }
-
-  .bottom {
-    padding: 20px;
-    border-top: 5px solid white;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-  
-
-
-  .bottom a {
-    color: white;
-    background-color: red;
-    padding: 10px 60px;
-    border-radius: 20px;
-    border-bottom: 5px solid white;
-    font-weight: bold;
-    text-decoration: none;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    margin-top: 20px;
-  }
-
-  .bottom a:hover {
-    color: red;
-    background: white;
-    border-bottom: 5px solid red;
-  }
-
-  .bottom p {
-    margin-bottom: 20px;
-  }
-
-  /* Main Content */
-  .content {
-    flex: 1;
-    background: url(../images/white1.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding: 20px;
-    overflow-y: auto;
-    position: relative;
-  }
-
-  /* Toggle Button for Small Screens */
-  .toggle-btn {
-    display: none;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: #3100b8;
-    color: white;
-    border: none;
-    padding: 10px 14px;
-    font-size: 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    z-index: 999;
-  }
-
-  /* Section Styling */
-  .section {
-    display: none;
-    /*background: url(images/whiteB.png); /*rgb(209, 70, 70);
-    background-repeat: no-repeat;
-    background-size: cover;*/
-    background: linear-gradient(270deg, red, lightblue, orange, yellow, white, cyan, magenta, lightgreen, green);
-    background-size: 800% 800%;
-    animation: bgAnimation 15s ease infinite;
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    border-bottom: 10px solid blue;
-  }
-
-  .section a {
-    text-decoration: none;
-    color: #000;
-  }
-
-  @keyframes bgAnimation {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-  }
-
-  .section.active {
-    display: block;
-  }
-
-  .section h1 {
-    color: blue;
-    padding: 1rem;
-    border-bottom: 5px solid black;
-
-  }
-
-  .section strong p pre {
-    font-family: 'arial black';
-    padding: 0.3rem;
-  }
-
-  .section p {
-    padding: 0.5rem;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    size: 23px;
-  }
-
-  footer {
-    text-align: center;
-    color: #cbda07;
-    font-size: 18px;
-    margin-top: 40px;
-    font-family: 'Times New Roman', Times, serif;
-    background: url(images/Dblue.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 3rem;
-    padding: 0.5rem;
-    border-bottom: 7px solid orangered;
-  }
-
-  footer p {
-    padding: 0.5rem;
-  }
-
-  /* --- RESPONSIVE --- */
-  @media (max-width: 900px) {
-    body {
-      flex-direction: column;
-    }
-
-    .sidebar {
-      position: fixed;
-      left: -250px;
-      top: 0;
-      height: 100%;
-      z-index: 1000;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.3);
-    }
-
-    .sidebar img {
-      border-radius: 16px;
-    }
-
-    .sidebar.open {
-      left: 0;
-    }
-
-    .toggle-btn {
-      display: block;
-    }
-
-    .content {
-      padding-top: 60px;
-    }
-  }
-
-  button {
-            padding: 12px 25px;
-            margin: 10px;
-            font-size: 18px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            background: #007bff;
-            color: white;
-        }
-
-        button:hover {
-            background: #0056b3;
-        }
-
-        .download-btn {
-            background: #28a745;
-        }
-
-        .download-btn:hover {
-            background: #1e7e34;
-        }
-  .what {
-  text-align: center; /* centers content */
-  padding: 20px;
-  /*background-color: #f9f9f9; /* light background */
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+:root{
+  --primary:#2563eb;
+  --secondary:#0f172a;
+  --accent:#06b6d4;
+  --success:#22c55e;
+  --danger:#ef4444;
+  --light:#f8fafc;
+  --white:#ffffff;
+  --text:#1e293b;
+  --gray:#64748b;
+  --border:rgba(255,255,255,0.1);
+  --shadow:0 10px 30px rgba(0,0,0,0.15);
 }
 
-.what h2 {
-  margin-bottom: 15px;
-  color: #333;
-  font-family: Arial, sans-serif;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
 }
 
-.what a {
-  display: inline-block;
-  padding: 12px 24px;
-  background: linear-gradient(135deg, #25D366, #128C7E); /* WhatsApp green tones */
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+html{
+  scroll-behavior:smooth;
 }
 
-.what a:hover {
-  background: linear-gradient(135deg, #128C7E, #075E54);
-  transform: translateY(-2px);
+body{
+  display:flex;
+  min-height:100vh;
+  background:
+  linear-gradient(rgba(15,23,42,.92), rgba(15,23,42,.92)),
+  url("../images/white1.jpg");
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+  overflow-x:hidden;
+  overflow-y:auto;
 }
 
-.ethics {
-  text-align: center;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+/* SIDEBAR */
+
+.sidebar{
+  width:280px;
+  background:rgba(15,23,42,.96);
+  backdrop-filter:blur(12px);
+  border-right:1px solid var(--border);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:.4s ease;
+  z-index:1000;
+  height:100vh;
+  overflow-y:auto;
+  position:sticky;
+  top:0;
 }
 
-.ethics a {
-  margin-bottom: 15px;
-  color: blue;
-  font-family: Georgia;
+.logo-section{
+  text-align:center;
+  padding:30px 20px 15px;
 }
 
-.ethics a {
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: linear-gradient(135deg, green, skyblue);
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  border-radius: 10px;
-  transition: all 0.4s ease;
-  box-shadow: 0 3px 6px rgba(0,0,0, 0.4);
+.logo-section img{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid rgba(255,255,255,.15);
+  box-shadow:0 10px 20px rgba(0,0,0,.4);
 }
 
-.ethics a:hover {
-  background-color: white;
-  transform: translateY(-7px);
-  color: blue;
+.logo-section h2{
+  color:white;
+  margin-top:15px;
+  font-size:21px;
+}
+
+.logo-section p{
+  color:#cbd5e1;
+  font-size:14px;
+}
+
+.nav{
+  list-style:none;
+  padding:20px 14px;
+}
+
+.nav li{
+  padding:15px 18px;
+  margin-bottom:10px;
+  border-radius:14px;
+  color:#e2e8f0;
+  cursor:pointer;
+  transition:.3s ease;
+  font-size:15px;
+  font-weight:500;
+}
+
+.nav li:hover{
+  background:rgba(255,255,255,.08);
+  transform:translateX(5px);
+}
+
+.nav li.active{
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:white;
+  box-shadow:0 10px 20px rgba(37,99,235,.3);
+}
+
+.bottom{
+  padding:25px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+.bottom h4{
+  color:white;
+  margin-bottom:15px;
+}
+
+.bottom p{
+  color:#cbd5e1;
+  margin-bottom:18px;
+  cursor:pointer;
+}
+
+.bottom a{
+  display:inline-block;
+  text-decoration:none;
+  background:linear-gradient(135deg,#ef4444,#dc2626);
+  color:white;
+  padding:12px 22px;
+  border-radius:12px;
+  font-weight:600;
+  transition:.3s ease;
+}
+
+.bottom a:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 20px rgba(239,68,68,.3);
+}
+
+/* CONTENT */
+
+.content{
+  flex:1;
+  padding:30px;
+  position:relative;
+  min-height:100vh;
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+  gap:10px;
+}
+
+.topbar h1{
+  color:white;
+  font-size:32px;
+}
+
+.topbar span{
+  color:#cbd5e1;
+}
+
+/* TOGGLE */
+
+.toggle-btn{
+  display:none;
+  position:fixed;
+  top:20px;
+  left:20px;
+  width:52px;
+  height:52px;
+  border:none;
+  border-radius:14px;
+  font-size:22px;
+  cursor:pointer;
+  z-index:2000;
+  color:white;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:var(--shadow);
+}
+
+/* SECTION */
+
+.section{
+  display:none;
+  animation:fade .4s ease;
+}
+
+.section.active{
+  display:block;
+}
+
+.card{
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(12px);
+  border-radius:24px;
+  padding:30px;
+  margin-bottom:25px;
+  box-shadow:var(--shadow);
+}
+
+.card h2{
+  color:var(--secondary);
+  margin-bottom:25px;
+  position:relative;
+  line-height:1.4;
+}
+
+.card h2::after{
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:-10px;
+  width:80px;
+  height:4px;
+  border-radius:10px;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+}
+
+/* GRID */
+
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px;
+}
+
+.info-box{
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:18px;
+  padding:18px;
+  transition:.3s ease;
+}
+
+.info-box:hover{
+  transform:translateY(-5px);
+  box-shadow:0 10px 20px rgba(0,0,0,.08);
+}
+
+.label{
+  font-size:13px;
+  color:var(--gray);
+  margin-bottom:7px;
+}
+
+.value{
+  font-size:15px;
+  font-weight:600;
+  color:var(--secondary);
+  word-break:break-word;
+}
+
+/* WHATSAPP */
+
+.whatsapp-box{
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  padding:28px;
+  border-radius:24px;
+  margin-bottom:25px;
+  text-align:center;
+  color:white;
+  box-shadow:var(--shadow);
+}
+
+.whatsapp-box h3{
+  margin-bottom:12px;
+}
+
+.whatsapp-box a{
+  display:inline-block;
+  margin-top:10px;
+  padding:12px 22px;
+  border-radius:12px;
+  text-decoration:none;
+  background:white;
+  color:#128C7E;
+  font-weight:700;
+  transition:.3s ease;
+}
+
+.whatsapp-box a:hover{
+  transform:scale(1.05);
+}
+
+/* BUTTONS */
+
+.btn{
+  display:inline-block;
+  padding:13px 24px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:600;
+  text-decoration:none;
+  transition:.3s ease;
+  margin-top:10px;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:white;
+}
+
+.btn-success{
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+  color:white;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+}
+
+/* TABLE */
+
+.table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px;
+}
+
+.table th{
+  background:var(--secondary);
+  color:white;
+  padding:14px;
+  text-align:left;
+}
+
+.table td{
+  padding:14px;
+  border-bottom:1px solid #e2e8f0;
+  background:#fff;
+}
+
+/* NOTICE */
+
+.notice{
+  background:#ecfeff;
+  border-left:6px solid var(--accent);
+  padding:20px;
+  border-radius:16px;
+  margin-top:20px;
+}
+
+.notice p{
+  margin-bottom:10px;
+  color:#164e63;
+  line-height:1.7;
+}
+
+/* ETHICS */
+
+.ethics{
+  position:relative;
+  margin-top:25px;
+  border-radius:24px;
+  overflow:hidden;
+  background:
+  linear-gradient(135deg,
+  rgba(37,99,235,.95),
+  rgba(6,182,212,.92));
+  box-shadow:
+  0 15px 35px rgba(37,99,235,.25);
+  transition:.35s ease;
+}
+
+.ethics::before{
+  content:'📘';
+  position:absolute;
+  top:-10px;
+  right:20px;
+  font-size:90px;
+  opacity:.08;
+}
+
+.ethics:hover{
+  transform:translateY(-6px) scale(1.01);
+  box-shadow:
+  0 20px 45px rgba(6,182,212,.35);
+}
+
+.ethics a{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:24px 28px;
+  text-decoration:none;
+  color:white;
+  font-size:16px;
+  font-weight:600;
+}
+
+.ethics a::after{
+  content:'↗';
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.18);
+  font-size:20px;
+}
+
+/* FOOTER */
+
+footer{
+  text-align:center;
+  padding:22px;
+  color:white;
+  background:rgba(255,255,255,.08);
+  border-radius:20px;
+  margin-top:35px;
+  backdrop-filter:blur(10px);
+}
+
+footer p{
+  line-height:1.8;
+}
+
+/* ANIMATION */
+
+@keyframes fade{
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+  body{
+    display:block;
+  }
+
+  .sidebar{
+    position:fixed;
+    left:-100%;
+    top:0;
+    width:280px;
+    height:100vh;
+  }
+
+  .sidebar.open{
+    left:0;
+  }
+
+  .toggle-btn{
+    display:block;
+  }
+
+  .content{
+    width:100%;
+    padding:90px 15px 20px;
+  }
+
+  .topbar{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .topbar h1{
+    font-size:24px;
+  }
+
+  .card{
+    padding:20px;
+  }
+
+  .info-grid{
+    grid-template-columns:1fr;
+  }
+
+  .table{
+    display:block;
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+
+  .btn{
+    width:100%;
+    text-align:center;
+  }
 }
 
 </style>
 </head>
+
 <body>
 
-    <!--FULL PAGE PROTECTION SCRIPT -->
-
 <script>
-	//Right-Click
-	document.addEventListener('contextmenu', event => event.preventDefault());
-</script>
+document.addEventListener('contextmenu', event => event.preventDefault());
 
-<!--F12-->
-<script>
-	document.onkeydown = function(e) {
+document.onkeydown = function(e){
 
-	//F12
-	if (e.keyCode == 123) {
-		return false;
-	}
+if(e.keyCode == 123){
+return false;
+}
 
+if(e.ctrlKey && e.shiftKey && (
+e.keyCode === 73 ||
+e.keyCode === 74 ||
+e.keyCode === 67
+)){
+return false;
+}
 
-//Ctrl+Shift+I or Ctrl+Shift+J or Ctrl+Shift+C
+if(e.ctrlKey && e.keyCode === 85){
+return false;
+}
 
-	if (e.ctrlKey && e.shiftKey && (
-		e.keyCode === 73 ||
-		e.keyCode === 74 ||
-		e.keyCode === 67
-	)) {
-		return false;
-	}
+if(e.ctrlKey && e.keyCode === 67){
+return false;
+}
 
-//Ctrl+U View Source-->
-
-	if (e.ctrlKey && e.keyCode === 85) {
-		return false;
-	}
-
-	//Ctrl+C Copy
-	if (e.ctrlKey && e.keyCode === 67) {
-		return false;
-	}
 };
 </script>
 
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
 
-  <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
+<div>
 
-    <img src="images/naomi.png">
-    <ul class="nav">
-        <strong>
-      <li class="active" onclick="showSection('update', event)">PERSONAL DETAILS</li>
-      <li onclick="showSection('funds', event)">ACADEMIC INFO</li>
-      <li onclick="showSection('postgrad', event)">COURSE DETAILS</li>
-      <li onclick="showSection('loans', event)">LEARNING PROGRESS</li>
-      <li onclick="showSection('assignments', event)">ASSIGNMENTS</li>
-      <li onclick="showSection('exams', event)">EXAMINATIONS</li>
-      <li onclick="showSection('self', event)">CERTIFICATIONS</li>
-      </strong>
-    </ul>
-    <div class="bottom">
-      <h4>CONTACT</h4>
-      <p onclick="showSection('contact', event)" style="cursor:pointer;">📞 Contact us</p>
-      <a href="/students">SIGN OUT</a>
-    </div>
-  </div>
+<div class="logo-section">
+<img src="images/zilpa.png">
+<h2>Zilpa Atieno Onyango</h2>
+<p>Student Dashboard</p>
+</div>
 
-  <!-- Content -->
-  <div class="content">
-    <button class="toggle-btn" id="toggleBtn">☰ Menu</button>
+<ul class="nav">
 
-    <div id="update" class="section active">
+<li class="active" onclick="showSection('personal', event)">👤 Personal Details</li>
 
-      <div class="what">
-      <a href="https://chat.whatsapp.com/FqtZpwSb5dQ1kqsXcfnpTF?mode=gi_t">Click here to join our whatsapp group</a>
-      </div>
+<li onclick="showSection('academic', event)">🎓 Academic Info</li>
 
-      <h1>BACKGROUND INFORMATION</h1>
-      <strong>
-      <p><pre>NAME:            NAOMI AKINYI JUMA</pre></p>
-      <p><pre>GENDER:          FEMALE</p></pre>
-      <p><pre>DATE OF BIRTH:   04/04/2007</pre></p>
-      <p><pre>MARITAL STATUS:  SINGLE</p></pre>
-      <p><pre>NATIONALITY:     KENYAN</pre></p>
-      <p><pre>COUNTY:          SIAYA</p></pre>
-      <p><pre>SUB-COUNTY:      N/A</p></pre>
-      <p><pre>CONSTITUENCY:     N/A</p></pre>
-      <p><pre>WARD:       N/A </pre></p>
-      <p><pre>LOCATION/village:        N/A</p></pre>
-      <P><pre>BOX ADRESS:      N/A</pre></P>
-      <P><pre>STUDENT'S CONTACT:     N/A</pre></P>
-      <P><pre>GUARDIAN'S CONTACT:    +254720293003 </pre></P>
-      <p><pre>STUDENT'S EMAIL:       N/A</p></pre>
-      </strong>
-    </div>
+<li onclick="showSection('course', event)">📘 Course Details</li>
 
-    <div id="funds" class="section">
+<li onclick="showSection('progress', event)">📈 Learning Progress</li>
 
-      <h1>ACADEMIC INFO</h1>
-      <strong>
-        <p><pre>KCPE SCHOOL: MAHWI PRIMARY</pre></p>
-    </strong>
-        <p>KCPE YEAR: 2022</p>
+<li onclick="showSection('assignments', event)">📝 Assignments</li>
 
-    <strong>
-        <p>KCSE SCHOOL: TUKJOWI GIRLS</p>
-    </strong>
-        <p>KCSE YEAR: 2025</p>
+<li onclick="showSection('exams', event)">📄 Examinations</li>
 
-            <strong>
-        <p>OTHER INSTITUTION: N/A</p>
-        <p>OTHER INSTITUTION: YEAR: N/A</p>
-    </strong>
-    </div>
+<li onclick="showSection('certifications', event)">🏆 Certifications</li>
 
-    <div id="postgrad" class="section">
-      <h1>COURSE DETAILS</h1>
-      <strong>
-        <P><pre>ADMNO:            RICT102/26/05/BAPK095</pre></P>
-      <P><pre>COURSE:       ICT Essentials/Computer basics II;</pre></P>
-      <P><pre>DESCRIPTION:   Covers Intro to Computers, Microsoft Applications, Database SystemS, Internet Essentials & Photoshop </pre></P>
-      <P><pre>DURATION:       Two Months</pre></P>
-      <P><pre>Enrollment Date:   14/05/2026</pre></P>
-      <P><pre>COMPLETION DATE:          14/07/2026</pre></P>
-      <P><pre>LEARNING MODE:              FULL TIME</pre></P>
-      <P><pre>TYPE OF STUDY:       PHYSICAL</pre></P>
-      <P><pre>STUDY HOURS          8AM TO 10AM; Monday to Friday</pre></P>
-      <div class="ethics">
-        <a href="../ethics.pdf" target="_blank">Rules, Regulations, Code of conduct & Ethics</a>
-      </div>
-      </strong>
-    </div>
+</ul>
 
-    <div id="loans" class="section">
-      <h2><pre>GENERAL STUDENT'S INFORMATION</pre></h2>
-      <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>Course Description</strong><pre></p>
-      <P><pre>Course Code:                  102</pre></P>
-      <P><pre>General Performance Rate:     ---</pre></P>
-      <P><pre>Conduct Remarks               ---</pre></P>
-    
-    <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>FEE PAYMENT</strong><pre></p>
-      <P><pre>Total Fee Payable:        Kshs. 6,600</pre></P>
-      <P><pre>Total Paid                   Kshs. 2,000</pre></P>
-      <P><pre>Balance                      4,600</pre></P>
+</div>
 
-      <h2><pre>Academic Score Sheet</pre></h2>
-      <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>Assessment Results</strong><pre></p>
-      <P><pre>Introduction:             </pre></P>
-      <P><pre>Word:                          </pre></P>
-      <P><pre>Excel:                          </pre></P>
-      <P><pre>Access:                         </pre></P>
-      <P><pre>Publisher:                          ---</pre></P>
-      <P><pre>PowerPoint:                          ---</pre></P>
-      <P><pre>Internet:                          ---</pre></P>
-      <P><pre>Overral Grade:                          ---</pre></P>
-    </div>
+<div class="bottom">
 
-    <DIV id="assignments" class="section">
-        <h3>There are no current assignmnents</h3>
-    </DIV>
+<h4>CONTACT</h4>
 
-    
-    <div id="exams" class="section">
-      <h1>examinations</h1>
-      <h3><strong>ICT Essential Exam</strong></h3>
-        <!-- VIEW PDF BUTTON -->
-    <button onclick="window.open('../INTRO.pdf', '_blank')">
-        Open  Assessment
-    </button>
-    </div>
+<p onclick="showSection('contact', event)">📞 Contact Us</p>
 
-    <div id="self" class="section">
-      <h1>RESULTS</h1>
-      <strong>
-      <!--<p>You have completed your course. Congratulations</p>-->
-      </strong>
-      <p>Incase you are planning to be absent, or you have absented yourself from atending your class,</p>
-      <p>Communicate through call or SMS to the nearest Instructor or Staff</p>
-      <p>Absenting yourself for one week without communication calls for automatic discontinuation!</p>
-      <p>when defferment period is past due, you will have to be re-admitted</p>-->
-      <!--<p>Make Good use of the knowledge you have attained at Ruralnet ICT Academy. </p>
-      <p>Incase you faced any challege while learning, Please feel free to share your idea through the numbers below this page.</p>-->
-      <p>Please Note that the certificate will only be ready upon clearance of the fee.</p>
-      <p> Certificate will be ready 6 to 7 days from the date of completion</p>
-      <p>keep checking if you have completed a course</p>
-      <p>Regards.</p>
-      <strong>
-        <!--<p>Your Certificate is available here</p>-->
-      </strong>
+<a href="/students">SIGN OUT</a>
 
-      <!-- VIEW PDF BUTTON --
-    <button onclick="window.open('files/myfile.pdf', '_blank')">
-        View Certificate
-    </button>
+</div>
 
-    <!-- DOWNLOAD PDF BUTTON --
-    <a href="files/myfile.pdf" download>
-        <button class="download-btn">Download Certificate</button>-->
-    </a>
+</div>
 
-      <p></p>
-    </div>
+<!-- CONTENT -->
+<div class="content">
 
-    <div id="contact" class="section">
-      <h1>Contact info</h1>
-      <p>Email: ruralnet2016@gmail.com</p>
-      <p>Phone: +254700886058 </p>
-      <a href="https//www.ruralnet.co.ke">Web: ruralnet.co.ke</p>
-    </div>
+<button class="toggle-btn" id="toggleBtn">☰</button>
 
-    <footer>
-      <p><strong>NAOMI AKINYI JUMA</strong></p>
-      <p><strong>ICT ESSENTIALS 102</strong>.</p>
-    </footer>
-  </div>
+<div class="topbar">
+
+<div>
+<h1>Student Portal</h1>
+<span>Welcome back, Zilpa 👋</span>
+</div>
+
+</div>
+
+<!-- PERSONAL -->
+<div class="section active" id="personal">
+
+<div class="whatsapp-box">
+
+<h3>Join Our WhatsApp Group</h3>
+
+<a href="https://chat.whatsapp.com/FqtZpwSb5dQ1kqsXcfnpTF?mode=gi_t">
+Join Group
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>Background Information</h2>
+
+<div class="info-grid">
+
+<div class="info-box">
+<div class="label">Full Name</div>
+<div class="value">ZILPA ATIENO ONYANGO</div>
+</div>
+
+<div class="info-box">
+<div class="label">Gender</div>
+<div class="value">Female</div>
+</div>
+
+<div class="info-box">
+<div class="label">Date of Birth</div>
+<div class="value">01/09/2007</div>
+</div>
+
+<div class="info-box">
+<div class="label">Marital Status</div>
+<div class="value">Single</div>
+</div>
+
+<div class="info-box">
+<div class="label">Nationality</div>
+<div class="value">Kenyan</div>
+</div>
+
+<div class="info-box">
+<div class="label">County</div>
+<div class="value">Siaya</div>
+</div>
+
+<div class="info-box">
+<div class="label">Sub County</div>
+<div class="value">Gem</div>
+</div>
+
+<div class="info-box">
+<div class="label">Constituency</div>
+<div class="value">Gem</div>
+</div>
+
+<div class="info-box">
+<div class="label">Ward</div>
+<div class="value">Gem</div>
+</div>
+
+<div class="info-box">
+<div class="label">Village</div>
+<div class="value">Got Okwiri</div>
+</div>
+
+<div class="info-box">
+<div class="label">Student Contact</div>
+<div class="value">0140460590</div>
+</div>
+
+<div class="info-box">
+<div class="label">Guardian Contact</div>
+<div class="value">+254728308193</div>
+</div>
+
+<div class="info-box">
+<div class="label">Student Email</div>
+<div class="value">N/A</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ACADEMIC -->
+<div class="section" id="academic">
+
+<div class="card">
+
+<h2>Academic Information</h2>
+
+<div class="info-grid">
+
+<div class="info-box">
+<div class="label">KCPE School</div>
+<div class="value">MASENE PRIMARY SCHOOL</div>
+</div>
+
+<div class="info-box">
+<div class="label">KCPE Year</div>
+<div class="value">2021</div>
+</div>
+
+<div class="info-box">
+<div class="label">KCSE School</div>
+<div class="value">SEGA GIRLS SECONDARY</div>
+</div>
+
+<div class="info-box">
+<div class="label">KCSE Year</div>
+<div class="value">2025</div>
+</div>
+
+<div class="info-box">
+<div class="label">Other Institution</div>
+<div class="value">N/A</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- COURSE -->
+<div class="section" id="course">
+
+<div class="card">
+
+<h2>Course Details</h2>
+
+<div class="info-grid">
+
+<div class="info-box">
+<div class="label">Admission Number</div>
+<div class="value">RICT102/26/05/BAPK093</div>
+</div>
+
+<div class="info-box">
+<div class="label">Course</div>
+<div class="value">ICT Essentials / Computer Basics II</div>
+</div>
+
+<div class="info-box">
+<div class="label">Duration</div>
+<div class="value">Two Months</div>
+</div>
+
+<div class="info-box">
+<div class="label">Enrollment Date</div>
+<div class="value">14/05/2026</div>
+</div>
+
+<div class="info-box">
+<div class="label">Completion Date</div>
+<div class="value">14/07/2026</div>
+</div>
+
+<div class="info-box">
+<div class="label">Learning Mode</div>
+<div class="value">Full Time</div>
+</div>
+
+<div class="info-box">
+<div class="label">Type of Study</div>
+<div class="value">Physical</div>
+</div>
+
+<div class="info-box">
+<div class="label">Study Hours</div>
+<div class="value">8AM TO 10AM | Monday - Friday</div>
+</div>
+
+</div>
+
+<div class="notice">
+
+<p><strong>Course Description:</strong></p>
+
+<p>
+Covers Introduction to Computers, Microsoft Applications,
+Database Systems, Internet Essentials and Photoshop.
+</p>
+
+</div>
+
+<div class="ethics">
+<a href="../ethics.pdf" target="_blank">
+Rules, Regulations, Code of Conduct & Ethics
+</a>
+</div>
+
+</div>
+
+</div>
+
+<!-- PROGRESS -->
+<div class="section" id="progress">
+
+<div class="card">
+
+<h2>Learning Progress</h2>
+
+<div class="info-grid">
+
+<div class="info-box">
+<div class="label">Course Code</div>
+<div class="value">102</div>
+</div>
+
+<div class="info-box">
+<div class="label">General Performance</div>
+<div class="value">---</div>
+</div>
+
+<div class="info-box">
+<div class="label">Conduct Remarks</div>
+<div class="value">---</div>
+</div>
+
+<div class="info-box">
+<div class="label">Fee Balance</div>
+<div class="value">Kshs. 4,600</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Fee Payment</h2>
+
+<table class="table">
+
+<tr>
+<th>Description</th>
+<th>Amount</th>
+</tr>
+
+<tr>
+<td>Total Fee Payable</td>
+<td>Kshs. 6,600</td>
+</tr>
+
+<tr>
+<td>Total Paid</td>
+<td>Kshs. 2,000</td>
+</tr>
+
+<tr>
+<td>Balance</td>
+<td>Kshs. 4,600</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="card">
+
+<h2>Academic Score Sheet</h2>
+
+<table class="table">
+
+<tr>
+<th>Unit</th>
+<th>Score</th>
+</tr>
+
+<tr>
+<td>Introduction</td>
+<td>---</td>
+</tr>
+
+<tr>
+<td>Microsoft Word</td>
+<td>---</td>
+</tr>
+
+<tr>
+<td>Microsoft Excel</td>
+<td>---</td>
+</tr>
+
+<tr>
+<td>Microsoft Access</td>
+<td>---</td>
+</tr>
+
+<tr>
+<td>Publisher</td>
+<td>---</td>
+</tr>
+
+<tr>
+<td>PowerPoint</td>
+<td>---</td>
+</tr>
+
+<tr>
+<td>Internet Essentials</td>
+<td>---</td>
+</tr>
+
+<tr>
+<td>Overall Grade</td>
+<td>---</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ASSIGNMENTS -->
+<div class="section" id="assignments">
+
+<div class="card">
+
+<h2>Assignments</h2>
+
+<div class="notice">
+
+<p>There are currently no active assignments available.</p>
+
+<p>
+Assignments and practical tasks will appear here once issued
+by the instructor.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- EXAMS -->
+<div class="section" id="exams">
+
+<div class="card">
+
+<h2>Examinations</h2>
+
+<div class="notice">
+
+<p><strong>ICT Essential Exam</strong></p>
+
+<p>
+Open the assessment PDF using the button below.
+</p>
+
+<button class="btn btn-primary"
+onclick="window.open('../INTRO.pdf','_blank')">
+
+Open Assessment
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- CERTIFICATIONS -->
+<div class="section" id="certifications">
+
+<div class="card">
+
+<h2>Certification Information</h2>
+
+<div class="notice">
+
+<p>
+Please note that certificates are only issued after
+full fee clearance.
+</p>
+
+<p>
+Certificate processing takes approximately
+6 to 7 days after completion.
+</p>
+
+<p>
+Incase of absenteeism, communicate through call or SMS
+to the nearest instructor or staff member.
+</p>
+
+<p>
+Absence for one week without communication may lead
+to automatic discontinuation.
+</p>
+
+<p>
+Thank you for choosing Ruralnet ICT Academy.
+</p>
+
+</div>
+
+<br>
+
+<button class="btn btn-success">
+Certificate Not Yet Available
+</button>
+
+</div>
+
+</div>
+
+<!-- CONTACT -->
+<div class="section" id="contact">
+
+<div class="card">
+
+<h2>Contact Information</h2>
+
+<div class="info-grid">
+
+<div class="info-box">
+<div class="label">Email</div>
+<div class="value">ruralnet2016@gmail.com</div>
+</div>
+
+<div class="info-box">
+<div class="label">Phone</div>
+<div class="value">+254700886058</div>
+</div>
+
+<div class="info-box">
+<div class="label">Website</div>
+<div class="value">www.ruralnet.co.ke</div>
+</div>
+
+<div class="info-box">
+<div class="label">Office Hours</div>
+<div class="value">Monday - Saturday | 8AM - 5PM</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+
+<p><strong>ZILPA ATIENO ONYANGO</strong></p>
+
+<p><strong>ICT ESSENTIALS 102</strong></p>
+
+</footer>
+
+</div>
 
 <script>
-  // Switch sections
-  function showSection(id, event) {
-    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
 
-    document.querySelectorAll('.nav li').forEach(li => li.classList.remove('active'));
-    event.target.classList.add('active');
+function showSection(id, event){
 
-    // close sidebar on small screens
-    document.getElementById('sidebar').classList.remove('open');
-  }
+document.querySelectorAll('.section').forEach(section=>{
+section.classList.remove('active');
+});
 
-  // Toggle sidebar for small screens
-  const toggleBtn = document.getElementById('toggleBtn');
-  const sidebar = document.getElementById('sidebar');
+document.getElementById(id).classList.add('active');
 
-  toggleBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('open');
-  });
+document.querySelectorAll('.nav li').forEach(item=>{
+item.classList.remove('active');
+});
+
+if(event){
+event.target.classList.add('active');
+}
+
+sidebar.classList.remove('open');
+}
+
+const toggleBtn = document.getElementById('toggleBtn');
+const sidebar = document.getElementById('sidebar');
+
+toggleBtn.addEventListener('click', ()=>{
+
+sidebar.classList.toggle('open');
+
+});
+
 </script>
 
 </body>

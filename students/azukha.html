@@ -367,6 +367,92 @@ body{
   line-height:1.7;
 }
 
+/* ETHICS SECTION */
+
+.ethics{
+  position:relative;
+  margin-top:25px;
+  border-radius:24px;
+  overflow:hidden;
+  background:
+  linear-gradient(135deg,
+  rgba(37,99,235,.95),
+  rgba(6,182,212,.92));
+  box-shadow:
+  0 15px 35px rgba(37,99,235,.25);
+  transition:.35s ease;
+}
+
+.ethics::before{
+  content:'📘';
+  position:absolute;
+  top:-10px;
+  right:20px;
+  font-size:90px;
+  opacity:.08;
+}
+
+.ethics:hover{
+  transform:translateY(-6px) scale(1.01);
+  box-shadow:
+  0 20px 45px rgba(6,182,212,.35);
+}
+
+.ethics a{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:24px 28px;
+  text-decoration:none;
+  color:white;
+  font-size:16px;
+  font-weight:600;
+  letter-spacing:.3px;
+}
+
+.ethics a span{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.ethics a::after{
+  content:'↗';
+  width:42px;
+  height:42px;
+  min-width:42px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(10px);
+  font-size:20px;
+  transition:.3s ease;
+}
+
+.ethics:hover a::after{
+  transform:translateX(4px) rotate(-8deg);
+  background:white;
+  color:#2563eb;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+  .ethics a{
+    padding:20px;
+    font-size:15px;
+  }
+
+  .ethics::before{
+    font-size:70px;
+  }
+
+}
+
 /* FOOTER */
 
 footer{
