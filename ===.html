@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Interactive Particle Accent Box</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0a0a0a;
+  font-family: Arial, sans-serif;
+}
+
+/* MAIN BOX */
+.box {
+  position: relative;
+  width: 320px;
+  height: 220px;
+  border-radius: 18px;
+  background: #111;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 40px rgba(0,255,255,0.1);
+}
+
+/* GLOW ACCENT */
+.box::before {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  background: radial-gradient(circle, rgba(0,255,255,0.4), transparent 60%);
+  animation: spin 8s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* PARTICLES */
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: cyan;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatUp 0.9s ease-out forwards;
+  box-shadow: 0 0 10px cyan;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, -60px);
+    opacity: 0;
+  }
+}
+
+/* INNER CONTENT ABOVE EFFECTS */
+.content {
+  position: relative;
+  z-index: 2;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box" id="box">
+  <div class="content">Hover / Move Mouse</div>
+</div>
+
+<script>
+const box = document.getElementById("box");
+
+box.addEventListener("mousemove", (e) => {
+  const particle = document.createElement("span");
+  particle.classList.add("particle");
+
+  const rect = box.getBoundingClientRect();
+
+  particle.style.left = (e.clientX - rect.left) + "px";
+  particle.style.top = (e.clientY - rect.top) + "px";
+
+  box.appendChild(particle);
+
+  setTimeout(() => {
+    particle.remove();
+  }, 900);
+});
+</script>
+
+</body>
+</html>
