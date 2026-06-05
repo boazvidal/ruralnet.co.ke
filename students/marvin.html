@@ -553,7 +553,7 @@ if (e.ctrlKey && e.keyCode === 67) {
             <li onclick="showSection('progress', event)">📈 Learning Progress</li>
             <li onclick="showSection('assignments', event)">📝 Assignments</li>
             <li onclick="showSection('exams', event)">📄 Examinations</li>
-            <li onclick="showSection('results', event)">🏆 Certifications</li>
+            <li onclick="showSection('certifications', event)">🏆 Certifications</li>
         </ul>
 
     </div>
@@ -898,51 +898,63 @@ if (e.ctrlKey && e.keyCode === 67) {
     </div>
 
     <!-- EXAMINATIONS -->
-    <div class="section" id="exams">
+<div class="section" id="exams">
 
-        <div class="card">
+  <div class="card">
 
-            <h2>Examinations</h2>
+    <h2>Examinations</h2>
 
-            <p><strong>DATABASE MANAGEMENT SYSTEM</strong></p>
+    <div class="notice">
 
-            <button class="btn btn-primary"
-            onclick="window.open('../ACCESS.pdf', '_blank')">
-                Open ACCESS Assessment
-            </button>
+      <p>You have no pending examinations.</p>
 
-        </div>
+      <button class="btn btn-primary">
+      ---
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- CERTIFICATION -->
+<div class="section" id="certifications">
+
+  <div class="card">
+
+    <h2>Certification Information</h2>
+
+    <div class="notice">
+
+        <p>You have completed your course. Congratulations.</p>
+
+        <p>Make good use of the knowledge attained at Ruralnet ICT Academy.</p>
+
+        <p>Incase you faced any challenge while learning, feel free to share your ideas through the contact details below.</p>
+
+        <p>Your certificate is available below.</p>
+
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary"
+        onclick="window.open('certificates/MARVIN.pdf', '_blank')">
+
+        View Certificate
+
+      </button>
+
+      <a href="certificates/MARVIN.pdf" download class="btn btn-success">
+      Download Certificate
+      </a>
 
     </div>
 
-    <!-- CERTIFICATIONS -->
-    <div class="section" id="results">
+  </div>
 
-        <div class="card">
-
-            <h2>Certifications & Results</h2>
-
-            <div class="notice">
-
-                <p>Incase you are planning to be absent, or you have absented yourself from attending your class, communicate through call or SMS to the nearest instructor or staff.</p>
-
-                <p>Absenting yourself for one week without communication calls for automatic discontinuation.</p>
-
-                <p>When deferment period is past due, you will have to be re-admitted.</p>
-
-                <p>Please note that the certificate will only be ready upon clearance of the fee.</p>
-
-                <p>Certificate will be ready 6 to 7 days from the date of completion.</p>
-
-                <p>Keep checking if you have completed a course.</p>
-
-                <p>Regards.</p>
-
-            </div>
-
-        </div>
-
-    </div>
+</div>
 
     <!-- CONTACT -->
     <div class="section" id="contact">

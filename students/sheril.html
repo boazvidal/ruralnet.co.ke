@@ -552,7 +552,7 @@ document.onkeydown = function(e){
             <li onclick="showSection('progress', event)">📈 Learning Progress</li>
             <li onclick="showSection('assignments', event)">📝 Assignments</li>
             <li onclick="showSection('exams', event)">📄 Examinations</li>
-            <li onclick="showSection('results', event)">🏆 Certifications</li>
+            <li onclick="showSection('certifications', event)">🏆 Certifications</li>
         </ul>
 
     </div>
@@ -895,66 +895,59 @@ document.onkeydown = function(e){
 
 <div class="section" id="exams">
 
-    <div class="card">
+  <div class="card">
 
-        <h2>Examinations</h2>
+    <h2>Examinations</h2>
 
-        <p style="margin-bottom:20px;">
-            DATABASE MANAGEMENT SYSTEM
-        </p>
+    <div class="notice">
 
-        <button class="btn btn-primary"
-        onclick="window.open('../ACCESS.pdf','_blank')">
+      <p>You have no pending examinations.</p>
 
-            Open ACCESS Assessment
-
-        </button>
+      <button class="btn btn-primary">
+      ---
+      </button>
 
     </div>
+
+  </div>
 
 </div>
 
-<!-- CERTIFICATIONS -->
+<!-- CERTIFICATION -->
+<div class="section" id="certifications">
 
-<div class="section" id="results">
+  <div class="card">
 
-    <div class="card">
+    <h2>Certification Information</h2>
 
-        <h2>Certifications</h2>
+    <div class="notice">
 
-        <div class="notice">
+        <p>You have completed your course. Congratulations.</p>
 
-            <p>
-                In case you are planning to be absent,
-                communicate through call or SMS to the nearest Instructor or Staff.
-            </p>
+        <p>Make good use of the knowledge attained at Ruralnet ICT Academy.</p>
 
-            <p>
-                Absenting yourself for one week without communication
-                calls for automatic discontinuation.
-            </p>
+        <p>Incase you faced any challenge while learning, feel free to share your ideas through the contact details below.</p>
 
-            <p>
-                Please note that the certificate will only be ready
-                upon clearance of the fee.
-            </p>
+        <p>Your certificate is available below.</p>
 
-            <p>
-                Certificate will be ready 6 to 7 days
-                from the date of completion.
-            </p>
+      </div>
 
-            <p>
-                Keep checking if you have completed your course.
-            </p>
+      <br>
 
-            <p>
-                Regards.
-            </p>
+      <button class="btn btn-primary"
+        onclick="window.open('certificates/SHERYL.pdf', '_blank')">
 
-        </div>
+        View Certificate
+
+      </button>
+
+      <a href="certificates/SHERYL.pdf" download class="btn btn-success">
+      Download Certificate
+      </a>
 
     </div>
+
+  </div>
 
 </div>
 
@@ -995,8 +988,6 @@ document.onkeydown = function(e){
     <p><strong>SHERYL PURITY ACHIENG OTIENO</strong></p>
     <p><strong>ICT ESSENTIALS 102</strong></p>
 </footer>
-
-</div>
 
 <script>
 
