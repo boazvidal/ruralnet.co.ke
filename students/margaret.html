@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sandra</title>
-
+<title>Michael</title>
 <link rel="icon" type="image/png" href="../images/favicon.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -45,8 +44,6 @@ body{
   background-size:cover;
   background-position:center;
   background-attachment:fixed;
-
-  /* FIXED SCROLL */
   overflow-x:hidden;
   overflow-y:auto;
 }
@@ -63,8 +60,6 @@ body{
   justify-content:space-between;
   transition:.4s ease;
   z-index:1000;
-
-  /* FIX */
   height:100vh;
   overflow-y:auto;
   position:sticky;
@@ -161,8 +156,6 @@ body{
   flex:1;
   padding:30px;
   position:relative;
-
-  /* FIX */
   min-height:100vh;
   overflow-x:hidden;
   overflow-y:auto;
@@ -374,6 +367,92 @@ body{
   line-height:1.7;
 }
 
+/* ETHICS SECTION */
+
+.ethics{
+  position:relative;
+  margin-top:25px;
+  border-radius:24px;
+  overflow:hidden;
+  background:
+  linear-gradient(135deg,
+  rgba(37,99,235,.95),
+  rgba(6,182,212,.92));
+  box-shadow:
+  0 15px 35px rgba(37,99,235,.25);
+  transition:.35s ease;
+}
+
+.ethics::before{
+  content:'📘';
+  position:absolute;
+  top:-10px;
+  right:20px;
+  font-size:90px;
+  opacity:.08;
+}
+
+.ethics:hover{
+  transform:translateY(-6px) scale(1.01);
+  box-shadow:
+  0 20px 45px rgba(6,182,212,.35);
+}
+
+.ethics a{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:24px 28px;
+  text-decoration:none;
+  color:white;
+  font-size:16px;
+  font-weight:600;
+  letter-spacing:.3px;
+}
+
+.ethics a span{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.ethics a::after{
+  content:'↗';
+  width:42px;
+  height:42px;
+  min-width:42px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(10px);
+  font-size:20px;
+  transition:.3s ease;
+}
+
+.ethics:hover a::after{
+  transform:translateX(4px) rotate(-8deg);
+  background:white;
+  color:#2563eb;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+  .ethics a{
+    padding:20px;
+    font-size:15px;
+  }
+
+  .ethics::before{
+    font-size:70px;
+  }
+
+}
+
 /* FOOTER */
 
 footer{
@@ -475,8 +554,6 @@ footer p{
   }
 }
 
-/* EXTRA SMALL DEVICES */
-
 @media(max-width:500px){
 
   .logo-section img{
@@ -550,26 +627,26 @@ return false;
 <div>
 
 <div class="logo-section">
-<img src="images/sandra.png">
-<h2>Sandra Atieno</h2>
+<img src="images/machaga.png">
+<h2>Michael Machaga</h2>
 <p>Student Dashboard</p>
 </div>
 
 <ul class="nav">
 
-<li class="active" onclick="showSection('update', event)">👤 Personal Details</li>
+<li class="active" onclick="showSection('personal', event)">👤 Personal Details</li>
 
-<li onclick="showSection('funds', event)">🎓 Academic Info</li>
+<li onclick="showSection('academic', event)">🎓 Academic Info</li>
 
-<li onclick="showSection('postgrad', event)">📘 Course Details</li>
+<li onclick="showSection('course', event)">📘 Course Details</li>
 
-<li onclick="showSection('loans', event)">📈 Learning Progress</li>
+<li onclick="showSection('progress', event)">📈 Learning Progress</li>
 
 <li onclick="showSection('assignments', event)">📝 Assignments</li>
 
 <li onclick="showSection('exams', event)">📄 Examinations</li>
 
-<li onclick="showSection('self', event)">🏆 Certifications</li>
+<li onclick="showSection('certifications', event)">🏆 Certifications</li>
 
 </ul>
 
@@ -596,13 +673,13 @@ return false;
 
 <div>
 <h1>Student Portal</h1>
-<span>Welcome back, Sandra 👋</span>
+<span>Welcome back, Michael 👋</span>
 </div>
 
 </div>
 
-<!-- PERSONAL -->
-<div class="section active" id="update">
+<!-- PERSONAL DETAILS -->
+<div class="section active" id="personal">
 
 <div class="whatsapp-box">
 
@@ -622,17 +699,17 @@ Join Group
 
 <div class="info-box">
 <div class="label">Full Name</div>
-<div class="value">SANDRA ATIENO OTIENO</div>
+<div class="value">MICHAEL MACHAGA</div>
 </div>
 
 <div class="info-box">
 <div class="label">Gender</div>
-<div class="value">Female</div>
+<div class="value">Male</div>
 </div>
 
 <div class="info-box">
 <div class="label">Date of Birth</div>
-<div class="value">21/08/2007</div>
+<div class="value">02/05/2006</div>
 </div>
 
 <div class="info-box">
@@ -647,37 +724,37 @@ Join Group
 
 <div class="info-box">
 <div class="label">County</div>
-<div class="value">Siaya</div>
+<div class="value">BUSIA</div>
 </div>
 
 <div class="info-box">
 <div class="label">Sub County</div>
-<div class="value">Ugunja</div>
+<div class="value">TESO SOUTH</div>
 </div>
 
 <div class="info-box">
 <div class="label">Constituency</div>
-<div class="value">Ugunja</div>
+<div class="value">N/A</div>
 </div>
 
 <div class="info-box">
 <div class="label">Ward</div>
-<div class="value">Ugunja</div>
+<div class="value">CHAKOL SOUTH</div>
 </div>
 
 <div class="info-box">
 <div class="label">Village</div>
-<div class="value">Mathai</div>
+<div class="value">OCHUDE</div>
 </div>
 
 <div class="info-box">
 <div class="label">Student Contact</div>
-<div class="value">0706861278</div>
+<div class="value">N/A</div>
 </div>
 
 <div class="info-box">
 <div class="label">Guardian Contact</div>
-<div class="value">+254721296747</div>
+<div class="value">+254797460675</div>
 </div>
 
 <div class="info-box">
@@ -692,7 +769,7 @@ Join Group
 </div>
 
 <!-- ACADEMIC -->
-<div class="section" id="funds">
+<div class="section" id="academic">
 
 <div class="card">
 
@@ -702,17 +779,17 @@ Join Group
 
 <div class="info-box">
 <div class="label">KCPE School</div>
-<div class="value">SIDINDI</div>
+<div class="value">OCHUDE PRIMARY</div>
 </div>
 
 <div class="info-box">
 <div class="label">KCPE Year</div>
-<div class="value">2021</div>
+<div class="value">2022</div>
 </div>
 
 <div class="info-box">
 <div class="label">KCSE School</div>
-<div class="value">GOT OSIMBO GIRLS</div>
+<div class="value">KOLANYA BOYS</div>
 </div>
 
 <div class="info-box">
@@ -736,8 +813,8 @@ Join Group
 
 </div>
 
-<!-- COURSE -->
-<div class="section" id="postgrad">
+<!-- COURSE DETAILS -->
+<div class="section" id="course">
 
 <div class="card">
 
@@ -747,17 +824,12 @@ Join Group
 
 <div class="info-box">
 <div class="label">Admission Number</div>
-<div class="value">RICT102/26/02/070</div>
+<div class="value">RICT102/26/06/104</div>
 </div>
 
 <div class="info-box">
 <div class="label">Course</div>
 <div class="value">ICT Essentials / Computer Basics II</div>
-</div>
-
-<div class="info-box">
-<div class="label">Description</div>
-<div class="value">Covers Intro to Computers, Microsoft Applications, Database System Project and Internet Essentials</div>
 </div>
 
 <div class="info-box">
@@ -767,12 +839,12 @@ Join Group
 
 <div class="info-box">
 <div class="label">Enrollment Date</div>
-<div class="value">09/03/2026</div>
+<div class="value">02/06/2026</div>
 </div>
 
 <div class="info-box">
 <div class="label">Completion Date</div>
-<div class="value">09/05/2026</div>
+<div class="value">02/08/2026</div>
 </div>
 
 <div class="info-box">
@@ -787,21 +859,38 @@ Join Group
 
 <div class="info-box">
 <div class="label">Study Hours</div>
-<div class="value">10AM TO 12PM | Monday - Friday</div>
+<div class="value">8AM TO 11AM | Monday - Friday</div>
+</div>
+
+</div>
+
+<div class="notice">
+
+<p><strong>Course Description:</strong></p>
+
+<p>
+Covers Introduction to Computers, Microsoft Applications,
+Database Systems, Internet Essentials and Photoshop.
+</p>
+
+</div>
+
+<div class="ethics">
+<a href="../ethics.pdf" target="_blank">
+Rules, Regulations, Code of Conduct & Ethics
+</a>
 </div>
 
 </div>
 
 </div>
 
-</div>
-
-<!-- LEARNING -->
-<div class="section" id="loans">
+<!-- LEARNING PROGRESS -->
+<div class="section" id="progress">
 
 <div class="card">
 
-<h2>General Student Information</h2>
+<h2>Learning Progress</h2>
 
 <div class="info-grid">
 
@@ -811,13 +900,18 @@ Join Group
 </div>
 
 <div class="info-box">
-<div class="label">General Performance Rate</div>
-<div class="value">---</div>
+<div class="label">General Performance</div>
+<div class="value">Good Progress</div>
 </div>
 
 <div class="info-box">
 <div class="label">Conduct Remarks</div>
-<div class="value">---</div>
+<div class="value">Satisfactory</div>
+</div>
+
+<div class="info-box">
+<div class="label">Fee Balance</div>
+<div class="value">Kshs. 0.00</div>
 </div>
 
 </div>
@@ -842,12 +936,12 @@ Join Group
 
 <tr>
 <td>Total Paid</td>
-<td>Kshs. 2,000</td>
+<td>Kshs. 6,600</td>
 </tr>
 
 <tr>
 <td>Balance</td>
-<td>Kshs. 4,600</td>
+<td>Kshs. o.00</td>
 </tr>
 
 </table>
@@ -867,37 +961,37 @@ Join Group
 
 <tr>
 <td>Introduction</td>
-<td>50%</td>
+<td>%</td>
 </tr>
 
 <tr>
-<td>Word</td>
-<td>84%</td>
+<td>Microsoft Word</td>
+<td>%</td>
 </tr>
 
 <tr>
-<td>Excel</td>
-<td>---</td>
+<td>Microsoft Excel</td>
+<td>%</td>
 </tr>
 
 <tr>
-<td>Access</td>
-<td>---</td>
+<td>Microsoft Access</td>
+<td>%</td>
 </tr>
 
 <tr>
 <td>Publisher</td>
-<td>---</td>
+<td>%</td>
 </tr>
 
 <tr>
 <td>PowerPoint</td>
-<td>---</td>
+<td>%</td>
 </tr>
 
 <tr>
-<td>Internet</td>
-<td>---</td>
+<td>Internet Essentials</td>
+<td>%</td>
 </tr>
 
 <tr>
@@ -922,6 +1016,11 @@ Join Group
 
 <p>There are currently no active assignments available.</p>
 
+<p>
+Assignments and practical tasks will appear here once issued
+by the instructor.
+</p>
+
 </div>
 
 </div>
@@ -937,11 +1036,18 @@ Join Group
 
 <div class="notice">
 
-<p>You currently have no pending examinations.</p>
+<p><strong>NO PENDING EXAMS</strong></p>
 
-<button class="btn btn-primary">
----
-</button>
+<!--<p>
+Open the Access Assessment PDF using the button below.
+</p>
+
+<button class="btn btn-primary"
+onclick="window.open('../ACCESS.pdf','_blank')">
+
+Open ACCESS Assessment
+
+</button>-->
 
 </div>
 
@@ -949,9 +1055,8 @@ Join Group
 
 </div>
 
-
-<!-- CERTIFICATION -->
-<div class="section" id="self">
+<!-- CERTIFICATIONS -->
+<div class="section" id="certifications">
 
 <div class="card">
 
@@ -959,28 +1064,37 @@ Join Group
 
 <div class="notice">
 
-<p>You have completed your course. Congratulations.</p>
+<p>
+Please note that certificates are only issued after
+full fee clearance.
+</p>
 
-<p>Make good use of the knowledge attained at Ruralnet ICT Academy.</p>
+<p>
+Certificate processing takes approximately
+6 to 7 days after completion.
+</p>
 
-<p>Incase you faced any challenge while learning, feel free to share your ideas through the contact details below.</p>
+<p>
+Incase of absenteeism, communicate through call or SMS
+to the nearest instructor or staff member.
+</p>
 
-<p>Your certificate is available below.</p>
+<p>
+Absence for one week without communication may lead
+to automatic discontinuation.
+</p>
+
+<p>
+Thank you for choosing Ruralnet ICT Academy.
+</p>
 
 </div>
 
 <br>
 
-<button class="btn btn-primary"
-onclick="window.open('certificates/SANDRA.pdf', '_blank')">
-
-View Certificate
-
+<button class="btn btn-success">
+Certificate Not Yet Available
 </button>
-
-<a href="certificates/SANDRA.pdf" download class="btn btn-success">
-Download Certificate
-</a>
 
 </div>
 
@@ -1010,6 +1124,12 @@ Download Certificate
 <div class="value">www.ruralnet.co.ke</div>
 </div>
 
+<div class="info-box">
+<div class="label">Office Hours</div>
+<div class="value">Monday - Saturday | 8AM - 5PM</div>
+<div class="value">Please Note that classes are not operational during public holydays.</div>
+</div>
+
 </div>
 
 </div>
@@ -1019,7 +1139,7 @@ Download Certificate
 <!-- FOOTER -->
 <footer>
 
-<p><strong>SANDRA ATIENO OTIENO</strong></p>
+<p><strong>MICHAEL MACHAGA</strong></p>
 
 <p><strong>ICT ESSENTIALS 102</strong></p>
 
