@@ -1,0 +1,1676 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<link rel="icon"
+      type="image/png"
+      href="images/favDataBase.png">
+
+<title>Staff Services</title>
+
+
+<style>
+
+/* ==========================================
+   ROOT VARIABLES
+========================================== */
+
+:root {
+
+    --accent: #118302;
+
+    --text: #1e293b;
+
+}
+
+
+/* ==========================================
+   GLOBAL RESET
+========================================== */
+
+* {
+
+    box-sizing: border-box;
+
+}
+
+
+/* ==========================================
+   BODY
+========================================== */
+
+body {
+
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,0.25),
+            rgba(0,0,0,0.25)
+        ),
+        url(images/bbk.jpg);
+
+    background-repeat: no-repeat;
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-attachment: fixed;
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-height: 100vh;
+
+    margin: 0;
+
+    color: var(--text);
+
+}
+
+
+/* ==========================================
+   AUTHENTICATION LOADING SCREEN
+
+   This screen appears while Firebase checks
+   whether the staff member is authenticated.
+========================================== */
+
+#authLoading {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99999;
+
+    background:
+        linear-gradient(
+            135deg,
+            #000000,
+            #073b00
+        );
+
+    color: white;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+}
+
+
+#authLoading img {
+
+    width: 180px;
+
+    max-width: 70%;
+
+    margin-bottom: 25px;
+
+}
+
+
+#authLoading h2 {
+
+    margin: 10px 0;
+
+}
+
+
+#authLoading p {
+
+    margin: 5px;
+
+    opacity: 0.8;
+
+}
+
+
+/* ==========================================
+   LOADING SPINNER
+========================================== */
+
+.spinner {
+
+    width: 45px;
+
+    height: 45px;
+
+    border: 5px solid
+        rgba(255,255,255,0.3);
+
+    border-top:
+        5px solid white;
+
+    border-radius: 50%;
+
+    animation:
+        spin 1s linear infinite;
+
+    margin-top: 20px;
+
+}
+
+
+@keyframes spin {
+
+    from {
+
+        transform:
+            rotate(0deg);
+
+    }
+
+    to {
+
+        transform:
+            rotate(360deg);
+
+    }
+
+}
+
+
+/* ==========================================
+   NAVBAR
+========================================== */
+
+nav {
+
+    background: black;
+
+    color: white;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 12px 20px;
+
+    box-shadow:
+        0 2px 6px
+        rgba(0,0,0,0.3);
+
+    gap: 20px;
+
+    flex-wrap: wrap;
+
+}
+
+
+/* ==========================================
+   BRAND
+========================================== */
+
+nav .brand {
+
+    font-weight: 600;
+
+    font-size: 18px;
+
+}
+
+
+nav .brand img {
+
+    height: 100px;
+
+    width: auto;
+
+    max-width: 100%;
+
+    object-fit: contain;
+
+}
+
+
+/* ==========================================
+   NAVIGATION LIST
+========================================== */
+
+nav ul {
+
+    list-style: none;
+
+    display: flex;
+
+    align-items: center;
+
+    margin: 0;
+
+    padding: 0;
+
+    gap: 20px;
+
+    flex-wrap: wrap;
+
+}
+
+
+nav ul li {
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+nav ul li a {
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 15px;
+
+    transition:
+        opacity 0.2s;
+
+}
+
+
+nav ul li a:hover {
+
+    opacity: 0.8;
+
+}
+
+
+/* ==========================================
+   LOGOUT BUTTON
+========================================== */
+
+#logoutBtn {
+
+    width: auto;
+
+    margin: 0;
+
+    padding:
+        9px 18px;
+
+    background:
+        linear-gradient(
+            to right,
+            #d60000,
+            #ff4b4b
+        );
+
+    color: white;
+
+    border: 2px solid white;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        0.3s;
+
+}
+
+
+#logoutBtn:hover {
+
+    background: white;
+
+    color: red;
+
+    border-color: red;
+
+}
+
+
+#logoutBtn:disabled {
+
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+}
+
+
+/* ==========================================
+   NOTICE
+========================================== */
+
+.notice {
+
+    background:
+        linear-gradient(
+            to bottom,
+            blue,
+            darkblue
+        );
+
+    color: white;
+
+    border-radius: 10px;
+
+    border-left:
+        13px solid red;
+
+    border-right:
+        8px solid red;
+
+    width: 89%;
+
+    height: auto;
+
+    padding:
+        4px 20px 15px 40px;
+
+    margin: 20px auto;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,0.25);
+
+}
+
+
+.notice h1 {
+
+    margin-top: 10px;
+
+}
+
+
+.notice li {
+
+    margin-bottom: 10px;
+
+}
+
+
+.notice h2 {
+
+    font-size: 18px;
+
+    line-height: 1.4;
+
+}
+
+
+.notice h3 {
+
+    border-bottom:
+        3px solid white;
+
+    padding-bottom: 8px;
+
+}
+
+
+/* ==========================================
+   MAIN CONTENT
+========================================== */
+
+.main {
+
+    flex: 1;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding:
+        40px 16px;
+
+}
+
+
+/* ==========================================
+   MAIN CARD
+========================================== */
+
+.card {
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.15
+        );
+
+    backdrop-filter:
+        blur(10px);
+
+    -webkit-backdrop-filter:
+        blur(10px);
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.3
+        );
+
+    box-shadow:
+        0 8px 25px
+        rgba(
+            0,
+            0,
+            0,
+            0.2
+        );
+
+    width:
+        340px;
+
+    max-width:
+        100%;
+
+    padding:
+        24px;
+
+    border-radius:
+        12px;
+
+    text-align:
+        center;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+}
+
+
+.card h1 {
+
+    margin:
+        0 0 12px 0;
+
+    font-size:
+        26px;
+
+    color:
+        white;
+
+}
+
+
+.card h3 {
+
+    border-bottom:
+        3px solid
+        white;
+
+    padding-bottom:
+        8px;
+
+    color:
+        white;
+
+    margin-bottom:
+        20px;
+
+}
+
+
+/* ==========================================
+   RESOURCE BUTTONS
+========================================== */
+
+.resource-btn {
+
+    width:
+        100%;
+
+    padding:
+        10px;
+
+    margin-top:
+        12px;
+
+    background:
+        linear-gradient(
+            to right,
+            rgb(175, 149, 4),
+            orange
+        );
+
+    color:
+        white;
+
+    border:
+        2px solid
+        blue;
+
+    border-radius:
+        8px;
+
+    font-size:
+        18px;
+
+    font-weight:
+        600;
+
+    cursor:
+        pointer;
+
+    transition:
+        0.2s;
+
+}
+
+
+.resource-btn:hover {
+
+    background:
+        white;
+
+    color:
+        green;
+
+}
+
+
+/* ==========================================
+   BACK HOME BUTTON
+========================================== */
+
+.home-btn {
+
+    width:
+        100%;
+
+    padding:
+        10px;
+
+    margin-top:
+        12px;
+
+    background:
+        linear-gradient(
+            to right,
+            #118302,
+            #36b81f
+        );
+
+    color:
+        white;
+
+    border:
+        2px solid
+        white;
+
+    border-radius:
+        8px;
+
+    font-size:
+        18px;
+
+    font-weight:
+        600;
+
+    cursor:
+        pointer;
+
+    transition:
+        0.2s;
+
+}
+
+
+.home-btn:hover {
+
+    background:
+        white;
+
+    color:
+        green;
+
+}
+
+
+/* ==========================================
+   ERROR
+========================================== */
+
+.error {
+
+    margin-top:
+        10px;
+
+    color:
+        #dc2626;
+
+    font-size:
+        14px;
+
+    min-height:
+        20px;
+
+}
+
+
+/* ==========================================
+   NOTE
+========================================== */
+
+.note {
+
+    font-size:
+        13px;
+
+    color:
+        white;
+
+    margin-top:
+        15px;
+
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+footer {
+
+    background:
+        #e2e8f0;
+
+    text-align:
+        center;
+
+    padding:
+        10px;
+
+    font-size:
+        14px;
+
+    color:
+        #475569;
+
+}
+
+
+/* ==========================================
+   MOBILE RESPONSIVE
+========================================== */
+
+@media
+(max-width: 700px) {
+
+
+    nav {
+
+        flex-direction:
+            column;
+
+        justify-content:
+            center;
+
+        text-align:
+            center;
+
+    }
+
+
+    nav .brand img {
+
+        height:
+            75px;
+
+    }
+
+
+    nav ul {
+
+        justify-content:
+            center;
+
+        gap:
+            12px;
+
+    }
+
+
+    nav ul li a {
+
+        font-size:
+            14px;
+
+    }
+
+
+    #logoutBtn {
+
+        margin-top:
+            5px;
+
+    }
+
+
+    .notice {
+
+        width:
+            92%;
+
+        padding:
+            10px 15px;
+
+    }
+
+
+    .notice h1 {
+
+        font-size:
+            24px;
+
+    }
+
+
+    .notice h2 {
+
+        font-size:
+            15px;
+
+    }
+
+
+    .card {
+
+        width:
+            95%;
+
+        padding:
+            20px;
+
+    }
+
+}
+
+
+@media
+(max-width: 480px) {
+
+
+    nav ul {
+
+        gap:
+            10px;
+
+    }
+
+
+    nav ul li a {
+
+        font-size:
+            13px;
+
+    }
+
+
+    .card h1 {
+
+        font-size:
+            23px;
+
+    }
+
+
+    .resource-btn,
+    .home-btn {
+
+        font-size:
+            16px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     AUTHENTICATION LOADING SCREEN
+
+     The protected page is hidden until Firebase
+     confirms that the user is authenticated.
+========================================== -->
+
+<div id="authLoading">
+
+    <img
+        src="images/RURALNET.png"
+        alt="Ruralnet ICT Academy">
+
+    <h2>
+        Verifying Staff Authentication
+    </h2>
+
+    <p>
+        Please wait...
+    </p>
+
+    <div class="spinner"></div>
+
+</div>
+
+
+
+<!-- ==========================================
+     RIGHT CLICK PROTECTION
+
+     NOTE:
+     This is only a deterrent and is NOT real
+     security. Firebase Authentication is what
+     protects this page.
+========================================== -->
+
+<script>
+
+document.addEventListener(
+
+    'contextmenu',
+
+    event => {
+
+        event.preventDefault();
+
+    }
+
+);
+
+</script>
+
+
+
+<!-- ==========================================
+     KEYBOARD SHORTCUT PROTECTION
+
+     NOTE:
+     This does not provide actual security.
+========================================== -->
+
+<script>
+
+document.addEventListener(
+
+    'keydown',
+
+    function(event) {
+
+
+        // F12
+
+        if (
+            event.key === 'F12'
+        ) {
+
+            event.preventDefault();
+
+        }
+
+
+        // Ctrl + Shift + I
+
+        if (
+
+            event.ctrlKey &&
+
+            event.shiftKey &&
+
+            event.key.toLowerCase() === 'i'
+
+        ) {
+
+            event.preventDefault();
+
+        }
+
+
+        // Ctrl + Shift + J
+
+        if (
+
+            event.ctrlKey &&
+
+            event.shiftKey &&
+
+            event.key.toLowerCase() === 'j'
+
+        ) {
+
+            event.preventDefault();
+
+        }
+
+
+        // Ctrl + Shift + C
+
+        if (
+
+            event.ctrlKey &&
+
+            event.shiftKey &&
+
+            event.key.toLowerCase() === 'c'
+
+        ) {
+
+            event.preventDefault();
+
+        }
+
+
+        // Ctrl + U
+
+        if (
+
+            event.ctrlKey &&
+
+            event.key.toLowerCase() === 'u'
+
+        ) {
+
+            event.preventDefault();
+
+        }
+
+
+        // Ctrl + C
+
+        if (
+
+            event.ctrlKey &&
+
+            event.key.toLowerCase() === 'c'
+
+        ) {
+
+            event.preventDefault();
+
+        }
+
+    }
+
+);
+
+</script>
+
+
+
+<!-- ==========================================
+     NAVIGATION
+========================================== -->
+
+<nav>
+
+
+    <div class="brand">
+
+        <img
+            src="images/RURALNET.png"
+            alt="Ruralnet ICT Academy Logo">
+
+    </div>
+
+
+
+    <ul>
+
+        <li>
+
+            <a
+                href="https://ruralnet.co.ke/">
+
+                Home
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a
+                href="verify.html">
+
+                Verify
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a
+                href="construction.html">
+
+                Courses
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a
+                href="/About_Us/">
+
+                About
+
+            </a>
+
+        </li>
+
+
+        <!-- LOGOUT -->
+
+        <li>
+
+            <button
+                id="logoutBtn"
+                type="button">
+
+                Logout
+
+            </button>
+
+        </li>
+
+    </ul>
+
+</nav>
+
+
+
+<!-- ==========================================
+     NOTICE
+========================================== -->
+
+<div class="notice">
+
+
+    <h1>
+        Notice:
+    </h1>
+
+
+    <ul>
+
+
+        <li>
+
+            <h2
+                style="
+                background-color:red;
+                padding:5px;
+                border-radius:5px;
+                ">
+
+                To the trainers, kindly go through
+                the syllabus to ensure complete
+                content delivery.
+
+            </h2>
+
+        </li>
+
+
+        <li>
+
+            <h2>
+
+                12noon class is currently unavailable.
+                This time is for staff to refresh
+                and have lunch.
+
+            </h2>
+
+        </li>
+
+
+        <li>
+
+            <h2>
+
+                8AM & 10AM lots are already having
+                two sessions and therefore available
+                class for the new intake is 2PM.
+                Kindly stick to this for now to allow
+                smooth program arrangements.
+
+            </h2>
+
+        </li>
+
+
+        <li>
+
+            <h2>
+
+                Intake schedule will change as soon
+                as the 2PM lot is full.
+
+            </h2>
+
+        </li>
+
+
+        <li>
+
+            <h2>
+
+                One session can only accommodate
+                two classes at a time due to the
+                number of trainers.
+
+            </h2>
+
+        </li>
+
+
+    </ul>
+
+
+    <h3>
+
+        Keep checking for changes
+
+    </h3>
+
+</div>
+
+
+
+<!-- ==========================================
+     MAIN SERVICES CARD
+========================================== -->
+
+<main class="main">
+
+
+    <div class="card">
+
+
+        <h1>
+            SERVICES
+        </h1>
+
+
+        <h3>
+            Choose where to go next
+        </h3>
+
+
+
+        <button
+            class="resource-btn"
+            onclick="
+            window.location.href='registrar2.html'
+            ">
+
+            Students M.I.S
+
+        </button>
+
+
+
+        <button
+            class="resource-btn"
+            onclick="
+            window.location.href='StudentResources.html'
+            ">
+
+            Student Resources
+
+        </button>
+
+
+
+        <button
+            class="resource-btn"
+            onclick="
+            window.location.href='Exams.html'
+            ">
+
+            Exams & Practicals
+
+        </button>
+
+
+
+        <button
+            class="resource-btn"
+            onclick="
+            window.location.href='INVENTORY.pdf'
+            ">
+
+            INVENTORY
+
+        </button>
+
+
+
+        <button
+            class="resource-btn"
+            onclick="
+            window.location.href='construction.html'
+            ">
+
+            Staff Establishment
+
+        </button>
+
+
+
+        <button
+            class="resource-btn"
+            onclick="
+            window.location.href='FILE_INDEXING.pdf'
+            ">
+
+            File Indexing
+
+        </button>
+
+
+
+        <button
+            class="resource-btn"
+            onclick="
+            window.location.href='Staff_Resources.html'
+            ">
+
+            More Resources
+
+        </button>
+
+
+
+        <button
+            class="home-btn"
+            onclick="
+            window.location.href='https://ruralnet.co.ke'
+            ">
+
+            Back to Home
+
+        </button>
+
+
+
+        <div
+            id="error"
+            class="error">
+
+        </div>
+
+
+
+        <div class="note">
+
+            Kindly consult our
+            HR/Administrator for
+            further inquiries.
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+
+<!-- ==========================================
+     FOOTER
+========================================== -->
+
+<footer>
+
+    &copy; Powered By Ruralnet ICT Academy Developer.
+
+    ICT Help Desk;
+    +254700886058
+
+</footer>
+
+
+
+<!-- ==========================================
+     FIREBASE AUTHENTICATION
+========================================== -->
+
+<script type="module">
+
+
+/* ==========================================
+   FIREBASE IMPORTS
+========================================== */
+
+import {
+
+    initializeApp
+
+}
+from
+"https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+
+
+import {
+
+    getAuth,
+
+    onAuthStateChanged,
+
+    signOut
+
+}
+from
+"https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+
+
+
+/* ==========================================
+   FIREBASE CONFIGURATION
+========================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyAOp0bK9NtPrw2kAbe0i5UchdWXy7aQaD8",
+
+    authDomain:
+    "staff-portal-c1caf.firebaseapp.com",
+
+    projectId:
+    "staff-portal-c1caf",
+
+    storageBucket:
+    "staff-portal-c1caf.firebasestorage.app",
+
+    messagingSenderId:
+    "1091632911018",
+
+    appId:
+    "1:1091632911018:web:0436456763965f973cf6d3",
+
+    measurementId:
+    "G-0XDM45JW6L"
+
+};
+
+
+
+/* ==========================================
+   INITIALIZE FIREBASE
+========================================== */
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+
+const auth =
+    getAuth(app);
+
+
+
+/* ==========================================
+   LOGIN PAGE LOCATION
+
+   CHANGE THIS IF YOUR LOGIN PAGE IS
+   LOCATED SOMEWHERE ELSE.
+
+   Example:
+
+   staff/staff-login.html
+
+========================================== */
+
+const LOGIN_PAGE =
+    "staff/staff-login.html";
+
+
+
+/* ==========================================
+   AUTHENTICATION LOADING SCREEN
+========================================== */
+
+const authLoading =
+    document.getElementById(
+        "authLoading"
+    );
+
+
+
+/* ==========================================
+   ERROR ELEMENT
+========================================== */
+
+const errorBox =
+    document.getElementById(
+        "error"
+    );
+
+
+
+/* ==========================================
+   LOGOUT BUTTON
+========================================== */
+
+const logoutBtn =
+    document.getElementById(
+        "logoutBtn"
+    );
+
+
+
+/* ==========================================
+   PROTECT RESOURCES PAGE
+
+   Firebase checks whether a valid
+   authenticated session exists.
+
+========================================== */
+
+onAuthStateChanged(
+
+    auth,
+
+    (user) => {
+
+
+        /* ==================================
+           USER NOT AUTHENTICATED
+        ================================== */
+
+        if (!user) {
+
+
+            // Redirect immediately
+            // to Staff Login
+
+            window.location.replace(
+                LOGIN_PAGE
+            );
+
+
+            return;
+
+        }
+
+
+
+        /* ==================================
+           USER IS AUTHENTICATED
+        ================================== */
+
+        console.log(
+            "Authenticated Staff:",
+            user.email
+        );
+
+
+
+        /* ==================================
+           HIDE AUTHENTICATION LOADING SCREEN
+
+           Only authenticated users reach here.
+        ================================== */
+
+        authLoading.style.display =
+            "none";
+
+
+    }
+
+);
+
+
+
+/* ==========================================
+   LOGOUT FUNCTION
+========================================== */
+
+logoutBtn.addEventListener(
+
+    "click",
+
+    async () => {
+
+
+        /* ==================================
+           CONFIRM LOGOUT
+        ================================== */
+
+        const confirmed =
+            confirm(
+                "Are you sure you want to logout?"
+            );
+
+
+        if (!confirmed) {
+
+            return;
+
+        }
+
+
+
+        /* ==================================
+           DISABLE BUTTON
+        ================================== */
+
+        logoutBtn.disabled =
+            true;
+
+        logoutBtn.textContent =
+            "Logging out...";
+
+
+
+        try {
+
+
+            /* ==============================
+               FIREBASE SIGN OUT
+            ============================== */
+
+            await signOut(
+                auth
+            );
+
+
+
+            /* ==============================
+               REDIRECT TO LOGIN
+            ============================== */
+
+            window.location.replace(
+                LOGIN_PAGE
+            );
+
+
+        }
+
+        catch (error) {
+
+
+            console.error(
+                "Logout Error:",
+                error
+            );
+
+
+            /* ==============================
+               SHOW ERROR
+            ============================== */
+
+            errorBox.textContent =
+                "Logout failed. Please try again.";
+
+
+            /* ==============================
+               ENABLE BUTTON AGAIN
+            ============================== */
+
+            logoutBtn.disabled =
+                false;
+
+            logoutBtn.textContent =
+                "Logout";
+
+        }
+
+    }
+
+);
+
+
+</script>
+
+
+</body>
+
+</html>
+```

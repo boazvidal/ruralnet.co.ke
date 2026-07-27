@@ -1,177 +1,1128 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<link rel="icon"
+      type="image/png"
+      href="../images/fav.png">
+
 <title>Staff Portal</title>
 
+
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: url('../images/staffbg.jpg');
-    background-size: cover;
-    background-position: center;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+/* ==========================================
+   RESET
+========================================== */
+
+* {
+    box-sizing: border-box;
 }
 
-/* NAVBAR */
-nav {
-    width: 95%;
-    max-width: 1200px;
-    background: black;
-    color: white;
+
+/* ==========================================
+   BODY
+========================================== */
+
+body {
+
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,0.35),
+            rgba(0,0,0,0.35)
+        ),
+        url('../images/staffbg.jpg');
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+    min-height: 100vh;
+
     display: flex;
-    justify-content: space-between;
+
+    flex-direction: column;
+
     align-items: center;
-    padding: 10px 20px;
-    border-radius: 20px;
-    border-bottom: 20px solid white;
-    border-top: 20px solid green;
-    margin-top: 10px;
+
 }
+
+
+/* ==========================================
+   NAVBAR
+========================================== */
+
+nav {
+
+    width: 95%;
+
+    max-width: 1200px;
+
+    background: black;
+
+    color: white;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 10px 20px;
+
+    border-radius: 20px;
+
+    border-bottom: 20px solid white;
+
+    border-top: 20px solid green;
+
+    margin-top: 10px;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,0.3);
+
+}
+
 
 nav img {
+
     height: 70px;
+
+    max-width: 100%;
+
+    object-fit: contain;
+
 }
 
-/* CARD */
+
+/* ==========================================
+   LOGIN CARD
+========================================== */
+
 .card {
+
     width: 90%;
+
     max-width: 400px;
-    background: rgba(255,255,255,0.1);
-    padding: 25px;
+
+    background:
+        rgba(255,255,255,0.15);
+
+    padding: 30px;
+
     border-radius: 15px;
+
     text-align: center;
-    backdrop-filter: blur(6px);
-    margin: 20px 0;
+
+    backdrop-filter: blur(10px);
+
+    -webkit-backdrop-filter: blur(10px);
+
+    margin: 30px 0;
+
+    box-shadow:
+        0 8px 30px
+        rgba(0,0,0,0.35);
+
 }
+
+
+/* ==========================================
+   HEADING
+========================================== */
+
+.card h2 {
+
+    margin-top: 0;
+
+    color: white;
+
+    font-size: 26px;
+
+}
+
+
+.card p {
+
+    color: white;
+
+}
+
+
+/* ==========================================
+   INPUT GROUP
+========================================== */
+
+.input-group {
+
+    position: relative;
+
+    width: 100%;
+
+    margin-bottom: 15px;
+
+}
+
+
+/* ==========================================
+   INPUTS
+========================================== */
 
 input {
+
     width: 100%;
-    padding: 12px;
+
+    padding: 13px;
+
     border-radius: 8px;
-    margin-bottom: 15px;
+
     border: 1px solid #ccc;
+
+    outline: none;
+
+    font-size: 15px;
+
+    background: white;
+
 }
+
+
+input:focus {
+
+    border-color: #3498db;
+
+    box-shadow:
+        0 0 5px
+        rgba(52,152,219,0.5);
+
+}
+
+
+/* ==========================================
+   PASSWORD INPUT
+========================================== */
+
+.password-input {
+
+    padding-right: 75px;
+
+}
+
+
+/* ==========================================
+   SHOW PASSWORD BUTTON
+========================================== */
+
+#togglePassword {
+
+    position: absolute;
+
+    right: 8px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    background: transparent;
+
+    color: #3498db;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+}
+
+
+/* ==========================================
+   LOGIN BUTTON
+========================================== */
 
 .btn {
+
     width: 100%;
-    padding: 12px;
+
+    padding: 13px;
+
     background: #3498db;
+
     color: white;
+
+    border: none;
+
     border-radius: 8px;
+
     cursor: pointer;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+
 }
+
 
 .btn:hover {
+
     background: #2980b9;
+
 }
+
+
+.btn:disabled {
+
+    background: #777;
+
+    cursor: not-allowed;
+
+}
+
+
+/* ==========================================
+   STATUS / ERROR MESSAGE
+========================================== */
 
 #error {
-    color: red;
-    margin-top: 10px;
+
+    min-height: 20px;
+
+    margin-top: 15px;
+
+    color: #ffdddd;
+
+    font-weight: bold;
+
 }
 
-footer {
+
+/* ==========================================
+   LOADING
+========================================== */
+
+.loading {
+
+    display: none;
+
+    margin-top: 15px;
+
     color: white;
-    font-size: 13px;
+
+    font-size: 14px;
+
 }
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+footer {
+
+    color: white;
+
+    font-size: 13px;
+
+    text-align: center;
+
+    margin-top: auto;
+
+    padding: 20px;
+
+}
+
+
+/* ==========================================
+   MOBILE RESPONSIVE
+========================================== */
+
+@media (max-width: 500px) {
+
+    nav {
+
+        width: 94%;
+
+        border-top-width: 12px;
+
+        border-bottom-width: 12px;
+
+        padding: 8px;
+
+    }
+
+
+    nav img {
+
+        height: 55px;
+
+    }
+
+
+    .card {
+
+        padding: 25px 20px;
+
+    }
+
+
+    .card h2 {
+
+        font-size: 22px;
+
+    }
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
+
+<!-- ==========================================
+     NAVIGATION
+========================================== -->
+
 <nav>
-    <img src="../images/RURALNET.png">
+
+    <img
+        src="../images/RURALNET.png"
+        alt="Ruralnet ICT Academy Logo">
+
 </nav>
 
-<div class="card">
-    <h2>STAFF PORTAL</h2>
-    <p>Sign in using your staff number</p>
 
-    <input type="password" id="userCode" placeholder="Enter staff number">
-    <div class="btn" id="loginBtn">Verify</div>
+<!-- ==========================================
+     LOGIN CARD
+========================================== -->
+
+<div class="card">
+
+    <h2>STAFF PORTAL</h2>
+
+    <p>
+        Sign in using your staff number
+    </p>
+
+
+    <!-- STAFF NUMBER -->
+
+    <input
+        type="text"
+        id="userCode"
+        placeholder="Enter staff number"
+        autocomplete="username"
+    >
+
+
+    <!-- PASSWORD -->
+
+    <div class="input-group">
+
+        <input
+            type="password"
+            id="userPassword"
+            class="password-input"
+            placeholder="Enter password"
+            autocomplete="current-password"
+        >
+
+        <button
+            type="button"
+            id="togglePassword">
+
+            Show
+
+        </button>
+
+    </div>
+
+
+    <!-- LOGIN BUTTON -->
+
+    <button
+        type="button"
+        class="btn"
+        id="loginBtn">
+
+        Verify & Login
+
+    </button>
+
+
+    <!-- STATUS MESSAGE -->
 
     <p id="error"></p>
+
+
+    <!-- LOADING MESSAGE -->
+
+    <div
+        class="loading"
+        id="loading">
+
+        Please wait...
+
+    </div>
+
 </div>
 
+
+<!-- ==========================================
+     FOOTER
+========================================== -->
+
 <footer>
-© Powered By Ruralnet ICT Academy Developer
+
+    © Powered By Ruralnet ICT Academy Developer
+
 </footer>
 
-<!-- 🔥 FIREBASE + LOGIN -->
+
+
+<!-- ==========================================
+     FIREBASE JAVASCRIPT
+========================================== -->
+
 <script type="module">
 
-// ✅ Import Firebase
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-import { getFirestore, collection, query, where, getDocs } 
-from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
-// ✅ Your Config
+/* ==========================================
+   FIREBASE IMPORTS
+========================================== */
+
+import {
+
+    initializeApp
+
+}
+from
+"https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+
+
+import {
+
+    getFirestore,
+
+    collection,
+
+    query,
+
+    where,
+
+    getDocs
+
+}
+from
+"https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+
+import {
+
+    getAuth,
+
+    signInWithEmailAndPassword,
+
+    onAuthStateChanged
+
+}
+from
+"https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+
+
+
+/* ==========================================
+   FIREBASE CONFIGURATION
+========================================== */
+
 const firebaseConfig = {
-  apiKey: "AIzaSyAOp0bK9NtPrw2kAbe0i5UchdWXy7aQaD8",
-  authDomain: "staff-portal-c1caf.firebaseapp.com",
-  projectId: "staff-portal-c1caf",
-  storageBucket: "staff-portal-c1caf.firebasestorage.app",
-  messagingSenderId: "1091632911018",
-  appId: "1:1091632911018:web:0436456763965f973cf6d3",
-  measurementId: "G-0XDM45JW6L"
+
+    apiKey:
+    "AIzaSyAOp0bK9NtPrw2kAbe0i5UchdWXy7aQaD8",
+
+    authDomain:
+    "staff-portal-c1caf.firebaseapp.com",
+
+    projectId:
+    "staff-portal-c1caf",
+
+    storageBucket:
+    "staff-portal-c1caf.firebasestorage.app",
+
+    messagingSenderId:
+    "1091632911018",
+
+    appId:
+    "1:1091632911018:web:0436456763965f973cf6d3",
+
+    measurementId:
+    "G-0XDM45JW6L"
+
 };
 
-// ✅ Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
-// 🔐 LOGIN FUNCTION
+
+/* ==========================================
+   INITIALIZE FIREBASE
+========================================== */
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+const db =
+    getFirestore(app);
+
+
+const auth =
+    getAuth(app);
+
+
+
+/* ==========================================
+   HTML ELEMENTS
+========================================== */
+
+const userCode =
+    document.getElementById("userCode");
+
+
+const userPassword =
+    document.getElementById("userPassword");
+
+
+const loginBtn =
+    document.getElementById("loginBtn");
+
+
+const errorBox =
+    document.getElementById("error");
+
+
+const loading =
+    document.getElementById("loading");
+
+
+const togglePassword =
+    document.getElementById("togglePassword");
+
+
+
+/* ==========================================
+   CHECK EXISTING FIREBASE SESSION
+==========================================
+
+   If a staff member is already authenticated,
+   there is no need to login again.
+
+========================================== */
+
+onAuthStateChanged(
+
+    auth,
+
+    (user) => {
+
+        if (user) {
+
+            console.log(
+                "Already authenticated:",
+                user.email
+            );
+
+
+            // Redirect directly to resources
+
+            window.location.replace(
+                "../resources.html"
+            );
+
+        }
+
+    }
+
+);
+
+
+
+/* ==========================================
+   SHOW / HIDE PASSWORD
+========================================== */
+
+togglePassword.addEventListener(
+
+    "click",
+
+    () => {
+
+        if (
+            userPassword.type ===
+            "password"
+        ) {
+
+            userPassword.type =
+                "text";
+
+            togglePassword.textContent =
+                "Hide";
+
+        }
+
+        else {
+
+            userPassword.type =
+                "password";
+
+            togglePassword.textContent =
+                "Show";
+
+        }
+
+    }
+
+);
+
+
+
+/* ==========================================
+   LOGIN FUNCTION
+========================================== */
+
 async function verifyCode() {
-    const entered = document.getElementById("userCode").value.trim();
-    const errorBox = document.getElementById("error");
+
+
+    /* ======================================
+       GET INPUT VALUES
+    ====================================== */
+
+    const enteredCode =
+        userCode.value.trim();
+
+
+    const enteredPassword =
+        userPassword.value.trim();
+
+
+
+    /* ======================================
+       CLEAR PREVIOUS ERROR
+    ====================================== */
 
     errorBox.textContent = "";
 
-    if (!entered) {
-        errorBox.textContent = "Enter your staff number";
+
+
+    /* ======================================
+       VALIDATE STAFF NUMBER
+    ====================================== */
+
+    if (!enteredCode) {
+
+        errorBox.textContent =
+            "Please enter your staff number.";
+
+        userCode.focus();
+
         return;
+
     }
 
-    errorBox.textContent = "Checking...";
+
+
+    /* ======================================
+       VALIDATE PASSWORD
+    ====================================== */
+
+    if (!enteredPassword) {
+
+        errorBox.textContent =
+            "Please enter your password.";
+
+        userPassword.focus();
+
+        return;
+
+    }
+
+
+
+    /* ======================================
+       DISABLE LOGIN BUTTON
+    ====================================== */
+
+    loginBtn.disabled = true;
+
+    loginBtn.textContent =
+        "Verifying...";
+
+    loading.style.display =
+        "block";
+
+
 
     try {
-        const q = query(
-            collection(db, "staff"),
-            where("code", "==", entered)
+
+
+        /* ==================================
+           STEP 1
+
+           SEARCH FIRESTORE FOR STAFF NUMBER
+        ================================== */
+
+        const staffQuery = query(
+
+            collection(
+                db,
+                "staff"
+            ),
+
+            where(
+                "code",
+                "==",
+                enteredCode
+            )
+
         );
 
-        const snapshot = await getDocs(q);
 
-        if (!snapshot.empty) {
-            // ✅ Save session
-            localStorage.setItem("staffLoggedIn", "true");
+        const snapshot =
+            await getDocs(
+                staffQuery
+            );
 
-            // ✅ Redirect
-            window.location.href = "../resources.html";
-        } else {
-            errorBox.textContent = "Invalid staff number";
+
+
+        /* ==================================
+           STAFF NUMBER NOT FOUND
+        ================================== */
+
+        if (
+            snapshot.empty
+        ) {
+
+            errorBox.textContent =
+                "Invalid staff number.";
+
+            loginBtn.disabled =
+                false;
+
+            loginBtn.textContent =
+                "Verify & Login";
+
+            loading.style.display =
+                "none";
+
+            return;
+
         }
 
-    } catch (err) {
-        console.error(err);
-        errorBox.textContent = "System error. Check console.";
+
+
+        /* ==================================
+           GET STAFF DOCUMENT
+        ================================== */
+
+        const staffDocument =
+            snapshot.docs[0];
+
+
+        const staffData =
+            staffDocument.data();
+
+
+
+        /* ==================================
+           GET STAFF EMAIL
+        ================================== */
+
+        const staffEmail =
+            staffData.email;
+
+
+
+        /* ==================================
+           CHECK EMAIL
+        ================================== */
+
+        if (!staffEmail) {
+
+            errorBox.textContent =
+                "This staff account has no email configured.";
+
+            loginBtn.disabled =
+                false;
+
+            loginBtn.textContent =
+                "Verify & Login";
+
+            loading.style.display =
+                "none";
+
+            return;
+
+        }
+
+
+
+        /* ==================================
+           STEP 2
+
+           SIGN IN WITH FIREBASE AUTH
+        ================================== */
+
+        await signInWithEmailAndPassword(
+
+            auth,
+
+            staffEmail,
+
+            enteredPassword
+
+        );
+
+
+
+        /* ==================================
+           LOGIN SUCCESSFUL
+        ================================== */
+
+        errorBox.style.color =
+            "#90ee90";
+
+
+        errorBox.textContent =
+            "Login successful. Redirecting...";
+
+
+        loading.textContent =
+            "Opening staff resources...";
+
+
+        /* ==================================
+           REDIRECT
+        ================================== */
+
+        setTimeout(
+
+            () => {
+
+                window.location.replace(
+                    "../resources.html"
+                );
+
+            },
+
+            500
+
+        );
+
+
     }
+
+    catch (error) {
+
+
+        /* ==================================
+           LOG ERROR FOR DEVELOPER
+        ================================== */
+
+        console.error(
+            "Firebase Login Error:",
+            error
+        );
+
+
+
+        /* ==================================
+           RESET ERROR COLOR
+        ================================== */
+
+        errorBox.style.color =
+            "#ffdddd";
+
+
+
+        /* ==================================
+           HANDLE FIREBASE ERRORS
+        ================================== */
+
+        if (
+
+            error.code ===
+            "auth/invalid-credential"
+
+        ) {
+
+            errorBox.textContent =
+                "Incorrect staff number or password.";
+
+        }
+
+
+        else if (
+
+            error.code ===
+            "auth/user-not-found"
+
+        ) {
+
+            errorBox.textContent =
+                "Staff authentication account was not found.";
+
+        }
+
+
+        else if (
+
+            error.code ===
+            "auth/wrong-password"
+
+        ) {
+
+            errorBox.textContent =
+                "Incorrect password.";
+
+        }
+
+
+        else if (
+
+            error.code ===
+            "auth/too-many-requests"
+
+        ) {
+
+            errorBox.textContent =
+                "Too many failed attempts. Please try again later.";
+
+        }
+
+
+        else if (
+
+            error.code ===
+            "auth/network-request-failed"
+
+        ) {
+
+            errorBox.textContent =
+                "Network error. Check your internet connection.";
+
+        }
+
+
+        else {
+
+            errorBox.textContent =
+                "Login failed. Please try again.";
+
+        }
+
+
+
+        /* ==================================
+           ENABLE LOGIN AGAIN
+        ================================== */
+
+        loginBtn.disabled =
+            false;
+
+
+        loginBtn.textContent =
+            "Verify & Login";
+
+
+        loading.style.display =
+            "none";
+
+    }
+
 }
 
-// 🎯 EVENTS
-document.getElementById("loginBtn").addEventListener("click", verifyCode);
 
-document.getElementById("userCode").addEventListener("keypress", function(e) {
-    if (e.key === "Enter") verifyCode();
-});
+
+/* ==========================================
+   LOGIN BUTTON CLICK
+========================================== */
+
+loginBtn.addEventListener(
+
+    "click",
+
+    verifyCode
+
+);
+
+
+
+/* ==========================================
+   ENTER KEY LOGIN
+========================================== */
+
+userCode.addEventListener(
+
+    "keypress",
+
+    (event) => {
+
+        if (
+            event.key ===
+            "Enter"
+        ) {
+
+            verifyCode();
+
+        }
+
+    }
+
+);
+
+
+userPassword.addEventListener(
+
+    "keypress",
+
+    (event) => {
+
+        if (
+            event.key ===
+            "Enter"
+        ) {
+
+            verifyCode();
+
+        }
+
+    }
+
+);
+
 
 </script>
 
+
 </body>
+
 </html>
+```
