@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>About Us | RuralNet ICT Academy</title>
+
+<link rel="icon" type="image/png" href="../images/favicAboutUs.png">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+    /* =========================================
+       GLOBAL STYLES
+    ========================================= */
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: "Inter", sans-serif;
+        color: #1f2937;
+        background:
+            linear-gradient(
+                rgba(2, 35, 16, 0.78),
+                rgba(2, 35, 16, 0.78)
+            ),
+            url("../images/gbd.jpg") center/cover fixed no-repeat;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    button {
+        font-family: inherit;
+    }
+
+
+    /* =========================================
+       NAVIGATION
+    ========================================= */
+
+    .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+
+        width: 100%;
+        padding: 12px 5%;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        background: rgba(3, 45, 20, 0.92);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    .logo img {
+        width: auto;
+        height: 55px;
+        display: block;
+        object-fit: contain;
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .nav-links a {
+        position: relative;
+
+        color: #ffffff;
+        padding: 12px 16px;
+
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: capitalize;
+
+        transition: all 0.3s ease;
+    }
+
+    .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 4px;
+
+        width: 0;
+        height: 3px;
+
+        background: #8ee000;
+        border-radius: 20px;
+
+        transform: translateX(-50%);
+        transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+        width: 60%;
+    }
+
+    .nav-links a:hover {
+        color: #b7ff62;
+    }
+
+    .apply-btn {
+        background: #8ee000 !important;
+        color: #123300 !important;
+        border-radius: 30px;
+        padding: 11px 20px !important;
+        margin-left: 8px;
+        font-weight: 800 !important;
+    }
+
+    .apply-btn::after {
+        display: none;
+    }
+
+    .apply-btn:hover {
+        background: #b6ff68 !important;
+        color: #102900 !important;
+        transform: translateY(-2px);
+    }
+
+    /* Mobile Menu Button */
+
+    .menu-toggle {
+        display: none;
+
+        width: 45px;
+        height: 45px;
+
+        border: none;
+        border-radius: 10px;
+
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+
+    /* =========================================
+       HERO SECTION
+    ========================================= */
+
+    .hero {
+        min-height: 420px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        text-align: center;
+
+        padding: 80px 20px;
+
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::before {
+        content: "";
+
+        position: absolute;
+        width: 400px;
+        height: 400px;
+
+        background: rgba(142, 224, 0, 0.12);
+        border-radius: 50%;
+
+        top: -180px;
+        right: -100px;
+
+        filter: blur(10px);
+    }
+
+    .hero::after {
+        content: "";
+
+        position: absolute;
+        width: 300px;
+        height: 300px;
+
+        background: rgba(0, 255, 153, 0.08);
+        border-radius: 50%;
+
+        bottom: -150px;
+        left: -100px;
+
+        filter: blur(10px);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 850px;
+        animation: fadeUp 1s ease;
+    }
+
+    .hero-badge {
+        display: inline-block;
+
+        padding: 8px 18px;
+        margin-bottom: 20px;
+
+        color: #b6ff68;
+        background: rgba(142, 224, 0, 0.12);
+
+        border: 1px solid rgba(142, 224, 0, 0.4);
+        border-radius: 30px;
+
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    .hero h1 {
+        color: white;
+
+        font-family: "Poppins", sans-serif;
+        font-size: clamp(2.5rem, 6vw, 5rem);
+
+        line-height: 1.1;
+        margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+        color: #8ee000;
+    }
+
+    .hero p {
+        max-width: 700px;
+        margin: auto;
+
+        color: rgba(255, 255, 255, 0.82);
+
+        font-size: 18px;
+        line-height: 1.8;
+    }
+
+
+    /* =========================================
+       STAFF SECTION
+    ========================================= */
+
+    .section {
+        padding: 80px 5%;
+    }
+
+    .section-heading {
+        max-width: 700px;
+        margin: 0 auto 50px;
+        text-align: center;
+    }
+
+    .section-heading .tag {
+        display: inline-block;
+
+        color: #197a2e;
+        background: #eaffdc;
+
+        padding: 7px 16px;
+        border-radius: 30px;
+
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+
+        margin-bottom: 15px;
+    }
+
+    .section-heading h2 {
+        color: white;
+
+        font-family: "Poppins", sans-serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+
+        margin-bottom: 15px;
+    }
+
+    .section-heading p {
+        color: rgba(255, 255, 255, 0.75);
+        line-height: 1.7;
+    }
+
+    .member-container {
+        max-width: 1250px;
+        margin: auto;
+
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 25px;
+    }
+
+    .staff {
+        position: relative;
+
+        text-align: center;
+
+        padding: 25px 20px;
+
+        background: rgba(255, 255, 255, 0.09);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+
+        border-radius: 22px;
+
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+
+        transition: all 0.4s ease;
+
+        overflow: hidden;
+    }
+
+    .staff::before {
+        content: "";
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 4px;
+
+        background: linear-gradient(
+            90deg,
+            #8ee000,
+            #00d084
+        );
+    }
+
+    .staff:hover {
+        transform: translateY(-10px);
+        background: rgba(255, 255, 255, 0.14);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+    }
+
+    .staff-image {
+        width: 170px;
+        height: 190px;
+
+        margin: 0 auto 20px;
+
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+
+        border-radius: 18px;
+        overflow: hidden;
+
+        background:
+            linear-gradient(
+                135deg,
+                rgba(142, 224, 0, 0.15),
+                rgba(0, 208, 132, 0.12)
+            );
+    }
+
+    .staff-image img {
+        width: auto;
+        max-width: 100%;
+        height: 100%;
+
+        object-fit: contain;
+
+        transition: transform 0.5s ease;
+    }
+
+    .staff:hover .staff-image img {
+        transform: scale(1.06);
+    }
+
+    .staff h3 {
+        color: white;
+
+        font-family: "Poppins", sans-serif;
+        font-size: 17px;
+
+        margin-bottom: 8px;
+    }
+
+    .staff p {
+        display: inline-block;
+
+        color: #b7ff62;
+
+        font-size: 13px;
+        font-weight: 600;
+
+        background: rgba(142, 224, 0, 0.1);
+
+        padding: 7px 13px;
+        border-radius: 30px;
+    }
+
+
+    /* =========================================
+       ABOUT CONTENT / TABS
+    ========================================= */
+
+    .about-section {
+        padding: 30px 5% 90px;
+    }
+
+    .tabs-container {
+        max-width: 1200px;
+        margin: auto;
+
+        background: rgba(255, 255, 255, 0.96);
+
+        border-radius: 25px;
+        overflow: hidden;
+
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    .tab-button {
+        display: flex;
+        flex-wrap: wrap;
+
+        background: #063c18;
+        padding: 10px;
+        gap: 5px;
+    }
+
+    .tab-btn {
+        flex: 1;
+        min-width: 150px;
+
+        border: none;
+        border-radius: 12px;
+
+        padding: 15px 18px;
+
+        background: transparent;
+        color: rgba(255, 255, 255, 0.7);
+
+        cursor: pointer;
+
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+
+        transition: all 0.3s ease;
+    }
+
+    .tab-btn:hover {
+        color: white;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .tab-btn.active {
+        color: #123300;
+        background: #8ee000;
+
+        box-shadow: 0 5px 15px rgba(142, 224, 0, 0.25);
+    }
+
+    .tab-content {
+        display: none;
+
+        padding: 45px;
+
+        min-height: 250px;
+
+        color: #4b5563;
+
+        font-size: 16px;
+        line-height: 1.9;
+
+        animation: fadeContent 0.5s ease;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+
+    .tab-content h3 {
+        color: #063c18;
+        font-family: "Poppins", sans-serif;
+        margin-bottom: 15px;
+    }
+
+    .loading {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        color: #197a2e;
+        font-weight: 600;
+    }
+
+    .loading::before {
+        content: "";
+
+        width: 18px;
+        height: 18px;
+
+        border: 3px solid #d8f5c2;
+        border-top-color: #197a2e;
+
+        border-radius: 50%;
+
+        animation: spin 0.8s linear infinite;
+    }
+
+
+    /* =========================================
+       FOOTER
+    ========================================= */
+
+    .footer {
+        background: #031b0b;
+        color: white;
+
+        padding: 70px 5% 30px;
+
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 40px;
+
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-column {
+        padding: 0;
+    }
+
+    .footer-column h3 {
+        position: relative;
+
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+
+        margin-bottom: 25px;
+        padding-bottom: 12px;
+    }
+
+    .footer-column h3::after {
+        content: "";
+
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        width: 45px;
+        height: 3px;
+
+        background: #8ee000;
+        border-radius: 10px;
+    }
+
+    .footer-column ul {
+        list-style: none;
+    }
+
+    .footer-column li {
+        list-style: none;
+        margin-bottom: 12px;
+    }
+
+    .footer-column a {
+        color: rgba(255, 255, 255, 0.7);
+        transition: all 0.3s ease;
+    }
+
+    .footer-column a:hover {
+        color: #8ee000;
+        padding-left: 5px;
+    }
+
+    .footer-column p {
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 12px;
+        line-height: 1.5;
+    }
+
+    .footer-bottom {
+        grid-column: 1 / -1;
+
+        padding-top: 25px;
+        margin-top: 20px;
+
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+        text-align: center;
+
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 13px;
+    }
+
+
+    /* =========================================
+       ANIMATIONS
+    ========================================= */
+
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeContent {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+
+    /* =========================================
+       TABLET
+    ========================================= */
+
+    @media (max-width: 900px) {
+
+        .menu-toggle {
+            display: block;
+        }
+
+        .nav-links {
+            position: absolute;
+
+            top: 80px;
+            left: 5%;
+            right: 5%;
+
+            display: none;
+            flex-direction: column;
+            align-items: stretch;
+
+            padding: 15px;
+
+            background: rgba(3, 45, 20, 0.98);
+            backdrop-filter: blur(15px);
+
+            border-radius: 18px;
+
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-links.show {
+            display: flex;
+        }
+
+        .nav-links a {
+            text-align: center;
+            padding: 14px;
+        }
+
+        .apply-btn {
+            margin-left: 0;
+            margin-top: 5px;
+        }
+
+        .hero {
+            min-height: 380px;
+        }
+
+        .tab-button {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .tab-btn {
+            min-width: auto;
+        }
+    }
+
+
+    /* =========================================
+       MOBILE
+    ========================================= */
+
+    @media (max-width: 600px) {
+
+        .navbar {
+            padding: 10px 20px;
+        }
+
+        .logo img {
+            height: 45px;
+        }
+
+        .nav-links {
+            left: 15px;
+            right: 15px;
+            top: 70px;
+        }
+
+        .hero {
+            padding: 70px 20px;
+            min-height: 350px;
+        }
+
+        .hero p {
+            font-size: 15px;
+        }
+
+        .section {
+            padding: 60px 20px;
+        }
+
+        .member-container {
+            grid-template-columns: 1fr;
+            max-width: 350px;
+        }
+
+        .about-section {
+            padding: 20px 15px 60px;
+        }
+
+        .tabs-container {
+            border-radius: 18px;
+        }
+
+        .tab-button {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tab-btn {
+            width: 100%;
+        }
+
+        .tab-content {
+            padding: 30px 22px;
+            font-size: 15px;
+        }
+
+        .footer {
+            padding: 50px 25px 25px;
+            grid-template-columns: 1fr;
+        }
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+<!-- =========================================
+     NAVIGATION
+========================================= -->
+
+<nav class="navbar">
+
+```
+<a href="index.html" class="logo">
+    <img src="../images/RURALNET.png" alt="RuralNet ICT Academy Logo">
+</a>
+
+<button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+    ☰
+</button>
+
+<div class="nav-links" id="navLinks">
+
+    <a href="index.html">Home</a>
+
+    <a href="https://forms.gle/wywREJiHrpFTF5veA"
+       target="_blank"
+       rel="noopener">
+        Apply Now
+    </a>
+
+    <a href="About_Us.html" class="active">
+        About Us
+    </a>
+
+    <a href="announcements.html">
+        Announcements
+    </a>
+
+    <a href="https://easytvet.com/"
+       target="_blank"
+       rel="noopener">
+        TVET
+    </a>
+
+    <a href="https://www.kasneb.or.ke/"
+       target="_blank"
+       rel="noopener">
+        KASNEB
+    </a>
+
+    <a href="https://www.netacad.com/"
+       target="_blank"
+       rel="noopener">
+        CISCO
+    </a>
+
+</div>
+```
+
+</nav>
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<section class="hero">
+
+```
+<div class="hero-content">
+
+    <div class="hero-badge">
+        About RuralNet ICT Academy
+    </div>
+
+    <h1>
+        Empowering People Through
+        <span>Digital Skills</span>
+    </h1>
+
+    <p>
+        Discover who we are, what we stand for, and our commitment
+        to providing quality ICT and technical education that
+        empowers individuals and communities for a digital future.
+    </p>
+
+</div>
+```
+
+</section>
+
+<!-- =========================================
+     STAFF SECTION
+========================================= -->
+
+<section class="section">
+
+```
+<div class="section-heading">
+
+    <span class="tag">
+        Our Leadership
+    </span>
+
+    <h2>
+        Meet Our Team
+    </h2>
+
+    <p>
+        Our dedicated leadership and professional team work together
+        to provide quality training, administration, and digital
+        solutions to our students and community.
+    </p>
+
+</div>
+
+
+<div class="member-container">
+
+
+    <div class="staff">
+
+        <div class="staff-image">
+            <img src="../images/micha.png"
+                 alt="Mr. Micha Schraven">
+        </div>
+
+        <h3>
+            Mr. Micha Schraven
+        </h3>
+
+        <p>
+            Director General
+        </p>
+
+    </div>
+
+
+    <div class="staff">
+
+        <div class="staff-image">
+            <img src="../images/agoko.png"
+                 alt="Mr. George Agoko">
+        </div>
+
+        <h3>
+            Mr. George Agoko
+        </h3>
+
+        <p>
+            Board of Directors Chair
+        </p>
+
+    </div>
+
+
+    <div class="staff">
+
+        <div class="staff-image">
+            <img src="../images/olivia.png"
+                 alt="Madam Olivia Alang'o">
+        </div>
+
+        <h3>
+            Madam Olivia Alang'o
+        </h3>
+
+        <p>
+            Manager / CEO
+        </p>
+
+    </div>
+
+
+    <div class="staff">
+
+        <div class="staff-image">
+            <img src="../images/charity.png"
+                 alt="Miss Charity Anyango">
+        </div>
+
+        <h3>
+            Miss. Charity Anyango
+        </h3>
+
+        <p>
+            Administrator / H.R
+        </p>
+
+    </div>
+
+
+    <div class="staff">
+
+        <div class="staff-image">
+            <img src="../images/boaz.png"
+                 alt="Mr. Boaz Ochieng">
+        </div>
+
+        <h3>
+            Mr. Boaz Ochieng
+        </h3>
+
+        <p>
+            ICT Officer
+        </p>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- =========================================
+     ABOUT INFORMATION TABS
+========================================= -->
+
+<section class="about-section">
+
+```
+<div class="tabs-container">
+
+    <div class="tab-button">
+
+        <button
+            type="button"
+            class="tab-btn active"
+            data-tab="tab1">
+            INTRODUCTION
+        </button>
+
+        <button
+            type="button"
+            class="tab-btn"
+            data-tab="tab2">
+            MISSION
+        </button>
+
+        <button
+            type="button"
+            class="tab-btn"
+            data-tab="tab3">
+            VISION
+        </button>
+
+        <button
+            type="button"
+            class="tab-btn"
+            data-tab="tab4">
+            OBJECTIVES
+        </button>
+
+        <button
+            type="button"
+            class="tab-btn"
+            data-tab="tab5">
+            BRIEF HISTORY
+        </button>
+
+    </div>
+
+
+    <div class="tab-content active" id="tab1">
+        <div class="loading">
+            Loading content...
+        </div>
+    </div>
+
+    <div class="tab-content" id="tab2"></div>
+
+    <div class="tab-content" id="tab3"></div>
+
+    <div class="tab-content" id="tab4"></div>
+
+    <div class="tab-content" id="tab5"></div>
+
+</div>
+```
+
+</section>
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer class="footer">
+
+```
+<div class="footer-column">
+
+    <h3>
+        Useful Links
+    </h3>
+
+    <ul>
+
+        <li>
+            <a href="index.html">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="About_Us.html">
+                Who We Are
+            </a>
+        </li>
+
+        <li>
+            <a href="students/studentLogin.html">
+                Student Portal
+            </a>
+        </li>
+
+        <li>
+            <a href="https://online.kasneb.or.ke/"
+               target="_blank"
+               rel="noopener">
+                Accounting
+            </a>
+        </li>
+
+        <li>
+            <a href="https://www.cisco.com/"
+               target="_blank"
+               rel="noopener">
+                ICT
+            </a>
+        </li>
+
+    </ul>
+
+</div>
+
+
+<div class="footer-column">
+
+    <h3>
+        Partners
+    </h3>
+
+    <ul>
+
+        <li>
+            <a href="https://www.cskonline.org/"
+               target="_blank"
+               rel="noopener">
+                CSK
+            </a>
+        </li>
+
+        <li>
+            <a href="https://www.kasneb.or.ke/"
+               target="_blank"
+               rel="noopener">
+                KASNEB
+            </a>
+        </li>
+
+        <li>
+            <a href="https://www.tveta.go.ke/"
+               target="_blank"
+               rel="noopener">
+                TVETA
+            </a>
+        </li>
+
+    </ul>
+
+</div>
+
+
+<div class="footer-column">
+
+    <h3>
+        Contact Us
+    </h3>
+
+    <p>
+        +254 723 845 040
+    </p>
+
+    <p>
+        +254 700 886 058
+    </p>
+
+    <p>
+        +254 793 714 564
+    </p>
+
+    <p>
+        ruralnet2016@gmail.com
+    </p>
+
+    <p>
+        ruralnet.co.ke
+    </p>
+
+</div>
+
+
+<div class="footer-bottom">
+
+    © 2026 RuralNet ICT Academy. All Rights Reserved.
+
+</div>
+```
+
+</footer>
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
+<script>
+
+    /* =========================================
+       MOBILE NAVIGATION
+    ========================================= */
+
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", function () {
+
+        navLinks.classList.toggle("show");
+
+    });
+
+
+    /* Close mobile menu after clicking a link */
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+
+        link.addEventListener("click", function () {
+
+            navLinks.classList.remove("show");
+
+        });
+
+    });
+
+
+    /* =========================================
+       TAB CONTENT SYSTEM
+    ========================================= */
+
+    const tabFiles = {
+
+        tab1: "../intro.txt",
+
+        tab2: "../mission.txt",
+
+        tab3: "../vision.txt",
+
+        tab4: "../Objectives.txt",
+
+        tab5: "../History.txt"
+
+    };
+
+
+    const tabButtons =
+        document.querySelectorAll(".tab-btn");
+
+    const tabContents =
+        document.querySelectorAll(".tab-content");
+
+
+    function loadTabContent(tabId) {
+
+        const contentElement =
+            document.getElementById(tabId);
+
+
+        contentElement.innerHTML = `
+            <div class="loading">
+                Loading content...
+            </div>
+        `;
+
+
+        fetch(tabFiles[tabId])
+
+            .then(response => {
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Unable to load file"
+                    );
+
+                }
+
+                return response.text();
+
+            })
+
+            .then(text => {
+
+                contentElement.innerHTML =
+                    text
+                    .replace(/\n/g, "<br>");
+
+            })
+
+            .catch(error => {
+
+                console.error(error);
+
+                contentElement.innerHTML = `
+
+                    <p style="
+                        color:#dc2626;
+                        font-weight:600;
+                    ">
+
+                        Unable to load this content.
+                        Please try again later.
+
+                    </p>
+
+                `;
+
+            });
+
+    }
+
+
+    /* =========================================
+       TAB BUTTON EVENTS
+    ========================================= */
+
+    tabButtons.forEach(button => {
+
+        button.addEventListener("click", function () {
+
+            const tabId =
+                this.dataset.tab;
+
+
+            /* Remove active state */
+
+            tabButtons.forEach(btn => {
+
+                btn.classList.remove("active");
+
+            });
+
+
+            tabContents.forEach(content => {
+
+                content.classList.remove("active");
+
+            });
+
+
+            /* Activate selected tab */
+
+            this.classList.add("active");
+
+            document
+                .getElementById(tabId)
+                .classList.add("active");
+
+
+            /* Load content */
+
+            loadTabContent(tabId);
+
+        });
+
+    });
+
+
+    /* =========================================
+       LOAD INTRODUCTION BY DEFAULT
+    ========================================= */
+
+    loadTabContent("tab1");
+
+
+    /* =========================================
+       BASIC PAGE PROTECTION
+    ========================================= */
+
+    document.addEventListener(
+        "contextmenu",
+        event => event.preventDefault()
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            /* Disable F12 */
+
+            if (event.key === "F12") {
+
+                event.preventDefault();
+
+            }
+
+
+            /* Disable Ctrl + Shift + I */
+
+            if (
+                event.ctrlKey &&
+                event.shiftKey &&
+                event.key.toLowerCase() === "i"
+            ) {
+
+                event.preventDefault();
+
+            }
+
+
+            /* Disable Ctrl + Shift + J */
+
+            if (
+                event.ctrlKey &&
+                event.shiftKey &&
+                event.key.toLowerCase() === "j"
+            ) {
+
+                event.preventDefault();
+
+            }
+
+
+            /* Disable Ctrl + Shift + C */
+
+            if (
+                event.ctrlKey &&
+                event.shiftKey &&
+                event.key.toLowerCase() === "c"
+            ) {
+
+                event.preventDefault();
+
+            }
+
+
+            /* Disable Ctrl + U */
+
+            if (
+                event.ctrlKey &&
+                event.key.toLowerCase() === "u"
+            ) {
+
+                event.preventDefault();
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+</html>

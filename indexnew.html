@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ruralnet ICT Academy — bridging the rural and digital world through affordable, practical ICT training.">
+<title>Ruralnet ICT Academy — Home</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ============ TOKENS ============ */
+:root{
+  --ink:#181614;
+  --paper:#FBF9F4;
+  --soil:#B5651D;
+  --soil-dark:#7A4312;
+  --soil-tint:#F1E3D3;
+  --teal:#0E8C82;
+  --teal-dark:#0A6B63;
+  --teal-tint:#E1F1EF;
+  --gold:#E8AC3E;
+  --charcoal:#16211F;
+  --line:#E4DED0;
+  --muted:#5C564C;
+  --radius:14px;
+  --display:"Sora", sans-serif;
+  --body:"Inter", sans-serif;
+  --mono:"IBM Plex Mono", monospace;
+  --shadow: 0 8px 30px rgba(22,33,31,0.08);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:var(--body);
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;margin:0;padding:0;}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.15;margin:0 0 .5em;}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+.container{max-width:1180px;margin:0 auto;padding:0 24px;}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.78rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--teal-dark);
+}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 26px;border-radius:999px;
+  font-family:var(--body);font-weight:600;font-size:.95rem;
+  border:2px solid transparent;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover{transform:translateY(-2px);}
+.btn-primary{background:var(--soil);color:#fff;box-shadow:0 6px 18px rgba(181,101,29,.35);}
+.btn-primary:hover{background:var(--soil-dark);}
+.btn-ghost{background:transparent;color:var(--paper);border-color:rgba(255,255,255,.5);}
+.btn-ghost:hover{border-color:#fff;}
+
+/* seam divider — the recurring signature motif: rural (soil) meeting digital (teal) */
+.seam{
+  height:26px;width:100%;
+  background:
+    linear-gradient(135deg, var(--soil) 0 50%, var(--teal) 50% 100%);
+  clip-path: polygon(0 40%,4% 60%,8% 35%,12% 65%,16% 30%,20% 70%,24% 35%,28% 60%,32% 40%,36% 65%,40% 30%,44% 70%,48% 35%,52% 60%,56% 40%,60% 65%,64% 30%,68% 70%,72% 35%,76% 60%,80% 40%,84% 65%,88% 30%,92% 70%,96% 35%,100% 60%,100% 100%,0 100%);
+}
+
+/* ============ TOP UTILITY BAR ============ */
+.utility-bar{
+  background:var(--charcoal);color:#cfe9e6;
+  font-family:var(--mono);font-size:.78rem;
+}
+.utility-bar .container{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:8px;padding-bottom:8px;flex-wrap:wrap;gap:8px;
+}
+.utility-bar .socials{display:flex;gap:14px;align-items:center;}
+.utility-bar .socials img{width:16px;height:16px;filter:invert(1) brightness(1.4);opacity:.85;}
+.utility-bar .socials a:hover img{opacity:1;}
+
+/* ============ NAV ============ */
+header.site-nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(251,249,244,.92);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0;}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:1.05rem;}
+.brand img{height:40px;width:auto;}
+.nav-links{display:flex;align-items:center;gap:28px;font-weight:500;font-size:.95rem;}
+.nav-links > a{padding:8px 2px;position:relative;}
+.nav-links > a::after{
+  content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--soil);
+  transition:width .2s ease;
+}
+.nav-links > a:hover::after{width:100%;}
+.nav-links .apply{
+  background:var(--teal);color:#fff;padding:10px 20px;border-radius:999px;font-weight:600;
+}
+.nav-links .apply::after{display:none;}
+.nav-links .apply:hover{background:var(--teal-dark);}
+
+.dropdown{position:relative;}
+.drop-btn{display:flex;align-items:center;gap:4px;cursor:pointer;}
+.dropdown-content{
+  position:absolute;top:calc(100% + 14px);left:0;background:#fff;
+  border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);
+  min-width:190px;padding:8px;opacity:0;visibility:hidden;transform:translateY(-6px);
+  transition:all .18s ease;
+}
+.dropdown-content a{display:block;padding:10px 12px;border-radius:8px;font-size:.9rem;}
+.dropdown-content a:hover{background:var(--teal-tint);color:var(--teal-dark);}
+.dropdown:hover .dropdown-content,
+.dropdown.active .dropdown-content{opacity:1;visibility:visible;transform:translateY(0);}
+
+.menu-icon{display:none;font-size:1.6rem;cursor:pointer;background:none;border:none;color:var(--ink);}
+
+@media (max-width: 900px){
+  .menu-icon{display:block;}
+  .nav-links{
+    position:fixed;top:0;right:0;height:100vh;width:min(320px,80vw);
+    background:var(--paper);flex-direction:column;align-items:flex-start;
+    padding:90px 28px 28px;gap:18px;box-shadow:-10px 0 30px rgba(0,0,0,.12);
+    transform:translateX(100%);transition:transform .25s ease;
+  }
+  .nav-links.show{transform:translateX(0);}
+  .dropdown-content{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;display:none;margin-top:8px;}
+  .dropdown.active .dropdown-content{display:block;}
+}
+
+/* ============ HERO / SLIDER ============ */
+.hero{position:relative;overflow:hidden;background:var(--charcoal);}
+.slider-track{display:flex;height:60vh;min-height:420px;transition:transform .8s ease;}
+.slide{min-width:100%;height:100%;position:relative;}
+.slide img{width:100%;height:100%;object-fit:cover;opacity:.55;}
+.hero-copy{
+  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  padding:40px 24px;max-width:640px;margin:0 auto;text-align:left;color:#fff;
+}
+.hero-copy h1{font-size:clamp(1.9rem,4.2vw,3.1rem);color:#fff;}
+.hero-copy h1 span{color:var(--gold);}
+.hero-copy p{font-size:1.05rem;color:#E7E4DC;max-width:52ch;}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;}
+
+/* ============ STATS ============ */
+.stats{background:var(--soil-tint);}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:24px;padding:44px 0;text-align:center;
+}
+.stats-grid .stat .num{font-family:var(--mono);font-weight:600;font-size:2.4rem;color:var(--soil-dark);}
+.stats-grid .stat .label{font-size:.9rem;color:var(--muted);margin-top:4px;}
+.stats-grid .promo{
+  background:var(--teal);color:#fff;border-radius:var(--radius);
+  display:flex;flex-direction:column;justify-content:center;padding:18px;
+}
+.stats-grid .promo .label{color:#E1F1EF;}
+
+/* ============ PROGRAMMES ============ */
+.section{padding:70px 0;}
+.section-head{max-width:640px;margin-bottom:44px;}
+.section-head h2{font-size:clamp(1.6rem,3vw,2.2rem);}
+.programme-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px;
+}
+.programme-card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px;box-shadow:var(--shadow);transition:transform .18s ease, border-color .18s ease;
+}
+.programme-card:hover{transform:translateY(-4px);border-color:var(--teal);}
+.programme-card .tag{
+  font-family:var(--mono);font-size:.72rem;color:var(--teal-dark);
+  background:var(--teal-tint);padding:4px 10px;border-radius:999px;display:inline-block;margin-bottom:14px;
+}
+.programme-card h3{font-size:1.15rem;margin-bottom:12px;}
+.programme-card ul li{
+  font-size:.92rem;color:var(--muted);padding:6px 0 6px 20px;position:relative;border-top:1px dashed var(--line);
+}
+.programme-card ul li:first-child{border-top:none;}
+.programme-card ul li::before{
+  content:"›";position:absolute;left:0;color:var(--soil);font-weight:700;
+}
+.programme-card ul li strong{color:var(--ink);}
+
+/* ============ ACCORDION (course synopsis) ============ */
+.synopsis{background:var(--charcoal);color:#EDEAE2;}
+.synopsis .section-head h2{color:#fff;}
+.synopsis .section-head p{color:#B8C4C1;}
+.accordion{display:flex;flex-direction:column;gap:14px;max-width:720px;}
+.acc-item{border-radius:var(--radius);overflow:hidden;background:#1E2C29;border:1px solid #2B3A36;}
+.acc-item input{display:none;}
+.acc-item label{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px;cursor:pointer;font-family:var(--display);font-weight:700;font-size:1.02rem;
+}
+.acc-item label::after{content:"+";font-size:1.4rem;color:var(--gold);}
+.acc-item input:checked + label::after{content:"–";}
+.acc-item input:checked + label{background:#243934;}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.acc-item input:checked ~ .acc-body{max-height:520px;}
+.acc-body-inner{padding:6px 24px 26px;}
+.acc-body-inner .price{font-family:var(--mono);color:var(--gold);font-size:1.05rem;margin-bottom:10px;}
+.acc-body-inner .line{padding:4px 0;font-size:.94rem;color:#D8DED0;}
+.acc-body-inner .no{opacity:.5;text-decoration:line-through;}
+
+/* ============ FOOTER ============ */
+footer.site-footer{background:#0F1917;color:#C7D3CF;}
+.footer-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:36px;padding:56px 0 32px;
+}
+.footer-grid h3{color:#fff;font-size:1rem;margin-bottom:16px;}
+.footer-grid li{padding:5px 0;font-size:.92rem;}
+.footer-grid a:hover{color:var(--gold);}
+.map-wrap{grid-column:1/-1;border-radius:var(--radius);overflow:hidden;height:230px;}
+.map-wrap iframe{width:100%;height:100%;border:0;filter:grayscale(.3) contrast(1.05);}
+.copyright{
+  border-top:1px solid #223330;text-align:center;padding:20px 0;
+  font-family:var(--mono);font-size:.78rem;color:#7E8E89;
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *{transition-duration:.01ms !important;animation-duration:.01ms !important;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ UTILITY BAR ============ -->
+<div class="utility-bar">
+  <div class="container">
+    <span>+254 723 845 040 · ruralnet2016@gmail.com</span>
+    <div class="socials">
+      <a href="tel:+254723845040" aria-label="Call"><img src="images/call.png" alt=""></a>
+      <a href="mailto:ruralnet2016@gmail.com" aria-label="Email"><img src="images/Gmail.png" alt=""></a>
+      <a href="https://www.facebook.com/share/1E8gXDYugw/" aria-label="Facebook"><img src="images/facebook.png" alt=""></a>
+      <a href="https://www.tiktok.com/@olly_766?lang=en" aria-label="TikTok"><img src="images/tiktok.png" alt=""></a>
+      <a href="https://www.instagram.com/boaz4113?igsh=emdmdmdnZ3E5eGZh" aria-label="Instagram"><img src="images/instagram.png" alt=""></a>
+      <a href="https://www.linkedin.com/in/boaz-vidal-tirone-hastin-35b75b280" aria-label="LinkedIn"><img src="images/linkedin.png" alt=""></a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ NAV ============ -->
+<header class="site-nav">
+  <div class="container navbar">
+    <a href="https://ruralnet.co.ke/" class="brand">
+      <img src="images/RURALNET.png" alt="Ruralnet ICT Academy logo">
+    </a>
+    <button class="menu-icon" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="https://ruralnet.co.ke/">Home</a>
+      <a href="/About_Us/">About us</a>
+
+      <div class="dropdown">
+        <a href="#" class="drop-btn">Learning resources ▾</a>
+        <div class="dropdown-content">
+          <a href="/verify/" target="_blank">E-Library</a>
+          <a href="COMPUTER%20COURSE%20OUTLINE.pdf" target="_blank">Course Outline</a>
+          <a href="FLIER.pdf" target="_blank">Brochure</a>
+          <a href="FEE_STRUCTURE.pdf" target="_blank">Fee structure</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a href="#" class="drop-btn">Portals ▾</a>
+        <div class="dropdown-content">
+          <a href="students/" target="_blank">Student</a>
+          <a href="employees/" target="_blank">Staff</a>
+        </div>
+      </div>
+
+      <a href="https://www.computerworld.com/" target="_blank">News &amp; Updates</a>
+      <a href="announcements.html">Announcements</a>
+      <a href="https://forms.gle/wywREJiHrpFTF5veA" class="apply">Apply now</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="slider-track" id="sliderTrack">
+    <div class="slide"><img src="images/c0.jpg" alt=""></div>
+    <div class="slide"><img src="images/c001.jpg" alt=""></div>
+    <div class="slide"><img src="images/c1.jpg" alt=""></div>
+    <div class="slide"><img src="images/c2.jpg" alt=""></div>
+    <div class="slide"><img src="images/c3.jpg" alt=""></div>
+    <div class="slide"><img src="images/c4.jpg" alt=""></div>
+    <div class="slide"><img src="images/c5.jpg" alt=""></div>
+    <div class="slide"><img src="images/c6.jpg" alt=""></div>
+    <div class="slide"><img src="images/c7.jpg" alt=""></div>
+    <div class="slide"><img src="images/c8.jpg" alt=""></div>
+    <div class="slide"><img src="images/c9.jpg" alt=""></div>
+    <div class="slide"><img src="images/c10.jpg" alt=""></div>
+    <div class="slide"><img src="images/c11.jpg" alt=""></div>
+    <div class="slide"><img src="images/c12.jpg" alt=""></div>
+    <div class="slide"><img src="images/c13.jpg" alt=""></div>
+    <div class="slide"><img src="images/c14.jpg" alt=""></div>
+    <div class="slide"><img src="images/c15.jpg" alt=""></div>
+    <div class="slide"><img src="images/c16.jpg" alt=""></div>
+  </div>
+  <div class="hero-copy">
+    <span class="eyebrow">Ruralnet ICT Academy</span>
+    <h1>Bridging the <span>rural</span> and the <span>digital</span> world.</h1>
+    <p>Practical, affordable ICT, programming, accounting and design training — built for learners outside the big cities who deserve the same opportunities.</p>
+    <div class="hero-actions">
+      <a href="https://forms.gle/wywREJiHrpFTF5veA" class="btn btn-primary">Apply now</a>
+      <a href="#programmes" class="btn btn-ghost">View programmes</a>
+    </div>
+  </div>
+</section>
+
+<div class="seam"></div>
+
+<!-- ============ STATS ============ -->
+<section class="stats">
+  <div class="container stats-grid">
+    <div class="stat"><div class="num counter" data-target="7000">0</div><div class="label">Students trained</div></div>
+    <div class="stat"><div class="num counter" data-target="1">0</div><div class="label">Branch</div></div>
+    <div class="stat"><div class="num counter" data-target="2">0</div><div class="label">Partner schools</div></div>
+    <div class="promo">
+      <div class="label" style="font-weight:600;">Pay for ICT Essentials,</div>
+      <div class="label" style="font-weight:600;">get the Photoshop course free.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROGRAMMES ============ -->
+<section class="section" id="programmes">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Available programmes</span>
+      <h2>Eight paths in, one skillset that travels.</h2>
+    </div>
+    <div class="programme-grid">
+
+      <div class="programme-card">
+        <span class="tag">Foundations</span>
+        <h3>ICT Essentials / Computer Basics</h3>
+        <ul>
+          <li>Computer basic operations</li>
+          <li>Operating systems — Windows, macOS, Linux/Ubuntu</li>
+          <li>Microsoft Office Suite</li>
+          <li>Database management (Microsoft Access) with an encrypted project</li>
+          <li>Networking and the internet</li>
+          <li>ICT ethics and data-safety practice</li>
+        </ul>
+      </div>
+
+      <div class="programme-card">
+        <span class="tag">Build</span>
+        <h3>Web Development</h3>
+        <ul>
+          <li>Websites and web terminology</li>
+          <li>Editors, IDEs and browsers</li>
+          <li><strong>HTML</strong> for structured content</li>
+          <li><strong>CSS</strong> for layout and styling</li>
+          <li><strong>JavaScript</strong> for interaction and logic</li>
+          <li><strong>Firebase</strong> for data and storage</li>
+        </ul>
+      </div>
+
+      <div class="programme-card">
+        <span class="tag">Build</span>
+        <h3>Programming</h3>
+        <ul>
+          <li>Python</li>
+          <li>JavaScript &amp; modern tooling</li>
+          <li>React</li>
+          <li>Node.js</li>
+          <li>Django</li>
+          <li>GitHub &amp; Firebase</li>
+        </ul>
+      </div>
+
+      <div class="programme-card">
+        <span class="tag">Create</span>
+        <h3>Graphic Design</h3>
+        <ul>
+          <li>Adobe Photoshop</li>
+          <li>Adobe Illustrator</li>
+          <li>CorelDRAW</li>
+          <li>AutoCAD</li>
+          <li>ArchiCAD</li>
+        </ul>
+      </div>
+
+      <div class="programme-card">
+        <span class="tag">Infrastructure</span>
+        <h3>Networking</h3>
+        <ul>
+          <li>CISCO modules</li>
+          <li>Networking tools</li>
+          <li>IP configuration &amp; broadband grouping</li>
+          <li>Wireless technology</li>
+          <li>Networks beyond WLAN, ISP technology</li>
+          <li>Network diagnosis</li>
+          <li>CCTV systems</li>
+        </ul>
+      </div>
+
+      <div class="programme-card">
+        <span class="tag">Business</span>
+        <h3>Accounting</h3>
+        <ul>
+          <li>Certificate in Accounting Management (CAM)</li>
+          <li>Accounting Technician Diploma (ATD)</li>
+          <li>Certified Public Accountant (CPA)</li>
+          <li>KASNEB-accredited exam centre</li>
+          <li>QuickBooks</li>
+          <li>Accounting systems diagnosis</li>
+        </ul>
+      </div>
+
+      <div class="programme-card">
+        <span class="tag">Hands-on</span>
+        <h3>Computer Repair &amp; Maintenance</h3>
+        <ul>
+          <li>Parts of a computer</li>
+          <li>Assembling and disassembling</li>
+          <li>PCBs and components</li>
+          <li>Software–hardware compatibility</li>
+          <li>Systematic troubleshooting</li>
+          <li>Safe hardware handling</li>
+          <li>Blue-screen-of-death fixes</li>
+        </ul>
+      </div>
+
+      <div class="programme-card">
+        <span class="tag">Analysis</span>
+        <h3>Data Analysis</h3>
+        <ul>
+          <li>Excel</li>
+          <li>SQL</li>
+          <li>Python</li>
+          <li>Core data concepts</li>
+          <li>Data cleaning &amp; transformation</li>
+          <li>Statistical analysis</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ COURSE SYNOPSIS ACCORDION ============ -->
+<section class="section synopsis">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Course synopsis</span>
+      <h2>Pick the category that fits, then open it up.</h2>
+      <p>Tap a package below to see what's included and the fee.</p>
+    </div>
+
+    <div class="accordion">
+      <div class="acc-item">
+        <input type="radio" name="acc" id="tab1" checked>
+        <label for="tab1">ICT Essentials II</label>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <div class="price">Kshs. 6,600</div>
+            <div class="line">✅ Introduction to computers</div>
+            <div class="line">✅ ICT resource operation mastery</div>
+            <div class="line">✅ ICT ethics &amp; security</div>
+            <div class="line">✅ Full computer-packages knowledge</div>
+            <div class="line">✅ Internet essentials &amp; networking</div>
+            <div class="line">✅ Secured system-based project</div>
+            <div class="line">✅ Modern tech tools</div>
+            <div class="line" style="color:var(--gold);font-weight:600;">✅ Free Photoshop course</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <input type="radio" name="acc" id="tab2">
+        <label for="tab2">Computer Basics (ICT Essentials I)</label>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <div class="price">Kshs. 4,500</div>
+            <div class="line">✅ Introduction to computers</div>
+            <div class="line">✅ Computer packages</div>
+            <div class="line">✅ Internet basics</div>
+            <div class="line no">Networking</div>
+            <div class="line no">Project</div>
+            <div class="line no">Modern tech tools</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <input type="radio" name="acc" id="tab3">
+        <label for="tab3">Advanced Courses</label>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <div class="line">Fees vary by course selected — see the full breakdown in the <a href="FLIER.pdf" target="_blank" style="color:var(--gold);text-decoration:underline;">brochure</a>.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="seam" style="transform:scaleY(-1);"></div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <h3>Useful links</h3>
+      <ul>
+        <li><a href="https://ruralnet.co.ke/">Home</a></li>
+        <li><a href="About_Us/">Who we are</a></li>
+        <li><a href="students/" target="_blank">Student portal</a></li>
+        <li><a href="https://www.kasneb.or.ke/" target="_blank">Accounting</a></li>
+        <li><a href="https://www.cisco.com/" target="_blank">ICT</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Partners</h3>
+      <ul>
+        <li><a href="https://www.cskonline.org/" target="_blank">CSK</a></li>
+        <li><a href="https://kasneb.or.ke/" target="_blank">KASNEB</a></li>
+        <li><a href="https://www.tveta.go.ke/" target="_blank">TVETA</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Contact us</h3>
+      <ul>
+        <li>+254 723 845 040</li>
+        <li>+254 700 886 058</li>
+        <li>ruralnet2016@gmail.com</li>
+        <li>ruralnet.co.ke</li>
+      </ul>
+    </div>
+    <div class="map-wrap">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.798716585544!2d34.29549147494557!3d0.17961016421947956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177fee707dda6723%3A0x7661927a7a412ea0!2sRuralNet%20IT%20Services%20%26%20Academy!5e0!3m2!1sen!2ske!4v1764222258833!5m2!1sen!2ske"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ruralnet ICT Academy location">
+      </iframe>
+    </div>
+  </div>
+  <div class="copyright">© 2026 Ruralnet ICT Academy. All rights reserved.</div>
+</footer>
+
+<script>
+// mobile nav
+function toggleMenu(){
+  document.getElementById("navLinks").classList.toggle("show");
+}
+document.querySelectorAll(".drop-btn").forEach(btn=>{
+  btn.addEventListener("click", e=>{
+    e.preventDefault();
+    btn.parentElement.classList.toggle("active");
+  });
+});
+
+// hero slider (fade/slide autoplay)
+(function(){
+  const track = document.getElementById("sliderTrack");
+  const total = track.children.length;
+  let i = 0;
+  setInterval(()=>{
+    i = (i+1) % total;
+    track.style.transform = `translateX(-${i*100}%)`;
+  }, 4000);
+})();
+
+// stat counters — animate once, when visible
+(function(){
+  const counters = document.querySelectorAll(".counter");
+  const animate = (el)=>{
+    const target = +el.getAttribute("data-target");
+    const duration = 1200;
+    const start = performance.now();
+    const step = (now)=>{
+      const p = Math.min((now-start)/duration, 1);
+      el.textContent = Math.floor(p*target).toLocaleString();
+      if(p<1) requestAnimationFrame(step);
+      else el.textContent = target.toLocaleString();
+    };
+    requestAnimationFrame(step);
+  };
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        animate(entry.target);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {threshold:.4});
+  counters.forEach(c=>obs.observe(c));
+})();
+</script>
+</body>
+</html>
