@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Portal — Login</title>
+<link rel="icon" type="image/png" href="../images/favStudentLogin.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+<style>
+/* ============ DESIGN TOKENS ============ */
+:root {
+  --bg-dark: #0B0F17;
+  --bg-card: rgba(19, 26, 38, 0.75);
+  --accent-teal: #14B8A6;
+  --accent-teal-hover: #0D9488;
+  --accent-teal-glow: rgba(20, 184, 166, 0.25);
+  --text-main: #F3F4F6;
+  --text-muted: #9CA3AF;
+  --border-line: rgba(255, 255, 255, 0.1);
+  --error-bg: rgba(239, 68, 68, 0.15);
+  --error-text: #FCA5A5;
+  --error-border: rgba(239, 68, 68, 0.4);
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --radius-pill: 999px;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background Glow Effect */
+.bg-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--accent-teal-glow) 0%, rgba(11, 15, 23, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============ LOGIN CARD ============ */
+.portal-card {
+  position: relative;
+  z-index: 1;
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-line);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  padding: 40px 32px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+.brand-logo {
+  width: 180px;
+  height: auto;
+  margin-bottom: 24px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+.portal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+
+.portal-subtitle {
+  font-size: 0.88rem;
+  color: var(--accent-teal);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+.instruction-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.example-code {
+  display: inline-block;
+  font-family: var(--font-mono);
+  color: #38BDF8;
+  font-size: 0.78rem;
+  margin-top: 4px;
+}
+
+/* ============ INPUT & BUTTONS ============ */
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-field {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(11, 15, 23, 0.8);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-md);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+.input-field::placeholder {
+  color: #4B5563;
+  font-family: var(--font-sans);
+}
+
+.input-field:focus {
+  border-color: var(--accent-teal);
+  box-shadow: 0 0 0 3px var(--accent-teal-glow);
+  background: rgba(11, 15, 23, 0.95);
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--accent-teal) 0%, var(--accent-teal-hover) 100%);
+  color: #0B0F17;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 10px 20px -5px var(--accent-teal-glow);
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 15px 25px -5px var(--accent-teal-glow);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+}
+
+/* ============ NAV LINKS & ERRORS ============ */
+.portal-footer-links {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.portal-footer-links a {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.portal-footer-links a:hover {
+  color: #FFFFFF;
+}
+
+.portal-footer-links .divider {
+  color: var(--border-line);
+  font-size: 0.8rem;
+}
+
+.error-message {
+  margin-top: 16px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background-color: var(--error-bg);
+  border: 1px solid var(--error-border);
+  color: var(--error-text);
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: none;
+}
+
+.error-message.active {
+  display: block;
+}
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<!-- PROTECTION SCRIPT -->
+<script>
+  // Disable Context Menu
+  document.addEventListener('contextmenu', event => event.preventDefault());
+
+  // Prevent Hotkeys
+  document.onkeydown = function(e) {
+    if (e.keyCode === 123) return false; // F12
+    if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) return false; // Ctrl+Shift+I/J/C
+    if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 67)) return false; // Ctrl+U or Ctrl+C
+  };
+
+  // Prevent History Back
+  window.onpopstate = function () {
+    window.location.href = "StudentLogin.html";
+  };
+</script>
+
+<main class="portal-card">
+  <img src="../images/RURALNET.png" alt="Ruralnet Logo" class="brand-logo">
+  
+  <h1 class="portal-title">Student Portal</h1>
+  <div class="portal-subtitle">Sign In To Proceed</div>
+
+  <div class="instruction-box">
+    Enter your Name followed by your Admission Number.<br>
+    <span class="example-code">e.g., BRIAN-RICT/001/001</span>
+  </div>
+
+  <form onsubmit="event.preventDefault(); checkLevel();">
+    <div class="input-group">
+      <input 
+        type="text" 
+        id="levelInput" 
+        class="input-field" 
+        autocomplete="off" 
+        placeholder="ENTER ADMISSION ID..." 
+        required
+      >
+    </div>
+
+    <button type="submit" class="btn-submit">Proceed →</button>
+  </form>
+
+  <div id="error" class="error-message"></div>
+
+  <div class="portal-footer-links">
+    <a href="https://ruralnet.co.ke/">Home</a>
+    <span class="divider">•</span>
+    <a href="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdmtwKqowkNksJLVEs49aRU8dN7MXlfzWrkmG1WAsg-6sJAIg/alreadyresponded?usp=send_form" target="_blank">Register</a>
+  </div>
+</main>
+
+<script>
+// CLEAN LOOKUP ROUTING TABLE
+const studentRoutes = {
+  "SUSAN-RICT/25/11/ADPK007": "Susan.html",
+  "SWEENY-RICT/25/11/BAPK011": "Sweeny.html",
+  "JOYCE-RICT/25/12/BAPK011": "joyce.html",
+  "SHEM-RICT/25/11/BAPK014": "Shem_G.html",
+  "TONNY-RICT/25/11/BACPK007": "Tonny.html",
+  "CLAIRE-RICT/25/11/BAPK011": "Claire.html",
+  "SHEM-RICT/25/12/BAPK013": "Shem.html",
+  "SHEM-RICT/25/12/BAPK012": "Shem_S.html",
+  "MARY-RICT/25/11/ADPK006": "Mary.html",
+  "JERITAH-RICT/25/11/BAPK005": "Jeritah.html",
+  "VALYNE-RICT/25/11/BAPK004": "Valyne.html",
+  "SHARON-RICT/25/10/BAPK006": "Sharon.html",
+  "FREDRICK-RICT/25/10/BAPK005": "Fredrick.html",
+  "RAMSEY-RICT/25/11/BAPK010": "vp3.html",
+  "FELIX-RICT/25/12/BAPK017": "felix.html",
+  "IDAH-RICT/25/12/BAPK016": "idah.html",
+  "IMMACULATE-RICT/25/12/BAPK018": "immaculate.html",
+  "MILLICENT-RICT/25/11/BAPK018": "millicent.html",
+  "PURITY-RICT/26/01/BAPK017": "purity.html",
+  "IRENE-RICT/26/01/BAPK018": "irene.html",
+  "SHERYNE-RICT/26/01/BAPK019": "sheryne.html",
+  "BRENDER-RICT/26/01/BAPK020": "brender.html",
+  "FIONA-RICT/25/11/BAPK008": "Fiona.html",
+  "BECKY-RICT/26/01/BAPK022": "becky.html",
+  "PHILIP-RICT/26/01/BAPK021": "Ymedacatcitenlarur_philip=011100110111100101101100011101100110100101100001=accounts&oq=accounts&gs_lcrp=EgZjaHJvbWUyCQgAEEUYORiABDIGCAEQRRg8Mg0IAhAAGJIDGIAEGIoF.html",
+  "GRACE-RICT/26/01/BAPK023": "grace.html",
+  "FAITH-RICT/26/01/BAPK024": "faith.html",
+  "KELVIN-RICT/26/01/BAPK025": "kelvin.html",
+  "CLINTON-RICT/26/01/BAPK026": "clinton.html",
+  "BETHA-RICT/26/01/BAPK034": "betha.html",
+  "VELMA-RICT/26/01/BAPK035": "velma.html",
+  "SHERYL-RICT/26/01/BAPK033": "sheryl.html",
+  "ELIJAH-RICT/26/01/BAPK031": "elijah.html",
+  "ALL-RICT/26/01/BAPK030": "all.html",
+  "MICHAEL-RICT/26/01/BAPK029": "michael.html",
+  "NATASHA-RICT/26/01/BAPK032": "natasha.html",
+  "MARYANN-RICT/26/01/BAPK028": "maryann.html",
+  "CANDYROSE-RICT/26/01/BAPK027": "candy.html",
+  "TREVOR-RICT/26/01/BAPK051": "trevor.html",
+  "SHARON-RICT/26/01/BAPK052": "sharonatieno.html",
+  "SYLVIA-RICT/26/01/BAPK036": "Ymedacatcitenlarur_sylvia=011100110111100101101100011101100110100101100001=accounts&oq=accounts&gs_lcrp=EgZjaHJvbWUyCQgAEEUYORiABDIGCAEQRRg8Mg0IAhAAGJIDGIAEGIoF.html",
+  "MARY-RICT/26/01/BAPK040": "maryogolla.html",
+  "EMMACULATE-RICT/26/01/BAPK039": "emmaculate.html",
+  "SHARON-RICT/26/01/BAPK038": "ssharon.html",
+  "HENRY-RICT/26/01/BAPK041": "henry.html",
+  "DAVID-RICT/26/01/BAPK042": "david.html",
+  "MOSES-RICT/26/01/BAPK049": "moses.html",
+  "LEON-RICT/26/01/BAPK046": "leon.html",
+  "AISHA-RICT/26/01/BAPK044": "aisha.html",
+  "REGAN-RICT/26/01/BAPK045": "regan.html",
+  "JABEZ-RICT/26/01/BAPK048": "jabez.html",
+  "DANIELLA-RICT/26/01/BAPK047": "daniella.html",
+  "MILDRED-RICT/26/02/BAPK060": "mildred.html",
+  "LYNE-RICT/26/02/BAPK059": "lyne.html",
+  "DIANA-RICT/26/02/BAPK053": "diana.html",
+  "JACK-RICT/26/02/BAPK054": "jack.html",
+  "REUBEN-RICT/26/02/BAPK055": "reuben.html",
+  "BABRA-RICT/26/02/BAPK057": "babra.html",
+  "VINCENT-RICT/26/02/BAPK056": "vincent.html",
+  "LEON-RICT/26/02/BAPK046": "leon.html",
+  "MOSES-RICT/26/02/BAPK049": "moses.html",
+  "VIVIAN-RICT/26/02/BAPK058": "vivian.html",
+  "AGGREY-RICT/26/02/BAPK061": "steve.html",
+  "LYNNE-RICT102/26/02/059": "lyne.html",
+  "DAMIAN-RICT102/26/02/063": "damian.html",
+  "MITCHELLE-RICT102/26/02/065": "mitchelle.html",
+  "NELLY-RICT102/26/02/064": "nelly.html",
+  "JOEL-RICT102/26/02/062": "joel.html",
+  "SYNDER-RICT102/26/02/067": "synder.html",
+  "VICTORINE-RICT102/26/02/066": "victorine.html",
+  "SANDRA-RICT102/26/02/070": "sandra.html",
+  "NATASHA-RICT102/26/02/068": "mukami.html",
+  "LINA-RICT102/26/03/077": "azukha.html",
+  "SHERIL-RICT102/26/03/073": "sheril.html",
+  "MERCY-RICT102/26/03/071": "mercy.html",
+  "MARVIN-RICT102/26/03/074": "marvin.html",
+  "SHELVINE-RICT102/26/03/072": "shelvine.html",
+  "CLINTON-RICT102/26/03/075": "clintono.html",
+  "MERAB-RICT102/26/04/078": "merab.html",
+  "LORINE-RICT102/26/04/083": "lorine.html",
+  "CLINTON-RICT102/26/04/075": "clinton.html",
+  "BRIAN-RICT102/26/04/080": "muema.html",
+  "MICHAEL-RICT102/26/04/084": "obat.html",
+  "ROSE-RICT102/26/04/087": "rose.html",
+  "ZANEL-RICT102/26/04/086": "zanel.html",
+  "TRIZAH-RICT102/26/04/082": "trizah.html",
+  "ERICK-RICT102/26/04/079": "erick.html",
+  "MITCHELLE-RICT102/26/04/085": "mitchelleakoth.html",
+  "FIDELIS-RICT102/26/04/086": "fidelis.html",
+  "DENIS-RICT102/26/04/081": "denis.html",
+  "WINNIE-RICT102/26/04/091": "winnie.html",
+  "CINDY-RICT102/26/04/088": "cindy.html",
+  "QUINTER-RICT102/26/04/090": "quinter.html",
+  "SIMON-RICT102/26/04/089": "simon.html",
+  "WINSLATE-RICT102/26/05/097": "winslet.html",
+  "ANTONINE-RICT102/26/05/099": "antonine.html",
+  "EZRA-RICT102/26/05/095": "ezra.html",
+  "ZILPA-RICT102/26/05/094": "zilpa.html",
+  "GRACE-RICT102/26/05/093": "grace.html",
+  "MARY-RICT102/26/05/092": "maryakinyi.html",
+  "NAOMI-RICT102/26/05/095": "naomi.html",
+  "EMMANUEL-RICT102/26/05/102": "emmanuel.html",
+  "STEPHEN-RICT102/26/05/101": "stivo.html",
+  "MERCY-RICT102/26/05/100": "mercya.html",
+  "FLORENCE-RICT102/26/06/105": "florence.html",
+  "MICHAEL-RICT102/26/06/104": "machaga.html",
+  "DORA-RICT102/26/06/103": "dora.html",
+  "DAVID-RICT102/26/06/107": "mulima.html",
+  "LINET-RICT102/26/06/106": "LINET.html",
+  "STEVEN-RICT102/26/06/108": "juma.html",
+  "MARGARET-RICT102/26/06/109": "margaret.html",
+  "EVANS-RICT102/26/06/112": "evans.html",
+  "ELSY-RICT102/26/06/111": "elsy.html",
+  "MARY-RICT102/26/06/115": "oginga.html",
+  "CHRISTINE-RICT102/26/06/113": "christine.html",
+  "STANLEY-RICT102/26/07/110": "stanley.html",
+  "GLEN-RICT102/26/06/114": "glen.html",
+  "MARYANNE-RICT102/26/06/116": "maryanne.html",
+  "NICOL-RICT102/26/06/117": "nicol.html",
+  "CHANTAL-RICT102/26/06/118": "chantal.html"
+};
+
+function checkLevel() {
+  const inputEl = document.getElementById("levelInput");
+  const errorEl = document.getElementById("error");
+  const userInput = inputEl.value.trim().toUpperCase();
+
+  // Reset error
+  errorEl.textContent = "";
+  errorEl.classList.remove("active");
+
+  // Lookup route
+  if (studentRoutes[userInput]) {
+    window.location.href = studentRoutes[userInput];
+  } else {
+    errorEl.textContent = "⚠️ Invalid Admission Number. Please verify and try again.";
+    errorEl.classList.add("active");
+  }
+}
+
+// Clear error state on input change
+document.getElementById("levelInput").addEventListener("input", function() {
+  const errorEl = document.getElementById("error");
+  errorEl.textContent = "";
+  errorEl.classList.remove("active");
+});
+</script>
+
+</body>
+</html>
