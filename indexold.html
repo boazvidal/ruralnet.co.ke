@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bridge between rural and digital world" />
+    <title>::Home || Ruralnet ICT Academy</title>
+
+	<link rel="stylesheet" href="stylus.css">
+  <link rel="stylesheet" href="stylus-footer.css">
+	<link rel="icon" type="image/png" href="images/favicon.png">
+  <style>
+
+    /*body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 30px;
+      background: #f2f2f2;
+    }*/
+
+	/* ================= Styling dropdown on hover) ================= */
+  .ict-wrapper {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    background: #e7d4d4;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  }
+
+.ict-title {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    color: #333;
+  }
+
+  .accordion {
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Hide radios */
+  .accordion input {
+    display: none;
+  }
+
+  .item {
+    border-radius: 30px;
+    background: white;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    text-align: left;
+  }
+
+  /* TAB HEADER */
+  .title {
+    padding: 18px;
+    font-size: 18px;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    user-select: none;
+  }
+
+  /* Colors */
+  #tab1 + label.title { background:  #00a8ff; }
+  #tab2 + label.title { background: #ff7e71; }
+  #tab3 + label.title { background: #8a6cff; }
+
+  /* CONTENT AREA (initially closed) */
+  .content {
+    max-height: 0;
+    overflow: hidden;
+    background: white;
+    padding: 0 25px;
+    transition: max-height 0.5s ease, padding 0.3s ease;
+  }
+
+  /* OPEN STATE — smooth animation */
+  input:checked ~ .content {
+    max-height: 300px; /* enough space for text */
+    padding: 20px 25px;
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+
+  </style> 
+
+</head>
+
+<body>
+
+<!--FULL PAGE PROTECTION SCRIPT -->
+
+<script>
+	//Right-Click
+	document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+
+<!--F12-->
+<script>
+	document.onkeydown = function(e) {
+
+	//F12
+	if (e.keyCode == 123) {
+		return false;
+	}
+
+
+//Ctrl+Shift+I or Ctrl+Shift+J or Ctrl+Shift+C
+
+	if (e.ctrlKey && e.shiftKey && (
+		e.keyCode === 73 ||
+		e.keyCode === 74 ||
+		e.keyCode === 67
+	)) {
+		return false;
+	}
+
+//Ctrl+U View Source-->
+
+	if (e.ctrlKey && e.keyCode === 85) {
+		return false;
+	}
+
+	//Ctrl+C Copy
+	if (e.ctrlKey && e.keyCode === 67) {
+		return false;
+	}
+}
+</script>
+
+
+<!--X-Mass Video animation-->
+<div class="floating-video">
+  <img src="images/ruralnet@10.png">
+  <!--<video src="images/Merry_Anime.mp4" autoplay muted loop controls></video>-->
+</div>
+
+<!---================================================
+======================================================
+	<-- Floating Box Section --
+<div class="overlay" id="overlay">
+  <div class="floating-box">
+    <span class="close-btn" onclick="closeBox()">×</span>
+    <img src="images/RURALNET.png" draggable="false" class="floating-box-img">
+        <--<h4 style="color: yellow;">This page does not allow Right-Click, page inspection or page source viewing due to security restrictions!</h4>--
+    <h2>HAPPY NEW YEAR</h2>
+    <img src="images/merry_schristmass.png" draggable="false" class="merry-img">
+    <--<h3>January intake is already ongoing</h3> 
+    <h3>for both ICT Essentials and advanced courses</h3>
+	<h3>We are still working on KASNEB Courses and we shall let you know once ready</h3>
+	<p1>powered by Ruralnet Developer</p1>-->
+  </div>
+</div>
+
+<!--<script>
+  function closeBox() {
+    const overlay = document.getElementById("overlay");
+    overlay.classList.add("closing");
+
+    /*//Wait for animation to finish (400ms), then hide the overlay*/
+    setTimeout(() => {
+      overlay.style.display = "none";
+    }, 400);
+  }
+</script>
+=============================================
+=============================================-->
+
+<div class="topt">
+	<a href="call:+254723845040"><img src="images/call.png"></a>
+	<a href="mailto:ruralnet2016@gmail.com"><img src="images/Gmail.png"></a>
+	<a href="https://www.facebook.com/share/1E8gXDYugw/"><img src="images/facebook.png"></a>
+	<a href="https://www.tiktok.com/@olly_766?lang=en"><img src="images/tiktok.png"></a>
+	<a href="https://www.instagram.com/boaz4113?igsh=emdmdmdnZ3E5eGZh"><img src="images/instagram.png"></a>
+	<a href=""><img src="images/twitter.png"></a>
+	<a href="www.linkedin.com/in/boaz-vidal-tirone-hastin-35b75b280"><img src="images/linkedin.png"></a>
+</div>
+
+  <nav>
+  <div class="navbar">
+    <div class="holyday"><img src="images/RURALNET.png" class="logo"></div>
+
+    <div class="menu-icon" onclick="toggleMenu()">&#x2630;</div>
+
+    <div class="nav-links" id="navLinks">
+      <a href="https://ruralnet.co.ke/">Home</a>
+      <a href="/About_Us/">About us</a>
+      <a href="https://forms.gle/wywREJiHrpFTF5veA">Apply now</a>
+
+      <div class="dropdown">
+        <a href="#" class="drop-btn">Learning resources ▾</a>
+        <div class="dropdown-content">
+          <a href="/verify/" target="_blank">E-Library</a>
+          <!--<a href="construction.html" target="_blank">Sylabus</a>-->
+          <a href="COMPUTER COURSE OUTLINE.pdf" target="_blank">Course Outline</a>
+          <a href="FLIER.pdf" target="_blank">Brochure</a>
+          <a href="FEE_STRUCTURE.pdf" target="_blank">Fee structure</a>
+        </div>
+      </div>
+
+      <!--<a href="construction.html">Admission</a>-->
+
+ <div class="dropdown">
+        <a href="#" class="drop-btn">Portals▾</a>
+        <div class="dropdown-content">
+          <a href="students/" target="_blank">Student</a>
+          <a href="employees/" target="_blank">Staff</a>
+        </div>
+      </div>
+
+
+      <a href="https://www.computerworld.com/" target="_blank">News & Updates</a>
+      <a href="announcements.html">Announcement</a>
+      <a href="https://www.cisco.com/">ICT</a>
+      <a href="https://www.kasneb.or.ke/">Accounting</a>
+
+    </div>
+  </div>
+</nav>
+
+
+<script>
+function toggleMenu() {
+  document.getElementById("navLinks").classList.toggle("show");
+}
+
+document.querySelectorAll(".drop-btn").forEach(btn => {
+  btn.addEventListener("click", function(e) {
+    e.preventDefault();
+    this.parentElement.classList.toggle("active");
+  });
+});
+</script>
+
+
+<!--<h1 style="size: 100px; padding: 1rem;">.</h1>-->
+	<div class="slider">
+    <div class="slides">
+      <div class="slide"><img src="images/c0.jpg" alt="Slide 1"></div>
+      <div class="slide"><img src="images/c001.jpg" alt=slide 2"></div>
+      <div class="slide"><img src="images/c1.jpg" alt="Slide 3"></div>
+      <div class="slide"><img src="images/c2.jpg" alt="Slide 3"></div>
+	    <div class="slide"><img src="images/c3.jpg" alt="Slide 4"></div>
+	    <div class="slide"><img src="images/c4.jpg" alt="Slide 5"></div>
+	    <div class="slide"><img src="images/c5.jpg" alt="Slide 6"></div>
+	    <div class="slide"><img src="images/c6.jpg" alt="Slide 7"></div>
+	    <div class="slide"><img src="images/c7.jpg" alt="Slide 8"></div>
+	    <div class="slide"><img src="images/c8.jpg" alt="Slide 9"></div>
+	    <div class="slide"><img src="images/c9.jpg" alt="Slide 10"></div>
+	    <div class="slide"><img src="images/c10.jpg" alt="Slide 11"></div>
+	    <div class="slide"><img src="images/c11.jpg" alt="Slide 12"></div>
+	    <div class="slide"><img src="images/c12.jpg" alt="Slide 13"></div>
+	    <div class="slide"><img src="images/c13.jpg" alt="Slide 14"></div>
+	    <div class="slide"><img src="images/c14.jpg" alt="Slide 15"></div>
+	    <div class="slide"><img src="images/c15.jpg" alt="Slide 16"></div>
+	    <div class="slide"><img src="images/c16.jpg" alt="Slide 17"></div>
+	  
+    </div>
+  </div>
+
+  <script>
+    const slides = document.querySelector('.slides');
+    const totalSlides = document.querySelectorAll('.slide').length;
+    let index = 0;
+
+    setInterval(() => {
+      index = (index + 1) % totalSlides;
+      slides.style.transform = `translateX(-${index * 100}%)`;
+    }, 3000);
+  </script>
+
+
+
+
+    <h1 style="background-color: rgb(12, 1, 44); color: white; text-align: center; font-size: 30px;">Available programmes:</h1>
+
+
+	<div class="stats-container">
+  <div>
+    
+    <div class="counter" data-target="7000">0</div>
+    <div class="label">No Of Students</div>
+  </div>
+  <div>
+    <div class="counter" data-target="1">0</div>
+    <div class="label">Branches</div>
+  </div>
+  <div>
+    <div class="counter" data-target="2">0</div>
+    <div class="label">Schools</div>
+  </div>
+
+  <div>
+    <div class="label">pay for essentials,</div>
+    <div class="label"> get photoshop course for free !</div>
+  </div>
+</div>
+
+
+<script>
+  const counters = document.querySelectorAll('.counter');
+  const speed = 800; // Adjust speed (lower = faster)
+
+  counters.forEach(counter => {
+    const updateCount = () => {
+      const target = +counter.getAttribute('data-target');
+      const count = +counter.innerText.replace(/,/g, '');
+      const increment = target / speed;
+
+      if (count < target) {
+        const newCount = Math.ceil(count + increment);
+        counter.innerText = newCount.toLocaleString();
+        setTimeout(updateCount, 20);
+      } else {
+        counter.innerText = target.toLocaleString();
+      }
+    };
+
+    updateCount();
+  });
+</script>
+
+    <div class="wrapper">
+      <div class="list_container">
+		    <h3>INtroduction To Computers / ICT Basics</h3>
+		    <ul>
+			    <li><span>Computer basic operations</span></li>
+			    <li><span>Operating systems :::Windows, Macintosh, Linux, Obuntu:::</span></li>
+			    <li><span>Microsoft Office Suits applications</span></li>
+			    <li><span>DataBase Management Systems (Microsoft Access), with an encrypted system based project </span></li>
+		      <li><span>Networking and Internet</span></li>
+			    <li><span>ICT ethics and safety data security measures</span></li>
+		  </ul>
+      </div>
+
+      <div class="list_container">
+		    <h3>Wb Development</h3>
+	    	<ul>
+			<li><span>Introduction to websites and related terminologies</span></li>
+			<li><span>Webpage editors, IDEs and web browsers</span></li>
+			<li><span>HyperText Markup Language <strong>(HTML)</strong> for text and readable tags in a webpage</span></li>
+			<li><span>Cascaded Style Sheet <strong>(CSS)</strong> for the beauty and nice display of webpage information</strong></span></li>
+			<li><span><strong>Javascript</strong> for page interraction and logical operations</span></li>
+			<li><span><strong>Firebase</strong> for DBase handlers and storage</span></li>
+		</ul>
+	</div>
+
+  <div class="list_container">
+		<h3>Programming</h3>
+		<ul>
+			<li><span>Python</span></li>
+			<li><span>Javascript</span></li>
+			<li><span>Modern Programming tools</span></li>
+			<li><span>React</span></li>
+			<li><span>NodeJS</span></li>
+			<li><span>DJango</span></li>
+			<li><span>GitHub</span></li>
+      <li><span>FireBase</span></li>
+		</ul>
+	</div>
+
+  <div class="list_container">
+		<h3>Graphic Designing</h3>
+		<ul>
+			<li><span>Adobe Photoshop</span></li>
+			<li><span>Adobe Illustrator</span></li>
+			<li><span>Corel Draw</span></li>
+			<li><span>AutoCAD</span></li>
+			<li><span>AchiCAD</span></li>
+			<li><span>     </span></li>
+			<li><span>     </span></li>
+		</ul>
+	</div>
+
+  <div class="list_container">
+		<h3>Networking</h3>
+		<ul>
+			<li><span>CISCO Modules</span></li>
+			<li><span>Networking tool</span></li>
+			<li><span>IP configurations and BroadBand grouping</span></li>
+			<li><span>Wireless etchnology</span></li>
+			<li><span>Network beyong WLAN</span></li>
+			<li><span>ISP Technology</span></li>
+			<li><span>Network diagnosis</span></li>
+			<li><span>Closed Circuit TeleVision <strong>(CCTV)</strong></span></li>
+		</ul>
+	</div>
+
+  <div class="list_container">
+		<h3>Accounting</h3>
+		<ul>
+			<li><span>Certificate in Accounting Management <strong>(CAM)</strong></span></li>
+			<li><span>Accounting Technician Diploma <strong>(ATD)</strong></span></li>
+			<li><span>Certified Public Accountant <strong>(CPA)</strong></span></li>
+			<li><span>Data Accredited KASNEB Exam Centre</span></li>
+			<li><span>Quickbooks</span></li>
+			<li><span>Accounting systems connection and diagnosis</span></li>
+			<li><span>     </span></li>
+		</ul>
+	</div>
+
+  <div class="list_container">
+		<h3>Computer Repair & Maintanance</h3>
+		<ul>
+			<li><span>Parts of a computer</span></li>
+			<li><span>Assembling and disassembling</span></li>
+			<li><span>PCB and its components</span></li>
+			<li><span>Software-Hardawre compatibility</span></li>
+			<li><span>Systematic aproach to bloblem solving</span></li>
+			<li><span>Safety hardware handle</span></li>
+			<li><span>BSofD fix</span></li>
+		</ul>
+	</div>
+
+  <div class="list_container">
+		<h3>Data Analysis</h3>
+		<ul>
+			<li><span>Excell</span></li>
+			<li><span>SQL</span></li>
+			<li><span>Python</span></li>
+			<li><span>Fundermanetal concepts</span></li>
+			<li><span>Data cleaning</span></li>
+			<li><span>Transformation</span></li>
+			<li><span>Statistical analysis</span></li>
+		</ul>
+	</div>
+
+  </div>
+
+<div class="ict-wrapper">
+  
+  <div class="ict-title">COURSE SYNOPSIS CATEGORIES
+    <p style="color: green; size: 12px; font-family: 'Lucida Calligraphy';">click to expand</p>
+  </div>
+
+  <div class="accordion">
+
+    <div class="item">
+      <input type="radio" name="acc" id="tab1" checked>
+      <label for="tab1" class="title">ICT Esentials</label>
+
+            <div class="content">
+        <h3>ICT Esentials II</h3>
+        <p>Package Subscription: <strong style="color: red;">Kshs. 6,600</strong></p>
+        <p>✅ Introduction to Computers</p>
+        <p>✅ ICT Resourses operation mastery</p>
+        <p>✅ ICT Ethics and security</p>
+        <p>✅ Full knowledge on computer packages</p>
+        <p>✅ Internet essentials</p>
+        <p>✅ networking</p>
+        <p>✅ secured System based project with</p>
+        <p>✅ Deep diving into applications</p>
+        <p>✅ Modern Tech tools</p>
+        <p><strong style="color: red;">✅ FREE PHOTOSHOP COURSE</strong> </p>
+      </div>
+    </div>
+
+    <div class="item">
+      <input type="radio" name="acc" id="tab2">
+      <label for="tab2" class="title">Computer Basics </label>
+
+          <div class="content">
+        <h3>ICT Essentails I</h3>
+        <p>Package subscription: <strong style="color: red;">Kshs. 4,500</strong></p>
+        <p>✅ Introduction to computers</p>
+        <p>✅ Computer packages</p>
+        <p>✅ Internet basics</p>
+        <p>❌ networking</p>
+        <p>❌ project</p>
+        <p>❌ Deep diving into applications</p>
+        <p>❌ Modern Tech tools</p>
+      </div>
+
+    </div>
+
+    <div class="item">
+      <input type="radio" name="acc" id="tab3">
+      <label for="tab3" class="title">Advanced Courses</label>
+      <div class="content">
+        <h3>Special Courses</h3>
+        <p>Subscription fee varies depending on the course selected. see more in the <a href="FLIER.pdf" target="_blank">Bronchure Tab</a></p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer class="footer">
+    <div class="footer-column">
+      <h3>Useful Links</h3>
+      <li><a href="https://ruralnet.co.ke/">Home</a></li>
+      <li><a href="About_Us/">Who we Are</a></li>
+      <li><a href="students/" target="_blank">Student Portal</a></li>
+      <li><a href="https://www.kasneb.or.ke/" target="_blank">Accounting</a></li>
+      <li><a href="https://www.cisco.com/" target="_blank">ICT</a></li>
+    </div>
+
+    <div class="footer-column">
+      <h3>Partners</h3>
+      <li><a href="https://www.cskonline.org/">CSK</a></li>
+      <li><a href="https://kasneb.or.ke/">KASNEB</a></li>
+      <li><a href="https://www.tveta.go.ke/">TVETA</a></li>
+    </div>
+
+    <div class="footer-column">
+      <h3>Contact Us</h3>
+      <p>+254723845040</p>
+      <p>+254700886058</p>
+      <p>   </p>
+      <p>ruralnet2016@gmail.com</p>
+      <p>ruralnet.co.ke</p>
+    </div>
+
+    <div class="map-container">
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.798716585544!2d34.29549147494557!3d0.17961016421947956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177fee707dda6723%3A0x7661927a7a412ea0!2sRuralNet%20IT%20Services%20%26%20Academy!5e0!3m2!1sen!2ske!4v1764222258833!5m2!1sen!2ske"
+    allowfullscreen
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+  </footer>
+</body>
+<footer>
+    <!--<h2 style="text-align: center; background-color: white; color: black; font-family: wide latin;">'</h2>--
+	<h2 style="text-align: right;">'</h2>    
+	<h2 style="text-align: center; background-color: white; color: black; font-family: wide latin;"><strong>CONTACT US</strong></h2>
+        
+  <form class="form">
+  <div class="tabs-container">
+
+    <!-- TAB BUTTONS --
+    <div class="tab-button">
+      <button type="button" class="tab-btn active" data-tab="tab1">CALL/TEXT US VIA WHATSAPP/SMS APP</button>
+      <button type="button" class="tab-btn" data-tab="tab2">LINKS</button>
+      <button type="button" class="tab-btn" data-tab="tab3">LOCATION</button>
+    </div>
+
+    <!-- TAB CONTENT 1 --
+    <div class="tab-content active" id="tab1">
+      <h3>Phone Numbers</h3>
+      <ul class="blue-text">
+        <li>+254723845040</li>
+        <li>+254700886058</li>
+        <li>+254793714564</li>
+      </ul>
+    </div>
+
+    <!-- TAB CONTENT 2 --
+    <div class="tab-content" id="tab2">
+      <h3>Accessibility Links</h3>
+      <ul class="blue-text">
+        <li>Website: ruralnet.co.ke</li>
+        <li>Email: ruralnet2016@gmail.com</li>
+        <li>Tiktok: olivia@ruralnet</li>
+      </ul>
+    </div>
+
+    <!-- TAB CONTENT 3 --
+    <div class="tab-content" id="tab3">
+      <h3>Where to find us</h3>
+      <p class="blue-text">
+        KWFT at the ground floor, Matibabu Hospital occupying the first floor,
+        <strong>Ruralnet ICT Academy</strong> occupying the second floor of Oguya Plaza;
+        (The tall building beside Wells Petrol Station; Opposite Easy Coach and Guardian Booking Offices.)
+      </p>
+    </div>
+
+  </div>
+</form>
+  <h3 style="align-items: center; justify-content: center;">Copyright © 2025 Ruralnet ICT Academy. All rights reserved. </h3>
+
+  <script>
+  //const buttons = document.querySelectorAll(".tab-btn");
+  //const contents = document.querySelectorAll(".tab-content");
+
+  //buttons.forEach(btn => {
+    //btn.addEventListener("click", () => {
+
+      // Remove "active" class from all buttons and content
+      //buttons.forEach(b => b.classList.remove("active"));
+      //contents.forEach(c => c.classList.remove("active"));
+
+      // Add active class to clicked button and matching content
+     // btn.classList.add("active");
+     // document.getElementById(btn.dataset.tab).classList.add("active");
+   // });
+//  });
+</script>
+
+  <script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const section = document.getElementById('flipbox-section');
+		const pages = Array.from(section.querySelectorAll('.page'));
+		const btn = section.querySelector('#flipBtn');
+
+		let currentPage = 0;
+		pages.forEach((p, i) => p.style.zIndex = pages.length - i);
+
+		btn.addEventListener('click', () => {
+			if (currentPage<pages.length) {
+				pages[currentPage].classList.add('flipped');
+				currentPage++;
+				if (currentPage == pages.length) btn.textContent = "Reset";
+			}
+			else {
+				pages.forEach((p, i) => {
+					p.classList.remove('flipped');
+					p.style.zIndex = pages.length - 1;
+				})
+
+				currentPage = 0;
+				btn.textContent = 'Flip Page';
+			}
+			}
+
+		})
+	</script> -->
+
+
+</body>
+
+    </footer>
+</html>

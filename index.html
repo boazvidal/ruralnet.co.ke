@@ -1,634 +1,709 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Bridge between rural and digital world" />
-    <title>::Home || Ruralnet ICT Academy</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ruralnet ICT Academy — Empowering rural communities with modern, practical digital skills.">
+<title>Ruralnet ICT Academy — Empowering the Digital Future</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
 
-	<link rel="stylesheet" href="stylus.css">
-  <link rel="stylesheet" href="stylus-footer.css">
-	<link rel="icon" type="image/png" href="images/favicon.png">
-  <style>
+/* ============ MODERN TOKENS ============ */
+:root {
+  --bg-dark: #0B0F17;
+  --bg-card: #131A26;
+  --bg-card-hover: #1C2638;
+  --accent-teal: #14B8A6;
+  --accent-teal-glow: rgba(20, 184, 166, 0.25);
+  --accent-amber: #F59E0B;
+  --accent-soil: #D97706;
+  --text-main: #F3F4F6;
+  --text-muted: #9CA3AF;
+  --border-line: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(19, 26, 38, 0.7);
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --radius-pill: 999px;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --shadow-glow: 0 10px 30px -10px var(--accent-teal-glow);
+}
 
-    /*body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 30px;
-      background: #f2f2f2;
-    }*/
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
 
-	/* ================= Styling dropdown on hover) ================= */
-  .ict-wrapper {
-    max-width: 600px;
-    margin: auto;
-    text-align: center;
-    background: #e7d4d4;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-  }
+/* ============ UTILITIES ============ */
+.container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(20, 184, 166, 0.1);
+  border: 1px solid rgba(20, 184, 166, 0.3);
+  color: var(--accent-teal);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-teal) 0%, #0D9488 100%);
+  color: #000;
+  font-weight: 700;
+  box-shadow: var(--shadow-glow);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px -5px var(--accent-teal-glow);
+  filter: brightness(1.1);
+}
+.btn-outline {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-main);
+  border: 1px solid var(--border-line);
+}
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
 
-.ict-title {
-    font-size: 26px;
-    font-weight: bold;
-    margin-bottom: 25px;
-    color: #333;
-  }
+/* ============ HEADER & NAV ============ */
+.utility-bar {
+  background: #070A0F;
+  border-bottom: 1px solid var(--border-line);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 8px 0;
+}
+.utility-bar .container { display: flex; justify-content: space-between; align-items: center; }
+.utility-links { display: flex; gap: 16px; }
+.utility-links a { color: var(--text-muted); transition: color 0.2s; text-decoration: none; }
+.utility-links a:hover { color: var(--accent-teal); }
 
-  .accordion {
-    max-width: 500px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+header.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-line);
+}
+.navbar { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.2rem; color: #fff; text-decoration: none; }
+.brand img { height: 42px; width: auto; border-radius: 6px; }
 
-  /* Hide radios */
-  .accordion input {
-    display: none;
-  }
+.nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+.nav-links a { color: var(--text-muted); font-weight: 500; font-size: 0.95rem; transition: color 0.2s; text-decoration: none; }
+.nav-links a:hover { color: #fff; }
 
-  .item {
-    border-radius: 30px;
-    background: white;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    text-align: left;
-  }
+.dropdown { position: relative; }
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--bg-card);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-md);
+  padding: 8px;
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+.dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+.dropdown-menu a { display: block; padding: 10px 14px; border-radius: 6px; font-size: 0.88rem; }
+.dropdown-menu a:hover { background: var(--bg-card-hover); color: var(--accent-teal); }
 
-  /* TAB HEADER */
-  .title {
-    padding: 18px;
-    font-size: 18px;
-    cursor: pointer;
-    text-align: center;
-    color: white;
-    user-select: none;
-  }
+.mobile-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
 
-  /* Colors */
-  #tab1 + label.title { background:  #00a8ff; }
-  #tab2 + label.title { background: #ff7e71; }
-  #tab3 + label.title { background: #8a6cff; }
+/* ============ HERO SECTION ============ */
+.hero {
+  position: relative;
+  padding: 100px 0 80px;
+  overflow: hidden;
+}
+.hero-bg-glow {
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1000px;
+  height: 600px;
+  background: radial-gradient(circle, var(--accent-teal-glow) 0%, rgba(11,15,23,0) 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.hero-content h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 20px 0;
+  letter-spacing: -0.02em;
+}
+.hero-content h1 span {
+  background: linear-gradient(135deg, var(--accent-teal) 0%, #38BDF8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-content p {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  max-width: 540px;
+}
+.hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
 
-  /* CONTENT AREA (initially closed) */
-  .content {
-    max-height: 0;
-    overflow: hidden;
-    background: white;
-    padding: 0 25px;
-    transition: max-height 0.5s ease, padding 0.3s ease;
-  }
+.hero-visual {
+  position: relative;
+  border-radius: var(--radius-lg);
+  padding: 10px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.01));
+  border: 1px solid var(--border-line);
+}
+.hero-slider-wrapper {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+.hero-slider-track { display: flex; width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+.hero-slide { min-width: 100%; height: 100%; }
+.hero-slide img { width: 100%; height: 100%; object-fit: cover; }
 
-  /* OPEN STATE — smooth animation */
-  input:checked ~ .content {
-    max-height: 300px; /* enough space for text */
-    padding: 20px 25px;
-  }
+/* ============ STATS BAR ============ */
+.stats-banner {
+  border-y: 1px solid var(--border-line);
+  background: rgba(19, 26, 38, 0.4);
+  padding: 40px 0;
+  margin-bottom: 60px;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  text-align: center;
+}
+.stat-card .number {
+  font-family: var(--font-mono);
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #fff;
+}
+.stat-card .label { color: var(--text-muted); font-size: 0.9rem; margin-top: 4px; }
+.promo-badge {
+  grid-column: span 1;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(217, 119, 6, 0.05) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.promo-badge span { color: var(--accent-amber); font-weight: 600; font-size: 0.9rem; }
 
-  h3 {
-    margin-top: 0;
-  }
+/* ============ PROGRAMMES ============ */
+.section-padding { padding: 80px 0; }
+.section-header { text-align: center; max-width: 640px; margin: 0 auto 50px; }
+.section-header h2 { font-size: 2.2rem; font-weight: 700; margin: 12px 0; }
+.section-header p { color: var(--text-muted); }
 
-  </style> 
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.program-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.program-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-teal), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.program-card:hover {
+  transform: translateY(-6px);
+  background: var(--bg-card-hover);
+  border-color: rgba(20, 184, 166, 0.4);
+}
+.program-card:hover::before { opacity: 1; }
 
+.program-card .tag {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-teal);
+  background: rgba(20, 184, 166, 0.1);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 18px;
+}
+.program-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #fff; }
+.program-card ul { list-style: none; margin-bottom: 20px; flex-grow: 1; }
+.program-card ul li {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+}
+.program-card ul li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--accent-teal);
+  font-weight: bold;
+}
+
+/* ============ SYNOPSIS & PRICING ============ */
+.pricing-section { background: rgba(19, 26, 38, 0.3); border-y: 1px solid var(--border-line); }
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+.price-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  position: relative;
+}
+.price-card.featured {
+  border-color: var(--accent-teal);
+  box-shadow: var(--shadow-glow);
+}
+.price-card .badge-featured {
+  position: absolute;
+  top: -12px;
+  right: 24px;
+  background: var(--accent-teal);
+  color: #000;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+}
+.price-card .amount {
+  font-family: var(--font-mono);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 16px 0 24px;
+}
+.price-card .amount span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+.price-features { list-style: none; margin-bottom: 30px; }
+.price-features li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-line);
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+.price-features li.disabled { opacity: 0.4; text-decoration: line-through; }
+
+/* ============ FOOTER ============ */
+footer { background: #05080E; border-top: 1px solid var(--border-line); padding-top: 60px; }
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  margin-bottom: 40px;
+}
+.footer-col h4 { font-size: 1rem; margin-bottom: 20px; color: #fff; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col a { color: var(--text-muted); font-size: 0.9rem; transition: color 0.2s; text-decoration: none; }
+.footer-col a:hover { color: var(--accent-teal); }
+.map-container {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  height: 180px;
+  border: 1px solid var(--border-line);
+}
+.map-container iframe { width: 100%; height: 100%; border: 0; filter: invert(90%) hue-rotate(180deg) contrast(1.2); }
+
+.copyright {
+  border-top: 1px solid var(--border-line);
+  padding: 24px 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+  .hero-content p { margin: 0 auto 32px; }
+  .hero-cta { justify-content: center; }
+  .nav-links { display: none; }
+  .mobile-toggle { display: block; }
+}
+</style>
 </head>
-
 <body>
 
-<!--FULL PAGE PROTECTION SCRIPT -->
-
-<script>
-	//Right-Click
-	document.addEventListener('contextmenu', event => event.preventDefault());
-</script>
-
-<!--F12-->
-<script>
-	document.onkeydown = function(e) {
-
-	//F12
-	if (e.keyCode == 123) {
-		return false;
-	}
-
-
-//Ctrl+Shift+I or Ctrl+Shift+J or Ctrl+Shift+C
-
-	if (e.ctrlKey && e.shiftKey && (
-		e.keyCode === 73 ||
-		e.keyCode === 74 ||
-		e.keyCode === 67
-	)) {
-		return false;
-	}
-
-//Ctrl+U View Source-->
-
-	if (e.ctrlKey && e.keyCode === 85) {
-		return false;
-	}
-
-	//Ctrl+C Copy
-	if (e.ctrlKey && e.keyCode === 67) {
-		return false;
-	}
-}
-</script>
-
-
-<!--X-Mass Video animation-->
-<div class="floating-video">
-  <img src="images/ruralnet@10.png">
-  <!--<video src="images/Merry_Anime.mp4" autoplay muted loop controls></video>-->
-</div>
-
-<!---================================================
-======================================================
-	<-- Floating Box Section --
-<div class="overlay" id="overlay">
-  <div class="floating-box">
-    <span class="close-btn" onclick="closeBox()">×</span>
-    <img src="images/RURALNET.png" draggable="false" class="floating-box-img">
-        <--<h4 style="color: yellow;">This page does not allow Right-Click, page inspection or page source viewing due to security restrictions!</h4>--
-    <h2>HAPPY NEW YEAR</h2>
-    <img src="images/merry_schristmass.png" draggable="false" class="merry-img">
-    <--<h3>January intake is already ongoing</h3> 
-    <h3>for both ICT Essentials and advanced courses</h3>
-	<h3>We are still working on KASNEB Courses and we shall let you know once ready</h3>
-	<p1>powered by Ruralnet Developer</p1>-->
-  </div>
-</div>
-
-<!--<script>
-  function closeBox() {
-    const overlay = document.getElementById("overlay");
-    overlay.classList.add("closing");
-
-    /*//Wait for animation to finish (400ms), then hide the overlay*/
-    setTimeout(() => {
-      overlay.style.display = "none";
-    }, 400);
-  }
-</script>
-=============================================
-=============================================-->
-
-<div class="topt">
-	<a href="call:+254723845040"><img src="images/call.png"></a>
-	<a href="mailto:ruralnet2016@gmail.com"><img src="images/Gmail.png"></a>
-	<a href="https://www.facebook.com/share/1E8gXDYugw/"><img src="images/facebook.png"></a>
-	<a href="https://www.tiktok.com/@olly_766?lang=en"><img src="images/tiktok.png"></a>
-	<a href="https://www.instagram.com/boaz4113?igsh=emdmdmdnZ3E5eGZh"><img src="images/instagram.png"></a>
-	<a href=""><img src="images/twitter.png"></a>
-	<a href="www.linkedin.com/in/boaz-vidal-tirone-hastin-35b75b280"><img src="images/linkedin.png"></a>
-</div>
-
-  <nav>
-  <div class="navbar">
-    <div class="holyday"><img src="images/RURALNET.png" class="logo"></div>
-
-    <div class="menu-icon" onclick="toggleMenu()">&#x2630;</div>
-
-    <div class="nav-links" id="navLinks">
-      <a href="https://ruralnet.co.ke/">Home</a>
-      <a href="/About_Us/">About us</a>
-      <a href="https://forms.gle/wywREJiHrpFTF5veA">Apply now</a>
-
-      <div class="dropdown">
-        <a href="#" class="drop-btn">Learning resources ▾</a>
-        <div class="dropdown-content">
-          <a href="/verify/" target="_blank">E-Library</a>
-          <!--<a href="construction.html" target="_blank">Sylabus</a>-->
-          <a href="COMPUTER COURSE OUTLINE.pdf" target="_blank">Course Outline</a>
-          <a href="FLIER.pdf" target="_blank">Brochure</a>
-          <a href="FEE_STRUCTURE.pdf" target="_blank">Fee structure</a>
-        </div>
-      </div>
-
-      <!--<a href="construction.html">Admission</a>-->
-
- <div class="dropdown">
-        <a href="#" class="drop-btn">Portals▾</a>
-        <div class="dropdown-content">
-          <a href="students/" target="_blank">Student</a>
-          <a href="employees/" target="_blank">Staff</a>
-        </div>
-      </div>
-
-
-      <a href="https://www.computerworld.com/" target="_blank">News & Updates</a>
-      <a href="announcements.html">Announcement</a>
-      <a href="https://www.cisco.com/">ICT</a>
-      <a href="https://www.kasneb.or.ke/">Accounting</a>
-
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="container">
+    <div>📞 +254 723 845 040 &nbsp;|&nbsp; ✉️ ruralnet2016@gmail.com</div>
+    <div class="utility-links">
+      <a href="https://www.facebook.com/share/1E8gXDYugw/">Facebook</a>
+      <a href="https://www.instagram.com/boaz4113">Instagram</a>
+      <a href="https://www.linkedin.com/in/boaz-vidal-tirone-hastin-35b75b280">LinkedIn</a>
     </div>
   </div>
-</nav>
+</div>
 
-
-<script>
-function toggleMenu() {
-  document.getElementById("navLinks").classList.toggle("show");
-}
-
-document.querySelectorAll(".drop-btn").forEach(btn => {
-  btn.addEventListener("click", function(e) {
-    e.preventDefault();
-    this.parentElement.classList.toggle("active");
-  });
-});
-</script>
-
-
-<!--<h1 style="size: 100px; padding: 1rem;">.</h1>-->
-	<div class="slider">
-    <div class="slides">
-      <div class="slide"><img src="images/c0.jpg" alt="Slide 1"></div>
-      <div class="slide"><img src="images/c001.jpg" alt=slide 2"></div>
-      <div class="slide"><img src="images/c1.jpg" alt="Slide 3"></div>
-      <div class="slide"><img src="images/c2.jpg" alt="Slide 3"></div>
-	    <div class="slide"><img src="images/c3.jpg" alt="Slide 4"></div>
-	    <div class="slide"><img src="images/c4.jpg" alt="Slide 5"></div>
-	    <div class="slide"><img src="images/c5.jpg" alt="Slide 6"></div>
-	    <div class="slide"><img src="images/c6.jpg" alt="Slide 7"></div>
-	    <div class="slide"><img src="images/c7.jpg" alt="Slide 8"></div>
-	    <div class="slide"><img src="images/c8.jpg" alt="Slide 9"></div>
-	    <div class="slide"><img src="images/c9.jpg" alt="Slide 10"></div>
-	    <div class="slide"><img src="images/c10.jpg" alt="Slide 11"></div>
-	    <div class="slide"><img src="images/c11.jpg" alt="Slide 12"></div>
-	    <div class="slide"><img src="images/c12.jpg" alt="Slide 13"></div>
-	    <div class="slide"><img src="images/c13.jpg" alt="Slide 14"></div>
-	    <div class="slide"><img src="images/c14.jpg" alt="Slide 15"></div>
-	    <div class="slide"><img src="images/c15.jpg" alt="Slide 16"></div>
-	    <div class="slide"><img src="images/c16.jpg" alt="Slide 17"></div>
-	  
-    </div>
-  </div>
-
-  <script>
-    const slides = document.querySelector('.slides');
-    const totalSlides = document.querySelectorAll('.slide').length;
-    let index = 0;
-
-    setInterval(() => {
-      index = (index + 1) % totalSlides;
-      slides.style.transform = `translateX(-${index * 100}%)`;
-    }, 3000);
-  </script>
-
-
-
-
-    <h1 style="background-color: rgb(12, 1, 44); color: white; text-align: center; font-size: 30px;">Available programmes:</h1>
-
-
-	<div class="stats-container">
-  <div>
+<!-- NAVIGATION -->
+<header class="site-nav">
+  <div class="container navbar">
+    <a href="https://ruralnet.co.ke/" class="brand">
+      <img src="images/RURALNET.png" alt="Ruralnet Logo">
+      <span>Ruralnet ICT</span>
+    </a>
     
-    <div class="counter" data-target="7000">0</div>
-    <div class="label">No Of Students</div>
-  </div>
-  <div>
-    <div class="counter" data-target="1">0</div>
-    <div class="label">Branches</div>
-  </div>
-  <div>
-    <div class="counter" data-target="2">0</div>
-    <div class="label">Schools</div>
-  </div>
+    <ul class="nav-links">
+      <li><a href="https://ruralnet.co.ke/">Home</a></li>
+      <li><a href="/About_Us/">About Us</a></li>
+      <li class="dropdown">
+        <a href="#">Resources ▾</a>
+        <div class="dropdown-menu">
+          <a href="/verify/" target="_blank">E-Library</a>
+          <a href="COMPUTER%20COURSE%20OUTLINE.pdf" target="_blank">Course Outline</a>
+          <a href="FLIER.pdf" target="_blank">Brochure</a>
+          <a href="FEE_STRUCTURE.pdf" target="_blank">Fee Structure</a>
+        </div>
+      </li>
+      <li class="dropdown">
+        <a href="#">Portals ▾</a>
+        <div class="dropdown-menu">
+          <a href="students/" target="_blank">Student Portal</a>
+          <a href="employees/" target="_blank">Staff Portal</a>
+        </div>
+      </li>
+      <li><a href="announcements.html">Announcements</a></li>
+    </ul>
 
-  <div>
-    <div class="label">pay for essentials,</div>
-    <div class="label"> get photoshop course for free !</div>
+    <a href="https://forms.gle/wywREJiHrpFTF5veA" class="btn btn-primary">Apply Now</a>
+    <button class="mobile-toggle" aria-label="Toggle Navigation">☰</button>
+  </div>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-bg-glow"></div>
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <div class="badge">🚀 Future-Proof Your Skills</div>
+      <h1>Bridging the <span>Rural</span> &amp; <span>Digital</span> World.</h1>
+      <p>Practical, affordable ICT, programming, accounting, and design education engineered for ambitious learners everywhere.</p>
+      <div class="hero-cta">
+        <a href="https://forms.gle/wywREJiHrpFTF5veA" class="btn btn-primary">Apply Now →</a>
+        <a href="#programmes" class="btn btn-outline">Explore Programs</a>
+      </div>
+    </div>
+    
+    <div class="hero-visual">
+      <div class="hero-slider-wrapper">
+        <div class="hero-slider-track" id="sliderTrack">
+          <div class="hero-slide"><img src="images/c0.jpg" alt="Academy Life"></div>
+          <div class="hero-slide"><img src="images/c1.jpg" alt="Student Training"></div>
+          <div class="hero-slide"><img src="images/c2.jpg" alt="Computer Lab"></div>
+          <div class="hero-slide"><img src="images/c3.jpg" alt="Computer Lab"></div>
+          <div class="hero-slide"><img src="images/c4.jpg" alt="Computer Lab"></div>
+          <div class="hero-slide"><img src="images/c5.jpg" alt="Computer Lab"></div>
+          <div class="hero-slide"><img src="images/c6.jpg" alt="Computer Lab"></div>
+          <div class="hero-slide"><img src="images/c7.jpg" alt="Computer Lab"></div>
+          <div class="hero-slide"><img src="images/c8.jpg" alt="Computer Lab"></div>
+          <div class="hero-slide"><img src="images/c9.jpg" alt="Computer Lab"></div>
+          <div class="hero-slide"><img src="images/c10.jpg" alt="Computer Lab"></div>
+          <div class="hero-slide"><img src="images/c11.jpg" alt="Computer Lab"></div>
+          <div class="hero-slide"><img src="images/c12.jpg" alt="Computer Lab"></div>
+          <div class="hero-slide"><img src="images/c13.jpg" alt="Computer Lab"></div>
+          <div class="hero-slide"><img src="images/c14jpg" alt="Computer Lab"></div>
+          <div class="hero-slide"><img src="images/c15.jpg" alt="Computer Lab"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-banner">
+  <div class="container stats-grid">
+    <div class="stat-card">
+      <div class="number" data-target="7000">0</div>
+      <div class="label">Graduated Students</div>
+    </div>
+    <div class="stat-card">
+      <div class="number" data-target="1">0</div>
+      <div class="label">Main Campus Branch</div>
+    </div>
+    <div class="stat-card">
+      <div class="number" data-target="2">0</div>
+      <div class="label">Partner Institutions</div>
+    </div>
+    <div class="promo-badge">
+      <span>🎁 Special Offer</span>
+      <span style="color:#fff; font-size:0.8rem; margin-top:2px;">Free Photoshop course with ICT Essentials II</span>
+    </div>
   </div>
 </div>
 
+<!-- PROGRAMMES -->
+<section class="section-padding" id="programmes">
+  <div class="container">
+    <div class="section-header">
+      <div class="badge">Academic Paths</div>
+      <h2>Pick Your Tech Career Track</h2>
+      <p>Market-relevant tracks designed to give you industry-ready hands-on experience.</p>
+    </div>
+
+    <div class="cards-grid">
+      <div class="program-card">
+        <span class="tag">Foundations</span>
+        <h3>ICT Essentials</h3>
+        <ul>
+        <li>Introduction to computers</li>
+          <li>Ethics &amp; Cyber Safety</li>
+          <li>OS Operations (Windows, Linux)</li>
+          <li>Full MS Office Suite Mastery</li>
+          <li>Database Management Systems</li>
+          <li>Networking, Internet &amp; A.I</li>
+          
+        </ul>
+      </div>
+
+      <div class="program-card">
+        <span class="tag">Development</span>
+        <h3>Web Development</h3>
+        <ul>
+          <li>Structured Content with HTML 5</li>
+          <li>Modern Layouts with CSS 3</li>
+          <li>Interactive Logic via JavaScript</li>
+          <li>Backend with Firebase</li>
+        </ul>
+      </div>
+
+      <div class="program-card">
+        <span class="tag">Software</span>
+        <h3>Software Engineering</h3>
+        <ul>
+          <li>Python Foundations &amp; Projects</li>
+          <li>Modern React &amp; Node.js</li>
+          <li>Django Web Framework</li>
+          <li>Git &amp; GitHub Workflows</li>
+        </ul>
+      </div>
+
+      <div class="program-card">
+        <span class="tag">Creative Arts and designing</span>
+        <h3>Graphic &amp; CAD Design</h3>
+        <ul>
+          <li>Adobe Photoshop &amp; Illustrator</li>
+          <li>CorelDRAW Publishing</li>
+          <li>AutoCAD Architectural Drafting</li>
+          <li>ArchiCAD Modeling</li>
+        </ul>
+      </div>
+
+      <div class="program-card">
+        <span class="tag">Big Data</span>
+        <h3>Data Analytics</h3>
+        <ul>
+          <li>Introduction to Data Analysis</li>
+          <li>Advanced Excel</li>
+          <li>Statistics and Dashboards</li>
+          <li>Python for Data Analysis</li>
+          <li>Machine Learning Fundamentals</li>
+          <li>Research &amp; Projects</li>
+        </ul>
+      </div>
+
+      <div class="program-card">
+        <span class="tag">Business and Accounting</span>
+        <h3>Accounting Basics</h3>
+        <ul>
+          <li>Quickbooks</li>
+          <li>Payroll</li>
+          <li>Chart of Accounts</li>
+          <li>Inventory Management</li>
+          <li>Financial Reporting</li>
+          <li>Tax Preparation</li>
+          <li>Profitability Analysis</li>
+          <li>Business Planning</li>
+          <li>Simple POS</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRICING / SYNOPSIS -->
+<section class="section-padding pricing-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="badge">Transparent Pricing</div>
+      <h2>Simple &amp; Affordable Fees</h2>
+      <p>No hidden costs. Quality technical education tailored for accessibility.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>ICT Essentials I</h3>
+        <p style="color:var(--text-muted); font-size:0.85rem;">Computer Basics Package</p>
+        <div class="amount">Kshs. 4,500</div>
+        <ul class="price-features">
+          <li>Introduction to Computers</li>
+          <li>Core Office Applications</li>
+          <li>Internet &amp; Web Basics</li>
+          <li class="disabled">Networking Foundations</li>
+          <li class="disabled">Encrypted Project Work</li>
+        </ul>
+        <a href="https://forms.gle/wywREJiHrpFTF5veA" class="btn btn-outline" style="width:100%;">Enroll Now</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="badge-featured">MOST POPULAR</div>
+        <h3>ICT Essentials II</h3>
+        <p style="color:var(--text-muted); font-size:0.85rem;">Full Practical Track</p>
+        <div class="amount">Kshs. 6,600</div>
+        <ul class="price-features">
+          <li>Everything in Essentials I</li>
+          <li>ICT Resource Operation Mastery</li>
+          <li>Networking &amp; Internet Systems</li>
+          <li>Secured System-Based Project</li>
+          <li><strong>FREE Photoshop Course Included</strong></li>
+        </ul>
+        <a href="https://forms.gle/wywREJiHrpFTF5veA" class="btn btn-primary" style="width:100%;">Enroll Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <h4>Ruralnet Academy</h4>
+      <p style="color:var(--text-muted); font-size:0.85rem; line-height:1.6;">Empowering minds outside urban hubs with digital and technological expertise.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="https://ruralnet.co.ke/">Home</a></li>
+        <li><a href="About_Us/">Who We Are</a></li>
+        <li><a href="students/">Student Portal</a></li>
+        <li><a href="announcements.html">Announcements</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <ul>
+        <li><a href="tel:+254723845040">+254 723 845 040</a></li>
+        <li><a href="mailto:ruralnet2016@gmail.com">ruralnet2016@gmail.com</a></li>
+        <li><a href="#">Siaya / Kenya Location</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Find Us</h4>
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.798716585544!2d34.29549147494557!3d0.17961016421947956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177fee707dda6723%3A0x7661927a7a412ea0!2sRuralNet%20IT%20Services%20%26%20Academy!5e0!3m2!1sen!2ske!4v1764222258833!5m2!1sen!2ske" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    © 2026 Ruralnet ICT Academy. All rights reserved.
+  </div>
+</footer>
 
 <script>
-  const counters = document.querySelectorAll('.counter');
-  const speed = 800; // Adjust speed (lower = faster)
+// Hero Slider
+const track = document.getElementById("sliderTrack");
+let slideIndex = 0;
+setInterval(() => {
+  slideIndex = (slideIndex + 1) % track.children.length;
+  track.style.transform = `translateX(-${slideIndex * 100}%)`;
+}, 4000);
 
-  counters.forEach(counter => {
-    const updateCount = () => {
-      const target = +counter.getAttribute('data-target');
-      const count = +counter.innerText.replace(/,/g, '');
-      const increment = target / speed;
-
-      if (count < target) {
-        const newCount = Math.ceil(count + increment);
-        counter.innerText = newCount.toLocaleString();
-        setTimeout(updateCount, 20);
-      } else {
-        counter.innerText = target.toLocaleString();
-      }
-    };
-
-    updateCount();
+// Stat Counter Animation
+const counters = document.querySelectorAll('.number');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      const target = +entry.target.getAttribute('data-target');
+      let count = 0;
+      const step = target / 50;
+      const update = () => {
+        count += step;
+        if(count < target) {
+          entry.target.innerText = Math.ceil(count).toLocaleString();
+          setTimeout(update, 20);
+        } else {
+          entry.target.innerText = target.toLocaleString();
+        }
+      };
+      update();
+      observer.unobserve(entry.target);
+    }
   });
+}, { threshold: 0.5 });
+
+counters.forEach(counter => observer.observe(counter));
 </script>
-
-    <div class="wrapper">
-      <div class="list_container">
-		    <h3>INtroduction To Computers / ICT Basics</h3>
-		    <ul>
-			    <li><span>Computer basic operations</span></li>
-			    <li><span>Operating systems :::Windows, Macintosh, Linux, Obuntu:::</span></li>
-			    <li><span>Microsoft Office Suits applications</span></li>
-			    <li><span>DataBase Management Systems (Microsoft Access), with an encrypted system based project </span></li>
-		      <li><span>Networking and Internet</span></li>
-			    <li><span>ICT ethics and safety data security measures</span></li>
-		  </ul>
-      </div>
-
-      <div class="list_container">
-		    <h3>Wb Development</h3>
-	    	<ul>
-			<li><span>Introduction to websites and related terminologies</span></li>
-			<li><span>Webpage editors, IDEs and web browsers</span></li>
-			<li><span>HyperText Markup Language <strong>(HTML)</strong> for text and readable tags in a webpage</span></li>
-			<li><span>Cascaded Style Sheet <strong>(CSS)</strong> for the beauty and nice display of webpage information</strong></span></li>
-			<li><span><strong>Javascript</strong> for page interraction and logical operations</span></li>
-			<li><span><strong>Firebase</strong> for DBase handlers and storage</span></li>
-		</ul>
-	</div>
-
-  <div class="list_container">
-		<h3>Programming</h3>
-		<ul>
-			<li><span>Python</span></li>
-			<li><span>Javascript</span></li>
-			<li><span>Modern Programming tools</span></li>
-			<li><span>React</span></li>
-			<li><span>NodeJS</span></li>
-			<li><span>DJango</span></li>
-			<li><span>GitHub</span></li>
-      <li><span>FireBase</span></li>
-		</ul>
-	</div>
-
-  <div class="list_container">
-		<h3>Graphic Designing</h3>
-		<ul>
-			<li><span>Adobe Photoshop</span></li>
-			<li><span>Adobe Illustrator</span></li>
-			<li><span>Corel Draw</span></li>
-			<li><span>AutoCAD</span></li>
-			<li><span>AchiCAD</span></li>
-			<li><span>     </span></li>
-			<li><span>     </span></li>
-		</ul>
-	</div>
-
-  <div class="list_container">
-		<h3>Networking</h3>
-		<ul>
-			<li><span>CISCO Modules</span></li>
-			<li><span>Networking tool</span></li>
-			<li><span>IP configurations and BroadBand grouping</span></li>
-			<li><span>Wireless etchnology</span></li>
-			<li><span>Network beyong WLAN</span></li>
-			<li><span>ISP Technology</span></li>
-			<li><span>Network diagnosis</span></li>
-			<li><span>Closed Circuit TeleVision <strong>(CCTV)</strong></span></li>
-		</ul>
-	</div>
-
-  <div class="list_container">
-		<h3>Accounting</h3>
-		<ul>
-			<li><span>Certificate in Accounting Management <strong>(CAM)</strong></span></li>
-			<li><span>Accounting Technician Diploma <strong>(ATD)</strong></span></li>
-			<li><span>Certified Public Accountant <strong>(CPA)</strong></span></li>
-			<li><span>Data Accredited KASNEB Exam Centre</span></li>
-			<li><span>Quickbooks</span></li>
-			<li><span>Accounting systems connection and diagnosis</span></li>
-			<li><span>     </span></li>
-		</ul>
-	</div>
-
-  <div class="list_container">
-		<h3>Computer Repair & Maintanance</h3>
-		<ul>
-			<li><span>Parts of a computer</span></li>
-			<li><span>Assembling and disassembling</span></li>
-			<li><span>PCB and its components</span></li>
-			<li><span>Software-Hardawre compatibility</span></li>
-			<li><span>Systematic aproach to bloblem solving</span></li>
-			<li><span>Safety hardware handle</span></li>
-			<li><span>BSofD fix</span></li>
-		</ul>
-	</div>
-
-  <div class="list_container">
-		<h3>Data Analysis</h3>
-		<ul>
-			<li><span>Excell</span></li>
-			<li><span>SQL</span></li>
-			<li><span>Python</span></li>
-			<li><span>Fundermanetal concepts</span></li>
-			<li><span>Data cleaning</span></li>
-			<li><span>Transformation</span></li>
-			<li><span>Statistical analysis</span></li>
-		</ul>
-	</div>
-
-  </div>
-
-<div class="ict-wrapper">
-  
-  <div class="ict-title">COURSE SYNOPSIS CATEGORIES
-    <p style="color: green; size: 12px; font-family: 'Lucida Calligraphy';">click to expand</p>
-  </div>
-
-  <div class="accordion">
-
-    <div class="item">
-      <input type="radio" name="acc" id="tab1" checked>
-      <label for="tab1" class="title">ICT Esentials</label>
-
-            <div class="content">
-        <h3>ICT Esentials II</h3>
-        <p>Package Subscription: <strong style="color: red;">Kshs. 6,600</strong></p>
-        <p>✅ Introduction to Computers</p>
-        <p>✅ ICT Resourses operation mastery</p>
-        <p>✅ ICT Ethics and security</p>
-        <p>✅ Full knowledge on computer packages</p>
-        <p>✅ Internet essentials</p>
-        <p>✅ networking</p>
-        <p>✅ secured System based project with</p>
-        <p>✅ Deep diving into applications</p>
-        <p>✅ Modern Tech tools</p>
-        <p><strong style="color: red;">✅ FREE PHOTOSHOP COURSE</strong> </p>
-      </div>
-    </div>
-
-    <div class="item">
-      <input type="radio" name="acc" id="tab2">
-      <label for="tab2" class="title">Computer Basics </label>
-
-          <div class="content">
-        <h3>ICT Essentails I</h3>
-        <p>Package subscription: <strong style="color: red;">Kshs. 4,500</strong></p>
-        <p>✅ Introduction to computers</p>
-        <p>✅ Computer packages</p>
-        <p>✅ Internet basics</p>
-        <p>❌ networking</p>
-        <p>❌ project</p>
-        <p>❌ Deep diving into applications</p>
-        <p>❌ Modern Tech tools</p>
-      </div>
-
-    </div>
-
-    <div class="item">
-      <input type="radio" name="acc" id="tab3">
-      <label for="tab3" class="title">Advanced Courses</label>
-      <div class="content">
-        <h3>Special Courses</h3>
-        <p>Subscription fee varies depending on the course selected. see more in the <a href="FLIER.pdf" target="_blank">Bronchure Tab</a></p>
-      </div>
-    </div>
-
-  </div>
-
-</div>
-
-<footer class="footer">
-    <div class="footer-column">
-      <h3>Useful Links</h3>
-      <li><a href="https://ruralnet.co.ke/">Home</a></li>
-      <li><a href="About_Us/">Who we Are</a></li>
-      <li><a href="students/" target="_blank">Student Portal</a></li>
-      <li><a href="https://www.kasneb.or.ke/" target="_blank">Accounting</a></li>
-      <li><a href="https://www.cisco.com/" target="_blank">ICT</a></li>
-    </div>
-
-    <div class="footer-column">
-      <h3>Partners</h3>
-      <li><a href="https://www.cskonline.org/">CSK</a></li>
-      <li><a href="https://kasneb.or.ke/">KASNEB</a></li>
-      <li><a href="https://www.tveta.go.ke/">TVETA</a></li>
-    </div>
-
-    <div class="footer-column">
-      <h3>Contact Us</h3>
-      <p>+254723845040</p>
-      <p>+254700886058</p>
-      <p>   </p>
-      <p>ruralnet2016@gmail.com</p>
-      <p>ruralnet.co.ke</p>
-    </div>
-
-    <div class="map-container">
-  <iframe 
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.798716585544!2d34.29549147494557!3d0.17961016421947956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177fee707dda6723%3A0x7661927a7a412ea0!2sRuralNet%20IT%20Services%20%26%20Academy!5e0!3m2!1sen!2ske!4v1764222258833!5m2!1sen!2ske"
-    allowfullscreen
-    loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade">
-  </iframe>
-</div>
-  </footer>
 </body>
-<footer>
-    <!--<h2 style="text-align: center; background-color: white; color: black; font-family: wide latin;">'</h2>--
-	<h2 style="text-align: right;">'</h2>    
-	<h2 style="text-align: center; background-color: white; color: black; font-family: wide latin;"><strong>CONTACT US</strong></h2>
-        
-  <form class="form">
-  <div class="tabs-container">
-
-    <!-- TAB BUTTONS --
-    <div class="tab-button">
-      <button type="button" class="tab-btn active" data-tab="tab1">CALL/TEXT US VIA WHATSAPP/SMS APP</button>
-      <button type="button" class="tab-btn" data-tab="tab2">LINKS</button>
-      <button type="button" class="tab-btn" data-tab="tab3">LOCATION</button>
-    </div>
-
-    <!-- TAB CONTENT 1 --
-    <div class="tab-content active" id="tab1">
-      <h3>Phone Numbers</h3>
-      <ul class="blue-text">
-        <li>+254723845040</li>
-        <li>+254700886058</li>
-        <li>+254793714564</li>
-      </ul>
-    </div>
-
-    <!-- TAB CONTENT 2 --
-    <div class="tab-content" id="tab2">
-      <h3>Accessibility Links</h3>
-      <ul class="blue-text">
-        <li>Website: ruralnet.co.ke</li>
-        <li>Email: ruralnet2016@gmail.com</li>
-        <li>Tiktok: olivia@ruralnet</li>
-      </ul>
-    </div>
-
-    <!-- TAB CONTENT 3 --
-    <div class="tab-content" id="tab3">
-      <h3>Where to find us</h3>
-      <p class="blue-text">
-        KWFT at the ground floor, Matibabu Hospital occupying the first floor,
-        <strong>Ruralnet ICT Academy</strong> occupying the second floor of Oguya Plaza;
-        (The tall building beside Wells Petrol Station; Opposite Easy Coach and Guardian Booking Offices.)
-      </p>
-    </div>
-
-  </div>
-</form>
-  <h3 style="align-items: center; justify-content: center;">Copyright © 2025 Ruralnet ICT Academy. All rights reserved. </h3>
-
-  <script>
-  //const buttons = document.querySelectorAll(".tab-btn");
-  //const contents = document.querySelectorAll(".tab-content");
-
-  //buttons.forEach(btn => {
-    //btn.addEventListener("click", () => {
-
-      // Remove "active" class from all buttons and content
-      //buttons.forEach(b => b.classList.remove("active"));
-      //contents.forEach(c => c.classList.remove("active"));
-
-      // Add active class to clicked button and matching content
-     // btn.classList.add("active");
-     // document.getElementById(btn.dataset.tab).classList.add("active");
-   // });
-//  });
-</script>
-
-  <script>
-	document.addEventListener('DOMContentLoaded', () => {
-		const section = document.getElementById('flipbox-section');
-		const pages = Array.from(section.querySelectorAll('.page'));
-		const btn = section.querySelector('#flipBtn');
-
-		let currentPage = 0;
-		pages.forEach((p, i) => p.style.zIndex = pages.length - i);
-
-		btn.addEventListener('click', () => {
-			if (currentPage<pages.length) {
-				pages[currentPage].classList.add('flipped');
-				currentPage++;
-				if (currentPage == pages.length) btn.textContent = "Reset";
-			}
-			else {
-				pages.forEach((p, i) => {
-					p.classList.remove('flipped');
-					p.style.zIndex = pages.length - 1;
-				})
-
-				currentPage = 0;
-				btn.textContent = 'Flip Page';
-			}
-			}
-
-		})
-	</script> -->
-
-
-</body>
-
-    </footer>
 </html>
