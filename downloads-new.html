@@ -1,0 +1,2099 @@
+# Modernized Learning Materials & Tutorials Page
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Learning Materials | RuralNet ICT Academy</title>
+
+    <link rel="icon" type="image/png" href="images/favdownload.png">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* =========================================================
+           ROOT VARIABLES
+        ========================================================= */
+
+        :root {
+            --primary: #087f3f;
+            --primary-dark: #04552a;
+            --primary-light: #e9f8ef;
+
+            --secondary: #0d6efd;
+            --accent: #ffc107;
+
+            --dark: #101828;
+            --dark-2: #1d2939;
+            --text: #344054;
+            --muted: #667085;
+
+            --white: #ffffff;
+            --light: #f6f8fa;
+            --border: #e4e7ec;
+
+            --shadow-sm: 0 4px 12px rgba(16, 24, 40, 0.08);
+            --shadow-md: 0 10px 30px rgba(16, 24, 40, 0.12);
+            --shadow-lg: 0 20px 50px rgba(16, 24, 40, 0.16);
+
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 22px;
+
+            --transition: 0.3s ease;
+        }
+
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", Arial, sans-serif;
+            color: var(--text);
+            background:
+                linear-gradient(
+                    rgba(255,255,255,0.90),
+                    rgba(255,255,255,0.94)
+                ),
+                url("images/lw.jpg");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            line-height: 1.6;
+            padding-top: 82px;
+        }
+
+        a {
+            color: inherit;
+        }
+
+
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            min-height: 82px;
+
+            background: rgba(4, 85, 42, 0.96);
+            backdrop-filter: blur(12px);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 5%;
+
+            z-index: 1000;
+
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+
+
+        /* Logo */
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 155px;
+            max-width: 100%;
+            display: block;
+        }
+
+
+        /* Navigation links */
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            list-style: none;
+        }
+
+        .nav-links a {
+            display: block;
+
+            color: white;
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            padding: 10px 13px;
+
+            border-radius: 8px;
+
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-1px);
+        }
+
+
+        /* Mobile menu button */
+
+        .menu-btn {
+            display: none;
+
+            border: none;
+            background: transparent;
+
+            color: white;
+
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+
+        /* =========================================================
+           HERO SECTION
+        ========================================================= */
+
+        .hero {
+            max-width: 1150px;
+            margin: 45px auto 30px;
+
+            padding: 50px 30px;
+
+            text-align: center;
+
+            border-radius: var(--radius-lg);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(4,85,42,0.96),
+                    rgba(8,127,63,0.90)
+                );
+
+            color: white;
+
+            box-shadow: var(--shadow-lg);
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+            height: 220px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.07);
+
+            right: -70px;
+            top: -80px;
+        }
+
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 48px);
+            line-height: 1.15;
+
+            margin-bottom: 15px;
+
+            font-weight: 800;
+
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            max-width: 720px;
+            margin: auto;
+
+            color: rgba(255,255,255,0.90);
+
+            font-size: 16px;
+
+            position: relative;
+            z-index: 1;
+        }
+
+
+        .update-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-top: 20px;
+
+            padding: 8px 15px;
+
+            border-radius: 50px;
+
+            background: rgba(255,255,255,0.15);
+
+            border: 1px solid rgba(255,255,255,0.2);
+
+            font-size: 13px;
+            font-weight: 600;
+
+            position: relative;
+            z-index: 1;
+        }
+
+
+        /* =========================================================
+           MAIN CONTENT
+        ========================================================= */
+
+        .container {
+            width: min(1150px, 92%);
+            margin: auto;
+        }
+
+
+        /* =========================================================
+           SECTION HEADER
+        ========================================================= */
+
+        .section-header {
+            margin: 50px 0 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-icon {
+            width: 45px;
+            height: 45px;
+
+            display: grid;
+            place-items: center;
+
+            background: var(--primary-light);
+            color: var(--primary);
+
+            border-radius: 12px;
+
+            font-size: 21px;
+        }
+
+        .section-title h2 {
+            color: var(--dark);
+
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .section-title p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+
+        /* =========================================================
+           MATERIAL CARD
+        ========================================================= */
+
+        .materials-card {
+            background: rgba(255,255,255,0.96);
+
+            border: 1px solid var(--border);
+
+            border-radius: var(--radius-lg);
+
+            box-shadow: var(--shadow-md);
+
+            overflow: hidden;
+        }
+
+
+        /* =========================================================
+           TABS
+        ========================================================= */
+
+        .tabs {
+            display: flex;
+
+            overflow-x: auto;
+
+            background: #f9fafb;
+
+            border-bottom: 1px solid var(--border);
+
+            scrollbar-width: thin;
+        }
+
+        .tab-btn {
+            flex: 0 0 auto;
+
+            border: none;
+            background: transparent;
+
+            color: var(--muted);
+
+            padding: 18px 20px;
+
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            position: relative;
+
+            transition: var(--transition);
+        }
+
+        .tab-btn:hover {
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            background: white;
+        }
+
+        .tab-btn.active::after {
+            content: "";
+
+            position: absolute;
+
+            left: 15%;
+            right: 15%;
+            bottom: 0;
+
+            height: 3px;
+
+            background: var(--primary);
+
+            border-radius: 5px 5px 0 0;
+        }
+
+
+        /* =========================================================
+           TAB CONTENT
+        ========================================================= */
+
+        .tab-content {
+            display: none;
+
+            padding: 30px;
+        }
+
+        .tab-content.active {
+            display: block;
+
+            animation: fadeIn 0.35s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tab-content h3 {
+            color: var(--dark);
+
+            font-size: 20px;
+
+            margin-bottom: 8px;
+        }
+
+        .tab-description {
+            color: var(--muted);
+
+            font-size: 14px;
+
+            margin-bottom: 22px;
+        }
+
+
+        /* =========================================================
+           RESOURCE LIST
+        ========================================================= */
+
+        .resource-list {
+            list-style: none;
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 12px;
+        }
+
+        .resource-list li {
+            list-style: none;
+        }
+
+        .resource-list a {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            text-decoration: none;
+
+            padding: 14px 16px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            background: white;
+
+            color: var(--dark-2);
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: var(--transition);
+        }
+
+        .resource-list a:hover {
+            border-color: var(--primary);
+
+            color: var(--primary);
+
+            background: var(--primary-light);
+
+            transform: translateY(-2px);
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .resource-icon {
+            width: 38px;
+            height: 38px;
+
+            flex-shrink: 0;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 10px;
+
+            background: #eef4ff;
+
+            color: var(--secondary);
+
+            font-size: 16px;
+        }
+
+        .download-arrow {
+            margin-left: auto;
+
+            font-size: 16px;
+
+            opacity: 0.5;
+        }
+
+
+        /* =========================================================
+           EMPTY / COMING SOON RESOURCE
+        ========================================================= */
+
+        .resource-list a.disabled {
+            cursor: not-allowed;
+
+            opacity: 0.55;
+
+            background: #f8f9fa;
+        }
+
+        .resource-list a.disabled:hover {
+            transform: none;
+
+            border-color: var(--border);
+
+            color: var(--dark-2);
+
+            background: #f8f9fa;
+
+            box-shadow: none;
+        }
+
+
+        /* =========================================================
+           TUTORIAL NOTE
+        ========================================================= */
+
+        .tutorial-note {
+            margin-top: 25px;
+
+            padding: 16px 18px;
+
+            background: #fff8e1;
+
+            border: 1px solid #ffe082;
+
+            border-radius: 12px;
+
+            color: #7a5c00;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================================
+           CONTACT CARD
+        ========================================================= */
+
+        .contact-box {
+            background: var(--primary-light);
+
+            border: 1px solid #c9ecd7;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            text-align: center;
+        }
+
+        .contact-box strong {
+            color: var(--primary);
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        .footer {
+            margin-top: 70px;
+
+            background: #0b1f14;
+
+            color: white;
+
+            padding: 55px 5% 25px;
+        }
+
+        .footer-grid {
+            width: min(1150px, 100%);
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                1.3fr
+                1fr
+                1fr
+                1.3fr;
+
+            gap: 30px;
+        }
+
+        .footer-column {
+            padding: 5px;
+        }
+
+        .footer-logo {
+            width: 155px;
+            margin-bottom: 15px;
+        }
+
+        .footer-column h3 {
+            font-size: 15px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.5px;
+
+            margin-bottom: 18px;
+
+            color: white;
+
+            position: relative;
+
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: 0;
+
+            width: 35px;
+            height: 3px;
+
+            background: var(--accent);
+
+            border-radius: 5px;
+        }
+
+        .footer-column p {
+            color: #b8c5bd;
+
+            font-size: 14px;
+
+            margin-bottom: 7px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #b8c5bd;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            width: min(1150px, 100%);
+
+            margin: 40px auto 0;
+
+            padding-top: 20px;
+
+            border-top: 1px solid rgba(255,255,255,0.12);
+
+            text-align: center;
+
+            color: #98a89e;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================================
+           RESPONSIVE DESIGN
+        ========================================================= */
+
+        @media (max-width: 900px) {
+
+            .navbar {
+                padding: 0 4%;
+            }
+
+            .nav-links {
+                position: absolute;
+
+                top: 82px;
+                left: 0;
+
+                width: 100%;
+
+                display: none;
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+                gap: 0;
+
+                padding: 10px 4% 20px;
+
+                background: rgba(4,85,42,0.98);
+
+                border-top: 1px solid rgba(255,255,255,0.1);
+
+                box-shadow: var(--shadow-md);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 14px;
+
+                border-radius: 8px;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .resource-list {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            body {
+                padding-top: 72px;
+                background-attachment: scroll;
+            }
+
+            .navbar {
+                min-height: 72px;
+            }
+
+            .logo img {
+                width: 130px;
+            }
+
+            .nav-links {
+                top: 72px;
+            }
+
+            .hero {
+                margin-top: 25px;
+
+                padding: 38px 20px;
+
+                border-radius: 17px;
+            }
+
+            .hero h1 {
+                font-size: 29px;
+            }
+
+            .section-header {
+                margin-top: 35px;
+            }
+
+            .section-title h2 {
+                font-size: 21px;
+            }
+
+            .tab-content {
+                padding: 22px 17px;
+            }
+
+            .tab-btn {
+                padding: 15px 16px;
+                font-size: 13px;
+            }
+
+            .resource-list a {
+                padding: 12px;
+            }
+
+            .footer {
+                padding: 40px 6% 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        /* =========================================================
+           ACCESSIBILITY
+        ========================================================= */
+
+        button:focus-visible,
+        a:focus-visible {
+            outline: 3px solid rgba(13,110,253,0.4);
+
+            outline-offset: 2px;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<header class="navbar">
+
+    <a href="https://ruralnet.co.ke/" class="logo">
+        <img src="images/RURALNET.png" alt="RuralNet ICT Academy">
+    </a>
+
+    <button
+        class="menu-btn"
+        id="menuBtn"
+        aria-label="Open navigation menu"
+        aria-expanded="false">
+        ☰
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+
+        <li>
+            <a href="https://ruralnet.co.ke/">Home</a>
+        </li>
+
+        <li>
+            <a href="About_Us">About Us</a>
+        </li>
+
+        <li>
+            <a href="students">Student Portal</a>
+        </li>
+
+        <li>
+            <a
+                href="https://www.netacad.com/"
+                target="_blank"
+                rel="noopener">
+                Cisco
+            </a>
+        </li>
+
+        <li>
+            <a
+                href="https://easytvet.com/"
+                target="_blank"
+                rel="noopener">
+                TVET Website
+            </a>
+        </li>
+
+        <li>
+            <a
+                href="https://www.kasneb.or.ke/"
+                target="_blank"
+                rel="noopener">
+                KASNEB
+            </a>
+        </li>
+
+    </ul>
+
+</header>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+    <h1>Learning Resources</h1>
+
+    <p>
+        Access updated notes, practical exercises, templates and
+        tutorials to support your ICT and technology learning journey.
+    </p>
+
+    <div class="update-badge">
+        ● Last Updated: April 20, 2026
+    </div>
+
+</section>
+
+
+<main class="container">
+
+
+<!-- =========================================================
+     NOTES SECTION
+========================================================= -->
+
+<section>
+
+    <div class="section-header">
+
+        <div class="section-title">
+
+            <div class="section-icon">
+                📚
+            </div>
+
+            <div>
+                <h2>Learning Notes</h2>
+
+                <p>
+                    Select your area of study
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="materials-card">
+
+        <!-- TABS -->
+
+        <div class="tabs" role="tablist">
+
+            <button
+                class="tab-btn active"
+                data-group="notes"
+                data-tab="notes-ict">
+                ICT Basics
+            </button>
+
+            <button
+                class="tab-btn"
+                data-group="notes"
+                data-tab="notes-design">
+                Graphic Designing
+            </button>
+
+            <button
+                class="tab-btn"
+                data-group="notes"
+                data-tab="notes-programming">
+                Programming
+            </button>
+
+            <button
+                class="tab-btn"
+                data-group="notes"
+                data-tab="notes-networking">
+                Networking
+            </button>
+
+            <button
+                class="tab-btn"
+                data-group="notes"
+                data-tab="notes-data">
+                Data Analysis
+            </button>
+
+        </div>
+
+
+        <!-- ICT -->
+
+        <div
+            class="tab-content active"
+            id="notes-ict">
+
+            <h3>ICT Essentials</h3>
+
+            <p class="tab-description">
+                Notes and practical learning materials for beginners
+                pursuing computer and ICT courses.
+            </p>
+
+            <ul class="resource-list">
+
+                <li>
+                    <a href="COMPERENSIVE LEARNERS COMPTETENCY GUIDE FOR ICT BEGINNERS.pdf"
+                       download>
+                        <span class="resource-icon">📘</span>
+                        Full ICT Notes
+                        <span class="download-arrow">↓</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="https://www.just.edu.jo/~mqais/CIS99/PDF/Ch.01_Introduction_%20to_computers.pdf"
+                        download>
+                        <span class="resource-icon">💻</span>
+                        Introduction to Computers
+                        <span class="download-arrow">↓</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="https://www.barnetlocaloffer.org.uk/senco_zone/documents/2044-keyboarding-skills.pdf"
+                        download>
+                        <span class="resource-icon">⌨️</span>
+                        Keyboarding Skills
+                        <span class="download-arrow">↓</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="https://brimbanklibraries.vic.gov.au/wp-content/uploads/2024/11/Libraries-Unit-Computer-Class-Manual-Keyboard-and-Mouse-Skills.pdf"
+                        download>
+                        <span class="resource-icon">🖱️</span>
+                        Mouse Skills
+                        <span class="download-arrow">↓</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="https://sriindu.ac.in/wp-content/uploads/2023/10/R20CSE2202-OPERATING-SYSTEMS.pdf"
+                        download>
+                        <span class="resource-icon">⚙️</span>
+                        Operating Systems
+                        <span class="download-arrow">↓</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="word_pract.pdf">
+                        <span class="resource-icon">📝</span>
+                        Microsoft Word Practical
+                        <span class="download-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="excel_pract.xlsx">
+                        <span class="resource-icon">📊</span>
+                        Excel Class Work Template
+                        <span class="download-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="excel_2.pdf">
+                        <span class="resource-icon">📈</span>
+                        Excel Classwork 2
+                        <span class="download-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="access_classwork.pdf">
+                        <span class="resource-icon">🗄️</span>
+                        Access Classwork
+                        <span class="download-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="access_pract.pdf">
+                        <span class="resource-icon">🗃️</span>
+                        Access Practical
+                        <span class="download-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="access1.pdf">
+                        <span class="resource-icon">📄</span>
+                        Access Practical 1
+                        <span class="download-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="access2.pdf">
+                        <span class="resource-icon">📄</span>
+                        Access Practical 2
+                        <span class="download-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="access3.pdf">
+                        <span class="resource-icon">📄</span>
+                        Access Practical 3
+                        <span class="download-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="access4.pdf">
+                        <span class="resource-icon">📄</span>
+                        Access Practical 4
+                        <span class="download-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="ACCESS_SIMPLE.pdf">
+                        <span class="resource-icon">📄</span>
+                        Access Practical 5
+                        <span class="download-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="cert_pub.pdf">
+                        <span class="resource-icon">📰</span>
+                        Publisher Practical
+                        <span class="download-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="https://www.ece.uvic.ca/~itraore/elec567-13/notes/dist-03-4.pdf"
+                        download="cisco networking notes.pdf">
+                        <span class="resource-icon">🌐</span>
+                        Networking Notes
+                        <span class="download-arrow">↓</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="https://www.just.edu.jo/~mqais/cis99/pdf/internet.pdf"
+                        download>
+                        <span class="resource-icon">🌍</span>
+                        Internet
+                        <span class="download-arrow">↓</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="mail_merge.pdf" download>
+                        <span class="resource-icon">✉️</span>
+                        Mail Merge
+                        <span class="download-arrow">↓</span>
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- GRAPHIC DESIGN -->
+
+        <div
+            class="tab-content"
+            id="notes-design">
+
+            <h3>Graphic Designing</h3>
+
+            <p class="tab-description">
+                Updated notes and practical procedures for graphic designers.
+            </p>
+
+            <ul class="resource-list">
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">🎨</span>
+                        Adobe Photoshop
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">✏️</span>
+                        Adobe Illustrator
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">🖌️</span>
+                        CorelDRAW
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">📰</span>
+                        Desktop Publishing
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">📊</span>
+                        PowerPoint
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- PROGRAMMING -->
+
+        <div
+            class="tab-content"
+            id="notes-programming">
+
+            <h3>Programming & Web Development</h3>
+
+            <p class="tab-description">
+                Modern programming notes, development resources and
+                recommended development environments.
+            </p>
+
+            <ul class="resource-list">
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">🌐</span>
+                        Web Development – Complete Notes
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">🏗️</span>
+                        HTML
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">🎨</span>
+                        CSS
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">⚡</span>
+                        JavaScript
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">🐍</span>
+                        Python
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">©️</span>
+                        C Programming
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">++</span>
+                        C++
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- NETWORKING -->
+
+        <div
+            class="tab-content"
+            id="notes-networking">
+
+            <h3>Networking</h3>
+
+            <p class="tab-description">
+                Everything you need to understand computer networks,
+                configuration and networking technologies.
+            </p>
+
+            <ul class="resource-list">
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">🌐</span>
+                        Networking
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">💿</span>
+                        Networking Software
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">🖥️</span>
+                        Cisco Packet Tracer
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">🧰</span>
+                        Networking Tools
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">🔗</span>
+                        OSI Model
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">⚙️</span>
+                        Configuration
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">📡</span>
+                        Routers & Wireless Technology
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- DATA ANALYSIS -->
+
+        <div
+            class="tab-content"
+            id="notes-data">
+
+            <h3>Data Analysis</h3>
+
+            <p class="tab-description">
+                Resources for students and beginners learning
+                data analysis with Excel and Python.
+            </p>
+
+            <ul class="resource-list">
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">📊</span>
+                        Full Data Analysis Notes
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">📈</span>
+                        Excel for Data Analysis
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">🐍</span>
+                        Python Fundamentals
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="Data_cleaning.xlsx">
+                        <span class="resource-icon">🧹</span>
+                        Data Cleaning Template
+                        <span class="download-arrow">↓</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="ways_to_clean_data.xlsx">
+                        <span class="resource-icon">📋</span>
+                        Excel Classwork Template
+                        <span class="download-arrow">↓</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="data_cleaning_instructions.pdf">
+                        <span class="resource-icon">📘</span>
+                        Data Cleaning Instructions
+                        <span class="download-arrow">↓</span>
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     TUTORIALS SECTION
+========================================================= -->
+
+<section>
+
+    <div class="section-header">
+
+        <div class="section-title">
+
+            <div class="section-icon">
+                🎓
+            </div>
+
+            <div>
+                <h2>Tutorials</h2>
+
+                <p>
+                    Practical learning videos and guides
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="materials-card">
+
+        <div class="tabs">
+
+            <button
+                class="tab-btn active"
+                data-group="tutorials"
+                data-tab="tutorial-it">
+                IT Skills
+            </button>
+
+            <button
+                class="tab-btn"
+                data-group="tutorials"
+                data-tab="tutorial-coding">
+                Coding
+            </button>
+
+            <button
+                class="tab-btn"
+                data-group="tutorials"
+                data-tab="tutorial-contact">
+                Others
+            </button>
+
+        </div>
+
+
+        <!-- IT TUTORIALS -->
+
+        <div
+            class="tab-content active"
+            id="tutorial-it">
+
+            <h3>IT Skills Tutorials</h3>
+
+            <p class="tab-description">
+                Practical tutorials covering essential computer applications.
+            </p>
+
+            <ul class="resource-list">
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">▶️</span>
+                        Lesson One
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">📝</span>
+                        Microsoft Word
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">📊</span>
+                        Microsoft Excel
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">🗄️</span>
+                        Microsoft Access
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">📰</span>
+                        Microsoft Publisher
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">📽️</span>
+                        PowerPoint
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">🌐</span>
+                        Internet & Networking
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+            </ul>
+
+            <div class="tutorial-note">
+                😇 You may watch the tutorials directly here when the
+                video resources are available.
+            </div>
+
+        </div>
+
+
+        <!-- CODING -->
+
+        <div
+            class="tab-content"
+            id="tutorial-coding">
+
+            <h3>Programming Tutorials</h3>
+
+            <p class="tab-description">
+                Start coding from the fundamentals and progressively
+                build your programming skills.
+            </p>
+
+            <ul class="resource-list">
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">💡</span>
+                        Introduction to Programming
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">🌐</span>
+                        HTML
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">🎨</span>
+                        CSS
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">⚡</span>
+                        JavaScript
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">🐍</span>
+                        Python
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">©️</span>
+                        C
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="disabled">
+                        <span class="resource-icon">++</span>
+                        C++
+                        <span class="download-arrow">🔒</span>
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- CONTACT -->
+
+        <div
+            class="tab-content"
+            id="tutorial-contact">
+
+            <div class="contact-box">
+
+                <h3>Need Help?</h3>
+
+                <p>
+                    Contact RuralNet ICT Academy for more information
+                    about learning materials and training.
+                </p>
+
+                <br>
+
+                <p>
+                    Email:
+                    <strong>
+                        ruralnet2016@gmail.com
+                    </strong>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+    <div class="footer-grid">
+
+
+        <!-- ABOUT -->
+
+        <div class="footer-column">
+
+            <img
+                src="images/RURALNET.png"
+                alt="RuralNet ICT Academy"
+                class="footer-logo">
+
+            <p>
+                RuralNet ICT Academy is committed to bridging the
+                digital divide between rural and urban communities
+                through practical ICT education.
+            </p>
+
+        </div>
+
+
+        <!-- USEFUL LINKS -->
+
+        <div class="footer-column">
+
+            <h3>Useful Links</h3>
+
+            <ul class="footer-links">
+
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="About_Us.html">
+                        Who We Are
+                    </a>
+                </li>
+
+                <li>
+                    <a href="students">
+                        Student Portal
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        Accounting
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        ICT
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- PARTNERS -->
+
+        <div class="footer-column">
+
+            <h3>Partners</h3>
+
+            <ul class="footer-links">
+
+                <li>
+                    <a href="#">
+                        CSK
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.kasneb.or.ke/"
+                       target="_blank"
+                       rel="noopener">
+                        KASNEB
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://easytvet.com/"
+                       target="_blank"
+                       rel="noopener">
+                        TVET
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- CONTACT -->
+
+        <div class="footer-column">
+
+            <h3>Contact Us</h3>
+
+            <p>+254 723 845 040</p>
+            <p>+254 700 886 058</p>
+            <p>+254 793 714 564</p>
+
+            <p>
+                ruralnet2016@gmail.com
+            </p>
+
+            <p>
+                ruralnet.co.ke
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 RuralNet ICT Academy.
+        All Rights Reserved.
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+    /* =========================================================
+       MOBILE NAVIGATION
+    ========================================================= */
+
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+
+        navLinks.classList.toggle("active");
+
+        const isOpen =
+            navLinks.classList.contains("active");
+
+        menuBtn.setAttribute(
+            "aria-expanded",
+            isOpen
+        );
+
+        menuBtn.innerHTML =
+            isOpen ? "✕" : "☰";
+
+    });
+
+
+    /* =========================================================
+       TAB SYSTEM
+    ========================================================= */
+
+    const tabButtons =
+        document.querySelectorAll(".tab-btn");
+
+    tabButtons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const group =
+                button.dataset.group;
+
+            const target =
+                button.dataset.tab;
+
+
+            /*
+             * Only affect tabs belonging
+             * to the same tab group.
+             */
+
+            document
+                .querySelectorAll(
+                    `.tab-btn[data-group="${group}"]`
+                )
+                .forEach(btn => {
+
+                    btn.classList.remove("active");
+
+                });
+
+
+            document
+                .querySelectorAll(
+                    `.tab-content[id^="${group === "notes"
+                        ? "notes-"
+                        : "tutorial-"}"]`
+                )
+                .forEach(content => {
+
+                    content.classList.remove("active");
+
+                });
+
+
+            button.classList.add("active");
+
+
+            const targetContent =
+                document.getElementById(target);
+
+            if (targetContent) {
+
+                targetContent.classList.add("active");
+
+            }
+
+        });
+
+    });
+
+
+    /* =========================================================
+       CLOSE MOBILE MENU AFTER CLICKING A LINK
+    ========================================================= */
+
+    document
+        .querySelectorAll(".nav-links a")
+        .forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                navLinks.classList.remove("active");
+
+                menuBtn.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+                menuBtn.innerHTML = "☰";
+
+            });
+
+        });
+
+
+    /* =========================================================
+       DISABLED RESOURCE LINKS
+    ========================================================= */
+
+    document
+        .querySelectorAll(".resource-list a.disabled")
+        .forEach(link => {
+
+            link.addEventListener("click", event => {
+
+                event.preventDefault();
+
+                alert(
+                    "This learning resource is not available yet."
+                );
+
+            });
+
+        });
+
+
+    /* =========================================================
+       BASIC PAGE PROTECTION
+       NOTE: This is NOT real security.
+    ========================================================= */
+
+    document.addEventListener(
+        "contextmenu",
+        event => event.preventDefault()
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            /* F12 */
+
+            if (event.key === "F12") {
+
+                event.preventDefault();
+
+            }
+
+
+            /* Ctrl + Shift + I */
+
+            if (
+                event.ctrlKey &&
+                event.shiftKey &&
+                event.key.toLowerCase() === "i"
+            ) {
+
+                event.preventDefault();
+
+            }
+
+
+            /* Ctrl + Shift + J */
+
+            if (
+                event.ctrlKey &&
+                event.shiftKey &&
+                event.key.toLowerCase() === "j"
+            ) {
+
+                event.preventDefault();
+
+            }
+
+
+            /* Ctrl + Shift + C */
+
+            if (
+                event.ctrlKey &&
+                event.shiftKey &&
+                event.key.toLowerCase() === "c"
+            ) {
+
+                event.preventDefault();
+
+            }
+
+
+            /* Ctrl + U */
+
+            if (
+                event.ctrlKey &&
+                event.key.toLowerCase() === "u"
+            ) {
+
+                event.preventDefault();
+
+            }
+
+        }
+
+    );
+
+</script>
+
+
+</body>
+</html>
+```
