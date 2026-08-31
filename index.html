@@ -388,8 +388,95 @@ footer { background: #05080E; border-top: 1px solid var(--border-line); padding-
   .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
   .hero-content p { margin: 0 auto 32px; }
   .hero-cta { justify-content: center; }
-  .nav-links { display: none; }
-  .mobile-toggle { display: block; }
+  .navbar {
+    position: relative;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 12px;
+    background: rgba(11, 15, 23, 0.98);
+    border: 1px solid var(--border-line);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+    max-height: calc(100vh - 72px);
+    overflow-y: auto;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links > li {
+    width: 100%;
+  }
+
+  .nav-links > li > a {
+    display: block;
+    width: 100%;
+    padding: 13px 14px;
+    border-radius: 10px;
+  }
+
+  .nav-links > li > a:hover {
+    background: var(--bg-card-hover);
+  }
+
+  .dropdown-menu {
+    position: static;
+    transform: none;
+    min-width: 0;
+    width: 100%;
+    margin: 4px 0 8px;
+    padding: 6px;
+    opacity: 1;
+    visibility: visible;
+    display: none;
+    box-shadow: none;
+    background: rgba(19, 26, 38, 0.95);
+  }
+
+  .dropdown.open .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    transform: none;
+  }
+
+  .dropdown-menu a {
+    padding: 11px 14px;
+  }
+
+  .mobile-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    margin-left: 10px;
+    background: transparent;
+    border: 1px solid var(--border-line);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 101;
+  }
+
+  .navbar > .btn-primary {
+    margin-left: auto;
+  }
 }
 </style>
 </head>
@@ -415,7 +502,7 @@ footer { background: #05080E; border-top: 1px solid var(--border-line); padding-
       <span>Ruralnet ICT</span>
     </a>
     
-    <ul class="nav-links">
+    <ul class="nav-links" id="mainNav">
       <li><a href="https://ruralnet.co.ke/">Home</a></li>
       <li><a href="/About_Us/">About Us</a></li>
       <li class="dropdown">
@@ -438,7 +525,7 @@ footer { background: #05080E; border-top: 1px solid var(--border-line); padding-
     </ul>
 
     <a href="https://forms.gle/wywREJiHrpFTF5veA" class="btn btn-primary">Apply Now</a>
-    <button class="mobile-toggle" aria-label="Toggle Navigation">☰</button>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation" aria-controls="mainNav" aria-expanded="false" type="button">☰</button>
   </div>
 </header>
 
@@ -473,7 +560,7 @@ footer { background: #05080E; border-top: 1px solid var(--border-line); padding-
           <div class="hero-slide"><img src="images/c11.jpg" alt="Computer Lab"></div>
           <div class="hero-slide"><img src="images/c12.jpg" alt="Computer Lab"></div>
           <div class="hero-slide"><img src="images/c13.jpg" alt="Computer Lab"></div>
-          <div class="hero-slide"><img src="images/c14jpg" alt="Computer Lab"></div>
+          <div class="hero-slide"><img src="images/c14.jpg" alt="Computer Lab"></div>
           <div class="hero-slide"><img src="images/c15.jpg" alt="Computer Lab"></div>
         </div>
       </div>
@@ -672,6 +759,77 @@ footer { background: #05080E; border-top: 1px solid var(--border-line); padding-
 </footer>
 
 <script>
+// Mobile Navigation
+const mobileToggle = document.getElementById("mobileToggle");
+const mainNav = document.getElementById("mainNav");
+
+if (mobileToggle && mainNav) {
+  mobileToggle.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const isOpen = mainNav.classList.toggle("active");
+    mobileToggle.setAttribute("aria-expanded", String(isOpen));
+    mobileToggle.textContent = isOpen ? "✕" : "☰";
+  });
+
+  // Mobile dropdowns: tap to open instead of relying on hover.
+  mainNav.querySelectorAll(".dropdown > a").forEach(link => {
+    link.addEventListener("click", (event) => {
+      if (window.innerWidth <= 900) {
+        event.preventDefault();
+        const dropdown = link.parentElement;
+
+        mainNav.querySelectorAll(".dropdown.open").forEach(other => {
+          if (other !== dropdown) other.classList.remove("open");
+        });
+
+        dropdown.classList.toggle("open");
+      }
+    });
+  });
+
+  // Close the menu after selecting a normal navigation link.
+  mainNav.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      if (window.innerWidth <= 900 && !link.parentElement.classList.contains("dropdown")) {
+        mainNav.classList.remove("active");
+        mobileToggle.setAttribute("aria-expanded", "false");
+        mobileToggle.textContent = "☰";
+        mainNav.querySelectorAll(".dropdown.open").forEach(dropdown => {
+          dropdown.classList.remove("open");
+        });
+      }
+    });
+  });
+
+  // Close when clicking outside the navigation.
+  document.addEventListener("click", (event) => {
+    if (
+      window.innerWidth <= 900 &&
+      !mainNav.contains(event.target) &&
+      !mobileToggle.contains(event.target)
+    ) {
+      mainNav.classList.remove("active");
+      mobileToggle.setAttribute("aria-expanded", "false");
+      mobileToggle.textContent = "☰";
+      mainNav.querySelectorAll(".dropdown.open").forEach(dropdown => {
+        dropdown.classList.remove("open");
+      });
+    }
+  });
+
+  // Reset mobile state when returning to desktop width.
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 900) {
+      mainNav.classList.remove("active");
+      mobileToggle.setAttribute("aria-expanded", "false");
+      mobileToggle.textContent = "☰";
+      mainNav.querySelectorAll(".dropdown.open").forEach(dropdown => {
+        dropdown.classList.remove("open");
+      });
+    }
+  });
+}
+
 // Hero Slider
 const track = document.getElementById("sliderTrack");
 let slideIndex = 0;
