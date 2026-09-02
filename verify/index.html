@@ -243,28 +243,30 @@
         © Powered By Ruralnet ICT Academy Developer. ICT Help Desk: +254700886058
     </footer>
 
-    <script>
-        //Admission Database
-        const correctCodes = [
-            "RICTACADEMY/2025-2026/LV1&2/007569",
-            "OLIVIA-2016#",
-            "BOAZ-2016#",
-            "KELLY-2016#",
-            "BRENDA-ANALYST/2026/001"
-        ];
+   <script>
+    // Admission Database
+    const correctCodes = [
+        "RICT/26/LV1&2/007569",
+        "OLIVIA-2016#",
+        "BOAZ-2016#",
+        "KELLY-2016#",
+        "BRENDA-ANALYST/2026/001"
+    ];
 
-        function verifyCode() {
-            let entered = 
-        document.getElementById("userCode").value.trim();
+    function verifyCode() {
+        let entered = document.getElementById("userCode").value.trim();
 
-        //Checking if the entered code is within the list...
+        // Checking if the entered code is within the list...
         if (correctCodes.includes(entered)) {
             window.location.href = "../loaders/loaddownload.html";
+        } else if (entered === "RICTACADEMY/2025-2026/LV1&2/007569") {
+            document.getElementById("error").textContent = "Expired Admission.";
         } else {
-            document.getElementById("error").textContent = "X Incorrect Admission number. Try Again"
+            document.getElementById("error").textContent = "X Incorrect Code. Try Again";
         }
-        }
-    </script>
+    }
+</script>
+
 
 </body>
 </html>
