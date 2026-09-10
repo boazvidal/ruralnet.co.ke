@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cliff</title>
+<title>Rose</title>
 <link rel="icon" type="image/png" href="../images/favicon.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -627,8 +627,8 @@ return false;
 <div>
 
 <div class="logo-section">
-<img src="images/cliff.png">
-<h2>Cliff Omondi Owuor</h2>
+<img src="images/rosea.png">
+<h2>Rose Atieno</h2>
 <p>Student Dashboard</p>
 </div>
 
@@ -673,7 +673,7 @@ return false;
 
 <div>
 <h1>Student Portal</h1>
-<span>Welcome back, Cliff 👋</span>
+<span>Welcome back, Rose 👋</span>
 </div>
 
 </div>
@@ -699,17 +699,17 @@ Join Group
 
 <div class="info-box">
 <div class="label">Full Name</div>
-<div class="value">Clifford Omondi Owuor</div>
+<div class="value">Rose Atieno</div>
 </div>
 
 <div class="info-box">
 <div class="label">Gender</div>
-<div class="value">Male</div>
+<div class="value">Female</div>
 </div>
 
 <div class="info-box">
 <div class="label">Date of Birth</div>
-<div class="value">15/08/2006</div>
+<div class="value">19/10/2001</div>
 </div>
 
 <div class="info-box">
@@ -724,37 +724,37 @@ Join Group
 
 <div class="info-box">
 <div class="label">County</div>
-<div class="value">Siaya</div>
+<div class="value">Kisumu</div>
 </div>
 
 <div class="info-box">
 <div class="label">Sub County</div>
-<div class="value">Ugenya</div>
+<div class="value">Kisumu East</div>
 </div>
 
 <div class="info-box">
 <div class="label">Constituency</div>
-<div class="value">Ugunja</div>
+<div class="value">N/A</div>
 </div>
 
 <div class="info-box">
 <div class="label">Ward</div>
-<div class="value">Sidindi</div>
+<div class="value">N/A</div>
 </div>
 
 <div class="info-box">
 <div class="label">Village</div>
-<div class="value">Sango</div>
+<div class="value">N/A</div>
 </div>
 
 <div class="info-box">
 <div class="label">Student Contact</div>
-<div class="value">0143056711</div>
+<div class="value">0700726794</div>
 </div>
 
 <div class="info-box">
 <div class="label">Guardian Contact</div>
-<div class="value">0728219527</div>
+<div class="value">0790342305</div>
 </div>
 
 <div class="info-box">
@@ -779,22 +779,22 @@ Join Group
 
 <div class="info-box">
 <div class="label">KCPE School</div>
-<div class="value">Rangala boys Primary School</div>
+<div class="value">Oyola Primary School</div>
 </div>
 
 <div class="info-box">
 <div class="label">KCPE Year</div>
-<div class="value">2021</div>
+<div class="value">2016</div>
 </div>
 
 <div class="info-box">
 <div class="label">KCSE School</div>
-<div class="value">Simerro mixed</div>
+<div class="value">Sigoti Complex</div>
 </div>
 
 <div class="info-box">
 <div class="label">KCSE Year</div>
-<div class="value">2025</div>
+<div class="value">2024</div>
 </div>
 
 <div class="info-box">
@@ -824,7 +824,7 @@ Join Group
 
 <div class="info-box">
 <div class="label">Admission Number</div>
-<div class="value">RICT102/26/09/129</div>
+<div class="value">RICT102/26/09/128</div>
 </div>
 
 <div class="info-box">
@@ -1140,7 +1140,7 @@ Certificate Not Yet Available
 <!-- FOOTER -->
 <footer>
 
-<p><strong>CLIFFORD OMONDI OWUOR</strong></p>
+<p><strong>ROSE ATIENO</strong></p>
 
 <p><strong>ICT ESSENTIALS 102</strong></p>
 
