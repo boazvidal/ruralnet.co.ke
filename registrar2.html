@@ -3,9 +3,7 @@
 <html lang="en">
 
 <head>
-
   <meta charset="UTF-8">
-
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
@@ -26,94 +24,62 @@
     rel="preconnect"
     href="https://fonts.googleapis.com"
   >
-
   <link
     rel="preconnect"
     href="https://fonts.gstatic.com"
     crossorigin
   >
-
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet"
   >
-
   <!-- Font Awesome -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
   >
-
   <!-- Excel Export -->
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js">
   </script>
-
   <!-- PDF -->
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
   </script>
 
-
 <style>
-
 /* =========================================================
    ROOT VARIABLES
 ========================================================= */
-
 :root {
-
   --primary: #2563eb;
-
   --primary-dark: #1d4ed8;
-
   --secondary: #0f172a;
-
   --success: #16a34a;
-
   --warning: #f59e0b;
-
   --danger: #dc2626;
-
   --info: #0891b2;
-
   --bg: #f1f5f9;
-
   --card: #ffffff;
-
   --text: #0f172a;
-
   --muted: #64748b;
-
   --border: #e2e8f0;
-
   --sidebar-width: 260px;
-
   --radius: 16px;
-
   --shadow:
     0 10px 30px rgba(15, 23, 42, 0.08);
-
   --transition:
     all 0.25s ease;
-
 }
-
 
 /* =========================================================
    RESET
 ========================================================= */
-
 * {
-
   margin: 0;
-
   padding: 0;
-
   box-sizing: border-box;
-
 }
-
 
 html {
 
@@ -123,31 +89,23 @@ html {
 
 
 body {
-
   font-family:
     "Inter",
     Arial,
     sans-serif;
-
   background:
     var(--bg);
-
   color:
     var(--text);
-
   min-height:
     100vh;
-
 }
-
 
 button,
 input,
 select {
-
   font-family:
     inherit;
-
 }
 
 
@@ -155,66 +113,45 @@ button {
 
   cursor:
     pointer;
-
 }
-
 
 /* =========================================================
    MOBILE HEADER
 ========================================================= */
-
 .mobile-header {
-
   display:
     none;
-
   position:
     sticky;
-
   top:
     0;
-
   z-index:
     1000;
-
   height:
     65px;
-
   padding:
     0 18px;
-
   background:
     var(--secondary);
-
   color:
     white;
-
   align-items:
     center;
-
   justify-content:
     space-between;
-
   box-shadow:
     0 4px 15px
     rgba(0,0,0,0.15);
-
 }
-
 
 .mobile-header-left {
-
   display:
     flex;
-
   align-items:
     center;
-
   gap:
     12px;
-
 }
-
 
 .mobile-header img {
 
@@ -2131,55 +2068,33 @@ tbody tr:last-child td {
 
 
   .main {
-
-    margin:
-      0;
-
-    padding:
-      0;
-
+    margin: 0;
+    padding: 0;
   }
-
 
   .card {
-
     box-shadow:
       none;
-
     border:
       none;
-
     padding:
       0;
-
   }
-
-
   table {
-
     min-width:
       100%;
-
   }
-
-
   th,
   td {
-
     font-size:
       8px;
-
   }
-
 }
-
 </style>
 
 </head>
 
-
 <body>
-
 
 <!-- =========================================================
      MOBILE HEADER
@@ -2200,19 +2115,14 @@ tbody tr:last-child td {
 
   </div>
 
-
   <button
     class="menu-btn"
     id="menuBtn"
     aria-label="Open Menu"
   >
-
     <i class="fa-solid fa-bars"></i>
-
   </button>
-
 </header>
-
 
 <!-- =========================================================
      SIDEBAR OVERLAY
@@ -3119,46 +3029,35 @@ tbody tr:last-child td {
             Course
           </th>
 
-
           <th>
             Amount Paid
           </th>
-
 
           <th>
             Total Expected
           </th>
 
-
-          <th>
-            Balance
-          </th>
-
+          <th>Balance</th>
 
           <th>
             Phone
           </th>
 
-
           <th>
             Location
           </th>
-
 
           <th>
             Mode
           </th>
 
-
           <th>
             Type
           </th>
 
-
           <th>
             Duration
           </th>
-
 
           <th>
             Completion
@@ -3772,36 +3671,18 @@ import {
 
 
   getFirestore,
-
-
   collection,
-
-
   addDoc,
-
-
   deleteDoc,
-
-
   updateDoc,
-
-
   doc,
-
-
   onSnapshot,
-
-
   getDoc
-
-
 }
 
 from
 
 "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
-
-
 
 /* =========================================================
    FIREBASE CONFIGURATION
@@ -3809,15 +3690,11 @@ from
 
 
 const firebaseConfig = {
-
-
   apiKey:
     "AIzaSyC-JoPMk5Ox3mR5hQPc_z0vBekXjMFiBMs",
 
-
   authDomain:
     "student-records-c37a3.firebaseapp.com",
-
 
   projectId:
     "student-records-c37a3",
@@ -3833,34 +3710,22 @@ const firebaseConfig = {
 
   appId:
     "1:684734182862:web:e7547a4a2f2243efa3279f"
-
-
 };
 
-
-
 /* INITIALIZE FIREBASE */
-
-
 const app =
   initializeApp(
     firebaseConfig
   );
-
-
 const db =
   getFirestore(
     app
   );
-
-
 const studentsCol =
   collection(
     db,
     "students"
   );
-
-
 
 /* =========================================================
    HELPER
