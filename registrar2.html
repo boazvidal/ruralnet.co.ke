@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -1305,6 +1306,61 @@ input:disabled {
 
 
 /* =========================================================
+   SEARCH / FILTER / SORT CONTROLS
+========================================================= */
+
+.search-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.filter-box,
+.sort-box {
+  min-width: 170px;
+}
+
+.control-label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.filter-box select,
+.sort-box select {
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.filter-sort-wrap {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.clear-filters-btn {
+  min-height: 44px;
+  white-space: nowrap;
+}
+
+@media (max-width: 1000px) {
+  .search-controls {
+    flex-wrap: wrap;
+  }
+
+  .search-box {
+    min-width: 100%;
+    max-width: none;
+  }
+}
+
+/* =========================================================
    TABLE
 ========================================================= */
 
@@ -1909,6 +1965,29 @@ tbody tr:last-child td {
 
   }
 
+
+  .search-controls {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-sort-wrap {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-box,
+  .sort-box {
+    width: 100%;
+  }
+
+  .filter-box select,
+  .sort-box select,
+  .clear-filters-btn {
+    width: 100%;
+  }
 
   .search-box {
 
@@ -2911,27 +2990,83 @@ tbody tr:last-child td {
 
   <div class="search-area">
 
+    <div class="search-controls">
 
-    <div class="search-box">
+      <div class="search-box">
 
+        <i
+          class="fa-solid fa-magnifying-glass"
+        ></i>
 
-      <i
-        class="fa-solid fa-magnifying-glass"
-      ></i>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search by name, phone, registration number or course..."
+        >
 
+      </div>
 
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Search by name, phone, registration number or course..."
-      >
+      <div class="filter-sort-wrap">
 
+        <div class="filter-box">
+
+          <label
+            class="control-label"
+            for="filterSelect"
+          >
+            Filter
+          </label>
+
+          <select id="filterSelect">
+            <option value="all">All Students</option>
+            <option value="paid">Fully Paid</option>
+            <option value="due">Balance Due</option>
+          </select>
+
+        </div>
+
+        <div class="sort-box">
+
+          <label
+            class="control-label"
+            for="sortSelect"
+          >
+            Sort
+          </label>
+
+          <select id="sortSelect">
+            <option value="default">Default Order</option>
+            <option value="name-asc">Names A - Z</option>
+            <option value="name-desc">Names Z - A</option>
+            <option value="regdate-new">Registration Date: Newest</option>
+            <option value="regdate-old">Registration Date: Oldest</option>
+            <option value="paid-high">Amount Paid: Highest</option>
+            <option value="paid-low">Amount Paid: Lowest</option>
+            <option value="expected-high">Total Expected: Highest</option>
+            <option value="expected-low">Total Expected: Lowest</option>
+            <option value="balance-high">Balance: Highest</option>
+            <option value="balance-low">Balance: Lowest</option>
+            <option value="completion-new">Completion Date: Latest</option>
+            <option value="completion-old">Completion Date: Earliest</option>
+          </select>
+
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-light clear-filters-btn"
+          id="clearFiltersBtn"
+          title="Reset search, filter and sort"
+        >
+          <i class="fa-solid fa-filter-circle-xmark"></i>
+          Reset
+        </button>
+
+      </div>
 
     </div>
 
-
     <div class="record-count">
-
 
       Showing
 
@@ -2941,9 +3076,7 @@ tbody tr:last-child td {
 
       records
 
-
     </div>
-
 
   </div>
 
@@ -4305,6 +4438,15 @@ const emptyState =
 const searchInput =
   $("searchInput");
 
+const filterSelect =
+  $("filterSelect");
+
+const sortSelect =
+  $("sortSelect");
+
+const clearFiltersBtn =
+  $("clearFiltersBtn");
+
 
 let allRecords =
   [];
@@ -4392,51 +4534,181 @@ onSnapshot(
 
 function renderRecords() {
 
+  /* =========================================================
+     SEARCH
+  ========================================================= */
 
-  const filter =
-
+  const searchTerm =
     searchInput
       .value
       .toLowerCase()
       .trim();
 
 
+  /* =========================================================
+     FILTER
+     - All Students
+     - Fully Paid
+     - Balance Due
+  ========================================================= */
 
-  const filtered =
+  const filterValue =
+    filterSelect.value;
 
 
+  /* =========================================================
+     SORT
+  ========================================================= */
+
+  const sortValue =
+    sortSelect.value;
+
+
+  let filtered =
     allRecords.filter(
-
       record => {
 
-
         const text = `
-
           ${record.Names || ""}
-
           ${record.RegNo || ""}
-
           ${record.Course || ""}
-
           ${record.StudentContact || ""}
-
           ${record.ParentContact || ""}
-
           ${record.Location || ""}
-
         `.toLowerCase();
 
-
-
         return text.includes(
-          filter
+          searchTerm
         );
 
+      }
+    );
+
+
+  filtered =
+    filtered.filter(
+      record => {
+
+        const balance =
+          Number(
+            record.Balance || 0
+          );
+
+        if (
+          filterValue === "paid"
+        ) {
+          return balance <= 0;
+        }
+
+        if (
+          filterValue === "due"
+        ) {
+          return balance > 0;
+        }
+
+        return true;
+
+      }
+    );
+
+
+  const numberValue =
+    value =>
+      Number(value || 0);
+
+
+  const dateValue =
+    value => {
+
+      if (!value) {
+        return 0;
+      }
+
+      const date =
+        new Date(value);
+
+      return Number.isNaN(
+        date.getTime()
+      )
+        ? 0
+        : date.getTime();
+
+    };
+
+
+  const nameValue =
+    record =>
+      String(
+        record.Names || ""
+      )
+        .toLowerCase()
+        .trim();
+
+
+  filtered.sort(
+    (a, b) => {
+
+      switch (sortValue) {
+
+        case "name-asc":
+          return nameValue(a)
+            .localeCompare(
+              nameValue(b)
+            );
+
+        case "name-desc":
+          return nameValue(b)
+            .localeCompare(
+              nameValue(a)
+            );
+
+        case "regdate-new":
+          return dateValue(b.RegDate)
+            - dateValue(a.RegDate);
+
+        case "regdate-old":
+          return dateValue(a.RegDate)
+            - dateValue(b.RegDate);
+
+        case "paid-high":
+          return numberValue(b.AmountPaid)
+            - numberValue(a.AmountPaid);
+
+        case "paid-low":
+          return numberValue(a.AmountPaid)
+            - numberValue(b.AmountPaid);
+
+        case "expected-high":
+          return numberValue(b.TotalExpected)
+            - numberValue(a.TotalExpected);
+
+        case "expected-low":
+          return numberValue(a.TotalExpected)
+            - numberValue(b.TotalExpected);
+
+        case "balance-high":
+          return numberValue(b.Balance)
+            - numberValue(a.Balance);
+
+        case "balance-low":
+          return numberValue(a.Balance)
+            - numberValue(b.Balance);
+
+        case "completion-new":
+          return dateValue(b.CompletionDate)
+            - dateValue(a.CompletionDate);
+
+        case "completion-old":
+          return dateValue(a.CompletionDate)
+            - dateValue(b.CompletionDate);
+
+        default:
+          return 0;
 
       }
 
-    );
-
+    }
+  );
 
 
   recordsBody.innerHTML =
@@ -4720,11 +4992,31 @@ function renderRecords() {
 
 
 searchInput.addEventListener(
-
   "input",
-
   renderRecords
+);
 
+filterSelect.addEventListener(
+  "change",
+  renderRecords
+);
+
+sortSelect.addEventListener(
+  "change",
+  renderRecords
+);
+
+clearFiltersBtn.addEventListener(
+  "click",
+  () => {
+
+    searchInput.value = "";
+    filterSelect.value = "all";
+    sortSelect.value = "default";
+
+    renderRecords();
+
+  }
 );
 
 
