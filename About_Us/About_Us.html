@@ -6,7 +6,6 @@
     <title>About Us</title>
 
     <link rel="icon" type="image/png" href="../images/favicAboutUs.png">
-</head>
 
 <style>
     body {
@@ -27,14 +26,11 @@
             padding: 10px 20px;
             align-items: center;
             text-align: center;
-            text-wrap: 1;
-            size: 30px;
         }
 
         .navbar a {
                 color: white;
                 padding: 14px 20px;
-                text-direction: none;
                 display: inline-block;
                 font-family: 'Bernard MT Condensed';
                 font-size: 20px;
@@ -42,8 +38,8 @@
             }
 
         .navbar a:hover {
-            background-color: none;
-            cursor: e-resize;
+            background-color: transparent;
+            cursor: pointer;
             border-bottom: 5px solid lightblue;
             border-radius: 8px;
         }
@@ -58,12 +54,12 @@
             position: absolute;
             background-color: blueviolet;
             min-width: 160px;
-            box-shadow: 0px 8px 16px rgb(0 0 0 0.2);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
         }
 
-        .dropdwon-content a {
+        .dropdown-content a {
             color: black;
-            padding:  12px 16px;
+            padding: 12px 16px;
             text-decoration: none;
             display: block;
         }
@@ -121,7 +117,7 @@
   font-family: bolonse;
 }
 
-    /* ✅ Aqua background for the form */
+    /* Aqua background for the form */
     form.form {
       background-color: aqua;
       padding: 20px;
@@ -209,7 +205,6 @@
     
     }
 
-    <style>
 /* ==============================
    FLOATING INFO OVERLAY
    ============================== */
@@ -369,6 +364,7 @@
   }
 }
 </style>
+</head>
 <body>
 
   	<!--FULL PAGE PROTECTION SCRIPT -->
@@ -414,7 +410,7 @@
 
     <nav> 
   <div class="navbar">
-        <img src="../images/RURALNET.png">
+        <img src="../images/RURALNET.png" alt="RuralNet logo">
         <a href="index.html">home</a>
         <a href="https://forms.gle/wywREJiHrpFTF5veA">Apply Now</a>
         <a href="About_Us.html">About us</a>
@@ -433,6 +429,7 @@
 
     <div class="info-icon">ℹ</div>
 
+    
     <h2>Important Information</h2>
 
     <p>
@@ -545,9 +542,9 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
     });
 </script>
 
-//FOR FLOATING POPUP
 <script>
 /* ==============================
+   FOR FLOATING POPUP
    POPUP FUNCTIONS
    ============================== */
 
@@ -573,18 +570,22 @@ window.addEventListener("load", function () {
   <footer class="footer">
     <div class="footer-column">
       <h3>Useful Links</h3>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="About_Us.html">Who we Are</a></li>
-      <li><a href="students/studentLogin.html">Student Portal</a></li>
-      <li><a href="https://online.kasneb.or.ke/">Accounting</a></li>
-      <li><a href="https://www.cisco.com/">ICT</a></li>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="About_Us.html">Who we Are</a></li>
+        <li><a href="students/studentLogin.html">Student Portal</a></li>
+        <li><a href="https://online.kasneb.or.ke/">Accounting</a></li>
+        <li><a href="https://www.cisco.com/">ICT</a></li>
+      </ul>
     </div>
 
     <div class="footer-column">
       <h3>Partners</h3>
-      <li><a href="https://www.cskonline.org/">CSK</a></li>
-      <li><a href="https://www.kasneb.or.ke/">KASNEB</a></li>
-      <li><a href="https://www.tveta.go.ke/">TVETA</a></li>
+      <ul>
+        <li><a href="https://www.cskonline.org/">CSK</a></li>
+        <li><a href="https://www.kasneb.or.ke/">KASNEB</a></li>
+        <li><a href="https://www.tveta.go.ke/">TVETA</a></li>
+      </ul>
     </div>
 
     <div class="footer-column">
