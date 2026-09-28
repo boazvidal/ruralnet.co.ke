@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RuralNet Student E-Library</title>
+<link rel="icon" type="image/png" href="images/favdownload.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#087a35; --primary2:#0ca84a; --dark:#071b12; --text:#17221d;
+  --muted:#6b7771; --surface:#fff; --soft:#f1f7f3; --line:#e2ebe5;
+  --shadow:0 18px 45px rgba(8,54,31,.10); --radius:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:Inter,Arial,sans-serif;color:var(--text);
+  background:linear-gradient(180deg,#edf7f1 0,#f8fbf9 36%,#fff 100%);
+}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+.navbar{
+  position:sticky;top:0;z-index:1000;background:rgba(5,42,23,.94);
+  backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.12);
+}
+.nav-inner{max-width:1250px;margin:auto;min-height:72px;padding:0 22px;display:flex;align-items:center;gap:22px}
+.logo{height:45px;width:auto;object-fit:contain}
+.nav-links{margin-left:auto;display:flex;gap:6px;align-items:center}
+.nav-links a{color:#fff;padding:10px 13px;border-radius:10px;font-size:14px;font-weight:600}
+.nav-links a:hover{background:rgba(255,255,255,.12)}
+.menu-btn{display:none;color:white;background:none;border:0;font-size:28px;cursor:pointer;margin-left:auto}
+.hero{max-width:1250px;margin:auto;padding:58px 22px 35px}
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:28px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:8px;background:#dff4e7;color:#08652e;padding:8px 13px;border-radius:999px;font-weight:700;font-size:13px}
+.hero h1{font-family:Poppins,sans-serif;font-size:clamp(34px,5vw,60px);line-height:1.04;margin:17px 0 15px;color:var(--dark)}
+.hero h1 span{color:var(--primary2)}
+.hero p{font-size:17px;line-height:1.75;color:var(--muted);max-width:720px}
+.search-box{
+  margin-top:25px;background:#fff;border:1px solid var(--line);border-radius:16px;
+  display:flex;align-items:center;gap:10px;padding:8px 10px;box-shadow:var(--shadow);max-width:680px
+}
+.search-box input{border:0;outline:0;width:100%;padding:12px;background:transparent;font-size:15px}
+.search-icon{font-size:20px;padding:0 7px}
+.hero-card{
+  min-height:270px;border-radius:28px;padding:28px;color:#fff;
+  background:radial-gradient(circle at top right,#21c76a 0,#0a7d39 35%,#05351f 100%);
+  box-shadow:0 25px 60px rgba(4,77,36,.25);position:relative;overflow:hidden
+}
+.hero-card:after{content:"";position:absolute;width:190px;height:190px;border:35px solid rgba(255,255,255,.08);border-radius:50%;right:-55px;bottom:-70px}
+.hero-card h3{font-family:Poppins;font-size:24px;margin:5px 0 10px}
+.hero-card p{color:#e7fff0;margin:0;line-height:1.7}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:35px}
+.stat{background:rgba(255,255,255,.12);padding:13px;border-radius:14px;text-align:center}
+.stat strong{display:block;font-size:22px}.stat span{font-size:11px;color:#d9f7e5}
+.section{max-width:1250px;margin:auto;padding:15px 22px 55px}
+.section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:20px}
+.section-head h2{font-family:Poppins;margin:0;font-size:28px}.section-head p{margin:6px 0 0;color:var(--muted)}
+.filters{display:flex;gap:9px;overflow:auto;padding-bottom:5px}
+.filter{
+  white-space:nowrap;border:1px solid var(--line);background:#fff;padding:9px 14px;
+  border-radius:999px;cursor:pointer;color:#46534c;font-weight:600
+}
+.filter.active,.filter:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+.resource-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  box-shadow:0 10px 28px rgba(12,56,32,.06);transition:.25s;display:flex;flex-direction:column
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 38px rgba(12,56,32,.12)}
+.card-top{padding:22px;background:linear-gradient(135deg,#e7f7ed,#f9fffb);display:flex;justify-content:space-between;align-items:start}
+.file-icon{width:50px;height:50px;border-radius:14px;background:#fff;display:grid;place-items:center;font-size:24px;box-shadow:0 8px 20px rgba(0,0,0,.07)}
+.type{font-size:11px;font-weight:800;color:#087a35;background:#dff4e7;border-radius:999px;padding:6px 9px}
+.card-body{padding:18px;flex:1}
+.card-body h3{font-size:16px;line-height:1.4;margin:0 0 8px}
+.card-body p{font-size:13px;color:var(--muted);line-height:1.55;margin:0}
+.card-actions{display:flex;gap:8px;padding:0 18px 18px}
+.btn{flex:1;border:0;border-radius:11px;padding:10px 12px;font-weight:700;cursor:pointer;text-align:center}
+.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:#056329}
+.btn-light{background:#edf5f0;color:#176039}.btn-light:hover{background:#dcece3}
+.empty{grid-column:1/-1;text-align:center;padding:55px 20px;color:var(--muted)}
+.footer{background:#06150e;color:#d8e7df;padding:45px 22px}
+.footer-grid{max-width:1250px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:35px}
+.footer h3{color:#fff;margin-top:0}.footer p,.footer li{font-size:14px;line-height:1.8;color:#aebeb5}
+.footer ul{list-style:none;padding:0;margin:0}.footer a:hover{color:#fff}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:2000;padding:25px}
+.modal.show{display:flex;align-items:center;justify-content:center}
+.modal-box{background:#fff;width:min(1050px,100%);height:min(82vh,800px);border-radius:20px;overflow:hidden;display:flex;flex-direction:column}
+.modal-head{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.modal-head strong{font-size:15px}.close{border:0;background:#eef4f0;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:20px}
+.viewer{flex:1;background:#edf1ee;display:flex}.viewer iframe{width:100%;height:100%;border:0}.viewer .fallback{margin:auto;text-align:center;padding:30px}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.resource-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){
+  .nav-inner{min-height:64px}.menu-btn{display:block}.nav-links{display:none;width:100%;flex-direction:column;align-items:stretch;margin:0;padding:10px 0}.nav-links.open{display:flex}.nav-links a{text-align:center}
+  .nav-inner{flex-wrap:wrap}.hero{padding-top:38px}.resource-grid{grid-template-columns:1fr}.section{padding-bottom:38px}.footer-grid{grid-template-columns:1fr}.hero-card{min-height:220px}
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="https://ruralnet.co.ke/" aria-label="RuralNet home"><img class="logo" src="images/RURALNET.png" alt="RuralNet"></a>
+    <button class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="https://ruralnet.co.ke/">Home</a>
+      <a href="About_Us">About Us</a>
+      <a href="students">Student Portal</a>
+      <a href="https://www.netacad.com/" target="_blank" rel="noopener">Cisco</a>
+      <a href="https://easytvet.com/" target="_blank" rel="noopener">TVET</a>
+      <a href="https://www.kasneb.or.ke/" target="_blank" rel="noopener">KASNEB</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <span class="badge">📚 RURALNET STUDENT E-LIBRARY</span>
+      <h1>Learn. Practice. <span>Grow.</span></h1>
+      <p>Access your learning notes, practical exercises, tutorials and data-analysis resources in one modern digital library.</p>
+      <div class="search-box">
+        <span class="search-icon">🔎</span>
+        <input id="searchInput" type="search" placeholder="Search notes, tutorials, practicals..." oninput="render()">
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>Knowledge at your fingertips</h3>
+      <p>Browse by subject, search resources instantly, open supported documents and download materials for offline study.</p>
+      <div class="stats">
+        <div class="stat"><strong id="totalCount">0</strong><span>Resources</span></div>
+        <div class="stat"><strong>5+</strong><span>Subjects</span></div>
+        <div class="stat"><strong>24/7</strong><span>Access</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div>
+      <h2>Learning Resources</h2>
+      <p>Choose a category or search for a specific resource.</p>
+    </div>
+  </div>
+  <div class="filters" id="filters"></div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="resource-grid" id="resourceGrid"></div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <h3>RuralNet Student E-Library</h3>
+      <p>A digital learning resource centre for RuralNet students. Access notes, practical work and tutorials from one place.</p>
+    </div>
+    <div>
+      <h3>Useful Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="About_Us.html">Who We Are</a></li>
+        <li><a href="">Student Portal</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Contact Us</h3>
+      <p>+254723845040<br>+254700886058<br>+254793714564<br>ruralnet2016@gmail.com<br>ruralnet.co.ke</p>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="viewerModal" onclick="if(event.target===this) closeViewer()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <strong id="viewerTitle">Resource Viewer</strong>
+      <button class="close" onclick="closeViewer()" aria-label="Close">×</button>
+    </div>
+    <div class="viewer" id="viewer"></div>
+  </div>
+</div>
+
+<script>
+const rawResources = [
+{title:`home`,url:`https://ruralnet.co.ke/`},
+{title:`About us`,url:`About_Us`},
+{title:`Student Portal`,url:`students`},
+{title:`Cisco`,url:`https://www.netacad.com/`},
+{title:`TVET Website`,url:`https://easytvet.com/`},
+{title:`KASNEB Website`,url:`https://www.kasneb.or.ke/`},
+{title:`Full Notes`,url:`COMPERENSIVE LEARNERS COMPTETENCY GUIDE FOR ICT BEGINNERS.pdf`},
+{title:`Introduction`,url:`https://www.just.edu.jo/~mqais/CIS99/PDF/Ch.01_Introduction_%20to_computers.pdf`},
+{title:`Keyboarding skills`,url:`https://www.barnetlocaloffer.org.uk/senco_zone/documents/2044-keyboarding-skills.pdf`},
+{title:`mouse`,url:`https://brimbanklibraries.vic.gov.au/wp-content/uploads/2024/11/Libraries-Unit-Computer-Class-Manual-Keyboard-and-Mouse-Skills.pdf`},
+{title:`Operating systems`,url:`https://sriindu.ac.in/wp-content/uploads/2023/10/R20CSE2202-OPERATING-SYSTEMS.pdf`},
+{title:`Word practical`,url:`word_pract.pdf`},
+{title:`Excell Class Work template`,url:`excel_pract.xlsx`},
+{title:`Excel classwork 2`,url:`excel_2.pdf`},
+{title:`Access classwork`,url:`access_classwork.pdf`},
+{title:`Access Practical`,url:`access_pract.pdf`},
+{title:`Access Practical 1`,url:`access1.pdf`},
+{title:`Access Practical 2`,url:`access2.pdf`},
+{title:`Access Practical 3`,url:`access3.pdf`},
+{title:`Access Practical 4`,url:`access4.pdf`},
+{title:`Access Practical 5`,url:`ACCESS_SIMPLE.pdf`},
+{title:`Publisher practical`,url:`cert_pub.pdf`},
+{title:`Networking`,url:`https://www.ece.uvic.ca/~itraore/elec567-13/notes/dist-03-4.pdf`},
+{title:`Internet`,url:`https://www.just.edu.jo/~mqais/cis99/pdf/internet.pdf`},
+{title:`Mail Merge doc`,url:`mail_merge.pdf`},
+{title:`Data Cleaning Template`,url:`Data_cleaning.xlsx`},
+{title:`Classwork Template (Excel)`,url:`ways_to_clean_data.xlsx`},
+{title:`Instructions to Classwork Template`,url:`data_cleaning_instructions.pdf`},
+{title:`Home`,url:`index.html`},
+{title:`Who we Are`,url:`About_Us.html`}
+];
+
+const categories = [
+  {name:"All", key:"all"},
+  {name:"ICT Basics", key:"ict"},
+  {name:"Graphic Designing", key:"graphics"},
+  {name:"Programming", key:"programming"},
+  {name:"Networking", key:"networking"},
+  {name:"Data Analysis", key:"data"}
+];
+
+const categoryMap = {
+  "ICT Basics":["Full Notes","Introduction","Keyboarding skills","mouse","Operating systems","Word practical","Excell Class Work template","Excel classwork 2","Access classwork","Access Practical","Access Practical 1","Access Practical 2","Access Practical 3","Access Practical 4","Access Practical 5","Publisher practical","Networking","Internet","Mail Merge doc"],
+  "Graphic Designing":["Adobe Photoshop","Adobe Illustrator","Corel Draw","Desktop Publishing","PowerPoint"],
+  "Programming":["Web Development (Complete Notes)","HTML","CSS","Javascript","Python","C","C++"],
+  "Networking":["Networking","Networking Software","Cisco packet tracer","Networking tools","OSI model","Configuration","Routers and wireless technology"],
+  "Data Analysis":["Full Notes","Excel for data analysis","Python fundermentals","Data Cleaning Template","Classwork Template (Excel)","Instructions to Classwork Template"]
+};
+
+let activeCategory = "all";
+
+function getCategory(title){
+  for(const [cat,names] of Object.entries(categoryMap)){
+    if(names.some(n => n.toLowerCase() === title.toLowerCase())) return cat;
+  }
+  return "ICT Basics";
+}
+function iconFor(url,title){
+  const u=(url||"").toLowerCase();
+  if(u.includes(".xlsx") || u.includes(".xls")) return "📊";
+  if(u.includes(".pdf")) return "📕";
+  if(u.includes(".doc")) return "📘";
+  if(/python|javascript|html|css|c\+\+|programming|web development/i.test(title)) return "💻";
+  if(/network|router|cisco|osi/i.test(title)) return "🌐";
+  return "📚";
+}
+function ext(url){
+  const clean=(url||"").split("?")[0].toLowerCase();
+  if(clean.endsWith(".pdf")) return "PDF";
+  if(clean.endsWith(".xlsx")||clean.endsWith(".xls")) return "EXCEL";
+  if(clean.endsWith(".doc")||clean.endsWith(".docx")) return "DOC";
+  return "RESOURCE";
+}
+function categoryClass(cat){
+  return cat === "Graphic Designing" ? "graphics" :
+         cat === "Programming" ? "programming" :
+         cat === "Networking" ? "networking" :
+         cat === "Data Analysis" ? "data" : "ict";
+}
+function renderFilters(){
+  document.getElementById("filters").innerHTML = categories.map(c =>
+    `<button class="filter ${activeCategory===c.key?"active":""}" onclick="setCategory('${c.key}')">${c.name}</button>`
+  ).join("");
+}
+function setCategory(key){activeCategory=key;render();}
+function render(){
+  renderFilters();
+  const q=document.getElementById("searchInput").value.trim().toLowerCase();
+  const filtered=rawResources.map((r,i)=>({...r,index:i,category:getCategory(r.title)})).filter(r=>{
+    const catOk=activeCategory==="all" || categoryClass(r.category)===activeCategory;
+    const searchOk=!q || r.title.toLowerCase().includes(q) || r.url.toLowerCase().includes(q);
+    return catOk && searchOk;
+  });
+  document.getElementById("totalCount").textContent=rawResources.length;
+  const grid=document.getElementById("resourceGrid");
+  if(!filtered.length){
+    grid.innerHTML='<div class="empty"><div style="font-size:40px">🔎</div><h3>No resources found</h3><p>Try another search term or category.</p></div>';
+    return;
+  }
+  grid.innerHTML=filtered.map(r=>`
+    <article class="card">
+      <div class="card-top"><div class="file-icon">${iconFor(r.url,r.title)}</div><span class="type">${ext(r.url)}</span></div>
+      <div class="card-body">
+        <h3>${escapeHtml(r.title)}</h3>
+        <p>${escapeHtml(r.category)} • Learning resource</p>
+      </div>
+      <div class="card-actions">
+        <button class="btn btn-light" onclick="openViewer(${r.index})">View</button>
+        <a class="btn btn-primary" href="${safeUrl(r.url)}" target="_blank" rel="noopener" download>Download</a>
+      </div>
+    </article>`).join("");
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
+function safeUrl(s){return escapeHtml(s);}
+function openViewer(index){
+  const r=rawResources[index];
+  document.getElementById("viewerTitle").textContent=r.title;
+  const url=r.url;
+  const lower=url.toLowerCase();
+  let content="";
+  if(lower.endsWith(".pdf")){
+    content=`<iframe src="${safeUrl(url)}" title="${escapeHtml(r.title)}"></iframe>`;
+  }else{
+    content=`<div class="fallback"><div style="font-size:52px">${iconFor(url,r.title)}</div><h3>${escapeHtml(r.title)}</h3><p>This resource is available for download or opening in a new tab.</p><a class="btn btn-primary" style="display:inline-block;max-width:220px" href="${safeUrl(url)}" target="_blank" rel="noopener">Open Resource</a></div>`;
+  }
+  document.getElementById("viewer").innerHTML=content;
+  document.getElementById("viewerModal").classList.add("show");
+}
+function closeViewer(){
+  document.getElementById("viewerModal").classList.remove("show");
+  document.getElementById("viewer").innerHTML="";
+}
+function toggleMenu(){document.getElementById("navLinks").classList.toggle("open");}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeViewer();});
+render();
+</script>
+</body>
+</html>

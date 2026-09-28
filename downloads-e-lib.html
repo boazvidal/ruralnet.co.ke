@@ -1,503 +1,449 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>download learning materials</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RuralNet Student E-Library</title>
+<link rel="icon" type="image/png" href="images/favdownload.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#087a35;--primary-dark:#055f29;--green:#12a94f;--dark:#071b12;
+  --text:#17221d;--muted:#6b7771;--surface:#fff;--soft:#f1f7f3;
+  --line:#e1ebe5;--shadow:0 18px 45px rgba(8,54,31,.10);--radius:22px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--text);background:linear-gradient(180deg,#edf7f1 0,#f8fbf9 38%,#fff 100%)}
+button,input{font:inherit}
+a{text-decoration:none;color:inherit}
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(5,42,23,.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.12)}
+.nav-inner{max-width:1250px;margin:auto;min-height:72px;padding:0 22px;display:flex;align-items:center;gap:22px}
+.logo{height:45px;width:auto;object-fit:contain}
+.nav-links{margin-left:auto;display:flex;gap:6px;align-items:center}
+.nav-links a{color:#fff;padding:10px 13px;border-radius:10px;font-size:14px;font-weight:600}
+.nav-links a:hover{background:rgba(255,255,255,.12)}
+.menu-btn{display:none;color:white;background:none;border:0;font-size:28px;cursor:pointer;margin-left:auto}
 
-    <link rel="icon" type="image/png" href="images/favdownload.png">
+.hero{max-width:1250px;margin:auto;padding:58px 22px 34px}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:8px;background:#dff4e7;color:#08652e;padding:8px 13px;border-radius:999px;font-weight:800;font-size:12px}
+.hero h1{font-family:Poppins,sans-serif;font-size:clamp(34px,5vw,60px);line-height:1.04;margin:17px 0 15px;color:var(--dark)}
+.hero h1 span{color:var(--green)}
+.hero p{font-size:17px;line-height:1.75;color:var(--muted);max-width:700px}
+.search-box{margin-top:25px;background:#fff;border:1px solid var(--line);border-radius:16px;display:flex;align-items:center;gap:10px;padding:8px 10px;box-shadow:var(--shadow);max-width:680px}
+.search-box input{border:0;outline:0;width:100%;padding:12px;background:transparent;font-size:15px}
+.search-icon{font-size:20px;padding:0 7px}
+.hero-card{min-height:280px;border-radius:28px;padding:29px;color:#fff;background:radial-gradient(circle at top right,#21c76a 0,#0a7d39 35%,#05351f 100%);box-shadow:0 25px 60px rgba(4,77,36,.25);position:relative;overflow:hidden}
+.hero-card:after{content:"";position:absolute;width:190px;height:190px;border:35px solid rgba(255,255,255,.08);border-radius:50%;right:-55px;bottom:-70px}
+.hero-card h3{font-family:Poppins;font-size:25px;margin:5px 0 10px}
+.hero-card p{color:#e7fff0;margin:0;line-height:1.7}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:35px}
+.stat{background:rgba(255,255,255,.12);padding:13px;border-radius:14px;text-align:center}
+.stat strong{display:block;font-size:22px}.stat span{font-size:11px;color:#d9f7e5}
+
+.section{max-width:1250px;margin:auto;padding:15px 22px 55px}
+.section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:22px}
+.section-head h2{font-family:Poppins;margin:0;font-size:28px}
+.section-head p{margin:6px 0 0;color:var(--muted)}
+
+.subject-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.subject-card{border-radius:23px;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 12px 35px rgba(12,56,32,.08);position:relative;display:flex;min-height:255px;transition:.25s}
+.subject-card:hover{transform:translateY(-5px);box-shadow:0 22px 45px rgba(12,56,32,.14)}
+.subject-icon{width:120px;min-width:120px;background:var(--card-gradient);display:grid;place-items:center;font-size:48px;color:white}
+.subject-content{padding:24px 25px}
+.resource-count{display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;color:#087a35;background:#e5f6eb;padding:6px 9px;border-radius:999px}
+.subject-content h3{font-family:Poppins;font-size:25px;margin:12px 0 2px}
+.subject-content h4{margin:0 0 9px;color:#4d5b54;font-size:14px}
+.subject-content p{margin:0;color:var(--muted);line-height:1.55;font-size:13px}
+.open-subject{margin-top:18px;border:0;background:#0a7d39;color:white;border-radius:11px;padding:10px 15px;font-weight:800;cursor:pointer}
+.open-subject span{margin-left:7px;font-size:18px}
+.search-results{display:none}
+.library-panel{display:none;background:#fff;border:1px solid var(--line);border-radius:23px;box-shadow:var(--shadow);overflow:hidden}
+.library-panel.show{display:block}
+.library-head{padding:22px 24px;background:linear-gradient(135deg,#eef8f2,#fff);display:flex;justify-content:space-between;align-items:center;gap:20px;border-bottom:1px solid var(--line)}
+.library-title{display:flex;align-items:center;gap:14px}
+.library-title .big-icon{width:52px;height:52px;border-radius:15px;background:#dff4e7;display:grid;place-items:center;font-size:26px}
+.library-title h2{font-family:Poppins;margin:0;font-size:24px}.library-title p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.back-btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}
+.back-btn:hover{background:#edf5f0}
+.resource-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:22px}
+.card{background:#fff;border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:0 8px 24px rgba(12,56,32,.05);transition:.22s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-3px);box-shadow:0 15px 30px rgba(12,56,32,.11)}
+.card-top{padding:19px;background:linear-gradient(135deg,#e7f7ed,#f9fffb);display:flex;justify-content:space-between;align-items:start}
+.file-icon{width:48px;height:48px;border-radius:13px;background:#fff;display:grid;place-items:center;font-size:23px;box-shadow:0 7px 18px rgba(0,0,0,.06)}
+.type{font-size:10px;font-weight:800;color:#087a35;background:#dff4e7;border-radius:999px;padding:6px 9px}
+.card-body{padding:17px;flex:1}.card-body h3{font-size:15px;line-height:1.4;margin:0 0 7px}.card-body p{font-size:12px;color:var(--muted);line-height:1.5;margin:0}
+.card-actions{display:flex;gap:8px;padding:0 17px 17px}
+.btn{flex:1;border:0;border-radius:10px;padding:10px 11px;font-weight:800;cursor:pointer;text-align:center;font-size:13px}
+.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--primary-dark)}
+.btn-light{background:#edf5f0;color:#176039}.btn-light:hover{background:#dcece3}
+.empty{grid-column:1/-1;text-align:center;padding:55px 20px;color:var(--muted)}
+.empty div{font-size:40px}
+
+.footer{background:#06150e;color:#d8e7df;padding:45px 22px}
+.footer-grid{max-width:1250px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:35px}
+.footer h3{color:#fff;margin-top:0}.footer p,.footer li{font-size:14px;line-height:1.8;color:#aebeb5}.footer ul{list-style:none;padding:0;margin:0}.footer a:hover{color:#fff}
+
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:2000;padding:25px}
+.modal.show{display:flex;align-items:center;justify-content:center}
+.modal-box{background:#fff;width:min(1050px,100%);height:min(82vh,800px);border-radius:20px;overflow:hidden;display:flex;flex-direction:column}
+.modal-head{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.modal-head strong{font-size:15px}.close{border:0;background:#eef4f0;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:20px}
+.viewer{flex:1;background:#edf1ee;display:flex}.viewer iframe{width:100%;height:100%;border:0}.viewer .fallback{margin:auto;text-align:center;padding:30px}
+
+@media(max-width:950px){.hero-grid{grid-template-columns:1fr}.resource-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:750px){
+  .nav-inner{min-height:64px;flex-wrap:wrap}.menu-btn{display:block}.nav-links{display:none;width:100%;flex-direction:column;align-items:stretch;margin:0;padding:10px 0}.nav-links.open{display:flex}.nav-links a{text-align:center}
+  .hero{padding-top:38px}.subject-grid{grid-template-columns:1fr}.subject-card{min-height:225px}.subject-icon{width:90px;min-width:90px;font-size:38px}
+  .resource-grid{grid-template-columns:1fr}.library-head{align-items:flex-start}.footer-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .hero h1{font-size:38px}.subject-card{display:block}.subject-icon{width:100%;height:90px;min-width:0}.subject-content{padding:20px}.library-head{flex-direction:column}.resource-grid{padding:15px}.section{padding-left:15px;padding-right:15px}
+}
+</style>
 </head>
 <body>
 
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tabbed Form</title>
-  <style>
-    /* ==== GLOBAL STYLING ==== */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 120px 20px 20px; /* space for fixed navbar */
-  background-image: url(images/lw.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-/* Center all <h1> headings */
-.info h1 {
-  color: #007bff;
-  text-shadow:
-    -1px -1px 0 black,
-    1px 1px 0 white;
-}
-
-.info h2 {
-  background: rgb(0, 80, 36);
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-}
-
-/* ==== FORM CONTAINER ==== */
-form.form {
-  background-color: aqua;
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 700px;
-  margin: auto;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-/* ==== TABS CONTAINER ==== */
-.tabs-container {
-  width: 100%;
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-/* ==== TAB BUTTONS ==== */
-.tab-button {
-  display: flex;
-  flex-wrap: wrap; /* allows break on small screens */
-  border-bottom: 2px solid #ddd;
-}
-
-.tab-button button {
-  flex: 1 1 150px; /* flexible width */
-  padding: 12px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 15px;
-  transition: 0.3s;
-}
-
-.tab-button button.active {
-  background: #007bff;
-  color: white;
-}
-
-/* ==== TAB CONTENT ==== */
-.tab-content {
-  padding: 20px;
-  display: none;
-}
-
-.tab-content.active {
-  display: block;
-}
-
-ul {
-  color: rgb(31, 146, 8);
-}
-
-ul li a {
-  color: rgb(8, 5, 156);
-  font-size: 18px;
-  text-decoration: none;
-}
-
-/* ==== NAVIGATION BAR ==== */
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: #026613;
-    color: white;
-    z-index: 1000;
-    padding: 10px 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 5px solid white;
-}
-
-nav img {
-    max-width: 170px;
-}
-
-/* Navigation links */
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 10px;
-}
-
-nav ul li a {
-    color: white;
-    padding: 10px 15px;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-nav ul li a:hover {
-    background-color: #1d5304d2;
-    border-radius: 5px;
-    border-bottom: 4px solid white;
-    border-right: 4px solid white;
-}
-
-/* ===== HAMBURGER BUTTON ===== */
-.menu-btn {
-    font-size: 30px;
-    cursor: pointer;
-    display: none;
-}
-
-/* ===== MOBILE VIEW ===== */
-@media (max-width: 768px) {
-    nav {
-        flex-wrap: wrap;
-    }
-
-    /* Show hamburger */
-    .menu-btn {
-        display: block;
-    }
-
-    /* Hide nav links */
-    nav ul {
-        width: 100%;
-        display: none;
-        flex-direction: column;
-        background: #026613;
-        margin-top: 10px;
-        padding: 10px 0;
-        border-top: 3px solid white;
-    }
-
-    /* Show them when active */
-    nav ul.active {
-        display: flex;
-    }
-
-    nav ul li a {
-        padding: 12px;
-        text-align: center;
-        width: 100%;
-        display: block;
-    }
-
-    nav img {
-        max-width: 140px;
-    }
-}
-
-/* ==== FOOTER ==== */
-.footer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  background-color: black;
-  color: white;
-  padding: 40px 20px;
-}
-
-.footer-column {
-  flex: 1 1 200px;
-  min-width: 200px;
-  margin: 10px;
-  background: #1d1c1c;
-  padding: 10px;
-  border-radius: 10px;
-  border-bottom: 5px solid white;
-}
-
-.footer h3 {
-  font-size: 16px;
-  text-transform: uppercase;
-  border-bottom: 2px solid yellow;
-  padding-bottom: 5px;
-}
-
-.footer-column li a {
-  color: white;
-  text-decoration: none;
-}
-
-/* ==== RESPONSIVE MEDIA QUERIES ==== */
-@media (max-width: 768px) {
-  body {
-    padding: 140px 10px 10px; /* more spacing for navbar */
-  }
-
-  .tab-button button {
-    font-size: 14px;
-    padding: 10px;
-  }
-}
-
-  
-
-@media (max-width: 480px) {
-  .tab-button button {
-    flex: 1 1 100%;
-    font-size: 13px;
-  }
-
-  form.form {
-    padding: 15px;
-  }
-
-  .footer {
-    text-align: center;
-  }
-}
-
-  </style>
-</head>
-<body>
-
-  	<!--FULL PAGE PROTECTION SCRIPT -->
-
-<script>
-	//Right-Click
-	document.addEventListener('contextmenu', event => event.preventDefault());
-</script>
-
-<!--F12-->
-<script>
-	document.onkeydown = function(e) {
-
-	//F12
-	if (e.keyCode == 123) {
-		return false;
-	}
-
-
-//Ctrl+Shift+I or Ctrl+Shift+J or Ctrl+Shift+C
-
-	if (e.ctrlKey && e.shiftKey && (
-		e.keyCode === 73 ||
-		e.keyCode === 74 ||
-		e.keyCode === 67
-	)) {
-		return false;
-	}
-
-//Ctrl+U View Source-->
-
-	if (e.ctrlKey && e.keyCode === 85) {
-		return false;
-	}
-
-	//Ctrl+C Copy
-	if (e.ctrlKey && e.keyCode === 67) {
-		return false;
-	}
-};
-</script>
-
-<script>
-function toggleMenu() {
-    document.querySelector(".nav-links").classList.toggle("active");
-}
-</script>
-
-<nav>
-    <img src="images/RURALNET.png">
-
-    <!-- Hamburger menu -->
-    <div class="menu-btn" onclick="toggleMenu()">&#9776;</div>
-
-    <ul class="nav-links">
-        <li><a href="https://ruralnet.co.ke/">home</a></li>
-        <li><a href="About_Us">About us</a></li>
-        <li><a href="students">Student Portal</a></li>
-        <li><a href="https://www.netacad.com/" target="_blank">Cisco</a></li>
-        <li><a href="https://easytvet.com/" target="_blank">TVET Website</a></li>
-        <li><a href="https://www.kasneb.or.ke/" target="_blank">KASNEB Website</a></li>
-    </ul>
-</nav>
-
-  <h1><strong>GET YOUR UPDATED LEARNING RESOURCES HERE...</strong></h1>
-  <div class="info">
-  <h1>Last updated: APRIL   20   2026</h1>
-  <h2>Notes</h2>
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="https://ruralnet.co.ke/" aria-label="RuralNet home">
+      <img class="logo" src="images/RURALNET.png" alt="RuralNet">
+    </a>
+    <button class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="https://ruralnet.co.ke/">Home</a>
+      <a href="About_Us">About Us</a>
+      <a href="students">Student Portal</a>
+      <a href="https://www.netacad.com/" target="_blank" rel="noopener">Cisco</a>
+      <a href="https://easytvet.com/" target="_blank" rel="noopener">TVET</a>
+      <a href="https://www.kasneb.or.ke/" target="_blank" rel="noopener">KASNEB</a>
+    </nav>
   </div>
+</header>
 
-  <form class="form">
-    <div class="tabs-container">
-      <div class="tab-button">
-        <button type="button" class="tab-btn active" data-tab="tab1">ICT Basics</button>
-        <button type="button" class="tab-btn" data-tab="tab2">Graphic Designing</button>
-        <button type="button" class="tab-btn" data-tab="tab3">Programming</button>
-        <button type="button" class="tab-btn" data-tab="tab4">Networking</button>
-        <button type="button" class="tab-btn" data-tab="tab5">Data Analysis</button>
-      </div>
-
-      <div class="tab-content active" id="tab1">
-        <h3>Notes for beginners pursuing Computer course (ICT Essentials)</h3>
-        <ul>
-          <li><a href="COMPERENSIVE LEARNERS COMPTETENCY GUIDE FOR ICT BEGINNERS.pdf" download="">Full Notes</a></li>
-            <li><a href="https://www.just.edu.jo/~mqais/CIS99/PDF/Ch.01_Introduction_%20to_computers.pdf" download="">Introduction</a></li>
-            <li><a href="https://www.barnetlocaloffer.org.uk/senco_zone/documents/2044-keyboarding-skills.pdf" download="">Keyboarding skills</a></li>
-            <li><a href="https://brimbanklibraries.vic.gov.au/wp-content/uploads/2024/11/Libraries-Unit-Computer-Class-Manual-Keyboard-and-Mouse-Skills.pdf" download="">mouse</a></li>
-            <li><a href="https://sriindu.ac.in/wp-content/uploads/2023/10/R20CSE2202-OPERATING-SYSTEMS.pdf" download="">Operating systems</a></li>
-            <li><a href="word_pract.pdf">Word practical</a></li>
-            <li><a href="excel_pract.xlsx">Excell Class Work template</a></li>
-            <li><a href="excel_2.pdf">Excel classwork 2 </a></li>
-            <li><a href="access_classwork.pdf">Access classwork</a></li>
-            <li><a href="access_pract.pdf">Access Practical </a></li>
-            <li><a href="access1.pdf">Access Practical 1</a></li>
-            <li><a href="access2.pdf">Access Practical 2</a></li>
-            <li><a href="access3.pdf">Access Practical 3</a></li>
-            <li><a href="access4.pdf">Access Practical 4</a></li>
-            <li><a href="ACCESS_SIMPLE.pdf">Access Practical 5</a></li>
-            <li><a href="cert_pub.pdf">Publisher practical</a></li>
-            <li><a href="https://www.ece.uvic.ca/~itraore/elec567-13/notes/dist-03-4.pdf" download="cisco networking notes.pdf">Networking</a></li>
-            <li><a href="https://www.just.edu.jo/~mqais/cis99/pdf/internet.pdf" download="">Internet</a></li>
-            <li><a href="mail_merge.pdf" download="">Mail Merge doc</a></li>
-        </ul>
-
-      </div>
-
-      <div class="tab-content" id="tab2">
-        <h3>Updated notes with practical procedures for graphic designers</h3>
-        <ul>
-            <li><a href="" download="">Adobe Photoshop</a></li>
-            <li><a href="" download="">Adobe Illustrator</a></li>
-            <li><a href="" download="">Corel Draw</a></li>
-            <li><a href="" download="">Desktop Publishing</a></li>
-            <li><a href="" download="">PowerPoint</a></li>
-        </ul>
-      </div>
-
-      <div class="tab-content" id="tab3">
-        <h3>Modern Notes with the best IDES to varius programming languages and code generation tools</h3>
-        <ul>
-            <li><a href="" download="">Web Development (Complete Notes)</a></li>
-            <li><a href="" download="">HTML</a></li>
-            <li><a href="" download="">CSS</a></li>
-            <li><a href="" download="">Javascript</a></li>
-            <li><a href="" download="Python Programming.pdf">Python</a></li>
-            <li><a href="" download="">C</a></li>
-            <li><a href="" download="">C++</a></li>
-        </ul>
-      </div>
-      
-      <div class="tab-content" id="tab4">
-        <h3>Notes on Everything you need to know about networking</h3>
-        <ul>
-            <li><a href="" download="">Networking</a></li>
-            <li><a href="" download="">Networking Software</a></li>
-            <li><a href="" download="">Cisco packet tracer</a></li>
-            <li><a href="" download="">Networking tools</a></li>
-            <li><a href="" download="">OSI model</a></li>
-            <li><a href="" download="">Configuration</a></li>
-            <li><a href="" download="">Routers and wireless technology</a></li>
-        </ul>
-      </div>
-
-      <div class="tab-content" id="tab5">
-        <h3>For Analysts</h3>
-        <li><a>Full Notes</a></li>
-        <li><a>Excel for data analysis</a></li>
-        <li><a>Python fundermentals</a></li>
-        <li><a href="Data_cleaning.xlsx">Data Cleaning Template</a></li>
-        <li><a href="ways_to_clean_data.xlsx">Classwork Template (Excel)</a></li>
-        <li><a href="data_cleaning_instructions.pdf">Instructions to Classwork Template</a></li>
-      </div>
-      
-    </div>
-  </form>
-
-  <div class="info">
-  <h1>======================</h1>
-  <h2>Tutorials</h2>
-  </div>
-
-  <form class="form">
-    <div class="tabs-container">
-      <div class="tab-button">
-        <button type="button" class="tab-btn active" data-tab="tab5">IT skills</button>
-        <button type="button" class="tab-btn" data-tab="tab6">Coding</button>
-        <button type="button" class="tab-btn" data-tab="tab3">Others</button>
-      </div>
-
-      <div class="tab-content active" id="tab5">
-        <h3>Tutorials</h3>
-                <ul>
-            <li><a href="" download="">Lesson one</a></li>
-            <li><a href="" download="">Word</a></li>
-            <li><a href="" download="">Excell</a></li>
-            <li><a href="" download="">Access</a></li>
-            <li><a href="" download="">Publisher</a></li>
-            <li><a href="" download="">Powerpoint</a></li>
-            <li><a href="" download="">Internet and networking</a></li>
-        </ul>
-        <p>You may Just watch them here 😇</p>
-      </div>
-
-      <div class="tab-content" id="tab6">
-        <h3>Programming tutorials</h3>
-            <li><a href="" download="">Intro to programming</a></li>
-            <li><a href="" download="">HTML</a></li>
-            <li><a href="" download="">CSS</a></li>
-            <li><a href="" download="">Javascript</a></li>
-            <li><a href="" download="">Python</a></li>
-            <li><a href="" download="">C</a></li>
-            <li><a href="" download="">C++</a></li>
-        </ul>
-      </div>
-
-      <div class="tab-content" id="tab3">
-        <h3>Contact</h3>
-        <p>Email us at <strong>ruralnet2016@gmail.com</strong></p>
+<main>
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <span class="badge">📚 RURALNET STUDENT E-LIBRARY</span>
+      <h1>Learn. Practice. <span>Grow.</span></h1>
+      <p>Find your learning materials by subject. Each library contains organized notes, practical exercises, templates and tutorials for easier student access.</p>
+      <div class="search-box">
+        <span class="search-icon">🔎</span>
+        <input id="searchInput" type="search" placeholder="Search across the entire library..." oninput="globalSearch()">
       </div>
     </div>
-  </form>
-  
+    <div class="hero-card">
+      <h3>One library. Every subject.</h3>
+      <p>Resources are grouped into subject libraries so you can quickly find exactly what you need without scrolling through unrelated materials.</p>
+      <div class="stats">
+        <div class="stat"><strong id="totalCount">0</strong><span>Resources</span></div>
+        <div class="stat"><strong>5</strong><span>Libraries</span></div>
+        <div class="stat"><strong>24/7</strong><span>Access</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <script>
-    const tabButtons = document.querySelectorAll(".tab-btn");
-    const tabContents = document.querySelectorAll(".tab-content");
+<section class="section" id="subjectsSection">
+  <div class="section-head">
+    <div>
+      <h2>Subject Libraries</h2>
+      <p>Select a subject to view its organized learning resources.</p>
+    </div>
+  </div>
+  <div class="subject-grid">
 
-    tabButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        tabButtons.forEach(btn => btn.classList.remove("active"));
-        tabContents.forEach(tab => tab.classList.remove("active"));
-        
-        button.classList.add("active");
-        document.getElementById(button.dataset.tab).classList.add("active");
-      });
-    });
-  </script>
+      <article class="subject-card" style="--card-gradient:linear-gradient(135deg,#0a7d39,#16b85a)">
+        <div class="subject-icon">📚</div>
+        <div class="subject-content">
+          <span class="resource-count">19 resources</span>
+          <h3>ICT Basics</h3>
+          <h4>Computer &amp; Office Applications</h4>
+          <p>Computer fundamentals, Office applications, practical exercises and essential digital skills.</p>
+          <button class="open-subject" onclick="openCategory('ICT Basics')">Open Library <span>→</span></button>
+        </div>
+      </article>
+      <article class="subject-card" style="--card-gradient:linear-gradient(135deg,#6636c9,#a35cf5)">
+        <div class="subject-icon">🎨</div>
+        <div class="subject-content">
+          <span class="resource-count">5 resources</span>
+          <h3>Graphic Designing</h3>
+          <h4>Creative Design &amp; Publishing</h4>
+          <p>Design, illustration, publishing and presentation resources for creative students.</p>
+          <button class="open-subject" onclick="openCategory('Graphic Designing')">Open Library <span>→</span></button>
+        </div>
+      </article>
+      <article class="subject-card" style="--card-gradient:linear-gradient(135deg,#1456a0,#2385df)">
+        <div class="subject-icon">💻</div>
+        <div class="subject-content">
+          <span class="resource-count">7 resources</span>
+          <h3>Programming</h3>
+          <h4>Coding &amp; Web Development</h4>
+          <p>Web development and programming resources covering HTML, CSS, JavaScript, Python, C and C++.</p>
+          <button class="open-subject" onclick="openCategory('Programming')">Open Library <span>→</span></button>
+        </div>
+      </article>
+      <article class="subject-card" style="--card-gradient:linear-gradient(135deg,#075f6b,#13a9b9)">
+        <div class="subject-icon">🌐</div>
+        <div class="subject-content">
+          <span class="resource-count">7 resources</span>
+          <h3>Networking</h3>
+          <h4>Networks &amp; Connectivity</h4>
+          <p>Networking concepts, tools, Cisco Packet Tracer, OSI model and configuration resources.</p>
+          <button class="open-subject" onclick="openCategory('Networking')">Open Library <span>→</span></button>
+        </div>
+      </article>
+      <article class="subject-card" style="--card-gradient:linear-gradient(135deg,#a05b08,#e6a126)">
+        <div class="subject-icon">📊</div>
+        <div class="subject-content">
+          <span class="resource-count">3 resources</span>
+          <h3>Data Analysis</h3>
+          <h4>Data, Excel &amp; Python</h4>
+          <p>Data-analysis notes, Excel templates, Python fundamentals and data-cleaning practicals.</p>
+          <button class="open-subject" onclick="openCategory('Data Analysis')">Open Library <span>→</span></button>
+        </div>
+      </article>
+      <article class="subject-card" style="--card-gradient:linear-gradient(135deg,#0a7d39,#16b85a)">
+        <div class="subject-icon">📚</div>
+        <div class="subject-content">
+          <span class="resource-count">19 resources</span>
+          <h3>Accounting Courses</h3>
+          <h4>Accounting</h4>
+          <p>Certificate, Diploma and proffessional Accounting Qualifications</p>
+          <button class="open-subject" onclick="openCategory('Accounting')">Open Library <span>→</span></button>
+        </div>
+      </article>
+  </div>
+</section>
 
-  <footer class="footer">
-    <div class="footer-column">
+<section class="section search-results" id="searchResultsSection">
+  <div class="section-head">
+    <div>
+      <h2>Search Results</h2>
+      <p id="searchResultText"></p>
+    </div>
+    <button class="back-btn" onclick="clearSearch()">← Back to Libraries</button>
+  </div>
+  <div class="library-panel show">
+    <div class="resource-grid" id="searchGrid"></div>
+  </div>
+</section>
+
+<section class="section" id="librarySection">
+  <div class="library-panel" id="libraryPanel">
+    <div class="library-head">
+      <div class="library-title">
+        <div class="big-icon" id="libraryIcon">📚</div>
+        <div>
+          <h2 id="libraryName">Library</h2>
+          <p id="libraryDescription"></p>
+        </div>
+      </div>
+      <button class="back-btn" onclick="closeLibrary()">← All Libraries</button>
+    </div>
+    <div class="resource-grid" id="resourceGrid"></div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <h3>RuralNet Student E-Library</h3>
+      <p>A digital learning resource centre for RuralNet students. Access notes, practical work and tutorials from one organized platform.</p>
+    </div>
+    <div>
       <h3>Useful Links</h3>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="About_Us.html">Who we Are</a></li>
-      <li><a href="">Student Portal</a></li>
-      <li><a href="">Accounting</a></li>
-      <li><a href="">ICT</a></li>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="About_Us.html">Who We Are</a></li>
+        <li><a href="">Student Portal</a></li>
+      </ul>
     </div>
-
-    <div class="footer-column">
-      <h3>Partners</h3>
-      <li><a href="">CSK</a></li>
-      <li><a href="">KASNEB</a></li>
-      <li><a href="">TVETA</a></li>
-    </div>
-
-    <div class="footer-column">
+    <div>
       <h3>Contact Us</h3>
-      <p>+254723845040</p>
-      <p>+254700886058</p>
-      <p>+254793714564</p>
-      <p>ruralnet2016@gmail.com</p>
-      <p>ruralnet.co.ke</p>
+      <p>+254723845040<br>+254700886058<br>+254793714564<br>ruralnet2016@gmail.com<br>ruralnet.co.ke</p>
     </div>
-  </footer>
-</body>
-</html>
+  </div>
+</footer>
 
-    
+<div class="modal" id="viewerModal" onclick="if(event.target===this) closeViewer()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <strong id="viewerTitle">Resource Viewer</strong>
+      <button class="close" onclick="closeViewer()" aria-label="Close">×</button>
+    </div>
+    <div class="viewer" id="viewer"></div>
+  </div>
+</div>
+
+<script>
+const resources = [
+{title:`Full Notes`,url:`COMPERENSIVE LEARNERS COMPTETENCY GUIDE FOR ICT BEGINNERS.pdf`,category:`ICT Basics`},
+{title:`Introduction`,url:`https://www.just.edu.jo/~mqais/CIS99/PDF/Ch.01_Introduction_%20to_computers.pdf`,category:`ICT Basics`},
+{title:`Keyboarding skills`,url:`https://www.barnetlocaloffer.org.uk/senco_zone/documents/2044-keyboarding-skills.pdf`,category:`ICT Basics`},
+{title:`mouse`,url:`https://brimbanklibraries.vic.gov.au/wp-content/uploads/2024/11/Libraries-Unit-Computer-Class-Manual-Keyboard-and-Mouse-Skills.pdf`,category:`ICT Basics`},
+{title:`Operating systems`,url:`https://sriindu.ac.in/wp-content/uploads/2023/10/R20CSE2202-OPERATING-SYSTEMS.pdf`,category:`ICT Basics`},
+{title:`Word practical`,url:`word_pract.pdf`,category:`ICT Basics`},
+{title:`Excell Class Work template`,url:`excel_pract.xlsx`,category:`ICT Basics`},
+{title:`Excel classwork 2`,url:`excel_2.pdf`,category:`ICT Basics`},
+{title:`Access classwork`,url:`access_classwork.pdf`,category:`ICT Basics`},
+{title:`Access Practical`,url:`access_pract.pdf`,category:`ICT Basics`},
+{title:`Access Practical 1`,url:`access1.pdf`,category:`ICT Basics`},
+{title:`Access Practical 2`,url:`access2.pdf`,category:`ICT Basics`},
+{title:`Access Practical 3`,url:`access3.pdf`,category:`ICT Basics`},
+{title:`Access Practical 4`,url:`access4.pdf`,category:`ICT Basics`},
+{title:`Access Practical 5`,url:`ACCESS_SIMPLE.pdf`,category:`ICT Basics`},
+{title:`Publisher practical`,url:`cert_pub.pdf`,category:`ICT Basics`},
+{title:`Networking`,url:`https://www.ece.uvic.ca/~itraore/elec567-13/notes/dist-03-4.pdf`,category:`ICT Basics`},
+{title:`Internet`,url:`https://www.just.edu.jo/~mqais/cis99/pdf/internet.pdf`,category:`ICT Basics`},
+{title:`Mail Merge doc`,url:`mail_merge.pdf`,category:`ICT Basics`},
+{title:`Data Cleaning Template`,url:`Data_cleaning.xlsx`,category:`Data Analysis`},
+{title:`Classwork Template (Excel)`,url:`ways_to_clean_data.xlsx`,category:`Data Analysis`},
+{title:`Instructions to Classwork Template`,url:`data_cleaning_instructions.pdf`,category:`Data Analysis`},
+];
+
+const libraryInfo = {
+  "ICT Basics": {
+    icon:"📚",
+    description:"Computer & Office Applications — fundamentals, office applications and practical exercises."
+  },
+  "Graphic Designing": {
+    icon:"🎨",
+    description:"Creative Design & Publishing — design, illustration, publishing and presentation resources."
+  },
+  "Programming": {
+    icon:"💻",
+    description:"Coding & Web Development — web development and programming resources."
+  },
+  "Networking": {
+    icon:"🌐",
+    description:"Networks & Connectivity — networking concepts, tools and configuration resources."
+  },
+  "Data Analysis": {
+    icon:"📊",
+    description:"Data, Excel & Python — analysis notes, templates and practical data-cleaning resources."
+  }
+};
+
+function iconFor(url,title){
+  const u=(url||"").toLowerCase();
+  if(u.includes(".xlsx")||u.includes(".xls")) return "📊";
+  if(u.includes(".pdf")) return "📕";
+  if(u.includes(".doc")) return "📘";
+  if(/python|javascript|html|css|c\+\+|programming|web development/i.test(title)) return "💻";
+  if(/network|router|cisco|osi/i.test(title)) return "🌐";
+  if(/photoshop|illustrator|corel|publisher|powerpoint/i.test(title)) return "🎨";
+  return "📚";
+}
+function ext(url){
+  const clean=(url||"").split("?")[0].toLowerCase();
+  if(clean.endsWith(".pdf")) return "PDF";
+  if(clean.endsWith(".xlsx")||clean.endsWith(".xls")) return "EXCEL";
+  if(clean.endsWith(".doc")||clean.endsWith(".docx")) return "DOC";
+  return "RESOURCE";
+}
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+}
+function safeUrl(s){return escapeHtml(s);}
+
+function renderCards(items,targetId){
+  const grid=document.getElementById(targetId);
+  if(!items.length){
+    grid.innerHTML='<div class="empty"><div>🔎</div><h3>No resources found</h3><p>Try another search term.</p></div>';
+    return;
+  }
+  grid.innerHTML=items.map((r,i)=>`
+    <article class="card">
+      <div class="card-top">
+        <div class="file-icon">${iconFor(r.url,r.title)}</div>
+        <span class="type">${ext(r.url)}</span>
+      </div>
+      <div class="card-body">
+        <h3>${escapeHtml(r.title)}</h3>
+        <p>${escapeHtml(r.category)} • Learning resource</p>
+      </div>
+      <div class="card-actions">
+        <button class="btn btn-light" onclick="openViewer(${r.originalIndex})">View</button>
+        <a class="btn btn-primary" href="${safeUrl(r.url)}" target="_blank" rel="noopener" download>Download</a>
+      </div>
+    </article>`).join("");
+}
+
+function openCategory(category){
+  document.getElementById("searchResultsSection").style.display="none";
+  document.getElementById("subjectsSection").style.display="none";
+  const panel=document.getElementById("libraryPanel");
+  panel.classList.add("show");
+  document.getElementById("librarySection").scrollIntoView({behavior:"smooth",block:"start"});
+  const info=libraryInfo[category];
+  document.getElementById("libraryIcon").textContent=info.icon;
+  document.getElementById("libraryName").textContent=category;
+  document.getElementById("libraryDescription").textContent=info.description;
+  const items=resources.map((r,i)=>({...r,originalIndex:i})).filter(r=>r.category===category);
+  renderCards(items,"resourceGrid");
+}
+
+function closeLibrary(){
+  document.getElementById("libraryPanel").classList.remove("show");
+  document.getElementById("subjectsSection").style.display="";
+  window.scrollTo({top:document.getElementById("subjectsSection").offsetTop-80,behavior:"smooth"});
+}
+
+function globalSearch(){
+  const q=document.getElementById("searchInput").value.trim().toLowerCase();
+  const resultSection=document.getElementById("searchResultsSection");
+  const subjectSection=document.getElementById("subjectsSection");
+  const libraryPanel=document.getElementById("libraryPanel");
+
+  if(!q){
+    clearSearch();
+    return;
+  }
+  libraryPanel.classList.remove("show");
+  subjectSection.style.display="none";
+  resultSection.style.display="block";
+  const results=resources.map((r,i)=>({...r,originalIndex:i})).filter(r=>
+    r.title.toLowerCase().includes(q) ||
+    r.category.toLowerCase().includes(q) ||
+    r.url.toLowerCase().includes(q)
+  );
+  document.getElementById("searchResultText").textContent=`${results.length} resource${results.length===1?"":"s"} found for "${q}"`;
+  renderCards(results,"searchGrid");
+}
+
+function clearSearch(){
+  document.getElementById("searchInput").value="";
+  document.getElementById("searchResultsSection").style.display="none";
+  document.getElementById("subjectsSection").style.display="";
+}
+
+function openViewer(index){
+  const r=resources[index];
+  document.getElementById("viewerTitle").textContent=r.title;
+  const lower=r.url.toLowerCase();
+  let content="";
+  if(lower.endsWith(".pdf")){
+    content=`<iframe src="${safeUrl(r.url)}" title="${escapeHtml(r.title)}"></iframe>`;
+  }else{
+    content=`<div class="fallback"><div style="font-size:52px">${iconFor(r.url,r.title)}</div><h3>${escapeHtml(r.title)}</h3><p>This resource is available for download or opening in a new tab.</p><a class="btn btn-primary" style="display:inline-block;max-width:220px" href="${safeUrl(r.url)}" target="_blank" rel="noopener">Open Resource</a></div>`;
+  }
+  document.getElementById("viewer").innerHTML=content;
+  document.getElementById("viewerModal").classList.add("show");
+}
+function closeViewer(){
+  document.getElementById("viewerModal").classList.remove("show");
+  document.getElementById("viewer").innerHTML="";
+}
+function toggleMenu(){document.getElementById("navLinks").classList.toggle("open")}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeViewer()});
+
+document.getElementById("totalCount").textContent=resources.length;
+</script>
 </body>
 </html>
