@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruralnet Training College - Bridge Between the Rural and Digital World</title>
+<meta name="description" content="Bridge between rural and digital world">
+<meta name="theme-color" content="#05524A">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<style>
+:root{--navy:#05524A;--navy-light:#1E625B;--navy-dark:#033B35;--gold:#FFBF29;--gold-light:#FFD15B;--gold-dark:#D79C17}
+body{font-family:'Inter',system-ui,sans-serif}
+.js [data-reveal]{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;transition-delay:var(--reveal-delay,0ms)}
+.js [data-reveal].is-visible{opacity:1;transform:none}
+.js section[data-reveal]{opacity:1;transform:none;transition:none}
+@media (prefers-reduced-motion:reduce){.js [data-reveal]{opacity:1;transform:none;transition:none}}
+[x-cloak]{display:none!important}
+</style>
+</head>
+<body class="flex min-h-screen flex-col bg-[#f4f8f6] antialiased">
+
+<!-- Navigation -->
+<nav x-data="{mobile:false}" class="sticky top-0 z-50 border-b border-[#d9e4e1] bg-[linear-gradient(180deg,rgba(240,247,245,.98),rgba(255,255,255,.98))] text-[var(--navy)] shadow-[0_14px_34px_-34px_rgba(5,82,74,.34)]">
+ <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(255,191,41,.55),transparent)]"></div>
+ <div class="relative mx-auto max-w-[1500px] px-4 sm:px-6 xl:px-8">
+  <div class="flex h-20 items-center justify-between">
+   <a href="https://ruralnet.co.ke/" class="flex items-center"><img src="images/RURALNET.png" alt="Ruralnet Training College logo" class="h-14 w-auto object-contain sm:h-16"></a>
+   <div class="hidden items-center gap-7 text-[0.93rem] font-semibold lg:flex">
+    <a href="https://ruralnet.co.ke/" class="transition-colors hover:text-[var(--gold-dark)]">Home</a>
+    <a href="/About_Us/" class="transition-colors hover:text-[var(--gold-dark)]">About Us</a>
+    <div class="relative" x-data="{o:false}" @click.outside="o=false">
+     <button @click="o=!o" class="inline-flex items-center gap-1 transition-colors hover:text-[var(--gold-dark)]" :aria-expanded="o.toString()">Learning Resources <span aria-hidden="true">▾</span></button>
+     <div x-cloak x-show="o" x-transition class="absolute left-0 top-full mt-3 w-48 rounded-xl border border-[#d9e4e1] bg-white p-2 shadow-xl">
+      <a href="/verify/" target="_blank" class="block rounded-lg px-3 py-2 hover:bg-[#f4f8f6] hover:text-[var(--gold-dark)]">E-Library</a>
+      <a href="COMPUTER COURSE OUTLINE.pdf" target="_blank" class="block rounded-lg px-3 py-2 hover:bg-[#f4f8f6] hover:text-[var(--gold-dark)]">Course Outline</a>
+      <a href="FLIER.pdf" target="_blank" class="block rounded-lg px-3 py-2 hover:bg-[#f4f8f6] hover:text-[var(--gold-dark)]">Brochure</a>
+      <a href="FEE_STRUCTURE.pdf" target="_blank" class="block rounded-lg px-3 py-2 hover:bg-[#f4f8f6] hover:text-[var(--gold-dark)]">Fee Structure</a>
+     </div>
+    </div>
+    <div class="relative" x-data="{o:false}" @click.outside="o=false">
+     <button @click="o=!o" class="inline-flex items-center gap-1 transition-colors hover:text-[var(--gold-dark)]" :aria-expanded="o.toString()">Portals <span aria-hidden="true">▾</span></button>
+     <div x-cloak x-show="o" x-transition class="absolute left-0 top-full mt-3 w-40 rounded-xl border border-[#d9e4e1] bg-white p-2 shadow-xl">
+      <a href="students/" target="_blank" class="block rounded-lg px-3 py-2 hover:bg-[#f4f8f6] hover:text-[var(--gold-dark)]">Student</a>
+      <a href="employees/" target="_blank" class="block rounded-lg px-3 py-2 hover:bg-[#f4f8f6] hover:text-[var(--gold-dark)]">Staff</a>
+     </div>
+    </div>
+    <a href="https://www.computerworld.com/" target="_blank" rel="noopener" class="transition-colors hover:text-[var(--gold-dark)]">News &amp; Updates</a>
+    <a href="announcements.html" class="transition-colors hover:text-[var(--gold-dark)]">Announcements</a>
+    <a href="https://forms.gle/wywREJiHrpFTF5veA" class="rounded-xl bg-[var(--gold)] px-6 py-3 text-sm font-bold text-[var(--navy-dark)] shadow-[0_16px_32px_-20px_rgba(255,191,41,.82)] transition-all hover:-translate-y-0.5 hover:bg-[var(--gold-light)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] focus-visible:ring-offset-2">Apply Now</a>
+   </div>
+   <button type="button" @click="mobile=!mobile" class="inline-flex rounded-md p-2 text-gray-600 hover:bg-[#edf6f4] focus:outline-none focus:ring-2 focus:ring-[var(--gold)] lg:hidden" aria-controls="mobile-menu" :aria-expanded="mobile.toString()">
+    <span class="sr-only">Open main menu</span>
+    <svg x-show="!mobile" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    <svg x-cloak x-show="mobile" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+   </button>
+  </div>
+ </div>
+ <div id="mobile-menu" x-cloak x-show="mobile" x-transition @click.outside="mobile=false" class="absolute left-0 top-20 max-h-[80vh] w-full overflow-y-auto border-b border-[#d9e4e1] bg-[#fbfdfc] shadow-lg lg:hidden">
+  <div class="space-y-1 px-2 py-3 text-base font-medium">
+   <a href="https://ruralnet.co.ke/" class="block rounded-md px-3 py-2 hover:bg-[#f8fbf9]">Home</a>
+   <a href="/About_Us/" class="block rounded-md px-3 py-2 hover:bg-[#f8fbf9]">About Us</a>
+   <p class="px-3 pt-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Learning Resources</p>
+   <a href="/verify/" class="block rounded-md px-6 py-2 hover:bg-[#f8fbf9]">E-Library</a>
+   <a href="COMPUTER COURSE OUTLINE.pdf" class="block rounded-md px-6 py-2 hover:bg-[#f8fbf9]">Course Outline</a>
+   <a href="FLIER.pdf" class="block rounded-md px-6 py-2 hover:bg-[#f8fbf9]">Brochure</a>
+   <a href="FEE_STRUCTURE.pdf" class="block rounded-md px-6 py-2 hover:bg-[#f8fbf9]">Fee Structure</a>
+   <p class="px-3 pt-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Portals</p>
+   <a href="students/" class="block rounded-md px-6 py-2 hover:bg-[#f8fbf9]">Student</a>
+   <a href="employees/" class="block rounded-md px-6 py-2 hover:bg-[#f8fbf9]">Staff</a>
+   <a href="https://www.computerworld.com/" class="block rounded-md px-3 py-2 hover:bg-[#f8fbf9]">News &amp; Updates</a>
+   <a href="announcements.html" class="block rounded-md px-3 py-2 hover:bg-[#f8fbf9]">Announcements</a>
+   <a href="https://forms.gle/wywREJiHrpFTF5veA" class="block rounded-md bg-[var(--gold)] px-3 py-2 text-center font-bold text-[var(--navy-dark)]">Apply Now</a>
+  </div>
+ </div>
+</nav>
+
+<main class="flex-grow">
+
+<!-- Hero -->
+<section class="border-b border-[#dbe7e1]/80 bg-[#f5faf8] py-2 sm:py-3" aria-labelledby="hero-h">
+ <div class="mx-auto max-w-[1500px] px-4 sm:px-6 xl:px-8">
+  <div class="relative overflow-hidden rounded-[2.15rem] border border-[#dbe7e1]/80 bg-[linear-gradient(180deg,#fff,#f7fbf9)] shadow-[0_34px_84px_-70px_rgba(5,82,74,.24)]">
+   <div class="pointer-events-none absolute -right-8 top-10 h-44 w-44 rounded-full bg-[#f9efcb] blur-3xl"></div>
+   <div class="pointer-events-none absolute left-2 top-1/4 h-36 w-36 rounded-full bg-[#e2f0ec] blur-3xl"></div>
+   <div class="grid items-start gap-6 px-5 py-6 sm:px-7 lg:grid-cols-[.84fr_1.16fr] lg:gap-9 lg:px-8 xl:gap-12 xl:px-12 xl:py-8">
+    <div class="max-w-[34rem]" data-reveal>
+     <p class="inline-flex rounded-full border border-[#d8e6df] bg-white px-4 py-2 text-[.68rem] font-semibold uppercase tracking-[.18em] text-[var(--gold-dark)]">January Intake Ongoing</p>
+     <h1 id="hero-h" class="mt-5 max-w-[11ch] text-[clamp(2.45rem,3.95vw,4.55rem)] font-extrabold leading-[.9] tracking-[-.05em] text-[var(--navy)]">Bridge Between the Rural and the <span class="text-[var(--gold-dark)]">Digital World</span></h1>
+     <p class="mt-4 max-w-[29rem] text-base leading-7 text-slate-600">Ruralnet ICT Academy offers hands-on training in ICT, web development, programming, graphic design, networking, accounting, computer repair and data analysis.</p>
+     <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+      <a href="#programmes" class="group inline-flex min-h-[3.05rem] items-center justify-center gap-2 rounded-xl bg-[var(--navy)] px-5 py-3 text-sm font-semibold text-white shadow-[0_15px_32px_-24px_rgba(5,82,74,.34)] transition hover:-translate-y-0.5 hover:bg-[var(--navy-light)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--navy)] focus-visible:ring-offset-2 sm:min-w-[11.25rem]">Explore Programmes <span class="transition group-hover:translate-x-0.5">→</span></a>
+      <a href="FLIER.pdf" target="_blank" class="inline-flex min-h-[3.05rem] items-center justify-center gap-2 rounded-xl border border-[var(--gold)]/75 bg-white px-5 py-3 text-sm font-semibold text-[var(--navy)] transition hover:-translate-y-0.5 hover:border-[var(--gold-dark)] hover:bg-[#fff9e7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] focus-visible:ring-offset-2 sm:min-w-[11.25rem]">Download Brochure</a>
+     </div>
+     <p class="mt-4 max-w-[28rem] border-t border-[#dbe7e1]/80 pt-3 text-[.9rem] font-medium leading-6 text-slate-500">KASNEB exam centre &bull; Hands-on training &bull; Affordable packages</p>
+    </div>
+
+    <div class="relative lg:justify-self-end" data-reveal style="--reveal-delay:120ms">
+     <div class="relative mx-auto w-full max-w-[720px] xl:max-w-[900px]"
+      x-data="{i:0,n:17,t:null,start(){this.t=setInterval(()=>this.i=(this.i+1)%this.n,3000)},stop(){clearInterval(this.t)}}" x-init="if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)start()" @mouseenter="stop()" @mouseleave="if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)start()">
+      <div class="absolute inset-y-5 left-6 right-1 rounded-[2.35rem] border border-white/70 bg-[linear-gradient(180deg,rgba(229,241,237,.95),rgba(248,251,249,.72))]"></div>
+      <div class="relative overflow-hidden rounded-[2.15rem] border border-[#dbe7e1]/80 bg-white/95 p-3 shadow-[0_30px_64px_-46px_rgba(5,82,74,.22)] lg:p-4">
+       <div class="relative h-[285px] overflow-hidden rounded-[1.7rem] border border-[#e1ebe7] bg-[#edf4f1] sm:h-[360px] lg:h-[430px] xl:h-[500px]">
+        <template x-for="k in n" :key="k">
+         <img :src="'images/c'+(k-1)+'.jpg'" :alt="'Ruralnet ICT Academy slide '+k" loading="lazy" x-show="i===k-1" x-transition.opacity.duration.700ms class="absolute inset-0 h-full w-full object-cover">
+        </template>
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[var(--navy)]/20 to-transparent"></div>
+       </div>
+       <div class="absolute left-3 right-3 bottom-[4.95rem] rounded-2xl border border-[#dbe7e1]/85 bg-white/95 px-3 py-2 shadow-lg sm:left-5 sm:right-auto sm:top-5 sm:bottom-auto sm:max-w-[150px]">
+        <p class="text-[.5rem] font-semibold uppercase tracking-[.13em] text-[var(--gold-dark)]">Programmes</p>
+        <p class="mt-1 flex items-start gap-1.5 text-[.74rem] font-semibold leading-snug text-[var(--navy)]"><span class="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-[var(--gold-dark)]"></span>8 Career-Focused Programmes</p>
+       </div>
+       <div class="absolute left-3 right-3 bottom-3 rounded-2xl border border-[#dbe7e1]/85 bg-white/95 px-3 py-2 shadow-lg sm:left-auto sm:right-5 sm:bottom-5 sm:max-w-[150px]">
+        <p class="text-[.5rem] font-semibold uppercase tracking-[.13em] text-[var(--gold-dark)]">Special Offer</p>
+        <p class="mt-1 flex items-start gap-1.5 text-[.74rem] font-semibold leading-snug text-[var(--navy)]"><span class="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-[var(--gold-dark)]"></span>Pay for Essentials, get Photoshop free</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+
+   <!-- Stats strip -->
+   <div class="relative z-10 px-5 pb-4 sm:px-7 lg:-mt-10 lg:px-8 xl:px-12 xl:pb-6" data-reveal style="--reveal-delay:180ms" x-data="{stats:[{n:7000,l:'Students trained'},{n:1,l:'Branch'},{n:2,l:'Schools'}]}">
+    <ul class="grid gap-px overflow-hidden rounded-[1.05rem] border border-[#dbe7e1]/65 bg-[#dbe7e1]/55 sm:grid-cols-2 lg:grid-cols-4" role="list">
+     <template x-for="s in stats"><li class="flex items-center gap-2.5 bg-white/95 px-3 py-3">
+      <span class="inline-flex h-9 min-w-9 flex-none items-center justify-center rounded-md bg-[#fff6dc] px-2 text-sm font-bold text-[var(--gold-dark)]"><span class="counter" :data-target="s.n">0</span><span x-show="s.n>=1000">+</span></span>
+      <p class="text-[.84rem] font-semibold leading-5 text-[var(--navy)]" x-text="s.l"></p></li></template>
+     <li class="flex items-center gap-2.5 bg-white/95 px-3 py-3"><span class="inline-flex h-9 w-9 flex-none items-center justify-center rounded-md bg-[#fff6dc] text-lg text-[var(--gold-dark)]">★</span><p class="text-[.84rem] font-semibold leading-5 text-[var(--navy)]">Pay for Essentials, get Photoshop free!</p></li>
+    </ul>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- Partners -->
+<section class="bg-[var(--navy)] py-16 text-white" data-reveal>
+ <div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+  <h2 class="mb-4 text-3xl font-bold text-[var(--gold)] md:text-4xl">Our Partners</h2>
+  <p class="mx-auto mb-10 max-w-3xl text-gray-200">Our training is aligned to recognized regulators, examining bodies and industry partners so your qualification stays credible and career-focused.</p>
+  <div class="grid grid-cols-1 gap-5 text-left sm:grid-cols-3" x-data="{p:[['CSK','https://www.cskonline.org/','Computer Society of Kenya, professional ICT community and standards.'],['KASNEB','https://kasneb.or.ke/','Professional certification for accounting and business. Accredited exam centre.'],['TVETA','https://www.tveta.go.ke/','National TVET regulatory oversight and quality assurance.']]}">
+   <template x-for="x in p"><a :href="x[1]" target="_blank" rel="noopener noreferrer" class="block h-full rounded-2xl border border-white/20 bg-white/12 p-5 transition duration-300 hover:-translate-y-1 hover:bg-white/16">
+    <h3 class="mb-2 text-lg font-bold text-[var(--gold)]" x-text="x[0]"></h3><p class="text-sm leading-relaxed text-gray-200" x-text="x[2]"></p></a></template>
+  </div>
+ </div>
+</section>
+
+<!-- Programmes -->
+<section id="programmes" class="bg-white py-20" data-reveal x-data="{p:[
+{t:'Introduction to Computers / ICT Basics',d:'Start from zero and build confident everyday computer skills.',i:['Computer basic operations','Operating systems: Windows, Macintosh, Linux, Ubuntu','Microsoft Office Suite applications','Database Management Systems (Microsoft Access), with an encrypted system-based project','Networking and Internet','ICT ethics and data security measures']},
+{t:'Web Development',d:'Design and ship real websites from the first lesson.',i:['Introduction to websites and related terminologies','Webpage editors, IDEs and web browsers','HyperText Markup Language (HTML) for text and readable tags in a webpage','Cascading Style Sheets (CSS) for attractive page display','JavaScript for page interaction and logical operations','Firebase for database handling and storage']},
+{t:'Programming',d:'Learn the languages and tools developers use every day.',i:['Python','JavaScript','Modern programming tools','React','NodeJS','Django','GitHub','Firebase']},
+{t:'Graphic Designing',d:'Create visuals, logos and technical drawings.',i:['Adobe Photoshop','Adobe Illustrator','CorelDRAW','AutoCAD','ArchiCAD']},
+{t:'Networking',d:'Plan, configure and troubleshoot networks.',i:['CISCO modules','Networking tools','IP configurations and broadband grouping','Wireless technology','Networks beyond WLAN','ISP technology','Network diagnosis','Closed Circuit Television (CCTV)']},
+{t:'Accounting',d:'KASNEB-accredited exam centre for accounting qualifications.',i:['Certificate in Accounting Management (CAM)','Accounting Technician Diploma (ATD)','Certified Public Accountant (CPA)','Accredited KASNEB exam centre','QuickBooks','Accounting systems connection and diagnosis']},
+{t:'Computer Repair &amp; Maintenance',d:'Fix, assemble and maintain computers with confidence.',i:['Parts of a computer','Assembling and disassembling','PCB and its components','Software-hardware compatibility','Systematic approach to problem solving','Safe hardware handling','BSoD fix']},
+{t:'Data Analysis',d:'Turn raw data into clear, usable answers.',i:['Excel','SQL','Python','Fundamental concepts','Data cleaning','Transformation','Statistical analysis']}]}">
+ <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <div class="mb-12 text-center">
+   <h2 class="mb-4 text-3xl font-bold text-[var(--navy)] md:text-4xl">Available Programmes</h2>
+   <p class="mx-auto max-w-2xl text-lg text-gray-600">Explore our industry-relevant ICT and accounting programmes.</p>
+  </div>
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+   <template x-for="x in p" :key="x.t"><article class="group flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-gray-50 shadow-[0_18px_42px_-34px_rgba(5,82,74,.2)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-34px_rgba(5,82,74,.26)]">
+    <div class="relative flex h-24 items-end bg-gradient-to-br from-[var(--navy)] to-[var(--navy-light)] p-5">
+     <span class="rounded-full bg-white/92 px-3 py-1 text-xs font-semibold text-[var(--navy)]" x-text="x.i.length+' Topics'"></span>
+    </div>
+    <div class="flex flex-1 flex-col p-6">
+     <h3 class="mb-2 text-xl font-bold text-[var(--navy)]" x-html="x.t"></h3>
+     <p class="mb-4 text-sm text-gray-600" x-text="x.d"></p>
+     <ul class="mb-2 space-y-1.5 text-sm text-slate-600">
+      <template x-for="y in x.i"><li class="flex gap-2"><span class="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[var(--gold-dark)]"></span><span x-text="y"></span></li></template>
+     </ul>
+    </div>
+   </article></template>
+  </div>
+ </div>
+</section>
+
+<!-- Packages -->
+<section id="packages" class="bg-[linear-gradient(180deg,#fff_0%,#f5faf8_100%)] py-20" data-reveal>
+ <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <div class="mb-12 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+   <div class="max-w-3xl">
+    <span class="inline-flex rounded-full border border-[var(--gold)]/25 bg-[var(--gold)]/10 px-4 py-1 text-xs font-semibold uppercase tracking-[.18em] text-[var(--gold-dark)]">Course Synopsis</span>
+    <h2 class="mt-4 text-3xl font-bold text-[var(--navy)] md:text-4xl">Course Packages</h2>
+    <p class="mt-4 text-lg text-gray-600">Choose the package that fits your goals. Pay for Essentials and get the Photoshop course free.</p>
+   </div>
+   <a href="FEE_STRUCTURE.pdf" target="_blank" class="inline-flex items-center justify-center rounded-xl border border-[var(--navy)]/15 bg-white px-6 py-3 font-semibold text-[var(--navy)] transition hover:-translate-y-0.5 hover:border-[var(--gold)]/40 hover:text-[var(--gold-dark)]">View Fee Structure</a>
+  </div>
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3" x-data="{k:[
+{n:'ICT Essentials II',tag:'Most complete',price:'Kshs. 6,600',f:[[1,'Introduction to computers'],[1,'ICT resources operation mastery'],[1,'ICT ethics and security'],[1,'Full knowledge of computer packages'],[1,'Internet essentials'],[1,'Networking'],[1,'Secured system-based project'],[1,'Deep diving into applications'],[1,'Modern tech tools'],[1,'FREE Photoshop course']]},
+{n:'ICT Essentials I',tag:'Computer basics',price:'Kshs. 4,500',f:[[1,'Introduction to computers'],[1,'Computer packages'],[1,'Internet basics'],[0,'Networking'],[0,'Project'],[0,'Deep diving into applications'],[0,'Modern tech tools']]},
+{n:'Advanced Courses',tag:'Special courses',price:'Fee varies by course',f:[[1,'Web development, programming and data analysis'],[1,'Graphic design and networking'],[1,'Accounting (KASNEB) and computer repair']]}]}">
+   <template x-for="c in k" :key="c.n"><article class="flex h-full flex-col overflow-hidden rounded-[1.6rem] border border-slate-200 bg-white shadow-[0_20px_44px_-38px_rgba(5,82,74,.16)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_26px_56px_-38px_rgba(5,82,74,.24)]">
+    <div class="bg-gradient-to-br from-[var(--navy)] to-[var(--navy-light)] p-6 text-white">
+     <span class="rounded-full bg-[var(--gold)]/20 px-3 py-1 text-xs font-semibold text-[var(--gold-light)]" x-text="c.tag"></span>
+     <h3 class="mt-4 text-xl font-bold" x-text="c.n"></h3>
+     <p class="mt-1 text-2xl font-extrabold text-[var(--gold)]" x-text="c.price"></p>
+    </div>
+    <ul class="flex-1 space-y-2.5 p-6 text-sm text-slate-600">
+     <template x-for="f in c.f"><li class="flex gap-2.5"><span class="font-bold" :class="f[0]?'text-[var(--navy)]':'text-slate-300'" x-text="f[0]?'✓':'✕'"></span><span :class="f[0]?'':'text-slate-400'" x-text="f[1]"></span></li></template>
+    </ul>
+    <div class="border-t border-slate-100 p-6"><a href="https://forms.gle/wywREJiHrpFTF5veA" class="inline-flex w-full items-center justify-center rounded-xl bg-[var(--navy)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[var(--navy-light)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--navy)] focus-visible:ring-offset-2">Apply for this package</a></div>
+   </article></template>
+  </div>
+ </div>
+</section>
+
+<!-- Location -->
+<section class="bg-gray-50 py-20" data-reveal>
+ <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+  <div>
+   <h2 class="mb-4 text-3xl font-bold text-[var(--navy)] md:text-4xl">Where to Find Us</h2>
+   <p class="text-lg leading-8 text-gray-600">KWFT is on the ground floor and Matibabu Hospital on the first floor. <strong class="text-[var(--navy)]">Ruralnet ICT Academy</strong> is on the second floor of Oguya Plaza, the tall building beside Wells Petrol Station, opposite Easy Coach and Guardian Booking Offices.</p>
+   <ul class="mt-6 space-y-2 font-semibold text-[var(--navy)]">
+    <li><a href="tel:+254723845040" class="hover:text-[var(--gold-dark)]">+254 723 845040</a></li>
+    <li><a href="tel:+254700886058" class="hover:text-[var(--gold-dark)]">+254 700 886058</a></li>
+    <li><a href="tel:+254793714564" class="hover:text-[var(--gold-dark)]">+254 793 714564</a></li>
+    <li><a href="mailto:ruralnet2016@gmail.com" class="hover:text-[var(--gold-dark)]">ruralnet2016@gmail.com</a></li>
+   </ul>
+  </div>
+  <div class="overflow-hidden rounded-2xl border border-[#dbe7e1] bg-white shadow-lg">
+   <iframe title="Ruralnet IT Services and Academy location" class="h-80 w-full lg:h-full lg:min-h-[22rem]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.798716585544!2d34.29549147494557!3d0.17961016421947956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177fee707dda6723%3A0x7661927a7a412ea0!2sRuralNet%20IT%20Services%20%26%20Academy!5e0!3m2!1sen!2ske!4v1764222258833!5m2!1sen!2ske" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+ </div>
+</section>
+
+<!-- CTA -->
+<section class="bg-gradient-to-br from-[var(--navy)] to-[var(--navy-light)] py-20 text-white" data-reveal>
+ <div class="mx-auto max-w-4xl px-4 text-center">
+  <h2 class="mb-6 text-3xl font-bold md:text-4xl">Ready to Start Your Journey?</h2>
+  <p class="mb-8 text-xl text-gray-300">Join thousands of students trained at Ruralnet. Apply now and secure your spot for the next intake.</p>
+  <a href="https://forms.gle/wywREJiHrpFTF5veA" class="inline-flex items-center rounded-xl bg-[var(--gold)] px-10 py-5 text-lg font-bold text-[var(--navy)] shadow-xl transition hover:scale-105 hover:bg-[var(--gold-light)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--navy)]">Apply Today</a>
+ </div>
+</section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-[var(--navy)] py-12 text-white">
+ <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
+   <div>
+    <div class="mb-4 flex items-center gap-3"><img src="images/RURALNET.png" alt="Ruralnet logo" class="h-10 w-auto rounded-lg bg-white p-1"><span class="text-xl font-bold">Ruralnet ICT Academy</span></div>
+    <p class="text-sm text-gray-400">Bridge between the rural and the digital world.</p>
+    <div class="mt-4 flex gap-4 text-sm text-gray-400">
+     <a href="https://www.facebook.com/share/1E8gXDYugw/" class="hover:text-[var(--gold)]">Facebook</a>
+     <a href="https://www.tiktok.com/@olly_766?lang=en" class="hover:text-[var(--gold)]">TikTok</a>
+     <a href="https://www.instagram.com/boaz4113?igsh=emdmdmdnZ3E5eGZh" class="hover:text-[var(--gold)]">Instagram</a>
+     <a href="https://www.linkedin.com/in/boaz-vidal-tirone-hastin-35b75b280" class="hover:text-[var(--gold)]">LinkedIn</a>
+    </div>
+   </div>
+   <div><h4 class="mb-4 font-bold">Useful Links</h4><ul class="space-y-2 text-sm text-gray-400">
+    <li><a href="https://ruralnet.co.ke/" class="hover:text-[var(--gold)]">Home</a></li>
+    <li><a href="About_Us/" class="hover:text-[var(--gold)]">Who We Are</a></li>
+    <li><a href="students/" target="_blank" class="hover:text-[var(--gold)]">Student Portal</a></li>
+    <li><a href="https://www.kasneb.or.ke/" target="_blank" class="hover:text-[var(--gold)]">Accounting</a></li>
+    <li><a href="https://www.cisco.com/" target="_blank" class="hover:text-[var(--gold)]">ICT</a></li></ul></div>
+   <div><h4 class="mb-4 font-bold">Partners</h4><ul class="space-y-2 text-sm text-gray-400">
+    <li><a href="https://www.cskonline.org/" class="hover:text-[var(--gold)]">CSK</a></li>
+    <li><a href="https://kasneb.or.ke/" class="hover:text-[var(--gold)]">KASNEB</a></li>
+    <li><a href="https://www.tveta.go.ke/" class="hover:text-[var(--gold)]">TVETA</a></li></ul></div>
+   <div><h4 class="mb-4 font-bold">Contact Us</h4><ul class="space-y-2 text-sm text-gray-400">
+    <li>+254723845040</li><li>+254700886058</li><li>ruralnet2016@gmail.com</li><li>ruralnet.co.ke</li></ul></div>
+  </div>
+  <div class="mt-8 border-t border-white/10 pt-8 text-center text-sm text-gray-400">© 2025 Ruralnet ICT Academy. All rights reserved.</div>
+ </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<div class="fixed bottom-4 right-4 z-[100] md:bottom-6 md:right-6">
+ <a href="https://wa.me/254723845040" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" class="flex items-center justify-center rounded-full bg-[#25D366] p-3 text-white shadow-[0_8px_24px_rgb(37,211,102,.24)] transition hover:-translate-y-1 hover:bg-[#20bd5a] md:p-4">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 md:h-10 md:w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+ </a>
+</div>
+
+<script>
+(() => {
+ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+ // Scroll reveal (same pattern as the ICS page)
+ const sel = '[data-reveal]:not(section)';
+ const els = document.querySelectorAll(sel);
+ if (reduce || !('IntersectionObserver' in window)) els.forEach(e => e.classList.add('is-visible'));
+ else {
+  const io = new IntersectionObserver((en, o) => en.forEach(x => { if (x.isIntersecting) { x.target.classList.add('is-visible'); o.unobserve(x.target); } }), {threshold: .05, rootMargin: '0px 0px 12% 0px'});
+  els.forEach(e => io.observe(e));
+ }
+ // Stat counters: count up once when the strip scrolls into view
+ const run = el => {
+  const target = +el.dataset.target;
+  if (reduce) { el.textContent = target.toLocaleString(); return; }
+  const t0 = performance.now(), dur = 1600;
+  const step = now => { const p = Math.min((now - t0) / dur, 1); el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))).toLocaleString(); if (p < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+ };
+ addEventListener('alpine:initialized', () => {
+  const cs = document.querySelectorAll('.counter');
+  const co = new IntersectionObserver((en, o) => en.forEach(x => { if (x.isIntersecting) { run(x.target); o.unobserve(x.target); } }), {threshold: .5});
+  cs.forEach(c => co.observe(c));
+ });
+})();
+</script>
+</body>
+</html>
