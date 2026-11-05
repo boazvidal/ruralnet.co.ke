@@ -1607,40 +1607,27 @@ logoutBtn.addEventListener(
         logoutBtn.textContent =
             "Logging out...";
 
-
-
         try {
-
-
             /* ==============================
                FIREBASE SIGN OUT
             ============================== */
-
             await signOut(
                 auth
             );
 
-
-
             /* ==============================
                REDIRECT TO LOGIN
             ============================== */
-
             window.location.replace(
                 LOGIN_PAGE
             );
-
-
         }
-
         catch (error) {
-
 
             console.error(
                 "Logout Error:",
                 error
             );
-
 
             /* ==============================
                SHOW ERROR
@@ -1649,28 +1636,19 @@ logoutBtn.addEventListener(
             errorBox.textContent =
                 "Logout failed. Please try again.";
 
-
             /* ==============================
                ENABLE BUTTON AGAIN
             ============================== */
-
             logoutBtn.disabled =
                 false;
 
             logoutBtn.textContent =
                 "Logout";
-
         }
-
     }
-
 );
-
-
 </script>
-
 
 </body>
 
 </html>
-```
