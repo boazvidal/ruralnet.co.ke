@@ -1443,17 +1443,12 @@ const firebaseConfig = {
 /* ==========================================
    INITIALIZE FIREBASE
 ========================================== */
-
 const app =
     initializeApp(
         firebaseConfig
     );
-
-
 const auth =
     getAuth(app);
-
-
 
 /* ==========================================
    LOGIN PAGE LOCATION
@@ -1492,8 +1487,6 @@ const errorBox =
         "error"
     );
 
-
-
 /* ==========================================
    LOGOUT BUTTON
 ========================================== */
@@ -1503,70 +1496,44 @@ const logoutBtn =
         "logoutBtn"
     );
 
-
-
 /* ==========================================
    PROTECT RESOURCES PAGE
-
    Firebase checks whether a valid
    authenticated session exists.
-
 ========================================== */
-
 onAuthStateChanged(
-
     auth,
-
     (user) => {
-
-
         /* ==================================
            USER NOT AUTHENTICATED
         ================================== */
 
         if (!user) {
-
-
             // Redirect immediately
             // to Staff Login
-
             window.location.replace(
                 LOGIN_PAGE
             );
-
-
             return;
-
         }
-
-
 
         /* ==================================
            USER IS AUTHENTICATED
         ================================== */
-
         console.log(
             "Authenticated Staff:",
             user.email
         );
 
-
-
         /* ==================================
            HIDE AUTHENTICATION LOADING SCREEN
-
            Only authenticated users reach here.
         ================================== */
-
         authLoading.style.display =
             "none";
-
-
     }
 
 );
-
-
 
 /* ==========================================
    LOGOUT FUNCTION
@@ -1575,9 +1542,7 @@ onAuthStateChanged(
 logoutBtn.addEventListener(
 
     "click",
-
     async () => {
-
 
         /* ==================================
            CONFIRM LOGOUT
@@ -1594,8 +1559,6 @@ logoutBtn.addEventListener(
             return;
 
         }
-
-
 
         /* ==================================
            DISABLE BUTTON
