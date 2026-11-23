@@ -36,11 +36,104 @@
 html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-sans);
-  background-color: var(--bg-dark);
+  background: transparent;
   color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  position: relative;
+  isolation: isolate;
+}
+
+/* Animated technology background */
+.tech-motion-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 20%, rgba(20,184,166,.13), transparent 38%),
+    radial-gradient(ellipse at 85% 72%, rgba(56,189,248,.11), transparent 35%),
+    linear-gradient(135deg, #080d16 0%, #0b1421 48%, #080f1b 100%);
+}
+.tech-motion-bg::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background-image:
+    linear-gradient(rgba(20,184,166,.075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20,184,166,.075) 1px, transparent 1px);
+  background-size: 58px 58px;
+  transform: perspective(700px) rotateX(58deg) scale(1.6);
+  transform-origin: center center;
+  animation: tech-grid-drift 20s linear infinite;
+  mask-image: linear-gradient(to bottom, transparent 5%, #000 38%, #000 75%, transparent 100%);
+}
+.tech-motion-bg::after {
+  content: "";
+  position: absolute;
+  width: 58vw;
+  height: 58vw;
+  min-width: 420px;
+  min-height: 420px;
+  top: -24%;
+  left: -12%;
+  border: 1px solid rgba(20,184,166,.16);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 55px rgba(20,184,166,.025),
+    0 0 0 110px rgba(56,189,248,.025),
+    inset 0 0 90px rgba(20,184,166,.045);
+  animation: tech-orbit 28s linear infinite;
+}
+.tech-orb {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  filter: blur(75px);
+  opacity: .22;
+  animation: tech-float 13s ease-in-out infinite alternate;
+}
+.tech-orb.orb-one {
+  background: #0d9488;
+  top: 12%;
+  right: -120px;
+}
+.tech-orb.orb-two {
+  background: #2563eb;
+  bottom: -150px;
+  left: 22%;
+  animation-delay: -7s;
+}
+.tech-orb.orb-three {
+  width: 180px;
+  height: 180px;
+  background: #06b6d4;
+  top: 48%;
+  left: 8%;
+  opacity: .13;
+  animation-delay: -3s;
+}
+@keyframes tech-grid-drift {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 0 58px, 58px 0; }
+}
+@keyframes tech-orbit {
+  from { transform: rotate(0deg) scale(1); }
+  to { transform: rotate(360deg) scale(1.06); }
+}
+@keyframes tech-float {
+  0% { transform: translate3d(0, 0, 0) scale(.9); }
+  100% { transform: translate3d(-55px, 45px, 0) scale(1.16); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tech-motion-bg::before,
+  .tech-motion-bg::after,
+  .tech-orb {
+    animation: none !important;
+  }
 }
 
 /* ============ UTILITIES ============ */
@@ -481,6 +574,12 @@ footer { background: #05080E; border-top: 1px solid var(--border-line); padding-
 </style>
 </head>
 <body>
+<!-- Decorative animated tech background -->
+<div class="tech-motion-bg" aria-hidden="true">
+  <span class="tech-orb orb-one"></span>
+  <span class="tech-orb orb-two"></span>
+  <span class="tech-orb orb-three"></span>
+</div>
 
 <!-- UTILITY BAR -->
 <div class="utility-bar">
