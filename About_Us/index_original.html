@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About_Us</title>
+    <title>About Us</title>
 
-    <link rel="icon" type="image/png" href="images/favicAboutUs.png">
+    <link rel="icon" type="image/png" href="../images/favicAboutUs.png">
 </head>
 
 <style>
     body {
             font-family: sans-serif;
-            background-image: url('images/gbd.jpg'); 
+            background-image: url('../images/gbd.jpg'); 
             background-size: cover;
             background-repeat: no-repeat;
         }
@@ -208,6 +208,166 @@
       padding-bottom: 5px;
     
     }
+
+    <style>
+/* ==============================
+   FLOATING INFO OVERLAY
+   ============================== */
+
+.info-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35);
+  /* Blur the website behind it */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.35s ease,
+    visibility 0.35s ease;
+}
+
+/* Popup visible */
+.info-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* ==============================
+   POPUP BOX
+   ============================== */
+
+.info-popup {
+  position: relative;
+  width: min(90%, 480px);
+  padding: 40px 35px 35px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 24px;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.25),
+    0 10px 30px rgba(0, 0, 0, 0.12);
+  transform: translateY(40px) scale(0.85);
+  opacity: 0;
+  transition:
+    transform 0.45s cubic-bezier(.17,.89,.32,1.28),
+    opacity 0.35s ease;
+}
+
+/* Animated popup */
+.info-overlay.show .info-popup {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* ==============================
+   CLOSE BUTTON
+   ============================== */
+.close-popup {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.07);
+  color: #333;
+  font-size: 25px;
+  line-height: 38px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.close-popup:hover {
+  background: #111;
+  color: white;
+  transform: rotate(90deg);
+}
+
+/* ==============================
+   INFO ICON
+   ============================== */
+.info-icon {
+  width: 65px;
+  height: 65px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00a86b, #006b45);
+
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  box-shadow: 0 10px 25px rgba(0, 168, 107, 0.3);
+}
+
+
+/* ==============================
+   TEXT
+   ============================== */
+
+.info-popup h2 {
+  margin: 0 0 12px;
+  font-family: Arial, sans-serif;
+  font-size: 27px;
+  color: #171717;
+}
+
+.info-popup p {
+  margin: 0 auto 25px;
+  max-width: 390px;
+  color: #666;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ==============================
+   BUTTON
+   ============================== */
+.popup-btn {
+  border: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #00a86b, #007c50);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 128, 80, 0.25);
+  transition: 0.25s ease;
+}
+.popup-btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 25px rgba(0, 128, 80, 0.35);
+}
+/* ==============================
+   MOBILE
+   ============================== */
+
+@media (max-width: 600px) {
+
+  .info-popup {
+    width: 88%; padding: 35px 22px 28px; border-radius: 20px;
+  }
+
+  .info-popup h2 {
+    font-size: 23px;
+  }
+  .info-popup p {
+    font-size: 14px;
+  }
+}
 </style>
 <body>
 
@@ -254,7 +414,7 @@
 
     <nav> 
   <div class="navbar">
-        <img src="images/RURALNET.png">
+        <img src="../images/RURALNET.png">
         <a href="index.html">home</a>
         <a href="https://forms.gle/wywREJiHrpFTF5veA">Apply Now</a>
         <a href="About_Us.html">About us</a>
@@ -265,35 +425,39 @@
     </div>
     </nav>
 
+
+    <!-- FLOATING INFO POPUP -->
     <div class="member-container">
         <div class="staff">
-            <img src="images/micha.png" alt="">
+            <img src="../images/micha.png" alt="">
             <h3>Mr. Micha Schraven</h3>
             <p>Director General</p>
         </div>
 
         <div class="staff">
-            <img src="images/agoko.png" alt="">
+            <img src="../images/agoko.png" alt="">
             <h3>Mr. George Agoko</h3>
             <p>Board of Directors Chair</p>
         </div>
 
         <div class="staff">
-            <img src="images/olivia.png" alt="">
+            <img src="../images/olivia.png" alt="">
             <h3>Madam Olivia Alang'o</h3>
             <p>Manager/CEO</p>
+            <P>Principal</P>
         </div>
 
         <div class="staff">
-            <img src="images/charity.png" alt="">
-            <h3>Miss. Charity Anyango</h3>
-            <p>Administrator/H.R</p>
+            <img src="../images/all.png" alt="">
+            <h3>Miss. Mary Earl</h3>
+            <p>Administrator</p>
         </div>
 
         <div class="staff">
-            <img src="images/boaz.png" alt="">
+            <img src="../images/boaz.png" alt="">
             <h3>Mr. Boaz Ochieng</h3>
-            <p>ICT Officer</p>
+            <p>H.O.D ICT</p>
+            <P>Public Relations/ILO</P>
         </div>
     </div>
 
@@ -319,11 +483,11 @@
 <script>
 // Mapping tabs to the files
 const tabFiles = {
-    tab1: "intro.txt",
-    tab2: "mission.txt",
-    tab3: "vision.txt",
-    tab4: "Objectives.txt",
-    tab5: "History.txt"
+    tab1: "../intro.txt",
+    tab2: "../mission.txt",
+    tab3: "../vision.txt",
+    tab4: "../Objectives.txt",
+    tab5: "../History.txt"
 };
 
 // Load default tab (tab1)
@@ -363,6 +527,31 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
         document.getElementById(button.dataset.tab).classList.add("active");
       });
     });
+</script>
+
+//FOR FLOATING POPUP
+<script>
+/* ==============================
+   POPUP FUNCTIONS
+   ============================== */
+
+function openInfoPopup() {
+  document.getElementById("infoPopup").classList.add("show");
+}
+
+function closeInfoPopup() {
+  document.getElementById("infoPopup").classList.remove("show");
+}
+
+
+/* Automatically appear when page loads */
+window.addEventListener("load", function () {
+
+  setTimeout(function () {
+    openInfoPopup();
+  }, 800);
+
+});
 </script>
 
   <footer class="footer">

@@ -1,584 +1,380 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
-
-    <link rel="icon" type="image/png" href="../images/favicAboutUs.png">
-</head>
-
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#087443">
+  <title>About Us | Ruralnet</title>
+  <link rel="icon" type="image/png" href="../images/favicAboutUs.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #087443;
+      --green-dark: #075b36;
+      --green-light: #eaf7ef;
+      --lime: #b7e36a;
+      --ink: #17251d;
+      --muted: #64736a;
+      --paper: #f6f9f6;
+      --white: #fff;
+      --line: #e3ebe5;
+      --shadow: 0 18px 50px rgba(17, 54, 34, .10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-            font-family: sans-serif;
-            background-image: url('../images/gbd.jpg'); 
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-
-        img {
-            height: 50px;
-            width: auto;
-        }
-
-        .navbar {
-            background-color: green;
-            overflow: visible;
-            padding: 10px 20px;
-            align-items: center;
-            text-align: center;
-            text-wrap: 1;
-            size: 30px;
-        }
-
-        .navbar a {
-                color: white;
-                padding: 14px 20px;
-                text-direction: none;
-                display: inline-block;
-                font-family: 'Bernard MT Condensed';
-                font-size: 20px;
-                text-decoration: none;
-            }
-
-        .navbar a:hover {
-            background-color: none;
-            cursor: e-resize;
-            border-bottom: 5px solid lightblue;
-            border-radius: 8px;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: blueviolet;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px rgb(0 0 0 0.2);
-        }
-
-        .dropdwon-content a {
-            color: black;
-            padding:  12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            display: block;
-        }
-
-.member-container {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-  padding: 2rem;
-  /*background: rgba(255, 255, 255, 0.55);*/
-
-}
-
-.staff {
-  text-align: center;
-  max-width: 250px;
-  transition: transform 0.3s ease;
-}
-
-.staff img {
-  width: auto;
-  height: 15rem;
-  /*background-color: #f9f9f9;*/
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 15px;
-  transition: transform 0.4s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.staff:hover img {
-  transform: scale(1.05);
-}
-
-.staff h3 {
-  font-size: 1rem;
-  margin: 0.5rem 0 0.2rem;
-  color: #085820;
-  background-color: #f9f9f9;
-  /*background: rgba(255, 255, 255, 0.15);*/
-  border-radius: 15px;
-  padding: 0.5rem;
-}
-
-.staff p {
-  font-size: 0.9rem;
-  color: #095a24;
-  background-color: #f9f9f9;
-  border-radius: 15px;
-  padding: 0.5rem;
-  font-family: bolonse;
-}
-
-    /* ✅ Aqua background for the form */
-    form.form {
-      background-color: aqua;
-      padding: 20px;
-      border-radius: 8px;
-      max-width: 300rem;
-      margin: auto;
-      box-shadow: 0 4px 15px rgba(7, 7, 7, 0.2);
-      display: flex;
-      flex-wrap: wrap;
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.65;
+    }
+    a { color: inherit; }
+    .site-header {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(227,235,229,.85);
+    }
+    .nav-wrap {
+      width: min(1200px, calc(100% - 40px));
+      min-height: 82px; margin: auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .brand { display: flex; align-items: center; gap: 13px; text-decoration: none; flex-shrink: 0; }
+    .brand img { width: 58px; height: 58px; object-fit: contain; }
+    .brand-copy { display: grid; line-height: 1.2; }
+    .brand-copy strong { font: 800 17px "Manrope", sans-serif; letter-spacing: -.4px; color: var(--green-dark); }
+    .brand-copy span { margin-top: 5px; font-size: 11px; color: var(--muted); letter-spacing: 1.3px; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 5px; }
+    .nav-links a {
+      padding: 10px 13px; border-radius: 10px; text-decoration: none;
+      color: #405047; font-size: 14px; font-weight: 700; transition: .2s ease;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--green); background: var(--green-light); }
+    .nav-links a.apply-link { color: white; background: var(--green); padding: 11px 18px; margin-left: 6px; }
+    .nav-links a.apply-link:hover { background: var(--green-dark); transform: translateY(-1px); }
+    .menu-toggle {
+      display: none; width: 44px; height: 44px; border: 0; border-radius: 12px;
+      color: var(--green-dark); background: var(--green-light); font-size: 23px; cursor: pointer;
     }
 
-    .tabs-container {
-      width: 100%;
-      background: rgb(255, 255, 255);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .tab-button {
-      display: flex;
-      border-bottom: 2px solid #ddd;
-    }
-
-    .tab-button button {
-      flex: 1;
-      padding: 15px;
-      color: rgb(206, 255, 205);
-      background: rgb(6, 68, 17);
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background 0.3s;
-    }
-
-    .tab-button button.active {
-      background: #ffffff;
-      color: rgb(12, 85, 2);
-    }
-
-    .tab-content {
-      padding: 20px;
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
-    .footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      background-color: black;
+    .hero {
+      position: relative; overflow: hidden; isolation: isolate;
+      min-height: 340px; display: grid; align-items: center;
+      background: linear-gradient(115deg, rgba(4,62,37,.94), rgba(8,116,67,.84)),
+                  url('../images/gbd.jpg') center/cover no-repeat;
       color: white;
-      padding: 40px 60px;
-      flex-wrap: wrap;
-      text-decoration: none;
-      width: 100%;
     }
-
-    .footer a, .footer p, .footer li {
-      color: white;
-      text-decoration: none;
-      margin-bottom: 3px;
-      padding-left: 7px;
+    .hero::before, .hero::after {
+      content: ""; position: absolute; z-index: -1; border: 1px solid rgba(255,255,255,.15);
+      border-radius: 50%;
     }
-
-    .footer-column {
-      flex: 1;
-      min-width: 200px;
-      margin: 0 20px;
-      border-bottom: 5px solid white;
-      border-radius: 10px;
-      background-color: #1d1c1c;
-
-
+    .hero::before { width: 430px; height: 430px; right: 5%; top: -230px; }
+    .hero::after { width: 300px; height: 300px; right: 13%; bottom: -220px; }
+    .hero-inner { width: min(1200px, calc(100% - 40px)); margin: auto; padding: 65px 0 72px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px; margin-bottom: 14px;
+      color: #d7f5df; font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
     }
+    .eyebrow::before { content: ""; width: 25px; height: 2px; background: var(--lime); }
+    .hero h1 { max-width: 720px; margin: 0; font: 800 clamp(38px, 6vw, 64px)/1.08 "Manrope", sans-serif; letter-spacing: -2px; }
+    .hero p { max-width: 620px; margin: 20px 0 0; color: rgba(255,255,255,.82); font-size: 17px; }
 
-    .footer h3 {
-      font-size: 16px;
-      margin-top: 15px;
-      text-transform: uppercase;
-      border-bottom: 2px solid yellow;
-      padding-bottom: 5px;
-    
+    main { width: min(1200px, calc(100% - 40px)); margin: auto; }
+    .section { padding: 76px 0; }
+    .section-heading { text-align: center; max-width: 700px; margin: 0 auto 38px; }
+    .section-kicker { color: var(--green); font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
+    .section-heading h2 { margin: 9px 0 10px; font: 800 clamp(28px, 4vw, 40px)/1.2 "Manrope", sans-serif; letter-spacing: -1px; }
+    .section-heading p { margin: 0; color: var(--muted); }
+
+    .team-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; }
+    .staff-card {
+      overflow: hidden; background: white; border: 1px solid var(--line); border-radius: 20px;
+      box-shadow: 0 8px 28px rgba(20,60,36,.05); text-align: center;
+      transition: transform .28s ease, box-shadow .28s ease;
     }
+    .staff-card:hover { transform: translateY(-8px); box-shadow: var(--shadow); }
+    .staff-photo {
+      height: 225px; padding: 15px 15px 0;
+      background: linear-gradient(145deg, #edf7ef, #dcefe2);
+      display: flex; align-items: flex-end; justify-content: center;
+    }
+    .staff-photo img { width: 100%; height: 100%; object-fit: contain; object-position: center bottom; }
+    .staff-info { padding: 18px 13px 21px; }
+    .staff-info h3 { margin: 0 0 6px; font: 800 15px "Manrope", sans-serif; }
+    .staff-info p { margin: 0; color: var(--green); font-size: 12px; font-weight: 700; line-height: 1.5; }
 
-    <style>
-/* ==============================
-   FLOATING INFO OVERLAY
-   ============================== */
+    .about-section { padding-top: 20px; }
+    .about-panel {
+      overflow: hidden; background: white; border: 1px solid var(--line); border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+    .tab-list { display: flex; gap: 5px; padding: 12px; background: #f0f6f1; border-bottom: 1px solid var(--line); }
+    .tab-btn {
+      flex: 1; min-width: 0; border: 0; border-radius: 12px; padding: 14px 10px;
+      background: transparent; color: #64736a; cursor: pointer;
+      font: 800 12px "Manrope", sans-serif; letter-spacing: .4px; transition: .2s ease;
+    }
+    .tab-btn:hover { color: var(--green); background: white; }
+    .tab-btn.active { color: white; background: var(--green); box-shadow: 0 7px 18px rgba(8,116,67,.2); }
+    .tab-content { display: none; min-height: 210px; padding: 38px clamp(22px, 5vw, 60px); color: #526158; }
+    .tab-content.active { display: block; animation: fadeIn .3s ease; }
+    .tab-content h3 { margin: 0 0 14px; color: var(--ink); font: 800 24px "Manrope", sans-serif; }
+    .tab-copy { white-space: pre-line; }
+    .loading { color: var(--muted); }
+    .load-error { color: #b42318; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
 
-.info-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.35);
-  /* Blur the website behind it */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.35s ease,
-    visibility 0.35s ease;
-}
+    .footer { margin-top: 35px; padding: 60px 0 24px; color: #e6f0e9; background: #10271b; }
+    .footer-inner { width: min(1200px, calc(100% - 40px)); margin: auto; display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 50px; }
+    .footer-brand strong { display: block; color: white; font: 800 21px "Manrope", sans-serif; }
+    .footer-brand p { max-width: 330px; color: #a9bdb0; font-size: 14px; }
+    .footer-column h3 { margin: 0 0 17px; color: white; font: 800 14px "Manrope", sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+    .footer-column ul { list-style: none; margin: 0; padding: 0; }
+    .footer-column li { margin: 9px 0; color: #c0d0c5; font-size: 14px; }
+    .footer-column a { color: #c0d0c5; text-decoration: none; transition: color .2s; }
+    .footer-column a:hover { color: var(--lime); }
+    .footer-bottom { width: min(1200px, calc(100% - 40px)); margin: 38px auto 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.12); color: #91a99a; font-size: 12px; }
 
-/* Popup visible */
-.info-overlay.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-
-/* ==============================
-   POPUP BOX
-   ============================== */
-
-.info-popup {
-  position: relative;
-  width: min(90%, 480px);
-  padding: 40px 35px 35px;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 24px;
-  box-shadow:
-    0 30px 80px rgba(0, 0, 0, 0.25),
-    0 10px 30px rgba(0, 0, 0, 0.12);
-  transform: translateY(40px) scale(0.85);
-  opacity: 0;
-  transition:
-    transform 0.45s cubic-bezier(.17,.89,.32,1.28),
-    opacity 0.35s ease;
-}
-
-/* Animated popup */
-.info-overlay.show .info-popup {
-  transform: translateY(0) scale(1);
-  opacity: 1;
-}
-
-/* ==============================
-   CLOSE BUTTON
-   ============================== */
-.close-popup {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 38px;
-  height: 38px;
-  border: none;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.07);
-  color: #333;
-  font-size: 25px;
-  line-height: 38px;
-  cursor: pointer;
-  transition: 0.25s ease;
-}
-
-.close-popup:hover {
-  background: #111;
-  color: white;
-  transform: rotate(90deg);
-}
-
-/* ==============================
-   INFO ICON
-   ============================== */
-.info-icon {
-  width: 65px;
-  height: 65px;
-  margin: 0 auto 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #00a86b, #006b45);
-
-  color: white;
-  font-size: 32px;
-  font-weight: bold;
-  box-shadow: 0 10px 25px rgba(0, 168, 107, 0.3);
-}
-
-
-/* ==============================
-   TEXT
-   ============================== */
-
-.info-popup h2 {
-  margin: 0 0 12px;
-  font-family: Arial, sans-serif;
-  font-size: 27px;
-  color: #171717;
-}
-
-.info-popup p {
-  margin: 0 auto 25px;
-  max-width: 390px;
-  color: #666;
-  font-size: 15px;
-  line-height: 1.7;
-}
-
-/* ==============================
-   BUTTON
-   ============================== */
-.popup-btn {
-  border: none;
-  padding: 12px 28px;
-  border-radius: 30px;
-  background: linear-gradient(135deg, #00a86b, #007c50);
-  color: white;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 8px 20px rgba(0, 128, 80, 0.25);
-  transition: 0.25s ease;
-}
-.popup-btn:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 12px 25px rgba(0, 128, 80, 0.35);
-}
-/* ==============================
-   MOBILE
-   ============================== */
-
-@media (max-width: 600px) {
-
-  .info-popup {
-    width: 88%; padding: 35px 22px 28px; border-radius: 20px;
-  }
-
-  .info-popup h2 {
-    font-size: 23px;
-  }
-  .info-popup p {
-    font-size: 14px;
-  }
-}
-</style>
+    @media (max-width: 1050px) {
+      .team-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .nav-links a { padding: 9px 10px; font-size: 13px; }
+    }
+    @media (max-width: 760px) {
+      .nav-wrap { min-height: 72px; }
+      .brand img { width: 50px; height: 50px; }
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none; position: absolute; top: calc(100% + 1px); left: 0; right: 0;
+        padding: 14px 20px 20px; background: white; border-bottom: 1px solid var(--line);
+        box-shadow: 0 18px 25px rgba(20,60,36,.08); align-items: stretch; flex-direction: column;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px 14px; }
+      .nav-links a.apply-link { margin: 5px 0 0; text-align: center; }
+      .hero { min-height: 310px; }
+      .hero-inner { padding: 54px 0; }
+      .hero h1 { letter-spacing: -1.3px; }
+      .hero p { font-size: 15px; }
+      .section { padding: 58px 0; }
+      .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+      .staff-photo { height: 190px; }
+      .tab-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .tab-btn:last-child { grid-column: 1 / -1; }
+      .tab-content { padding: 28px 22px; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 420px) {
+      .nav-wrap, main, .hero-inner, .footer-inner, .footer-bottom { width: min(100% - 28px, 1200px); }
+      .brand-copy strong { font-size: 15px; }
+      .brand-copy span { font-size: 9px; }
+      .team-grid { gap: 10px; }
+      .staff-photo { height: 155px; padding: 10px 8px 0; }
+      .staff-info { padding: 14px 8px 16px; }
+      .staff-info h3 { font-size: 13px; }
+      .staff-info p { font-size: 11px; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
 <body>
-
-  	<!--FULL PAGE PROTECTION SCRIPT -->
-
-<script>
-	//Right-Click
-	document.addEventListener('contextmenu', event => event.preventDefault());
-</script>
-
-<!--F12-->
-<script>
-	document.onkeydown = function(e) {
-
-	//F12
-	if (e.keyCode == 123) {
-		return false;
-	}
-
-
-//Ctrl+Shift+I or Ctrl+Shift+J or Ctrl+Shift+C
-
-	if (e.ctrlKey && e.shiftKey && (
-		e.keyCode === 73 ||
-		e.keyCode === 74 ||
-		e.keyCode === 67
-	)) {
-		return false;
-	}
-
-//Ctrl+U View Source-->
-
-	if (e.ctrlKey && e.keyCode === 85) {
-		return false;
-	}
-
-	//Ctrl+C Copy
-	if (e.ctrlKey && e.keyCode === 67) {
-		return false;
-	}
-};
-</script>
-
-
-    <nav> 
-  <div class="navbar">
-        <img src="../images/RURALNET.png">
-        <a href="index.html">home</a>
-        <a href="https://forms.gle/wywREJiHrpFTF5veA">Apply Now</a>
-        <a href="About_Us.html">About us</a>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html" aria-label="Ruralnet home">
+        <img src="../images/RURALNET.png" alt="Ruralnet logo">
+        <span class="brand-copy"><strong>RURALNET TRAINING COLLEGE</strong><span>Learning • Skills • Opportunity</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a class="apply-link" href="https://forms.gle/wywREJiHrpFTF5veA" target="_blank" rel="noopener">Apply Now</a>
+        <a class="active" href="index.html" aria-current="page">About Us</a>
         <a href="announcements.html">Announcements</a>
-        <a href="https://easytvet.com/">TVET</a>
-        <a href="https://www.kasneb.or.ke/">KASNEB</a>
-        <a href="https://www.netacad.com/">CISCO</a>
+        <a href="https://easytvet.com/" target="_blank" rel="noopener">TVET</a>
+        <a href="https://www.kasneb.or.ke/" target="_blank" rel="noopener">KASNEB</a>
+        <a href="https://www.netacad.com/" target="_blank" rel="noopener">CISCO</a>
+      </nav>
     </div>
-    </nav>
+  </header>
 
-
-    <!-- FLOATING INFO POPUP -->
-    <div class="member-container">
-        <div class="staff">
-            <img src="../images/micha.png" alt="">
-            <h3>Mr. Micha Schraven</h3>
-            <p>Director General</p>
-        </div>
-
-        <div class="staff">
-            <img src="../images/agoko.png" alt="">
-            <h3>Mr. George Agoko</h3>
-            <p>Board of Directors Chair</p>
-        </div>
-
-        <div class="staff">
-            <img src="../images/olivia.png" alt="">
-            <h3>Madam Olivia Alang'o</h3>
-            <p>Manager/CEO</p>
-            <P>Principal</P>
-        </div>
-
-        <div class="staff">
-            <img src="../images/all.png" alt="">
-            <h3>Miss. Mary Earl</h3>
-            <p>Administrator</p>
-        </div>
-
-        <div class="staff">
-            <img src="../images/boaz.png" alt="">
-            <h3>Mr. Boaz Ochieng</h3>
-            <p>H.O.D ICT</p>
-            <P>Public Relations/ILO</P>
-        </div>
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Discover Ruralnet</div>
+      <h1>People, purpose<br>and progress.</h1>
+      <p>Get to know our leadership team, what drives us, and the story behind our commitment to learning and opportunity.</p>
     </div>
+  </section>
 
-    <form class="form">
-    <div class="tabs-container">
-      <div class="tab-button">
-        <button type="button" class="tab-btn active" data-tab="tab1"><strong>INTRODUCTION</strong></button>
-        <button type="button" class="tab-btn" data-tab="tab2"><strong>MISSION</strong></button>
-        <button type="button" class="tab-btn" data-tab="tab3"><strong>VISION</strong></button>
-        <button type="button" class="tab-btn" data-tab="tab4"><strong>OBJECTIVES</strong></button>
-        <button type="button" class="tab-btn" data-tab="tab5"><strong>BRIEF HISTORY</strong></button>
+  <main>
+    <section class="section" aria-labelledby="team-title">
+      <div class="section-heading">
+        <span class="section-kicker">The people behind our work</span>
+        <h2 id="team-title">Meet Our Team</h2>
+        <p>Dedicated leadership and staff working together to support our learners and community.</p>
       </div>
+      <div class="team-grid">
+        <article class="staff-card">
+          <div class="staff-photo"><img src="../images/micha.png" alt="Mr. Micha Schraven"></div>
+          <div class="staff-info"><h3>Mr. Micha Schraven</h3><p>Director General</p></div>
+        </article>
+        <article class="staff-card">
+          <div class="staff-photo"><img src="../images/agoko.png" alt="Mr. George Agoko"></div>
+          <div class="staff-info"><h3>Mr. George Agoko</h3><p>Board of Directors Chair</p></div>
+        </article>
+        <article class="staff-card">
+          <div class="staff-photo"><img src="../images/olivia.png" alt="Madam Olivia Alang'o"></div>
+          <div class="staff-info"><h3>Madam Olivia Alang'o</h3><p>Manager / CEO · Principal</p></div>
+        </article>
+        <article class="staff-card">
+          <div class="staff-photo"><img src="../images/all.png" alt="Miss Mary Earl"></div>
+          <div class="staff-info"><h3>Miss. Mary Earl</h3><p>Administrator</p></div>
+        </article>
+        <article class="staff-card">
+          <div class="staff-photo"><img src="../images/boaz.png" alt="Mr. Boaz Ochieng"></div>
+          <div class="staff-info"><h3>Mr. Boaz Ochieng</h3><p>H.O.D ICT · Public Relations / ILO</p></div>
+        </article>
+      </div>
+    </section>
 
-      <!-- FIXED CONTENT AREAS -->
-      <div class="tab-content active" id="tab1"></div>
-      <div class="tab-content" id="tab2"></div>
-      <div class="tab-content" id="tab3"></div>
-      <div class="tab-content" id="tab4"></div>
-      <div class="tab-content" id="tab5"></div>
-    </div>
-</form>
-
-<script>
-// Mapping tabs to the files
-const tabFiles = {
-    tab1: "../intro.txt",
-    tab2: "../mission.txt",
-    tab3: "../vision.txt",
-    tab4: "../Objectives.txt",
-    tab5: "../History.txt"
-};
-
-// Load default tab (tab1)
-loadTabContent("tab1");
-
-function loadTabContent(tabId) {
-    fetch(tabFiles[tabId])
-        .then(res => res.text())
-        .then(text => {
-            document.getElementById(tabId).innerHTML = 
-                text.replace(/\n/g, "<br>");
-        })
-        .catch(err => {
-            document.getElementById(tabId).innerHTML = 
-                "<p style='color:red;'>Failed to load content.</p>";
-        });
-}
-
-document.querySelectorAll(".tab-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-        const tabId = btn.dataset.tab;
-        loadTabContent(tabId);
-    });
-});
-</script>
-
-<script>
-    const tabButtons = document.querySelectorAll(".tab-btn");
-    const tabContents = document.querySelectorAll(".tab-content");
-
-    tabButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        tabButtons.forEach(btn => btn.classList.remove("active"));
-        tabContents.forEach(tab => tab.classList.remove("active"));
-        
-        button.classList.add("active");
-        document.getElementById(button.dataset.tab).classList.add("active");
-      });
-    });
-</script>
-
-//FOR FLOATING POPUP
-<script>
-/* ==============================
-   POPUP FUNCTIONS
-   ============================== */
-
-function openInfoPopup() {
-  document.getElementById("infoPopup").classList.add("show");
-}
-
-function closeInfoPopup() {
-  document.getElementById("infoPopup").classList.remove("show");
-}
-
-
-/* Automatically appear when page loads */
-window.addEventListener("load", function () {
-
-  setTimeout(function () {
-    openInfoPopup();
-  }, 800);
-
-});
-</script>
+    <section class="section about-section" aria-labelledby="about-title">
+      <div class="section-heading">
+        <span class="section-kicker">Get to know us</span>
+        <h2 id="about-title">Who We Are</h2>
+        <p>Explore our introduction, mission, vision, objectives and history.</p>
+      </div>
+      <div class="about-panel">
+        <div class="tab-list" role="tablist" aria-label="About Ruralnet">
+          <button class="tab-btn active" id="btn-tab1" type="button" role="tab" aria-selected="true" aria-controls="tab1" data-tab="tab1">INTRODUCTION</button>
+          <button class="tab-btn" id="btn-tab2" type="button" role="tab" aria-selected="false" aria-controls="tab2" data-tab="tab2">MISSION</button>
+          <button class="tab-btn" id="btn-tab3" type="button" role="tab" aria-selected="false" aria-controls="tab3" data-tab="tab3">VISION</button>
+          <button class="tab-btn" id="btn-tab4" type="button" role="tab" aria-selected="false" aria-controls="tab4" data-tab="tab4">OBJECTIVES</button>
+          <button class="tab-btn" id="btn-tab5" type="button" role="tab" aria-selected="false" aria-controls="tab5" data-tab="tab5">BRIEF HISTORY</button>
+        </div>
+        <div class="tab-content active" id="tab1" role="tabpanel" aria-labelledby="btn-tab1"><h3>Introduction</h3><div class="tab-copy loading">Loading content…</div></div>
+        <div class="tab-content" id="tab2" role="tabpanel" aria-labelledby="btn-tab2" hidden><h3>Our Mission</h3><div class="tab-copy loading">Select this tab to load content.</div></div>
+        <div class="tab-content" id="tab3" role="tabpanel" aria-labelledby="btn-tab3" hidden><h3>Our Vision</h3><div class="tab-copy loading">Select this tab to load content.</div></div>
+        <div class="tab-content" id="tab4" role="tabpanel" aria-labelledby="btn-tab4" hidden><h3>Our Objectives</h3><div class="tab-copy loading">Select this tab to load content.</div></div>
+        <div class="tab-content" id="tab5" role="tabpanel" aria-labelledby="btn-tab5" hidden><h3>Our History</h3><div class="tab-copy loading">Select this tab to load content.</div></div>
+      </div>
+    </section>
+  </main>
 
   <footer class="footer">
-    <div class="footer-column">
-      <h3>Useful Links</h3>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="About_Us.html">Who we Are</a></li>
-      <li><a href="students/studentLogin.html">Student Portal</a></li>
-      <li><a href="https://online.kasneb.or.ke/">Accounting</a></li>
-      <li><a href="https://www.cisco.com/">ICT</a></li>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <strong>RURALNET</strong>
+        <p>Building skills, opening opportunities and supporting learning in our community.</p>
+      </div>
+      <div class="footer-column">
+        <h3>Useful Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="About_Us.html">Who We Are</a></li>
+          <li><a href="students/studentLogin.html">Student Portal</a></li>
+          <li><a href="https://online.kasneb.or.ke/" target="_blank" rel="noopener">Accounting</a></li>
+          <li><a href="https://www.cisco.com/" target="_blank" rel="noopener">ICT</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Partners</h3>
+        <ul>
+          <li><a href="https://www.cskonline.org/" target="_blank" rel="noopener">CSK</a></li>
+          <li><a href="https://www.kasneb.or.ke/" target="_blank" rel="noopener">KASNEB</a></li>
+          <li><a href="https://www.tveta.go.ke/" target="_blank" rel="noopener">TVETA</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><a href="tel:+254723845040">+254 723 845 040</a></li>
+          <li><a href="tel:+254700886058">+254 700 886 058</a></li>
+          <li><a href="tel:+254793714564">+254 793 714 564</a></li>
+          <li><a href="mailto:ruralnet2016@gmail.com">ruralnet2016@gmail.com</a></li>
+          <li><a href="https://ruralnet.co.ke/">ruralnet.co.ke</a></li>
+        </ul>
+      </div>
     </div>
-
-    <div class="footer-column">
-      <h3>Partners</h3>
-      <li><a href="https://www.cskonline.org/">CSK</a></li>
-      <li><a href="https://www.kasneb.or.ke/">KASNEB</a></li>
-      <li><a href="https://www.tveta.go.ke/">TVETA</a></li>
-    </div>
-
-    <div class="footer-column">
-      <h3>Contact Us</h3>
-      <p>+254723845040</p>
-      <p>+254700886058</p>
-      <p>+254793714564</p>
-      <p>ruralnet2016@gmail.com</p>
-      <p>ruralnet.co.ke</p>
-    </div>
+    <div class="footer-bottom">© <span id="year"></span> Ruralnet. All rights reserved.</div>
   </footer>
+
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+      menuToggle.textContent = isOpen ? '×' : '☰';
+    });
+
+    const tabFiles = {
+      tab1: '../intro.txt',
+      tab2: '../mission.txt',
+      tab3: '../vision.txt',
+      tab4: '../Objectives.txt',
+      tab5: '../History.txt'
+    };
+    const loadedTabs = new Set();
+
+    async function loadTabContent(tabId) {
+      if (loadedTabs.has(tabId)) return;
+      const panel = document.getElementById(tabId);
+      const copy = panel.querySelector('.tab-copy');
+      copy.textContent = 'Loading content…';
+      copy.className = 'tab-copy loading';
+      try {
+        const response = await fetch(tabFiles[tabId]);
+        if (!response.ok) throw new Error('Unable to load file');
+        const content = await response.text();
+        copy.textContent = content.trim() || 'No content is available yet.';
+        copy.className = 'tab-copy';
+        loadedTabs.add(tabId);
+      } catch (error) {
+        copy.textContent = 'Failed to load content. Please check that the linked text file exists and that the page is being served through a web server.';
+        copy.className = 'tab-copy load-error';
+      }
+    }
+
+    function activateTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(button => {
+        const active = button.dataset.tab === tabId;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-selected', String(active));
+        button.tabIndex = active ? 0 : -1;
+      });
+      document.querySelectorAll('.tab-content').forEach(panel => {
+        const active = panel.id === tabId;
+        panel.classList.toggle('active', active);
+        panel.hidden = !active;
+      });
+      loadTabContent(tabId);
+    }
+
+    document.querySelectorAll('.tab-btn').forEach((button, index, buttons) => {
+      button.addEventListener('click', () => activateTab(button.dataset.tab));
+      button.addEventListener('keydown', event => {
+        if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        let next = index;
+        if (event.key === 'ArrowRight') next = (index + 1) % buttons.length;
+        if (event.key === 'ArrowLeft') next = (index - 1 + buttons.length) % buttons.length;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = buttons.length - 1;
+        buttons[next].focus();
+        activateTab(buttons[next].dataset.tab);
+      });
+    });
+
+    loadTabContent('tab1');
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
