@@ -1,0 +1,105 @@
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d19">
+  <meta name="description" content="Digital solutions designed and developed by Boaz — web development, business systems, automation and graphic design.">
+  <title>Developed by Boaz | Digital Solutions</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+    :root{--bg:#080d19;--panel:#101a2b;--text:#f4f7fb;--muted:#a8b4c7;--green:#35e0a1;--blue:#65a7ff;--line:rgba(255,255,255,.11)}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 15% 10%,rgba(53,224,161,.13),transparent 34%),radial-gradient(ellipse at 90% 80%,rgba(101,167,255,.14),transparent 35%);z-index:-1}
+    a{color:inherit;text-decoration:none}.wrap{width:min(1120px,calc(100% - 40px));margin:auto}
+    nav{height:82px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+    .brand{display:flex;align-items:center;gap:12px;font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:.2px}
+    .brand-mark{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--green),#168eaf);color:#07131b;font-weight:800;font-size:19px;box-shadow:0 8px 28px rgba(53,224,161,.2)}
+    .nav-tag{font-size:12px;color:var(--muted);letter-spacing:1.8px;text-transform:uppercase}
+    .hero{min-height:calc(100vh - 83px);display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:70px;padding:80px 0}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;padding:9px 13px;border:1px solid rgba(53,224,161,.25);border-radius:100px;background:rgba(53,224,161,.07);color:#9df3d0;font-size:12px;letter-spacing:1.4px;text-transform:uppercase}
+    .dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 12px var(--green)}
+    h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(48px,7vw,82px);line-height:1.02;letter-spacing:-4px;margin:25px 0 20px}
+    h1 span{background:linear-gradient(100deg,var(--green),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .intro{font-size:18px;line-height:1.8;color:var(--muted);max-width:620px;margin:0}
+    .actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:34px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 20px;border-radius:12px;font-weight:700;font-size:14px;transition:.2s;border:1px solid var(--line)}
+    .btn-primary{background:var(--green);color:#07131b;border-color:var(--green)}.btn:hover{transform:translateY(-3px);filter:brightness(1.07)}
+    .btn-ghost{background:rgba(255,255,255,.04);color:var(--text)}
+    .visual{position:relative;min-height:410px;display:grid;place-items:center}
+    .orbit{width:min(360px,85vw);aspect-ratio:1;border:1px solid rgba(255,255,255,.12);border-radius:50%;display:grid;place-items:center;position:relative;background:radial-gradient(circle,rgba(53,224,161,.10),rgba(16,26,43,.1) 62%,transparent 63%)}
+    .orbit:before,.orbit:after{content:"";position:absolute;border:1px solid rgba(101,167,255,.18);border-radius:50%;inset:25px}.orbit:after{inset:55px;border-color:rgba(53,224,161,.18)}
+    .core{width:170px;height:170px;border-radius:38px;transform:rotate(-8deg);background:linear-gradient(145deg,#17283a,#0c1422);border:1px solid rgba(255,255,255,.16);box-shadow:0 25px 80px rgba(0,0,0,.45),inset 0 1px rgba(255,255,255,.12);display:grid;place-items:center;text-align:center;z-index:1}
+    .core-inner{transform:rotate(8deg)}.core strong{font-family:'Space Grotesk';font-size:48px;display:block;letter-spacing:-3px;color:var(--green)}.core small{font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+    .float{position:absolute;padding:12px 15px;background:rgba(16,26,43,.88);border:1px solid var(--line);border-radius:13px;box-shadow:0 15px 35px rgba(0,0,0,.25);font-size:12px;color:#dce7f5;backdrop-filter:blur(12px)}
+    .float b{color:var(--green);font-size:16px;margin-right:7px}.f1{top:42px;right:0}.f2{bottom:55px;left:-5px}.f3{bottom:20px;right:15px}
+    .section{padding:25px 0 90px}.section-head{text-align:center;margin-bottom:30px}.section-head p{color:var(--muted);margin:8px 0 0}.section-head h2{font:600 30px 'Space Grotesk';margin:0}
+    .services{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .service{padding:22px 19px;border:1px solid var(--line);background:rgba(16,26,43,.72);border-radius:17px;min-height:150px}
+    .service .ico{font-size:22px;margin-bottom:15px}.service h3{font:600 16px 'Space Grotesk';margin:0 0 8px}.service p{font-size:13px;line-height:1.6;color:var(--muted);margin:0}
+    .bottom{border-top:1px solid var(--line);padding:25px 0 35px;display:flex;justify-content:space-between;align-items:center;gap:15px;color:var(--muted);font-size:12px}
+    .bottom strong{color:var(--text)}.social{display:flex;gap:18px}.social a:hover{color:var(--green)}
+    @media(max-width:800px){.hero{grid-template-columns:1fr;gap:20px;padding:65px 0 35px}.visual{min-height:340px}.orbit{width:300px}.services{grid-template-columns:repeat(2,1fr)}h1{letter-spacing:-2.5px}.intro{font-size:16px}}
+    @media(max-width:480px){.wrap{width:min(100% - 30px,1120px)}nav{height:70px}.nav-tag{font-size:9px;letter-spacing:1px}.brand-mark{width:36px;height:36px}.hero{padding-top:48px}.visual{min-height:300px}.orbit{width:260px}.core{width:140px;height:140px}.core strong{font-size:40px}.f1{right:-3px;top:25px}.f2{left:-4px;bottom:35px}.f3{right:0;bottom:5px}.services{grid-template-columns:1fr 1fr;gap:9px}.service{padding:16px 13px;min-height:145px}.service h3{font-size:14px}.service p{font-size:12px}.bottom{align-items:flex-start;flex-direction:column}.section{padding-bottom:55px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#top" aria-label="Boaz home"><span class="brand-mark">B.</span><span>BOAZ<span style="color:var(--green)">.</span></span></a>
+      <span class="nav-tag">Independent Digital Developer</span>
+    </nav>
+
+    <main id="top">
+      <section class="hero">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> Project successfully delivered</div>
+          <h1>Designed with purpose.<br><span>Developed by Boaz.</span></h1>
+          <p class="intro">This digital experience was thoughtfully designed and developed by Boaz — turning ideas into reliable, practical and engaging digital solutions.</p>
+          <div class="actions">
+            <h4>Would like to discuss a project?</h4>
+            <!-- Replace the WhatsApp number below with your preferred contact number. Use country code, without + or spaces. -->
+            <a class="btn btn-primary" href="https://wa.me/254700886058?text=Hello%20Boaz%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener">Start a project <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-ghost" href="mailto:boazkhoinange@gmail.com">Send an email <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+
+        <div class="visual" aria-label="Boaz digital development illustration">
+          <div class="orbit">
+            <div class="core"><div class="core-inner"><strong>B.</strong><small>Build · Create · Innovate</small></div></div>
+            <div class="float f1"><b>01</b> Clean design</div>
+            <div class="float f2"><b>02</b> Smart solutions</div>
+            <div class="float f3"><b>03</b> Quality code</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head"><h2>Ideas turned into digital solutions</h2><p>From the first concept to the final experience.</p></div>
+        <div class="services">
+          <article class="service"><div class="ico">⌘</div><h3>Web Development</h3><p>Responsive websites, landing pages and modern web experiences.</p></article>
+          <article class="service"><div class="ico">▦</div><h3>Business Systems</h3><p>Custom management systems, portals, databases and workflow tools.</p></article>
+          <article class="service"><div class="ico">✳</div><h3>Automation</h3><p>Practical digital processes that reduce repetitive work and save time.</p></article>
+          <article class="service"><div class="ico">◈</div><h3>Graphic Design</h3><p>Professional visual identities, marketing materials and digital graphics.</p></article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bottom">
+      <div>© <span id="year"></span> <strong>Boaz</strong>. Crafted with purpose.</div>
+      <div class="social">
+        <!-- Replace these links with your actual professional profiles. -->
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </footer>
+  </div>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>'''
+
+path = Path("/mnt/data/developed-by-boaz.html")
+path.write_text(html, encoding="utf-8")
+print(f"Created: {path}")
